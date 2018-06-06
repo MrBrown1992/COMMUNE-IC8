@@ -1,6 +1,7 @@
 package at.fh.swenga.model;
 
 import java.util.List;
+import java.util.Set;
 import java.util.Date;
 
 import javax.persistence.Entity;
@@ -18,6 +19,10 @@ import javax.persistence.Id;
 import org.hibernate.annotations.Fetch;
 import org.hibernate.annotations.FetchMode;
 
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+
+import at.fh.swenga.model.UserRole;
+
 @Entity
 @Table(name = "user")
 
@@ -26,8 +31,12 @@ public class User implements java.io.Serializable {
 	@Id
 	@Column(name = "username", length = 35)
 	private String username;
-	@Column(name = "password", length = 32)
+	@Column(name = "password", length = 35)
 	private String password;
+	
+	@Column(name = "enabled", nullable = false)
+	private boolean enabled;
+	
 	@Column(name = "firstname", nullable = false, length = 35)
 	private String firstname;
 	@Column(name = "lastname", nullable = false, length = 35)
@@ -42,12 +51,12 @@ public class User implements java.io.Serializable {
 	@Temporal(TemporalType.DATE)
 	private Date birthdate;
 
-	
-	
-	@OneToOne(fetch = FetchType.LAZY,
-    cascade =  CascadeType.ALL,
-    mappedBy = "attacheduser")
+	@ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.PERSIST)
+	private Set<UserRole> userRoles;
+
+	@OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "attacheduser")
 	private Image userimage;
+
 	public User() {
 		/**
 		 * @param username
