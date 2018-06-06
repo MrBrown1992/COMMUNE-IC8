@@ -1,7 +1,0 @@
-/build/
-/target/
-
-
-.gitignore
-db.properties
- # Untracked files:
