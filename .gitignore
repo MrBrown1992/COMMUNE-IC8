@@ -2,5 +2,6 @@
 /target/
 
  # Untracked files:
- 
+ /COMMUNE-IC8/.gitignore
  /COMMUNE-IC8/src/db.properties
+ 
