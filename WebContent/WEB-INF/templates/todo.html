@@ -43,29 +43,16 @@
 				<table data-toggle="table" class="table table-striped">
 					<thead>
 						<tr>
-							<th>Username</th>
-							<th>Password</th>
-							<th>Enabled</th>
-							<th>First Name</th>
-							<th>Last Name</th>
-							<th> Mobile Number </th>
-							<th> E-Mail </th>
-							<th> DOB </th>
+							<th>ToDo</th>
+							
 							
 						</tr>
 					</thead>
 					<tbody>
 						<!--  list all items ----------------------------------------------------------- -->
 						<tr th:each="user : ${users}">
-							<td th:text="${user.username}"></td>
-							<td th:text="${user.firstName}"></td>
-							<td th:text="${user.enabled}"></td>
-							<td th:text="${user.firstname}"></td>
-							<td th:text="${user.lastname}"></td>
-							<td th:text="${user.mobilenumber}"></td>
-							<td th:text="${user.email}"></td>							
-							<td th:text="${#calendars.format(user.birthdate,'dd.MM.yyyy')}"></td>
-							<!-- <td><a sec:authorize="hasRole('ADMIN')" th:href="@{/delete(id=${employee.id})}">Delete</a></td> -->
+							<td th:text="${...}"></td>
+						
 							
 						</tr>
 						<!--  list all items ----------------------------------------------------------- -->
