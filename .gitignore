@@ -1,2 +1,6 @@
 /build/
 /target/
+
+ # Untracked files:
+ 
+ /COMMUNE-IC8/src/db.properties
