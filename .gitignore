@@ -2,6 +2,7 @@
 /target/
 
 
-.gitignore
-db.properties
+/.gitignore
+/db.properties
  # Untracked files:
+#test
