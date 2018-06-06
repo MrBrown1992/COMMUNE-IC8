@@ -3,8 +3,6 @@ target/**
 /target/*
 .DS_Store
 .settings
-.classpath
-.project
 /target/
 /src/db.properties
 /WebContent/WEB-INF/dispatcher-servlet.xml
