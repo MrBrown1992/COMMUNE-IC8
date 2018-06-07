@@ -58,6 +58,12 @@ public class SecurityController {
 		return "forward:login";
 	}
 
+	
+	@RequestMapping(value = {"/"})
+	public String index(Model model) {
+		return "index";
+	}
+	
 	@ExceptionHandler(Exception.class)
 	public String handleAllException(Exception ex) {
 
