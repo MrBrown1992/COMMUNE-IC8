@@ -21,8 +21,7 @@
 		<intercept-url pattern="/delete"
 			access="hasRole('ADMIN')" />
 
-		<form-login login-page="/login" default-target-url='/'
-			always-use-default-target='true' />
+		<form-login login-page="/login" default-target-url='/' always-use-default-target='true' />
 		<logout logout-url="/logout" />
 	</http>
 
@@ -33,13 +32,13 @@
 
 				users-by-username-query="
 		        SELECT username, password, CASE enabled WHEN 1 THEN 'true' ELSE 'false' END 'enabled'
-		        FROM users
+		        FROM user
 		        WHERE username=?;"
 
 				authorities-by-username-query="
 		       	SELECT u.username, ur.role
-				FROM users u
-				INNER JOIN users_user_roles u2r ON u.id = u2r.users_id
+				FROM user u
+				INNER JOIN user_user_roles u2r ON u.id = u2r.user_id
 				INNER JOIN user_roles ur        ON u2r.userRoles_id = ur.id
 				WHERE u.username=?;" />
 		</authentication-provider>

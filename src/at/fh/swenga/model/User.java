@@ -16,6 +16,8 @@ import javax.persistence.OneToOne;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
 import org.hibernate.annotations.Fetch;
@@ -32,6 +34,9 @@ import at.fh.swenga.model.UserRole;
 public class User implements java.io.Serializable {
 
 	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private int id;
+	
 	@Column(name = "username", length = 45)
 	private String username;
 	@Column(name = "password", length = 60)
@@ -94,6 +99,20 @@ public class User implements java.io.Serializable {
 		this.username = username;
 		this.password = password;
 		this.enabled = enabled;
+	}
+
+	/**
+	 * @return the id
+	 */
+	public int getId() {
+		return id;
+	}
+
+	/**
+	 * @param id the id to set
+	 */
+	public void setId(int id) {
+		this.id = id;
 	}
 
 	/**
