@@ -48,8 +48,8 @@
 				<thead>
 					<tr>
 						<th>Username</th>
-						<th>Password</th>
-						<th>Enabled</th>
+						
+					
 						<th>First Name</th>
 						<th>Last Name</th>
 						<th>Mobile Number</th>
@@ -62,8 +62,8 @@
 					<!--  list all items ----------------------------------------------------------- -->
 					<tr th:each="user : ${users}">
 						<td th:text="${user.username}"></td>
-						<td th:text="${user.firstName}"></td>
-						<td th:text="${user.enabled}"></td>
+						
+						
 						<td th:text="${user.firstname}"></td>
 						<td th:text="${user.lastname}"></td>
 						<td th:text="${user.mobilenumber}"></td>

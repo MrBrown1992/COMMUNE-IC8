@@ -9,10 +9,12 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToOne;
+import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
 @Entity
+@Table(name = "clean_pan")
 public class CleanPlan {
 	
 	@Id
@@ -37,6 +39,8 @@ public class CleanPlan {
 		super();
 		// TODO Auto-generated constructor stub
 	}
+
+	
 
 	/**
 	 * @param room
@@ -90,6 +94,19 @@ public class CleanPlan {
 	 */
 	public void setDoc(Date doc) {
 		this.doc = doc;
+	}
+	/**
+	 * @return the flat
+	 */
+	public Flat getFlat() {
+		return flat;
+	}
+
+	/**
+	 * @param flat the flat to set
+	 */
+	public void setFlat(Flat flat) {
+		this.flat = flat;
 	}
 
 }

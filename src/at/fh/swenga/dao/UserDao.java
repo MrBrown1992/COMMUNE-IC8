@@ -20,8 +20,24 @@ public class UserDao {
 	protected EntityManager entityManager;
 	
 	
+	
+	public List<User> getUsers() {
+		TypedQuery<User> typedQuery = entityManager.createQuery("select u from User u",
+				User.class);
+		List<User> typedResultList = typedQuery.getResultList();
+		return typedResultList;
+	}
+	
+	
 	public void persist(User user) {
 		entityManager.persist(user);
 	}
-
+ 
+	public User merge(User user) {
+		return entityManager.merge(user);
+	}
+ 
+	public void delete(User user) {
+		entityManager.remove(user);
+	}
 }
