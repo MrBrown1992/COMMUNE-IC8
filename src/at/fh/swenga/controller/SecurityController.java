@@ -4,6 +4,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
+
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -20,6 +23,12 @@ public class SecurityController {
 	UserDao userDao;
 	@Autowired
 	UserRoleDao userRoleDao;
+	
+	
+	@RequestMapping(value = "/login", method = RequestMethod.GET)
+	public String handleLogin() {
+		return "login";
+	}
 
 	@RequestMapping("/addUser")
 	@Transactional
@@ -34,10 +43,11 @@ public class SecurityController {
 			userRole = new UserRole("ROLE_USER");
 
 		User admin = new User("admin", "password", true);
-		admin.encryptPassword();
-		admin.addUserRole(userRole);
-		admin.addUserRole(adminRole);
-		userDao.persist(admin);
+		User spiess = new User("spiess", "password", true, null, null, 0, null, null, null, null);
+		spiess.encryptPassword();
+		spiess.addUserRole(userRole);
+		spiess.addUserRole(adminRole);
+		userDao.persist(spiess);
 		
 		User user = new User("user", "password", true);
 		user.encryptPassword();
