@@ -1,0 +1,30 @@
+<nav th:fragment="search" class="navbar navbar-default">
+
+
+	<!-- Left Menu------------------------------------------------------------------- -->
+	<div class="container">
+		
+			<table data-toggle="table" class="table table-striped">
+				<thead>
+					<tr>
+						<th>Menu</th>
+					</tr>
+				</thead>
+
+				<tbody>
+					<!--  list manu items ----------------------------------------------------------- -->
+					<tr>
+						<td>
+							<form th:action="@{/grocery}" method="post">
+								<input class="btn btn-default" type="submit" value="Groceries" />
+							</form>
+						</td>
+
+
+					</tr>
+					<!--  list all items ----------------------------------------------------------- -->
+				</tbody>
+
+			</table>
+	</div>
+</nav>
