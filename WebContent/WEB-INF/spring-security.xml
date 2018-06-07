@@ -11,7 +11,7 @@
 	<http>
 		<csrf disabled="true" />
 		<intercept-url pattern="/login" access="permitAll" />
-		<intercept-url pattern="/fillUsers" access="permitAll" />
+		<intercept-url pattern="/addUser" access="permitAll" />
 		<intercept-url pattern="/images/**" access="permitAll" />
 
 		<!-- intercept-url pattern="/**" access="hasRole('USER')" / -->
@@ -38,7 +38,7 @@
 				authorities-by-username-query="
 		       	SELECT u.username, ur.role
 				FROM user u
-				INNER JOIN user_user_roles u2r ON u.id = u2r.user_id
+				INNER JOIN user_user_roles u2r ON u.id = u2r.users_id
 				INNER JOIN user_roles ur        ON u2r.userRoles_id = ur.id
 				WHERE u.username=?;" />
 		</authentication-provider>

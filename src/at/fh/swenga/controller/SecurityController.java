@@ -40,19 +40,19 @@ public class SecurityController {
 		if (userRole == null)
 			userRole = new UserRole("ROLE_USER");
 
-		User admin = new User("admin", "password", true);
-		User spiess = new User("spiess", "password", true, null, null, 0, null, null, null, null);
+		//User admin = new User("admin", "password", true);
+		User spiess = new User("spiess", "password", true, "admin", "admin", 0, null, null, null, null);
 		spiess.encryptPassword();
 		spiess.addUserRole(userRole);
 		spiess.addUserRole(adminRole);
 		userDao.persist(spiess);
-		
+		/*
 		User user = new User("user", "password", true);
 		user.encryptPassword();
 		user.addUserRole(userRole);
 		userDao.persist(user);
 		
-
+*/		System.out.println("login");
 		return "forward:login";
 	}
 
