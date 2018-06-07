@@ -10,14 +10,11 @@ import javax.persistence.Table;
 @Entity
 @Table(name = "grocery")
 public class Grocery {
-<<<<<<< HEAD
-=======
 
->>>>>>> 90b654af6d76b182eb33e1f5cd48240cf50c7d21
 	@Id
 	@Column(name = "id")
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private String id;
+	private int id;
 
 	@Column(name = "name", nullable = false, length = 60)
 	private String name;
@@ -38,14 +35,14 @@ public class Grocery {
 	/**
 	 * @return the id
 	 */
-	public String getId() {
+	public int getId() {
 		return id;
 	}
 
 	/**
 	 * @param id the id to set
 	 */
-	public void setId(String id) {
+	public void setId(int id) {
 		this.id = id;
 	}
 
