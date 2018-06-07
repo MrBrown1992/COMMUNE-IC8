@@ -1,5 +1,7 @@
 package at.fh.swenga.controller;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
@@ -21,6 +23,7 @@ public class SecurityController {
 
 	@Autowired
 	UserDao userDao;
+	
 	@Autowired
 	UserRoleDao userRoleDao;
 	
@@ -61,6 +64,11 @@ public class SecurityController {
 	
 	@RequestMapping(value = {"/"})
 	public String index(Model model) {
+		
+
+		List<User> users = userDao.getUsers();
+
+		model.addAttribute("users",users);
 		return "index";
 	}
 	

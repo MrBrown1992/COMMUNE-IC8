@@ -38,6 +38,8 @@ public class CleanPlan {
 		// TODO Auto-generated constructor stub
 	}
 
+	
+
 	/**
 	 * @param room
 	 * @param user
@@ -90,6 +92,19 @@ public class CleanPlan {
 	 */
 	public void setDoc(Date doc) {
 		this.doc = doc;
+	}
+	/**
+	 * @return the flat
+	 */
+	public Flat getFlat() {
+		return flat;
+	}
+
+	/**
+	 * @param flat the flat to set
+	 */
+	public void setFlat(Flat flat) {
+		this.flat = flat;
 	}
 
 }
