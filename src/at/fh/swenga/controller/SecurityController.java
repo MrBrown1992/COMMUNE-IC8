@@ -64,6 +64,12 @@ public class SecurityController {
 		return "index";
 	}
 	
+	
+	@RequestMapping(value = {"/grocery"})
+	public String grocery(Model model) {
+		return "grocery";
+	}
+	
 	@ExceptionHandler(Exception.class)
 	public String handleAllException(Exception ex) {
 
