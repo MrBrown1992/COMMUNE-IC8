@@ -11,6 +11,7 @@ import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.persistence.Version;
 import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -22,6 +23,7 @@ import org.hibernate.annotations.FetchMode;
 
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
+import at.fh.swenga.model.Flat;
 import at.fh.swenga.model.UserRole;
 
 @Entity
@@ -57,6 +59,9 @@ public class User implements java.io.Serializable {
 
 	@OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "attacheduser")
 	private Image userimage;
+	
+	@ManyToOne(cascade = CascadeType.PERSIST)
+	Flat flat;
 
 	public User() {
 		/**
