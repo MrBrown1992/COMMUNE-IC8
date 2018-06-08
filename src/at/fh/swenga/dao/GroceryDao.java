@@ -5,6 +5,7 @@ import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.TypedQuery;
+import javax.validation.Valid;
 
 import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Repository;
@@ -29,6 +30,8 @@ public class GroceryDao {
 		return entityManager.find(Grocery.class, i);
 	}
 
+	
+	
 	public void persist(Grocery grocery) {
 		entityManager.persist(grocery);
 	}
@@ -45,6 +48,16 @@ public class GroceryDao {
 		Grocery grocery = getGrocery(id);
 		if (grocery != null)
 			delete(grocery);
+	}
+
+	public static Grocery getGroceryById(int id) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	public static void addGrocery(@Valid Grocery newGrocery) {
+		// TODO Auto-generated method stub
+		
 	}
 
 }

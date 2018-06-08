@@ -37,14 +37,45 @@
 		</div>
 		<!--  1 simple button ----------------------------------------------------------- -->
 
-		<div class="row">
+		<<div class="row">
 			<div class="col-md-10 col-md-offset-1">
 
-				
-								
+				<table data-toggle="table" class="table table-striped">
+					<thead>
+						<tr>
+							<th data-sortable="true">SSN</th>
+							<th data-sortable="true">First Name</th>
+							<th data-sortable="true">Last Name</th>
+							
+							<th>Actions</th>
+						</tr>
+					</thead>
+					<tbody>
+						<!--  list all items ----------------------------------------------------------- -->
+						<tr th:each="employee : ${#request.getAttribute('employees')}">
+							<td th:text="${employee.ssn}"></td>
+							<td th:text="${employee.firstName}"></td>
+							<td th:text="${employee.lastName}"></td>
+							
+
+							<td>
+								<a th:href="@{/editEmployee(ssn=${employee.ssn})}" class="btn btn-xs btn-success">
+									<span class="glyphicon glyphicon-edit" aria-hidden="true"></span>
+									Edit
+								</a>
+
+								<a th:href="@{/deleteEmployee(ssn=${employee.ssn})}" class="btn btn-xs btn-danger">
+									<span class="glyphicon glyphicon-trash" aria-hidden="true"></span>
+									Delete
+								</a>
+
+							</td>
+						</tr>
+						<!--  list all items ----------------------------------------------------------- -->
+					</tbody>
+				</table>
 			</div>
 		</div>
-		
 	</div>
 	<!--  End of container -->
 	<div th:replace="~{includes/bootstrap :: bootstrapJS}" />
