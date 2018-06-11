@@ -5,6 +5,11 @@
 			method="post">
 			<input class="btn btn-danger" type="submit" value="Sign Out" />
 		</form>
+		
+		<span sec:authorize="hasRole('ADMIN')">
+		<form th:action="@{/editGrocery}" method="post" class="btn btn-default navbar-btn">
+			<input class="btn btn-default" type = "submit" value = "Add new GRocery"/>
+		</form> </span>
 
 
 
@@ -26,7 +31,7 @@
 					data-toggle="dropdown" href="#">Menu <span class="caret"></span></a>
 					<ul class="dropdown-menu">
 						<li>
-							<form class="navbar-form" th:action="@{/grocery}"
+							<form class="navbar-form" th:action="@{/listGrocery}"
 								method="post">
 								<a class="btn btn-default" type="submit">Grocery</a>
 							</form>

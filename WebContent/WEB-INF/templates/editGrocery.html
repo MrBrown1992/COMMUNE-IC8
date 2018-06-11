@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org">
+
+<head>
+<div th:include="~{includes/bootstrap :: bootstrapMeta}" th:remove="tag" />
+<title>Employee Manager</title>
+<div th:include="~{includes/bootstrap :: bootstrapCSS}" th:remove="tag" />
+<link
+	href="http://www.malot.fr/bootstrap-datetimepicker/bootstrap-datetimepicker/css/bootstrap-datetimepicker.css"
+	rel="stylesheet">
+</head>
+
+<body>
+	<div class="container" role="main">
+		<div class="row">
+			<div class="col-md-8 col-md-offset-2">
+				<form class="form-horizontal" method="post"
+					th:action="${grocery} ? @{/editGrocery(id=${grocery.id})} : @{/createNewGroceryItem}">
+					<!--<input type="hidden" th:name="${_csrf.parameterName}"
+						th:value="${_csrf.token}" />-->
+					<fieldset>
+						<legend th:text="${grocery}? 'Change Grocery' : 'New Grocery'">New
+							Grocery</legend>
+
+						<!--  ----------------  id ---------------- -->
+						<div class="form-group">
+							<label for="inputID" class="col-md-2 control-label">ID</label>
+							<div class="col-md-10">
+								<input class="form-control" id="inputID" type="text" name="id"
+									th:value="${grocery} ? ${grocery.id}"
+									th:readonly="${grocery}">
+							</div>
+						</div>
+
+						<!-- --------------  Name ---------------- -->
+						<div class="form-group">
+							<label for="groceryName" class="col-md-2 control-label">
+								Name </label>
+							<div class="col-md-10">
+								<input class="form-control" id="groceryName" type="text"
+									name="groceryName" th:value="${grocery} ? ${grocery.groceryName}">
+							</div>
+						</div>
+						
+						<!-- Checkbox Bought  --->
+						<div class="form-group">
+							<label for="inputAvailable" class="col-md-2 control-label">Bought
+							</label>
+							<div class="col-md-10">
+								<input th:checked="${grocery} ? ${grocery.bought}"
+									id="boughtstate" class=form-control type="checkbox"
+									name="boughtstate">
+							</div>
+						</div>
+							
+
+											
+						<!-- --------------  buttons ---------------- -->
+						<div class="form-group">
+							<div class="col-md-10 col-md-offset-2">
+								<button type="submit" class="btn btn-primary">Submit</button>
+								<a th:action="createNewGroceryItem" class="btn btn-default"> Cancel </a>
+							</div>
+						</div>
+
+					</fieldset>
+				</form>
+			</div>
+		</div>
+
+	</div>
+	<!--  End of container -->
+	<div th:include="~{includes/bootstrap :: bootstrapJS}" th:remove="tag" />
+
+	<!-- JS for Datetime picker -->
+	<script type="text/javascript"
+		src="http://www.malot.fr/bootstrap-datetimepicker/bootstrap-datetimepicker/js/bootstrap-datetimepicker.js"></script>
+
+
+</body>
+
+</html>

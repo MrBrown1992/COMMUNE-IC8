@@ -1,132 +1,127 @@
 package at.fh.swenga.controller;
 
+import java.util.List;
+
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Scope;
+import org.springframework.context.annotation.ScopedProxyMode;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.FieldError;
 import org.springframework.web.bind.annotation.ExceptionHandler;
-import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import at.fh.swenga.dao.GroceryDao;
 import at.fh.swenga.model.Grocery;
 
 @Controller
+@Scope(proxyMode = ScopedProxyMode.TARGET_CLASS, value = "session")
 public class GroceryController {
-	
-	
-	@Autowired 
-	GroceryDao groceryDao;
-	/*
+
 	@Autowired
-	Grocery grocery;
-	*/
+	private GroceryDao groceryDao;
+
+	public GroceryController() {
+
+		// TODO Auto-generated constructor stub
+	}
+
+	private PageRequest generatePageRequest(int pageNr) {
+		return PageRequest.of(pageNr, 6);
+	}
+
+	private boolean errorsDetected(Model model, BindingResult bindingResult) {
+		// Any errors? -> Create a String out of all errors and return to the page
+		if (bindingResult.hasErrors()) {
+			String errorMessage = "";
+			for (FieldError fieldError : bindingResult.getFieldErrors()) {
+				errorMessage += fieldError.getField() + " is invalid";
+			}
+			model.addAttribute("errorMessage", errorMessage);
+			return true;
+		}
+		return false;
+	}
+	
+	
+	@RequestMapping(value = {  "listGroc" })
+	public String listGroc(Model model) {
+		List<Grocery> grocerie = groceryDao.findAll();
+		model.addAttribute("grocerie", grocerie);
+		model.addAttribute("grocerie", grocerie.size());
+		return "listGrocery";
+	}
+
+	
+
+	@RequestMapping(value = { "showGroceryList" })
+	public String showGroceryList(Model model) {
+		// Set attributes
+		PageRequest page = generatePageRequest(0);
+		Page<Grocery> groceryPage = groceryDao.findAll(page);
+
+		model.addAttribute("happeningCategories", groceryPage);
+		// model.addAttribute("groceryName", groceryDao.getName());
+		model.addAttribute("currPage", groceryPage.getNumber());
+		model.addAttribute("totalPages", groceryPage.getTotalPages());
+		return "listGrocery"; // <-- grocery MANAGEMENT ?
+	}
+	// @requestmapping
+
+	@RequestMapping("/createNewGroceryItem")
+	public String createNewGroceryItem(Model model, @Valid Grocery newGrocery,
+			@RequestParam(value = "groceryName") String groceryName,
+			@RequestParam(value = "boughtstate") boolean bought, Authentication authentication,
+			BindingResult bindingResult) {
+
+		// Any errors? -> Create a String out of all errors and return to the page
+		if (errorsDetected(model, bindingResult)) {
+			return showGroceryList(model);
+		}
+
+		newGrocery.setName(groceryName);
+		newGrocery.setBought(bought);
+		groceryDao.save(newGrocery);
+
+		return showGroceryList(model);
+	}
+
+	@PostMapping("/changeGrocery")
+	public String changeGrocery(Model model, @Valid Grocery changedGrocery, Authentication authentication,
+			BindingResult bindingResult) {
+
+		// Any errors? -> Create a String out of all errors and return to the page
+		if (errorsDetected(model, bindingResult)) {
+			return showGroceryList(model);
+		}
+
+		Grocery grocery = groceryDao.findFirstByid(changedGrocery.getId());
+		if (grocery != null) {
+			grocery.setName(changedGrocery.getName());
+			grocery.setBought(changedGrocery.isBought());
+
+			groceryDao.save(grocery);
+
+			return showGroceryList(model);
+		} else {
+			model.addAttribute("warningMessage", "Grocery not found!");
+			return showGroceryList(model);
+		}
+	}
+	
+	
 	@ExceptionHandler(Exception.class)
 	public String handleAllException(Exception ex) {
-
+		ex.printStackTrace();
 		return "error";
 
 	}
-	
-	
-	@RequestMapping(value = "/addGrocery" , method = RequestMethod.GET)
-	public String showAddGroceryForm(Model model) {
-		return "editGrocery";
-		
-	}
-	
-	@RequestMapping(value = "/addGrocery", method = RequestMethod.POST)
-	public String addGrocery(@Valid @ModelAttribute Grocery newGrocery, BindingResult bindingResult,
-			Model model) {
-
-		if (bindingResult.hasErrors()) {
-			String errorMessage = "";
-			for (FieldError fieldError : bindingResult.getFieldErrors()) {
-				errorMessage += fieldError.getField() + " is invalid<br>";
-			}
-			model.addAttribute("errorMessage", errorMessage);
-			return "forward:/listEmployees";
-		}
-
-		Grocery grocery = GroceryDao.getGroceryById(newGrocery.getId());
-
-		if (grocery != null) {
-			model.addAttribute("errorMessage", "Grocery already exists!<br>");
-		} else {
-			GroceryDao.addGrocery(newGrocery);
-			model.addAttribute("message", "New grocery " + newGrocery.getId() + " added.");
-		}
-
-		return "forward:/listGrocery";
-	}
-
-	@RequestMapping(value = "/editEmployee", method = RequestMethod.GET)
-	public String showChangeGroceryForm(Model model, @RequestParam int id) {
-		Grocery grocery = GroceryDao.getGroceryById(id);
-		if (grocery != null) {
-			model.addAttribute("grocery", grocery);
-			return "editGrocery";
-		} else {
-			model.addAttribute("errorMessage", "Couldn't find grocery " + id);
-			return "forward:/listGrocery";
-		}
-	}
-
-	@RequestMapping(value = "/editGrocery", method = RequestMethod.POST)
-	public String changeEmployee(@Valid @ModelAttribute Grocery changedGrocery, BindingResult bindingResult,
-			Model model) {
-
-		if (bindingResult.hasErrors()) {
-			String errorMessage = "";
-			for (FieldError fieldError : bindingResult.getFieldErrors()) {
-				errorMessage += fieldError.getField() + " is invalid<br>";
-			}
-			model.addAttribute("errorMessage", errorMessage);
-			return "forward:/listGrocery";
-		}
-
-		Grocery grocery = GroceryDao.getGroceryById(changedGrocery.getId());
-
-		if (grocery == null) {
-			model.addAttribute("errorMessage", "Grocery does not exist!<br>");
-		} else {
-			grocery.setId(changedGrocery.getId());
-			grocery.setName(changedGrocery.getName());
-			grocery.setBought(changedGrocery.isBought());
-			
-			model.addAttribute("message", "Changed grocery " + changedGrocery.getId());
-		}
-
-		return "forward:/listGrocery";
-	}
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	/*
-	@PostMapping("/addGrocery")
-	public String addGrocery(@Valid Grocery grocery, BindingResult bindingResult, Model model) {
-
-		//kein plan
-		return null ;
-	}*/
-	
-	
-	
 }

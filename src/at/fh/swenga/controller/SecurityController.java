@@ -57,7 +57,7 @@ public class SecurityController {
 		user.addUserRole(userRole);
 		userDao.persist(user);
 		
-*/		System.out.println("login");
+*/		
 		return "forward:login";
 	}
 
@@ -73,11 +73,16 @@ public class SecurityController {
 	}
 	
 	
-	@RequestMapping(value = {"/grocery"})
+	@RequestMapping(value = {"/editGrocery"})
 	public String grocery(Model model) {
-		return "grocery";
+		return "editGrocery";
 	}
 	
+	
+	@RequestMapping(value = {"/listGrocery"})
+	public String listGrocery(Model model) {
+		return "listGrocery";
+	}
 	@ExceptionHandler(Exception.class)
 	public String handleAllException(Exception ex) {
 

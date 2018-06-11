@@ -1,5 +1,7 @@
 package at.fh.swenga.model;
 
+import java.io.Serializable;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -9,15 +11,15 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name = "grocery")
-public class Grocery {
+public class Grocery implements Serializable{
 
 	@Id
 	@Column(name = "id")
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
 
-	@Column(name = "name", nullable = false, length = 60)
-	private String name;
+	@Column(name = "groceryName", nullable = false, length = 60)
+	private String groceryName;
 	@Column(name = "bought", nullable = false)
 	private boolean bought;
 	
@@ -26,9 +28,9 @@ public class Grocery {
 		// TODO Auto-generated constructor stub
 	}
 
-	public Grocery(String name, boolean bought) {
+	public Grocery(String groceryName, boolean bought) {
 		super();
-		this.name = name;
+		this.groceryName = groceryName;
 		this.bought = bought;
 	}
 
@@ -50,14 +52,14 @@ public class Grocery {
 	 * @return the name
 	 */
 	public String getName() {
-		return name;
+		return groceryName;
 	}
 
 	/**
 	 * @param name the name to set
 	 */
-	public void setName(String name) {
-		this.name = name;
+	public void setName(String groceryName) {
+		this.groceryName = groceryName;
 	}
 
 	/**
