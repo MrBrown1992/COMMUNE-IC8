@@ -8,36 +8,14 @@ import javax.persistence.TypedQuery;
 
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.data.jpa.repository.JpaRepository;
 
 import at.fh.swenga.model.User;
 
 
 @Repository
 @Transactional
-public class UserDao {
-	
-	@PersistenceContext
-	protected EntityManager entityManager;
+public interface UserDao extends JpaRepository<User, Integer>{
 	
 	
-	
-	public List<User> getUsers() {
-		TypedQuery<User> typedQuery = entityManager.createQuery("select u from User u",
-				User.class);
-		List<User> typedResultList = typedQuery.getResultList();
-		return typedResultList;
-	}
-	
-	
-	public void persist(User user) {
-		entityManager.persist(user);
-	}
- 
-	public User merge(User user) {
-		return entityManager.merge(user);
-	}
- 
-	public void delete(User user) {
-		entityManager.remove(user);
-	}
 }
