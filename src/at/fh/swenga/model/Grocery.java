@@ -11,7 +11,7 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name = "grocery")
-public class Grocery implements Serializable{
+public class Grocery implements java.io.Serializable{
 
 	@Id
 	@Column(name = "id")
@@ -19,7 +19,7 @@ public class Grocery implements Serializable{
 	private int id;
 
 	@Column(name = "groceryName", nullable = false, length = 60)
-	private String groceryName;
+	public String groceryName;
 	@Column(name = "bought", nullable = false)
 	private boolean bought;
 	
@@ -29,7 +29,7 @@ public class Grocery implements Serializable{
 	}
 
 	public Grocery(String groceryName, boolean bought) {
-		super();
+		
 		this.groceryName = groceryName;
 		this.bought = bought;
 	}
@@ -74,6 +74,34 @@ public class Grocery implements Serializable{
 	 */
 	public void setBought(boolean bought) {
 		this.bought = bought;
+	}
+
+	/* (non-Javadoc)
+	 * @see java.lang.Object#hashCode()
+	 */
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + id;
+		return result;
+	}
+
+	/* (non-Javadoc)
+	 * @see java.lang.Object#equals(java.lang.Object)
+	 */
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Grocery other = (Grocery) obj;
+		if (id != other.id)
+			return false;
+		return true;
 	}
 
 	
