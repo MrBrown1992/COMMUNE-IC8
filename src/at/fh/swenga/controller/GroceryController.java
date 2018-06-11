@@ -21,14 +21,14 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import at.fh.swenga.dao.GroceryDao;
 import at.fh.swenga.model.Grocery;
-import at.fh.swenga.model.User;
+
 
 @Controller
 @Scope(proxyMode = ScopedProxyMode.TARGET_CLASS, value = "session")
 public class GroceryController {
 
 	@Autowired
-	private GroceryDao groceryDao;
+	 GroceryDao groceryDao;
 
 	public GroceryController() {
 
