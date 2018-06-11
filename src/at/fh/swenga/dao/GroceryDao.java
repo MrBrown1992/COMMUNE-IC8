@@ -22,7 +22,6 @@ public interface GroceryDao extends JpaRepository<Grocery, Integer> {
 	
 	public Grocery findFirstByid(int id);
 	
-	
 
 	
 

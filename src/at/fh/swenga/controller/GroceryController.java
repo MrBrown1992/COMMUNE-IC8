@@ -21,6 +21,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import at.fh.swenga.dao.GroceryDao;
 import at.fh.swenga.model.Grocery;
+import at.fh.swenga.model.User;
 
 @Controller
 @Scope(proxyMode = ScopedProxyMode.TARGET_CLASS, value = "session")
@@ -52,15 +53,19 @@ public class GroceryController {
 	}
 	
 	
-	@RequestMapping(value = {  "listGroc" })
-	public String listGroc(Model model) {
-		List<Grocery> grocerie = groceryDao.findAll();
-		model.addAttribute("grocerie", grocerie);
-		model.addAttribute("grocerie", grocerie.size());
+
+	
+	@RequestMapping(value = {"showGroceryList"})
+	public String showGroceryList(Model model) {
+		
+
+		List<Grocery> groceries = groceryDao.findAll();
+
+		model.addAttribute("groceries",groceries);
 		return "listGrocery";
 	}
 
-	
+	/*
 
 	@RequestMapping(value = { "showGroceryList" })
 	public String showGroceryList(Model model) {
@@ -75,7 +80,7 @@ public class GroceryController {
 		return "listGrocery"; // <-- grocery MANAGEMENT ?
 	}
 	// @requestmapping
-
+*/
 	@RequestMapping("/createNewGroceryItem")
 	public String createNewGroceryItem(Model model, @Valid Grocery newGrocery,
 			@RequestParam(value = "groceryName") String groceryName,

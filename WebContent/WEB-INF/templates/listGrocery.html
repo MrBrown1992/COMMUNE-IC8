@@ -49,15 +49,15 @@
 							<th sec:authorize="hasRole('ADMIN')"> Actions</th>
 							
 							
-							<th>Actions</th>
+							
 						</tr>
 					</thead>
 					
 					
 					<tbody>
 						<!--  list all items ----------------------------------------------------------- -->
-						<tr th:each="grocery : ${grocerie}">
-							<td th:text="${grocery.id}"></td>
+
+						<tr th:each="grocery : ${groceries}">
 							<td th:text="${grocery.groceryName}"></td>
 							<td th:text="${grocery.bought}"></td>
 							

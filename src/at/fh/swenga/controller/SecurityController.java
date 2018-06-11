@@ -3,12 +3,11 @@ package at.fh.swenga.controller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Scope;
+import org.springframework.context.annotation.ScopedProxyMode;
 import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
-
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -19,6 +18,7 @@ import at.fh.swenga.model.User;
 import at.fh.swenga.model.UserRole;
 
 @Controller
+@Scope(proxyMode = ScopedProxyMode.TARGET_CLASS, value = "session")
 public class SecurityController {
 
 	@Autowired
@@ -50,7 +50,7 @@ public class SecurityController {
 		spiess.encryptPassword();
 		spiess.addUserRole(userRole);
 		spiess.addUserRole(adminRole);
-		userDao.persist(spiess);
+		userDao.save(spiess);
 		/*
 		User user = new User("user", "password", true);
 		user.encryptPassword();
@@ -66,7 +66,7 @@ public class SecurityController {
 	public String index(Model model) {
 		
 
-		List<User> users = userDao.getUsers();
+		List<User> users = userDao.findAll();
 
 		model.addAttribute("users",users);
 		return "index";
