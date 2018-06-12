@@ -7,7 +7,6 @@ import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.context.annotation.ScopedProxyMode;
-import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
@@ -15,6 +14,7 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.FieldError;
 import org.springframework.web.bind.annotation.ExceptionHandler;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -65,22 +65,7 @@ public class GroceryController {
 		return "listGrocery";
 	}
 
-	/*
-
-	@RequestMapping(value = { "showGroceryList" })
-	public String showGroceryList(Model model) {
-		// Set attributes
-		PageRequest page = generatePageRequest(0);
-		Page<Grocery> groceryPage = groceryDao.findAll(page);
-
-		model.addAttribute("happeningCategories", groceryPage);
-		// model.addAttribute("groceryName", groceryDao.getName());
-		model.addAttribute("currPage", groceryPage.getNumber());
-		model.addAttribute("totalPages", groceryPage.getTotalPages());
-		return "listGrocery"; // <-- grocery MANAGEMENT ?
-	}
-	// @requestmapping
-*/
+	
 	@RequestMapping("/createNewGroceryItem")
 	public String createNewGroceryItem(Model model, @Valid Grocery newGrocery,
 			@RequestParam(value = "groceryName") String groceryName,
@@ -120,6 +105,30 @@ public class GroceryController {
 			model.addAttribute("warningMessage", "Grocery not found!");
 			return showGroceryList(model);
 		}
+	}
+	
+	@GetMapping("/changeGrocery")
+	public String changeGrocery(@RequestParam int id ,Model model ,Authentication authentication ) {
+		
+		
+		Grocery grocery = groceryDao.findFirstByid(id);
+		
+		if(grocery != null ) {
+			
+			model.addAttribute("grocery",grocery);
+			return "editGrocery"; 
+		}
+		
+		model.addAttribute("warningMessage", "Grocery not found!");
+		return showGroceryList(model);
+	}
+	
+	
+	@RequestMapping("/delete")
+	public String deleteGrocery(Model model, @RequestParam int id) {
+		groceryDao.deleteById(id);
+
+		return showGroceryList(model);
 	}
 	
 	

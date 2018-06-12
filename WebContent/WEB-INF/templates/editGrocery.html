@@ -16,23 +16,12 @@
 		<div class="row">
 			<div class="col-md-8 col-md-offset-2">
 				<form class="form-horizontal" method="post"
-					th:action="${grocery} ? @{/editGrocery(id=${grocery.id})} : @{/createNewGroceryItem}">
+					th:action="${grocery} ? @{/changeGrocery(id=${grocery.id})} : @{/createNewGroceryItem}">
 					<!--<input type="hidden" th:name="${_csrf.parameterName}"
 						th:value="${_csrf.token}" />-->
 					<fieldset>
 						<legend th:text="${grocery}? 'Change Grocery' : 'New Grocery'">New
 							Grocery</legend>
-
-						<!--  ----------------  id ---------------- 
-						<div class="form-group">
-							<label for="inputID" class="col-md-2 control-label">ID</label>
-							<div class="col-md-10">
-								<input class="form-control" id="inputID" type="text" name="id"
-									th:value="${grocery} ? ${grocery.id}"
-									th:readonly="${grocery}">
-							</div>
-						</div>
-						-->
 
 						<!-- --------------  Name ---------------- -->
 						<div class="form-group">

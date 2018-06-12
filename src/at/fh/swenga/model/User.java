@@ -36,7 +36,7 @@ public class User implements java.io.Serializable {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
-	
+
 	@Column(name = "username", length = 45)
 	private String username;
 	@Column(name = "password", length = 60)
@@ -64,7 +64,7 @@ public class User implements java.io.Serializable {
 
 	@OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "attacheduser")
 	private Image userimage;
-	
+
 	@ManyToOne(cascade = CascadeType.PERSIST)
 	Flat flat;
 
@@ -94,7 +94,7 @@ public class User implements java.io.Serializable {
 		this.userRoles = userRoles;
 		this.userimage = userimage;
 	}
-	
+
 	public User(String username, String password, boolean enabled) {
 		this.username = username;
 		this.password = password;
@@ -109,7 +109,8 @@ public class User implements java.io.Serializable {
 	}
 
 	/**
-	 * @param id the id to set
+	 * @param id
+	 *            the id to set
 	 */
 	public void setId(int id) {
 		this.id = id;
@@ -249,12 +250,12 @@ public class User implements java.io.Serializable {
 	public void setUserRoles(Set<UserRole> userRoles) {
 		this.userRoles = userRoles;
 	}
-	
+
 	public void addUserRole(UserRole userRole) {
-		if (userRoles==null) userRoles = new HashSet<UserRole>();
+		if (userRoles == null)
+			userRoles = new HashSet<UserRole>();
 		userRoles.add(userRole);
 	}
-	
 
 	/**
 	 * @return the userimage
@@ -262,8 +263,6 @@ public class User implements java.io.Serializable {
 	public Image getUserimage() {
 		return userimage;
 	}
-	
-	
 
 	/**
 	 * @param userimage

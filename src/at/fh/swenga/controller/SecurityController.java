@@ -23,11 +23,10 @@ public class SecurityController {
 
 	@Autowired
 	UserDao userDao;
-	
+
 	@Autowired
 	UserRoleDao userRoleDao;
-	
-	
+
 	@RequestMapping(value = "/login", method = RequestMethod.GET)
 	public String handleLogin() {
 		return "login";
@@ -45,46 +44,43 @@ public class SecurityController {
 		if (userRole == null)
 			userRole = new UserRole("ROLE_USER");
 
-		//User admin = new User("admin", "password", true);
+		// User admin = new User("admin", "password", true);
 		User spiess = new User("spiess", "password", true, "admin", "admin", 0, null, null, null, null);
 		spiess.encryptPassword();
 		spiess.addUserRole(userRole);
 		spiess.addUserRole(adminRole);
 		userDao.save(spiess);
-		/*
-		User user = new User("user", "password", true);
+
+		User user = new User("user", "password", true, "user", "user", 1, null, null, null, null);
 		user.encryptPassword();
 		user.addUserRole(userRole);
-		userDao.persist(user);
-		
-*/		
+		userDao.save(user);
+
 		return "forward:login";
 	}
 
-	
-	@RequestMapping(value = {"/"})
+	@RequestMapping(value = { "/" })
 	public String index(Model model) {
-		
 
 		List<User> users = userDao.findAll();
 
-		model.addAttribute("users",users);
+		model.addAttribute("users", users);
 		return "index";
 	}
-	
-	
-	@RequestMapping(value = {"/editGrocery"})
+
+	@RequestMapping(value = { "/editGrocery" })
 	public String grocery(Model model) {
 		return "editGrocery";
 	}
-	
-	
-	@RequestMapping(value = {"/listGrocery"})
+
+	@RequestMapping(value = { "/listGrocery" })
 	public String listGrocery(Model model) {
 		return "listGrocery";
 	}
+
 	@ExceptionHandler(Exception.class)
 	public String handleAllException(Exception ex) {
+		ex.printStackTrace();
 
 		return "error";
 

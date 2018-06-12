@@ -36,7 +36,7 @@
 		<div class="row">
 		</div>
 		<!--  1 simple button ----------------------------------------------------------- -->
-
+		<Form><input type="submit" name="pdf" value="PDF" class="btn btn-primary"></Form>
 		<div class="row">
 			<div class="col-md-10 col-md-offset-1">
 
@@ -64,12 +64,12 @@
 							
 
 							<td sec:authorize="hasRole('ADMIN')">
-							<a th:href="@{/editGrocery(id=${grocery.id})}"
+							<a th:href="@{/changeGrocery(id=${grocery.id})}"
 								class="btn btn-xs btn-success"> <span
 									class="glyphicon glyphicon-edit" aria-hidden="true"></span>
 									Edit
 							</a> <a
-									th:href="@{/deleteGrocery(id=${grocery.id})}"
+									th:href="@{/delete(id=${grocery.id})}"
 									class="btn btn-xs btn-danger"> <span
 										class="glyphicon glyphicon-trash" aria-hidden="true"></span>
 										Delete

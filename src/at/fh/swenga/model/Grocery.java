@@ -11,7 +11,7 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name = "grocery")
-public class Grocery implements java.io.Serializable{
+public class Grocery implements java.io.Serializable {
 
 	@Id
 	@Column(name = "id")
@@ -21,16 +21,17 @@ public class Grocery implements java.io.Serializable{
 	@Column(name = "groceryName", nullable = false, length = 60)
 	public String groceryName;
 	
+	
 	@Column(name = "bought", nullable = false)
 	private boolean bought;
-	
+
 	public Grocery() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
 
 	public Grocery(String groceryName, boolean bought) {
-		
+
 		this.groceryName = groceryName;
 		this.bought = bought;
 	}
@@ -43,7 +44,8 @@ public class Grocery implements java.io.Serializable{
 	}
 
 	/**
-	 * @param id the id to set
+	 * @param id
+	 *            the id to set
 	 */
 	public void setId(int id) {
 		this.id = id;
@@ -57,7 +59,8 @@ public class Grocery implements java.io.Serializable{
 	}
 
 	/**
-	 * @param name the name to set
+	 * @param name
+	 *            the name to set
 	 */
 	public void setName(String groceryName) {
 		this.groceryName = groceryName;
@@ -71,13 +74,16 @@ public class Grocery implements java.io.Serializable{
 	}
 
 	/**
-	 * @param bought the bought to set
+	 * @param bought
+	 *            the bought to set
 	 */
 	public void setBought(boolean bought) {
 		this.bought = bought;
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see java.lang.Object#hashCode()
 	 */
 	@Override
@@ -88,7 +94,9 @@ public class Grocery implements java.io.Serializable{
 		return result;
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see java.lang.Object#equals(java.lang.Object)
 	 */
 	@Override
@@ -105,5 +113,4 @@ public class Grocery implements java.io.Serializable{
 		return true;
 	}
 
-	
 }
