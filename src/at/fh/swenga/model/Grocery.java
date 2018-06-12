@@ -20,6 +20,7 @@ public class Grocery implements java.io.Serializable{
 
 	@Column(name = "groceryName", nullable = false, length = 60)
 	public String groceryName;
+	
 	@Column(name = "bought", nullable = false)
 	private boolean bought;
 	
