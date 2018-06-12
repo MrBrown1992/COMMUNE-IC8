@@ -63,12 +63,12 @@
 							
 
 							<td sec:authorize="hasRole('ADMIN')">
-							<a th:href="@{/editGrocery(id=${grocery.id})}"
+							<a th:href="@{/changeGrocery(id=${grocery.id})}"
 								class="btn btn-xs btn-success"> <span
 									class="glyphicon glyphicon-edit" aria-hidden="true"></span>
 									Edit
 							</a> <a
-									th:href="@{/deleteGrocery(id=${grocery.id})}"
+									th:href="@{/delete(id=${grocery.id})}"
 									class="btn btn-xs btn-danger"> <span
 										class="glyphicon glyphicon-trash" aria-hidden="true"></span>
 										Delete

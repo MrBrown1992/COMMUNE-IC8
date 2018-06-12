@@ -16,7 +16,7 @@
 		<div class="row">
 			<div class="col-md-8 col-md-offset-2">
 				<form class="form-horizontal" method="post"
-					th:action="${grocery} ? @{/editGrocery(id=${grocery.id})} : @{/createNewGroceryItem}">
+					th:action="${grocery} ? @{/changeGrocery(id=${grocery.id})} : @{/createNewGroceryItem}">
 					<!--<input type="hidden" th:name="${_csrf.parameterName}"
 						th:value="${_csrf.token}" />-->
 					<fieldset>

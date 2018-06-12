@@ -51,13 +51,13 @@ public class SecurityController {
 		spiess.addUserRole(userRole);
 		spiess.addUserRole(adminRole);
 		userDao.save(spiess);
-		/*
-		User user = new User("user", "password", true);
+		
+		User user = new User("user", "password", true, "user","user",1,null, null, null, null);
 		user.encryptPassword();
 		user.addUserRole(userRole);
-		userDao.persist(user);
+		userDao.save(user);
 		
-*/		
+		
 		return "forward:login";
 	}
 
