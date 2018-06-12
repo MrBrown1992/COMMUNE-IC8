@@ -1,32 +1,25 @@
 package at.fh.swenga.model;
 
-import java.util.List;
-import java.util.Set;
 import java.util.Date;
 import java.util.HashSet;
+import java.util.Set;
 
-import javax.persistence.Entity;
-import javax.persistence.Table;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
-import javax.persistence.Version;
-import javax.persistence.ManyToMany;
-import javax.persistence.ManyToOne;
-import javax.persistence.OneToOne;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
+import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-
-import org.hibernate.annotations.Fetch;
-import org.hibernate.annotations.FetchMode;
+import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
+import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-
-import at.fh.swenga.model.Flat;
-import at.fh.swenga.model.UserRole;
 
 @Entity
 @Table(name = "user")
@@ -67,7 +60,10 @@ public class User implements java.io.Serializable {
 
 	@ManyToOne(cascade = CascadeType.PERSIST)
 	Flat flat;
-
+	
+	@OneToMany(fetch = FetchType.LAZY,cascade = CascadeType.PERSIST)
+	private Set<Comment> comments;
+	
 	public User() {
 		/**
 		 * @param username
