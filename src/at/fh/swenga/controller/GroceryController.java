@@ -69,7 +69,7 @@ public class GroceryController {
 	@RequestMapping("/createNewGroceryItem")
 	public String createNewGroceryItem(Model model, @Valid Grocery newGrocery,
 			@RequestParam(value = "groceryName") String groceryName,
-			@RequestParam(value = "boughtstate",required = false) boolean bought, Authentication authentication,
+			@RequestParam(value = "boughtstate") boolean bought, Authentication authentication,
 			BindingResult bindingResult) {
 
 		// Any errors? -> Create a String out of all errors and return to the page
@@ -114,14 +114,13 @@ public class GroceryController {
 		Grocery grocery = groceryDao.findFirstByid(id);
 		
 		if(grocery != null ) {
-			grocery.getName();
-			grocery.isBought();
 			
-			model.addAttribute(grocery);
-			
+			model.addAttribute("grocery",grocery);
+			return "editGrocery"; 
 		}
 		
-		return "editGrocery"; 
+		model.addAttribute("warningMessage", "Grocery not found!");
+		return showGroceryList(model);
 	}
 	
 	
