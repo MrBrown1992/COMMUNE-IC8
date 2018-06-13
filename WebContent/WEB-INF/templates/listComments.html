@@ -1,8 +1,7 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:th="http://www.thymeleaf.org"
-	xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
-	>
+	xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head>
 <div th:replace="~{includes/bootstrap :: bootstrapMeta}" />
 <title>COMMUNE-IC8</title>
@@ -12,7 +11,7 @@
 	<div class="container" role="main">
 
 		<div class="page-header">
-			<h1>Grocery</h1>
+			<h1>LIST COMMENTS</h1>
 		</div>
 
 		<!--  Error message ----------------------------------------------------------- -->
@@ -21,8 +20,9 @@
 		<!--  Error message ----------------------------------------------------------- -->
 
 		<!--  Warning message ----------------------------------------------------------- -->
-		<div th:unless="${warningMessage} == null" th:utext="${warningMessage}"
-			class="alert alert-warning" role="warning"></div>
+		<div th:unless="${warningMessage} == null"
+			th:utext="${warningMessage}" class="alert alert-warning"
+			role="warning"></div>
 		<!--  Warning message ----------------------------------------------------------- -->
 
 		<!--   message ----------------------------------------------------------- -->
@@ -33,54 +33,54 @@
 		<nav th:replace="~{includes/searchNav :: search}"></nav>
 
 		<!--  1 simple button ----------------------------------------------------------- -->
-		<div class="row">
-		</div>
+		<div class="row"></div>
 		<!--  1 simple button ----------------------------------------------------------- -->
-		<form><input type="submit" name="pdf" value="PDF" class="btn btn-primary"></form>
+
+		<form>
+			<input type="submit" name="pdf" value="PDF" class="btn btn-primary">
+		</form>
 		<div class="row">
 			<div class="col-md-10 col-md-offset-1">
 
 				<table data-toggle="table" class="table table-striped">
 					<thead>
 						<tr>
-							<th data-sortable="true">ID</th>
-							<th data-sortable="true">Grocery</th>
-							<th data-sortable="true">bought</th>
-							<th sec:authorize="hasRole('ADMIN')"> Actions</th>
-							
-							
-							
+							<th data-sortable="true">Text</th>
+							<th data-sortable="true">User</th>
+							<th data-sortable="true">Date</th>
+							<th sec:authorize="hasRole('ADMIN')">Actions</th>
 						</tr>
 					</thead>
-					
-					
+
+
 					<tbody>
 						<!--  list all items ----------------------------------------------------------- -->
-
-						<tr th:each="grocery : ${groceries}">
-						<td th:text="${grocery.id}"></td>
-							<td th:text="${grocery.groceryName}"></td>
-							<td th:text="${grocery.bought}"></td>
+					<tr th:each="comment : ${comments}">
+						<td th:text="${comment.text}"></td>
+							<td th:text="${comment.user}"></td>
+							<td th:text="${comment.date}"></td>
 							
 
 							<td sec:authorize="hasRole('ADMIN')">
-							<a th:href="@{/changeGrocery(id=${grocery.id})}"
+							<a th:href="@{/changeComment(id=${comment.id})}"
 								class="btn btn-xs btn-success"> <span
 									class="glyphicon glyphicon-edit" aria-hidden="true"></span>
 									Edit
 							</a> <a
-									th:href="@{/delete(id=${grocery.id})}"
+									th:href="@{/delete(id=${comment.id})}"
 									class="btn btn-xs btn-danger"> <span
 										class="glyphicon glyphicon-trash" aria-hidden="true"></span>
 										Delete
 								</a>
 					</td>
 						</tr>
-						<!--  list all items ----------------------------------------------------------- -->
+					
 					</tbody>
 				</table>
+
 			</div>
 		</div>
+
 	</div>
 	<!--  End of container -->
 	<div th:replace="~{includes/bootstrap :: bootstrapJS}" />
