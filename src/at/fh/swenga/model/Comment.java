@@ -37,9 +37,8 @@ public class Comment implements java.io.Serializable{
 	 * @param date
 	 * @param user
 	 */
-	public Comment(int id, String text, Date date, User user) {
+	public Comment(String text, Date date, User user) {
 		super();
-		this.id = id;
 		this.text = text;
 		this.date = date;
 		this.user = user;

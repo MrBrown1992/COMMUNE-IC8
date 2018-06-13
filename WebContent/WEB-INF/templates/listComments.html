@@ -31,58 +31,56 @@
 		<!--   message ----------------------------------------------------------- -->
 
 		<nav th:replace="~{includes/searchNav :: search}"></nav>
+		
+	
+		
 
 		<!--  1 simple button ----------------------------------------------------------- -->
 		<div class="row"></div>
 		<!--  1 simple button ----------------------------------------------------------- -->
 
-		<form>
-			<input type="submit" name="pdf" value="PDF" class="btn btn-primary">
-		</form>
-		<div class="row">
-			<div class="col-md-10 col-md-offset-1">
-
-				<table data-toggle="table" class="table table-striped">
-					<thead>
-						<tr>
-							<th data-sortable="true">Text</th>
-							<th data-sortable="true">User</th>
-							<th data-sortable="true">Date</th>
-							<th sec:authorize="hasRole('ADMIN')">Actions</th>
-						</tr>
-					</thead>
 
 
-					<tbody>
-						<!--  list all items ----------------------------------------------------------- -->
-					<tr th:each="comment : ${comments}">
-						<td th:text="${comment.text}"></td>
-							<td th:text="${comment.user}"></td>
-							<td th:text="${comment.date}"></td>
-							
+		<!-- Right Dynamic Content------------------------------------------------------- -->
+		<div class="col-sm-12">
 
-							<td sec:authorize="hasRole('ADMIN')">
-							<a th:href="@{/changeComment(id=${comment.id})}"
-								class="btn btn-xs btn-success"> <span
-									class="glyphicon glyphicon-edit" aria-hidden="true"></span>
-									Edit
-							</a> <a
-									th:href="@{/delete(id=${comment.id})}"
-									class="btn btn-xs btn-danger"> <span
-										class="glyphicon glyphicon-trash" aria-hidden="true"></span>
-										Delete
-								</a>
-					</td>
-						</tr>
+			<table data-toggle="table" class="table table-striped">
+				<thead>
+					<tr>
+						
 					
-					</tbody>
-				</table>
+						
+						
+						<th>User</th>
+						<th>Date</th>
+						<th>Text</th>
 
-			</div>
+					</tr>
+				</thead>
+				<tbody>
+					<!--  list all items ----------------------------------------------------------- -->
+					<tr th:each="comment : ${comments}">
+						
+						<td th:text="${comment.user}"></td>
+						<td th:text="${comment.date}"></td>
+						<td th:text="${comment.text}"></td>
+						
+						<!-- <td><a sec:authorize="hasRole('ADMIN')" th:href="@{/delete(id=${employee.id})}">Delete</a></td> -->
+
+					</tr>
+					<!--  list all items ----------------------------------------------------------- -->
+				</tbody>
+			</table>
+
 		</div>
-
+		<!-- Right Dynamic Content------------------------------------------------------- -->
+	</div>
+	
+	
+	
 	</div>
 	<!--  End of container -->
 	<div th:replace="~{includes/bootstrap :: bootstrapJS}" />
+	<div th:replace="~{includes/footer :: footer}" />
 </body>
 </html>

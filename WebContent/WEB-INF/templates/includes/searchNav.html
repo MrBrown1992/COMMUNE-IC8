@@ -10,6 +10,11 @@
 		<form th:action="@{/editGrocery}" method="post" class="btn btn-default navbar-btn">
 			<input class="btn btn-default" type = "submit" value = "Add new GRocery"/>
 		</form> </span>
+		
+		<span sec:authorize="hasRole('ADMIN')">
+		<form th:action="@{/addComment}" method="post" class="btn btn-default navbar-btn">
+			<input class="btn btn-default" type = "submit" value = "Add new Comment"/>
+		</form> </span>
 
 
 
