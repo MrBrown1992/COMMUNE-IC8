@@ -60,7 +60,7 @@
 						<tr th:each="grocery : ${groceries}">
 						<td th:text="${grocery.id}"></td>
 							<td th:text="${grocery.groceryName}"></td>
-							<td th:text="${grocery.bought}"></td>
+							<td  th:text="${grocery.bought}" ></td>
 							
 
 							<td sec:authorize="hasRole('ADMIN')">

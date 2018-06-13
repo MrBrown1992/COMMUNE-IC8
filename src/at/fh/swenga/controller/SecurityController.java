@@ -1,5 +1,6 @@
 package at.fh.swenga.controller;
 
+import java.security.Principal;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,6 +12,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import at.fh.swenga.dao.UserDao;
 import at.fh.swenga.dao.UserRoleDao;
@@ -77,6 +79,8 @@ public class SecurityController {
 	public String listGrocery(Model model) {
 		return "listGrocery";
 	}
+	
+
 
 	@ExceptionHandler(Exception.class)
 	public String handleAllException(Exception ex) {
