@@ -28,7 +28,7 @@
 							<label for="groceryName" class="col-md-2 control-label">
 								Name </label>
 							<div class="col-md-10">
-								<input class="form-control" id="groceryName" type="text"
+								<input class="form-control" type="text"
 									name="groceryName" th:value="${grocery} ? ${grocery.groceryName}">
 							</div>
 						</div>
@@ -38,9 +38,18 @@
 							<label for="inputAvailable" class="col-md-2 control-label">Bought
 							</label>
 							<div class="col-md-10">
-								<input th:checked="${grocery} ? ${grocery.bought}"
-									id="boughtstate" class=form-control type="checkbox"
+							<th:block th:if = "${grocery}" >
+								<input th:checked="${grocery.bought}"
+								
+									class=form-control type="checkbox"
 									name="boughtstate">
+									</th:block>
+									<th:block th:unless = "${grocery}" >
+								<input 
+								
+									class=form-control type="checkbox"
+									name="boughtstate">
+									</th:block>
 							</div>
 						</div>
 							
@@ -50,7 +59,7 @@
 						<div class="form-group">
 							<div class="col-md-10 col-md-offset-2">
 								<button type="submit" class="btn btn-primary">Submit</button>
-								<a th:action="createNewGroceryItem" class="btn btn-default"> Cancel </a>
+								<a th:action="listGrocery" class="btn btn-default"> Cancel </a>
 							</div>
 						</div>
 

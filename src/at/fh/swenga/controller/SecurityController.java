@@ -36,11 +36,11 @@ public class SecurityController {
 	@Transactional
 	public String fillData(Model model) {
 
-		UserRole adminRole = userRoleDao.getRole("ROLE_ADMIN");
+		UserRole adminRole = userRoleDao.findFirstByRoleName("ROLE_ADMIN");
 		if (adminRole == null)
 			adminRole = new UserRole("ROLE_ADMIN");
 
-		UserRole userRole = userRoleDao.getRole("ROLE_USER");
+		UserRole userRole = userRoleDao.findFirstByRoleName("ROLE_USER");
 		if (userRole == null)
 			userRole = new UserRole("ROLE_USER");
 
