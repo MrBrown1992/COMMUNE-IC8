@@ -10,6 +10,7 @@ import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.data.jpa.repository.JpaRepository;
 
+import at.fh.swenga.model.Grocery;
 import at.fh.swenga.model.User;
 
 
@@ -18,4 +19,5 @@ import at.fh.swenga.model.User;
 public interface UserDao extends JpaRepository<User, Integer>{
 	
 	
+	public User findFirstByUsername(String username);
 }

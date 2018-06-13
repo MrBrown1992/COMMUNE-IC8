@@ -6,9 +6,12 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.context.annotation.ScopedProxyMode;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
+import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -82,6 +85,23 @@ public class SecurityController {
 	
 
 
+
+	
+	public String getCurrentUser(Model model) {
+		 
+	      Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+	      String name = auth.getName();
+	      model.addAttribute("name", name);
+	      return name;
+	}
+	
+	
+	
+	
+	
+	
+	
+	
 	@ExceptionHandler(Exception.class)
 	public String handleAllException(Exception ex) {
 		ex.printStackTrace();
