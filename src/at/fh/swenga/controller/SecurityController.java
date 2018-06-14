@@ -1,7 +1,9 @@
 package at.fh.swenga.controller;
 
-import java.security.Principal;
+import java.util.Date;
 import java.util.List;
+
+import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
@@ -11,14 +13,16 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
-import org.springframework.ui.ModelMap;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.FieldError;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import at.fh.swenga.dao.UserDao;
 import at.fh.swenga.dao.UserRoleDao;
+import at.fh.swenga.model.Flat;
 import at.fh.swenga.model.User;
 import at.fh.swenga.model.UserRole;
 
@@ -31,10 +35,25 @@ public class SecurityController {
 
 	@Autowired
 	UserRoleDao userRoleDao;
+	
+	///UserRole userRole;
 
 	@RequestMapping(value = "/login", method = RequestMethod.GET)
 	public String handleLogin() {
 		return "login";
+	}
+	
+	private boolean errorsDetected(Model model, BindingResult bindingResult) {
+		// Any errors? -> Create a String out of all errors and return to the page
+		if (bindingResult.hasErrors()) {
+			String errorMessage = "";
+			for (FieldError fieldError : bindingResult.getFieldErrors()) {
+				errorMessage += fieldError.getField() + " is invalid";
+			}
+			model.addAttribute("errorMessage", errorMessage);
+			return true;
+		}
+		return false;
 	}
 
 	@RequestMapping("/addUser")
@@ -64,6 +83,42 @@ public class SecurityController {
 		return "forward:login";
 	}
 
+	@RequestMapping("/addNewUser")
+	@Transactional
+	public String addNewUser(@Valid User newUser, @RequestParam(value = "userName") String userName,
+			@RequestParam(value = "firstName") String firstName, @RequestParam(value = "lastName") String lastName,
+			@RequestParam(value = "password") String password, @RequestParam(value = "email") String email,
+			@RequestParam(value = "dob") Date dob,@RequestParam(value = "mobilenumber") int mobilenumber, @RequestParam(value = "userRole") UserRole userRole,@RequestParam(value = "flat")Flat flat ,
+			Authentication authentication, Model model, BindingResult bindingResult) {
+		
+		// Any errors? -> Create a String out of all errors and return to the page
+		if (errorsDetected(model, bindingResult)) {
+			return ("/index");
+		}
+		
+		newUser.setFirstname(firstName);
+		newUser.setLastname(lastName);
+		newUser.setUsername(userName);
+		newUser.setPassword(password);
+		newUser.encryptPassword();
+		newUser.setBirthdate(dob);
+		newUser.setEmail(email);
+		newUser.addUserRole(userRole);
+		newUser.setMobilenumber(mobilenumber);
+		//newUser.setFlat(flat);
+		
+		userDao.save(newUser);
+		
+		return "listUsers";
+	}
+	
+	
+	@RequestMapping(value = { "/editUser" })
+	public String user(Model model) {
+		return "editUser";
+	}
+	
+
 	@RequestMapping(value = { "/" })
 	public String index(Model model) {
 
@@ -82,26 +137,15 @@ public class SecurityController {
 	public String listGrocery(Model model) {
 		return "listGrocery";
 	}
-	
 
-
-
-	
 	public String getCurrentUser(Model model) {
-		 
-	      Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-	      String name = auth.getName();
-	      model.addAttribute("name", name);
-	      return name;
+
+		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+		String name = auth.getName();
+		model.addAttribute("name", name);
+		return name;
 	}
-	
-	
-	
-	
-	
-	
-	
-	
+
 	@ExceptionHandler(Exception.class)
 	public String handleAllException(Exception ex) {
 		ex.printStackTrace();

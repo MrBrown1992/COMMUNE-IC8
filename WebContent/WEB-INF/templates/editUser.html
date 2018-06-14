@@ -16,97 +16,85 @@
 		<div class="row">
 			<div class="col-md-8 col-md-offset-2">
 				<form class="form-horizontal" method="post"
-					th:action="${user} ? @{/changeGrocery(id=${grocery.id})} : @{/createNewGroceryItem}">
+					th:action="${user} ? @{/changeUser(id=${user.id})} : @{/addNewUser}">
 					<!--<input type="hidden" th:name="${_csrf.parameterName}"
 						th:value="${_csrf.token}" />-->
 					<fieldset>
-						<legend th:text="${grocery}? 'Change Grocery' : 'New Grocery'">New
-							Grocery</legend>
+						<legend th:text="${user}? 'Change User' : 'New User'">New
+							User</legend>
 
 						<!-- --------------  UserName ---------------- -->
 						<div class="form-group">
-							<label class="col-md-2 control-label">
-								Username </label>
+							<label class="col-md-2 control-label"> Username </label>
 							<div class="col-md-10">
-								<input class="form-control" type="text" name="username"
+								<input class="form-control" type="text" name="userName"
 									th:value="${user} ? ${user.userName}">
 							</div>
 						</div>
 						<!-- --------------  MobileNumber ---------------- -->
 						<div class="form-group">
-							<label class="col-md-2 control-label">
-								Password</label>
+							<label class="col-md-2 control-label"> Password</label>
 							<div class="col-md-10">
 								<input class="form-control" type="text" name="password"
 									th:value="${user} ? ${user.password}">
 							</div>
 						</div>
-						
-						
+
+
 						<!-- --------------  FirstName ---------------- -->
 						<div class="form-group">
-							<label class="col-md-2 control-label">
-								First Name  </label>
+							<label class="col-md-2 control-label"> First Name </label>
 							<div class="col-md-10">
-								<input class="form-control" type="text" name="firstname"
+								<input class="form-control" type="text" name="firstName"
 									th:value="${user} ? ${user.firstname}">
 							</div>
 						</div>
-						
+
 						<!-- --------------  LastName ---------------- -->
 						<div class="form-group">
-							<label class="col-md-2 control-label">
-								Last Name </label>
+							<label class="col-md-2 control-label"> Last Name </label>
 							<div class="col-md-10">
-								<input class="form-control" type="text" name="lastname"
+								<input class="form-control" type="text" name="lastName"
 									th:value="${user} ? ${user.lastname}">
 							</div>
-							
+
 						</div>
-						
+
 						<!-- --------------  MobileNumber ---------------- -->
 						<div class="form-group">
-							<label class="col-md-2 control-label">
-								Mobilephone Number </label>
+							<label class="col-md-2 control-label"> Mobilephone Number
+							</label>
 							<div class="col-md-10">
-								<input class="form-control" type="text" name="mobilenumber"
+								<input class="form-control" type="number" name="mobilenumber"
 									th:value="${user} ? ${user.mobilenumber}">
 							</div>
 						</div>
 						<!-- --------------  EMail ---------------- -->
 						<div class="form-group">
-							<label class="col-md-2 control-label">
-								E-Mail </label>
+							<label class="col-md-2 control-label"> E-Mail </label>
 							<div class="col-md-10">
-								<input class="form-control" type="text" name="mobilenumber"
-									th:value="${user} ? ${user.mobilenumber}">
+								<input class="form-control" type="email" name="email"
+									th:value="${user} ? ${user.email}">
 							</div>
 						</div>
-						
-						
-						
 
 
 
-						<!-- Checkbox Bought  --->
+						<!-- --------------  dayOfBirth ---------------- -->
 						<div class="form-group">
-							<label for="inputAvailable" class="col-md-2 control-label">Bought
-							</label>
+							<label class="col-md-2 control-label">Date</label>
 							<div class="col-md-10">
-
-								<input  th:checked= "${grocery} ? ${grocery.bought}" class=form-control
-									type="checkbox" name="boughtstate">
-
+								<input class="form_datetime" placeholder="dob" type="date"
+									readonly name="dob"
+									th:value="${user} ? ${#dates.format(user.dob, 'dd.MM.yyyy')}">
 							</div>
 						</div>
-
-
 
 						<!-- --------------  buttons ---------------- -->
 						<div class="form-group">
 							<div class="col-md-10 col-md-offset-2">
 								<button type="submit" class="btn btn-primary">Submit</button>
-								<a th:action="listGrocery" class="btn btn-default"> Cancel </a>
+								<a th:action="listUsers" class="btn btn-default"> Cancel </a>
 							</div>
 						</div>
 
@@ -122,7 +110,19 @@
 	<!-- JS for Datetime picker -->
 	<script type="text/javascript"
 		src="http://www.malot.fr/bootstrap-datetimepicker/bootstrap-datetimepicker/js/bootstrap-datetimepicker.js"></script>
+	<script>
+		$(function() {
 
+			$(".form_datetime").datetimepicker({
+				format : "dd.mm.yyyy",
+				autoclose : true,
+				todayBtn : true,
+				pickerPosition : "bottom-left",
+				minView : 2
+			});
+
+		});
+	</script>
 
 </body>
 
