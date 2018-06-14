@@ -1,3 +1,4 @@
+
 <nav th:fragment="search" class="navbar navbar-inverse navbar-fixed-top">
 	<div class="container-fluid">
 
@@ -11,7 +12,7 @@
 			<input class="btn btn-default" type = "submit" value = "Add new GRocery"/>
 		</form> </span>
 		
-		<span sec:authorize="hasRole('ADMIN')">
+		<span sec:authorize="hasRole('USER')">
 		<form th:action="@{/addComment}" method="post" class="btn btn-default navbar-btn">
 			<input class="btn btn-default" type = "submit" value = "Add new Comment"/>
 		</form> </span>

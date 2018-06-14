@@ -6,6 +6,7 @@ import java.util.List;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Scope;
 import org.springframework.context.annotation.ScopedProxyMode;
 import org.springframework.security.access.annotation.Secured;
@@ -16,13 +17,11 @@ import org.springframework.validation.BindingResult;
 import org.springframework.validation.FieldError;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import at.fh.swenga.dao.CommentDao;
 import at.fh.swenga.dao.UserDao;
 import at.fh.swenga.model.Comment;
-import at.fh.swenga.model.Grocery;
 import at.fh.swenga.model.User;
 
 @Controller
@@ -33,14 +32,13 @@ public class CommentController {
 	@Autowired
 	UserDao userDao;
 
-	@Autowired
-	User user;
+	//@Autowired
+	//User user;
 
 	@Autowired
 	CommentDao commentDao;
 	
-	@Autowired
-	Comment comment;
+
 
 	/**
 	 * 
@@ -80,7 +78,8 @@ public class CommentController {
 
 		User user = userDao.findFirstByUsername(authentication.getName());
 
-		if (user != null) {
+		/*
+		 if (user != null) {
 			model.addAttribute("user", user);
 
 		} else {
@@ -88,11 +87,15 @@ public class CommentController {
 			model.addAttribute("errorMessage", "Something went wrong!");
 		}
 
+		 */
+	
 		return user;
 	}
 	
 	
 	
+	
+	@Secured({ "ROLE_USER" })
 	@RequestMapping(value = "/addComment")
 	public String addComment() {
 		
