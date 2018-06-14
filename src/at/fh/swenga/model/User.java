@@ -77,7 +77,7 @@ public class User implements java.io.Serializable {
 	}
 
 	public User(String username, String password, boolean enabled, String firstname, String lastname, int mobilenumber,
-			String email, Date birthdate, Set<UserRole> userRoles, Image userimage) {
+			String email, Date birthdate, Set<UserRole> userRoles, Image userimage ) {
 		super();
 		this.username = username;
 		this.password = password;
@@ -89,7 +89,10 @@ public class User implements java.io.Serializable {
 		this.birthdate = birthdate;
 		this.userRoles = userRoles;
 		this.userimage = userimage;
-	}
+		}
+	
+	
+	
 
 	public User(String username, String password, boolean enabled) {
 		this.username = username;
@@ -251,6 +254,38 @@ public class User implements java.io.Serializable {
 		if (userRoles == null)
 			userRoles = new HashSet<UserRole>();
 		userRoles.add(userRole);
+	}
+
+	
+	
+	
+	
+	/**
+	 * @return the flat
+	 */
+	public Flat getFlat() {
+		return flat;
+	}
+
+	/**
+	 * @param flat the flat to set
+	 */
+	public void setFlat(Flat flat) {
+		this.flat = flat;
+	}
+
+	/**
+	 * @return the comments
+	 */
+	public Set<Comment> getComments() {
+		return comments;
+	}
+
+	/**
+	 * @param comments the comments to set
+	 */
+	public void setComments(Set<Comment> comments) {
+		this.comments = comments;
 	}
 
 	/**

@@ -4,7 +4,9 @@
 
 <head>
 <div th:include="~{includes/bootstrap :: bootstrapMeta}" th:remove="tag" />
-<title>COMMUNE-IC8</title>
+
+<title>Edit Grocery</title>
+
 <div th:include="~{includes/bootstrap :: bootstrapCSS}" th:remove="tag" />
 <link
 	href="http://www.malot.fr/bootstrap-datetimepicker/bootstrap-datetimepicker/css/bootstrap-datetimepicker.css"
@@ -28,33 +30,25 @@
 							<label for="groceryName" class="col-md-2 control-label">
 								Name </label>
 							<div class="col-md-10">
-								<input class="form-control" type="text"
-									name="groceryName" th:value="${grocery} ? ${grocery.groceryName}">
+								<input class="form-control" type="text" name="groceryName"
+									th:value="${grocery} ? ${grocery.groceryName}">
 							</div>
 						</div>
-						
+
 						<!-- Checkbox Bought  --->
 						<div class="form-group">
 							<label for="inputAvailable" class="col-md-2 control-label">Bought
 							</label>
 							<div class="col-md-10">
-							<th:block th:if = "${grocery}" >
-								<input th:checked="${grocery.bought}"
-								
-									class=form-control type="checkbox"
-									name="boughtstate">
-									</th:block>
-									<th:block th:unless = "${grocery}" >
-								<input 
-								
-									class=form-control type="checkbox"
-									name="boughtstate">
-									</th:block>
+
+								<input  th:checked= "${grocery} ? ${grocery.bought}" class=form-control
+									type="checkbox" name="boughtstate">
+
 							</div>
 						</div>
-							
 
-											
+
+
 						<!-- --------------  buttons ---------------- -->
 						<div class="form-group">
 							<div class="col-md-10 col-md-offset-2">
