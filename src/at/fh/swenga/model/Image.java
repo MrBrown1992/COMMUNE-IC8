@@ -31,6 +31,8 @@ public class Image implements java.io.Serializable {
 	@Column(name = "img")
 	private byte[] img;
 	
+	@Column(name="filename")
+	private String filename;
 	@Version
 	long version;
 
@@ -39,11 +41,12 @@ public class Image implements java.io.Serializable {
 		// TODO Auto-generated constructor stub
 	}
 
-	public Image(int id, User attacheduser, byte[] img) {
+	public Image(int id, User attacheduser, byte[] img, String filename) {
 		super();
 		this.id = id;
 		this.attacheduser = attacheduser;
 		this.img = img;
+		this.filename = filename;
 	}
 
 	public int getId() {
@@ -69,6 +72,15 @@ public class Image implements java.io.Serializable {
 	public void setImg(byte[] img) {
 		this.img = img;
 	}
+	
+	public String getFilename() {
+		return filename;
+	}
+ 
+	public void setFilename(String filename) {
+		this.filename = filename;
+	}
+ 
 	
 	
 

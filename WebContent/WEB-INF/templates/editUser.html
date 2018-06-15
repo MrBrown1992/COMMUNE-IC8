@@ -84,9 +84,10 @@
 						<div class="form-group">
 							<label class="col-md-2 control-label">Date</label>
 							<div class="col-md-10">
-								<input class="form_datetime" placeholder="dob" type="date"
+								<input class="form_datetime" placeholder="day of birth" type="text"
 									readonly name="dob"
 									th:value="${user} ? ${#dates.format(user.dob, 'dd.MM.yyyy')}">
+									
 							</div>
 						</div>
 
@@ -94,7 +95,7 @@
 						<div class="form-group">
 							<div class="col-md-10 col-md-offset-2">
 								<button type="submit" class="btn btn-primary">Submit</button>
-								<a th:action="listUsers" class="btn btn-default"> Cancel </a>
+								<a href="index" class="btn btn-default"> Cancel </a>
 							</div>
 						</div>
 
