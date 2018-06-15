@@ -66,7 +66,7 @@ public class CommentController {
 	public String listComments(Model model) {
 
 		List<Comment> comments = commentDao.findAll();
-
+		System.out.println("Size: " + comments.size());
 		model.addAttribute("comments", comments);
 		return "listComments";
 	}
@@ -121,7 +121,7 @@ public class CommentController {
 		Date date = new Date();
 		
 		
-		String username = currentUserName(authentication);
+		String username = authentication.getName();
 		User user = userDao.findFirstByUsername(username);
 		
 		// Any errors? -> Create a String out of all errors and return to the page
@@ -141,7 +141,7 @@ public class CommentController {
 		System.out.println("Comment: " + newComment.toString());
 		commentDao.save(newComment);
 
-		return "listComments";
+		return "forward:listComments";
 	}
 	
 

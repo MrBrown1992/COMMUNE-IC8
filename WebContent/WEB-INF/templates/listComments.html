@@ -58,7 +58,7 @@
 					<!--  list all items ----------------------------------------------------------- -->
 					<tr th:each="comment : ${comments}">
 						
-						<td th:text="${comment.user}"></td>
+						<td th:text="${comment.getUser().getFirstname() + ' ' + comment.getUser().getLastname()}"></td>
 						<td th:text="${comment.date}"></td>
 						<td th:text="${comment.text}"></td>
 						

@@ -43,6 +43,17 @@ public class Comment implements java.io.Serializable{
 		this.date = date;
 		this.user = user;
 	}
+	
+	
+	
+
+	public Comment() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
+
+
+
 
 	/**
 	 * @return the id
