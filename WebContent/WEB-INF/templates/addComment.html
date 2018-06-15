@@ -29,7 +29,7 @@
 							<div class="col-md-10">
 								<input class="form-control" type="text" name="commentText"
 									th:value="${commentText}"
-									placeholder="What comes to your mind ? Du Eierbär..">
+									placeholder="What comes to your mind ? ">
 							</div>
 						</div>
 
@@ -39,7 +39,7 @@
 						<div class="form-group">
 							<div class="col-md-10 col-md-offset-2">
 								<button type="submit" class="btn btn-primary">Submit</button>
-								<a th:action="listComments" class="btn btn-default"> Cancel
+								<a th:href="listComments" class="btn btn-default"> Cancel
 								</a>
 							</div>
 						</div>

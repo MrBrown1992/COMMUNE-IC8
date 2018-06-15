@@ -28,7 +28,7 @@ public class Comment implements java.io.Serializable{
 	@Temporal(TemporalType.DATE)
 	private Date date;
 
-	@ManyToOne(cascade = CascadeType.PERSIST)
+	@ManyToOne(cascade = CascadeType.DETACH)
 	User user;
 
 	/**

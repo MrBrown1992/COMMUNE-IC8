@@ -6,7 +6,6 @@ import java.util.List;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Scope;
 import org.springframework.context.annotation.ScopedProxyMode;
 import org.springframework.security.access.annotation.Secured;
@@ -17,7 +16,9 @@ import org.springframework.validation.BindingResult;
 import org.springframework.validation.FieldError;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import at.fh.swenga.dao.CommentDao;
 import at.fh.swenga.dao.UserDao;
@@ -88,11 +89,20 @@ public class CommentController {
 		}
 
 		 */
-	
+		System.out.println("The current user is: " + user +"\n" + authentication.getPrincipal());
 		return user;
 	}
 	
 	
+	
+	@RequestMapping(value = "/username", method = RequestMethod.GET)
+    @ResponseBody
+    public String currentUserName(Authentication authentication) {
+        
+		//System.out.println("inside currentUserName" + authentication.getName());
+		return authentication.getName();
+	
+	}
 	
 	
 	@Secured({ "ROLE_USER" })
@@ -110,16 +120,25 @@ public class CommentController {
 
 		Date date = new Date();
 		
+		
+		String username = currentUserName(authentication);
+		User user = userDao.findFirstByUsername(username);
+		
 		// Any errors? -> Create a String out of all errors and return to the page
 		if (errorsDetected(model, bindingResult)) {
 			return listComments(model);
 		}
 		
-		newComment.setUser(getCurrentUser(model, authentication));
+		
+		newComment.setUser(user);
 		newComment.setDate(date);
 		newComment.setText(commentText);
 		
-		
+		System.out.println("Username: " + username);
+
+		System.out.println("User: " + user);
+
+		System.out.println("Comment: " + newComment.toString());
 		commentDao.save(newComment);
 
 		return "listComments";
