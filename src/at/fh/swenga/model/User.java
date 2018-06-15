@@ -1,5 +1,6 @@
 package at.fh.swenga.model;
 
+import java.util.Calendar;
 import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
@@ -19,6 +20,7 @@ import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 @Entity
@@ -48,10 +50,12 @@ public class User implements java.io.Serializable {
 
 	@Column(name = "email", nullable = true, length = 65)
 	private String email;
-
+	
+	@DateTimeFormat(pattern = "dd.MM.yyyy") 
 	@Temporal(TemporalType.DATE)
 	private Date birthdate;
 
+	
 	@ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.PERSIST)
 	private Set<UserRole> userRoles;
 

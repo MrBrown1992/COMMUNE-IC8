@@ -84,9 +84,10 @@
 						<div class="form-group">
 							<label class="col-md-2 control-label">Date</label>
 							<div class="col-md-10">
-								<input class="form_datetime" placeholder="dob" type="date"
+								<input class="form_datetime" placeholder="day of birth" type="text"
 									readonly name="dob"
 									th:value="${user} ? ${#dates.format(user.dob, 'dd.MM.yyyy')}">
+									
 							</div>
 						</div>
 
