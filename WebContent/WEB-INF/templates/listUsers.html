@@ -36,7 +36,12 @@
 		
 
 		<!--  1 simple button ----------------------------------------------------------- -->
-		<div class="row"></div>
+		<div class="row">
+		<form sec:authorize="hasRole('ADMIN')" th:action="@{/editUser}"
+				method="post">
+				<input class="btn btn-default" type="submit" value="Add new User" />
+			</form>
+		</div>
 		<!--  1 simple button ----------------------------------------------------------- -->
 
 
