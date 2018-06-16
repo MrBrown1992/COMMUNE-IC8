@@ -1,8 +1,7 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:th="http://www.thymeleaf.org"
-	xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
-	>
+	xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head>
 <div th:replace="~{includes/bootstrap :: bootstrapMeta}" />
 <title>COMMUNE-IC8</title>
@@ -21,8 +20,9 @@
 		<!--  Error message ----------------------------------------------------------- -->
 
 		<!--  Warning message ----------------------------------------------------------- -->
-		<div th:unless="${warningMessage} == null" th:utext="${warningMessage}"
-			class="alert alert-warning" role="warning"></div>
+		<div th:unless="${warningMessage} == null"
+			th:utext="${warningMessage}" class="alert alert-warning"
+			role="warning"></div>
 		<!--  Warning message ----------------------------------------------------------- -->
 
 		<!--   message ----------------------------------------------------------- -->
@@ -34,16 +34,19 @@
 
 		<!--  1 simple button ----------------------------------------------------------- -->
 		<div class="row">
-		<span sec:authorize="hasRole('ADMIN')">
-		<form th:action="@{/editGrocery}" method="post" class="btn btn-default navbar-btn">
-			<input class="btn btn-default" type = "submit" value = "Add new Grocery"/>
-		</form> </span>
-		
-				<form><input type="submit" name="pdf" value="PDF" class="btn btn-primary"></form>
-		
+
+			<form sec:authorize="hasRole('ADMIN')" th:action="@{/editGrocery}"
+				method="post">
+				<input class="btn btn-default" type="submit" value="Add new Grocery" />
+			</form>
+
+			<form>
+				<input type="submit" name="pdf" value="PDF" class="btn btn-primary">
+			</form>
+
 		</div>
 		<!--  1 simple button ----------------------------------------------------------- -->
-		<div class="row">
+		
 			<div class="col-md-10 col-md-offset-1">
 
 				<table data-toggle="table" class="table table-striped">
@@ -52,42 +55,40 @@
 							<th data-sortable="true">ID</th>
 							<th data-sortable="true">Grocery</th>
 							<th data-sortable="true">bought</th>
-							<th sec:authorize="hasRole('ADMIN')"> Actions</th>
-							
-							
-							
+							<th sec:authorize="hasRole('ADMIN')">Actions</th>
+
+
+
 						</tr>
 					</thead>
-					
-					
+
+
 					<tbody>
 						<!--  list all items ----------------------------------------------------------- -->
 
 						<tr th:each="grocery : ${groceries}">
-						<td th:text="${grocery.id}"></td>
+							<td th:text="${grocery.id}"></td>
 							<td th:text="${grocery.groceryName}"></td>
-							<td  th:text="${grocery.bought}" ></td>
-							
+							<td th:text="${grocery.bought}"></td>
 
-							<td sec:authorize="hasRole('ADMIN')">
-							<a th:href="@{/changeGrocery(id=${grocery.id})}"
+
+							<td sec:authorize="hasRole('ADMIN')"><a
+								th:href="@{/changeGrocery(id=${grocery.id})}"
 								class="btn btn-xs btn-success"> <span
 									class="glyphicon glyphicon-edit" aria-hidden="true"></span>
 									Edit
-							</a> <a
-									th:href="@{/delete(id=${grocery.id})}"
-									class="btn btn-xs btn-danger"> <span
-										class="glyphicon glyphicon-trash" aria-hidden="true"></span>
-										Delete
-								</a>
-					</td>
+							</a> <a th:href="@{/delete(id=${grocery.id})}"
+								class="btn btn-xs btn-danger"> <span
+									class="glyphicon glyphicon-trash" aria-hidden="true"></span>
+									Delete
+							</a></td>
 						</tr>
 						<!--  list all items ----------------------------------------------------------- -->
 					</tbody>
 				</table>
 			</div>
 		</div>
-	</div>
+	
 	<!--  End of container -->
 	<div th:replace="~{includes/bootstrap :: bootstrapJS}" />
 </body>
