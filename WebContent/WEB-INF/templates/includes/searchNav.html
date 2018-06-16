@@ -7,7 +7,7 @@
 			<input class="btn btn-danger" type="submit" value="Sign Out" />
 		</form>
 		
-		<span sec:authorize="hasRole('ADMIN')">
+		<span sec:authorize="hasRole('USER')">
 		<form th:action="@{/showGroceryList}" method="post" class="btn btn-default navbar-btn">
 			<input class="btn btn-default" type = "submit" value = "Grocery List"/>
 		</form> </span>
