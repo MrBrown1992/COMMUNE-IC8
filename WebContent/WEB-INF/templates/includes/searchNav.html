@@ -18,8 +18,8 @@
 		</form> </span>
 		
 		<span sec:authorize="hasRole('ADMIN')">
-		<form th:action="@{/editUser}" method="post" class="btn btn-default navbar-btn">
-			<input class="btn btn-default" type = "submit" value = "Add new User"/>
+		<form th:action="@{/listUsers}" method="post" class="btn btn-default navbar-btn">
+			<input class="btn btn-default" type = "submit" value = "Users"/>
 		 </form></span>
 
 
