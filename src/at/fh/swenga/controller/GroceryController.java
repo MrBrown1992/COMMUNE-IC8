@@ -136,6 +136,18 @@ public class GroceryController {
 		return showGroceryList(model);
 	}
 	
+	@RequestMapping(value = { "/editGrocery" })
+	public String grocery(Model model) {
+		return "editGrocery";
+	}
+
+	@RequestMapping(value = { "/listGrocery" })
+	public String listGrocery(Model model) {
+		return "listGrocery";
+	}
+	
+	
+	
 	
 	@ExceptionHandler(Exception.class)
 	public String handleAllException(Exception ex) {

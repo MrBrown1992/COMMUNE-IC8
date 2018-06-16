@@ -129,15 +129,7 @@ public class SecurityController {
 		return "index";
 	}
 
-	@RequestMapping(value = { "/editGrocery" })
-	public String grocery(Model model) {
-		return "editGrocery";
-	}
-
-	@RequestMapping(value = { "/listGrocery" })
-	public String listGrocery(Model model) {
-		return "listGrocery";
-	}
+	
 
 	public String getCurrentUser(Model model) {
 
