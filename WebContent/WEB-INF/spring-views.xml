@@ -14,6 +14,6 @@
 	<bean id="pdfReportV5" class="at.fh.swenga.jpa.report.pdf.itext5.PdfEmployeeReportViewItext5" />
  
 	<!-- OLD ITEXT LIBRARY -->
-	<bean id="pdfReport" class="at.fh.swenga.jpa.report.pdf.PdfEmployeeReportView" />
+	<bean id="pdfReport" class="at.fh.swenga.exportpdf.PdfGroceryReportView" />
 
 </beans>

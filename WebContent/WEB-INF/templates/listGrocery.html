@@ -34,9 +34,15 @@
 
 		<!--  1 simple button ----------------------------------------------------------- -->
 		<div class="row">
+		<span sec:authorize="hasRole('ADMIN')">
+		<form th:action="@{/editGrocery}" method="post" class="btn btn-default navbar-btn">
+			<input class="btn btn-default" type = "submit" value = "Add new Grocery"/>
+		</form> </span>
+		
+				<form><input type="submit" name="pdf" value="PDF" class="btn btn-primary"></form>
+		
 		</div>
 		<!--  1 simple button ----------------------------------------------------------- -->
-		<form><input type="submit" name="pdf" value="PDF" class="btn btn-primary"></form>
 		<div class="row">
 			<div class="col-md-10 col-md-offset-1">
 
