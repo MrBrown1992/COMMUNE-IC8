@@ -50,11 +50,11 @@ public class User implements java.io.Serializable {
 
 	@Column(name = "email", nullable = true, length = 65)
 	private String email;
-	
+	/*
 	@DateTimeFormat(pattern = "dd.MM.yyyy") 
 	@Temporal(TemporalType.DATE)
 	private Date birthdate;
-
+*/
 	
 	@ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.PERSIST)
 	private Set<UserRole> userRoles;
@@ -81,7 +81,7 @@ public class User implements java.io.Serializable {
 	}
 
 	public User(String username, String password, boolean enabled, String firstname, String lastname, int mobilenumber,
-			String email, Date birthdate, Set<UserRole> userRoles, Image userimage ) {
+			String email, /*Date birthdate,*/ Set<UserRole> userRoles, Image userimage ) {
 		super();
 		this.username = username;
 		this.password = password;
@@ -90,7 +90,7 @@ public class User implements java.io.Serializable {
 		this.lastname = lastname;
 		this.mobilenumber = mobilenumber;
 		this.email = email;
-		this.birthdate = birthdate;
+		//this.birthdate = birthdate;
 		this.userRoles = userRoles;
 		this.userimage = userimage;
 		}
@@ -226,7 +226,7 @@ public class User implements java.io.Serializable {
 
 	/**
 	 * @return the birthdate
-	 */
+	
 	public Date getBirthdate() {
 		return birthdate;
 	}
@@ -234,10 +234,10 @@ public class User implements java.io.Serializable {
 	/**
 	 * @param birthdate
 	 *            the birthdate to set
-	 */
+	
 	public void setBirthdate(Date birthdate) {
 		this.birthdate = birthdate;
-	}
+	}*/
 
 	/**
 	 * @return the userRoles

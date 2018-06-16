@@ -69,7 +69,7 @@ public class GroceryController {
 	@RequestMapping("/createNewGroceryItem")
 	public String createNewGroceryItem(Model model, @Valid Grocery newGrocery,
 			@RequestParam(value = "groceryName") String groceryName,
-			@RequestParam(value = "boughtstate") boolean bought, Authentication authentication,
+			@RequestParam(value = "boughtstate",required = false) boolean bought, Authentication authentication,
 			BindingResult bindingResult) {
 
 		// Any errors? -> Create a String out of all errors and return to the page
@@ -100,7 +100,7 @@ public class GroceryController {
 		if (grocery != null) {
 			grocery.setName(groceryName);
 			
-			grocery.setBought(bought); // default valu setzen .. 
+			grocery.setBought(bought); // default value setzen .. 
 			
 
 			groceryDao.save(grocery);
@@ -113,7 +113,7 @@ public class GroceryController {
 	}
 	
 	@GetMapping("/changeGrocery")
-	public String changeGrocery(@RequestParam int id ,Model model ,Authentication authentication ) {
+	public String changeGrocery(@RequestParam(value = "id") int id ,Model model ,Authentication authentication ) {
 		
 		
 		Grocery grocery = groceryDao.findFirstByid(id);
