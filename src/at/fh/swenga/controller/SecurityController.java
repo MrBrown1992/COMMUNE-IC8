@@ -23,6 +23,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import at.fh.swenga.dao.UserDao;
 import at.fh.swenga.dao.UserRoleDao;
+
 import at.fh.swenga.model.Flat;
 import at.fh.swenga.model.User;
 import at.fh.swenga.model.UserRole;
@@ -36,14 +37,14 @@ public class SecurityController {
 
 	@Autowired
 	UserRoleDao userRoleDao;
-	
-	///UserRole userRole;
+
+	/// UserRole userRole;
 
 	@RequestMapping(value = "/login", method = RequestMethod.GET)
 	public String handleLogin() {
 		return "login";
 	}
-	
+
 	private boolean errorsDetected(Model model, BindingResult bindingResult) {
 		// Any errors? -> Create a String out of all errors and return to the page
 		if (bindingResult.hasErrors()) {
@@ -70,13 +71,13 @@ public class SecurityController {
 			userRole = new UserRole("ROLE_USER");
 
 		// User admin = new User("admin", "password", true);
-		User spiess = new User("spiess", "password", true, "admin", "admin", 0, null, null, null, null);
+		User spiess = new User("spiess", "password", true, "nikolaus", "spiess", 0, null, null, null);
 		spiess.encryptPassword();
 		spiess.addUserRole(userRole);
 		spiess.addUserRole(adminRole);
 		userDao.save(spiess);
 
-		User user = new User("user", "password", true, "user", "user", 1, null, null, null, null);
+		User user = new User("user", "password", true, "user", "user", 1, null, null, null);
 		user.encryptPassword();
 		user.addUserRole(userRole);
 		userDao.save(user);
@@ -89,36 +90,35 @@ public class SecurityController {
 	public String addNewUser(@Valid User newUser, @RequestParam(value = "userName") String userName,
 			@RequestParam(value = "firstName") String firstName, @RequestParam(value = "lastName") String lastName,
 			@RequestParam(value = "password") String password, @RequestParam(value = "email") String email,
-			@RequestParam(value = "dob") Date dob,@RequestParam(value = "mobilenumber") int mobilenumber, @RequestParam(value = "userRole") UserRole userRole,@RequestParam(value = "flat")Flat flat ,
+			/* @RequestParam(value = "dob") Date dob, */@RequestParam(value = "mobilenumber") int mobilenumber,
+			@RequestParam(value = "userRole") UserRole userRole, @RequestParam(value = "flat") Flat flat,
 			Authentication authentication, Model model, BindingResult bindingResult) {
-		
+
 		// Any errors? -> Create a String out of all errors and return to the page
 		if (errorsDetected(model, bindingResult)) {
 			return ("/index");
 		}
-		
+
 		newUser.setFirstname(firstName);
 		newUser.setLastname(lastName);
 		newUser.setUsername(userName);
 		newUser.setPassword(password);
 		newUser.encryptPassword();
-		newUser.setBirthdate(dob);
+		// newUser.setBirthdate(dob);
 		newUser.setEmail(email);
 		newUser.addUserRole(userRole);
 		newUser.setMobilenumber(mobilenumber);
-		//newUser.setFlat(flat);
-		
+		// newUser.setFlat(flat);
+
 		userDao.save(newUser);
-		
+
 		return "listUsers";
 	}
-	
-	
+
 	@RequestMapping(value = { "/editUser" })
 	public String user(Model model) {
 		return "editUser";
 	}
-	
 
 	@RequestMapping(value = { "/" })
 	public String index(Model model) {

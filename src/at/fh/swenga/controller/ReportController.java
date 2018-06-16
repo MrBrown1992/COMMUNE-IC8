@@ -49,15 +49,15 @@ public class ReportController {
 			return "excelReport";
 		} else if (StringUtils.isNoneEmpty(pdf)) {
 			// return "pdfReport";
-			return "pdfReportV5";
+			return "pdfReport";
 		} else if (StringUtils.isNoneEmpty(mail)) {
 			// sendMail(groceries);
 			model.addAttribute("errorMessage", "Mail sent");
-			return "forward:/list";
+			return "forward:/index";
 		}
 
 		else {
-			return "forward:/list";
+			return "forward:/index";
 		}
 	}
 

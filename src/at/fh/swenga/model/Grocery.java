@@ -24,7 +24,7 @@ public class Grocery implements java.io.Serializable{
 
 
 
-	@Column(name = "bought", nullable = false)
+	@Column(name = "bought")
 	private boolean bought;
 	
 	public Grocery() {

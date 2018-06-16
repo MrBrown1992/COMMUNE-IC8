@@ -25,7 +25,7 @@
 
 						<!-- --------------  UserName ---------------- -->
 						<div class="form-group">
-							<label class="col-md-2 control-label"> Username </label>
+							<label class="col-md-2 control-label"> User name </label>
 							<div class="col-md-10">
 								<input class="form-control" type="text" name="userName"
 									th:value="${user} ? ${user.userName}">
@@ -62,8 +62,7 @@
 
 						<!-- --------------  MobileNumber ---------------- -->
 						<div class="form-group">
-							<label class="col-md-2 control-label"> Mobilephone Number
-							</label>
+							<label class="col-md-2 control-label"> Phone number</label>
 							<div class="col-md-10">
 								<input class="form-control" type="number" name="mobilenumber"
 									th:value="${user} ? ${user.mobilenumber}">
@@ -78,16 +77,29 @@
 							</div>
 						</div>
 
-
+						<!-- UserRole  -->
+						<div>
+							<form method="post" action="find">
+								<div class="form-group">
+									<label class="col-md-2 control-label">User Role</label>
+									<div class="col-md-10">
+										<select id="searchType" class="form-control" name="searchType">
+											<option selected="selected">User</option>
+											<option>Admin</option>
+										</select>
+									</div>
+								</div>
+							</form>
+						</div>
 
 						<!-- --------------  dayOfBirth ---------------- -->
 						<div class="form-group">
 							<label class="col-md-2 control-label">Date</label>
 							<div class="col-md-10">
-								<input class="form_datetime" placeholder="day of birth" type="text"
-									readonly name="dob"
+								<input class="form_datetime" placeholder="day of birth"
+									type="text" readonly name="dob"
 									th:value="${user} ? ${#dates.format(user.dob, 'dd.MM.yyyy')}">
-									
+
 							</div>
 						</div>
 
@@ -95,10 +107,9 @@
 						<div class="form-group">
 							<div class="col-md-10 col-md-offset-2">
 								<button type="submit" class="btn btn-primary">Submit</button>
-								<a href="index" class="btn btn-default"> Cancel </a>
+								<a th:href="index" class="btn btn-default"> Cancel </a>
 							</div>
 						</div>
-
 					</fieldset>
 				</form>
 			</div>
