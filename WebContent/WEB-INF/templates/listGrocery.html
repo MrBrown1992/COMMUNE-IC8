@@ -8,10 +8,12 @@
 <div th:replace="~{includes/bootstrap :: bootstrapCSS}" />
 </head>
 <body>
-	<div class="container" role="main">
+	<div class="container-fluid" role="main">
 
 		<div class="page-header">
-			<h1>Grocery</h1>
+			
+			<h1 align="center">Groceries</h1>
+			<nav th:replace="~{includes/searchNav :: search}"></nav>
 		</div>
 
 		<!--  Error message ----------------------------------------------------------- -->
@@ -30,66 +32,70 @@
 			class="alert alert-success" role="warning"></div>
 		<!--   message ----------------------------------------------------------- -->
 
-		<nav th:replace="~{includes/searchNav :: search}"></nav>
-
-		<!--  1 simple button ----------------------------------------------------------- -->
-		<div class="row">
-
-			<form sec:authorize="hasRole('ADMIN')" th:action="@{/editGrocery}"
-				method="post">
-				<input class="btn btn-default" type="submit" value="Add new Grocery" />
-			</form>
-
-			<form>
-				<input type="submit" name="pdf" value="PDF" class="btn btn-primary">
-			</form>
-
+		<div class="col-sm-1">
+			<div th:replace="~{includes/menu :: menu}"></div>
 		</div>
-		<!--  1 simple button ----------------------------------------------------------- -->
 		
-			<div class="col-md-10 col-md-offset-1">
+		<!--  Edit Grocery----------------------------------------------------------- -->
+		<div class="col-md-2 col-md-offset-1">
 
-				<table data-toggle="table" class="table table-striped">
-					<thead>
-						<tr>
-							<th data-sortable="true">ID</th>
-							<th data-sortable="true">Grocery</th>
-							<th data-sortable="true">bought</th>
-							<th sec:authorize="hasRole('ADMIN')">Actions</th>
-
-
-
-						</tr>
-					</thead>
-
-
-					<tbody>
-						<!--  list all items ----------------------------------------------------------- -->
-
-						<tr th:each="grocery : ${groceries}">
-							<td th:text="${grocery.id}"></td>
-							<td th:text="${grocery.groceryName}"></td>
-							<td th:text="${grocery.bought}"></td>
-
-
-							<td sec:authorize="hasRole('ADMIN')"><a
-								th:href="@{/changeGrocery(id=${grocery.id})}"
-								class="btn btn-xs btn-success"> <span
-									class="glyphicon glyphicon-edit" aria-hidden="true"></span>
-									Edit
-							</a> <a th:href="@{/delete(id=${grocery.id})}"
-								class="btn btn-xs btn-danger"> <span
-									class="glyphicon glyphicon-trash" aria-hidden="true"></span>
-									Delete
-							</a></td>
-						</tr>
-						<!--  list all items ----------------------------------------------------------- -->
-					</tbody>
-				</table>
-			</div>
+			<form sec:authorize="hasRole('USER')" th:action="@{/editGrocery}"
+				method="post">
+				<input class="btn btn-default" type="submit" value="Add Grocery" />			
+				<input class="btn btn-default" type="submit" value="PDF" >
+			</form>
 		</div>
+		<!--  Edit Grocery----------------------------------------------------------- -->
+		
+	
+		
+
+		<div class="col-md-10 col-md-offset-1">
+			<table data-toggle="table" class="table table-striped">
+				<thead>
+					
+					<tr>
+						<th data-sortable="true">ID</th>
+						<th data-sortable="true">Grocery</th>
+						<th data-sortable="true">bought</th>
+						<th sec:authorize="hasRole('ADMIN')">Actions</th>
+
+
+
+					</tr>
+				</thead>
+
+
+				<tbody>
+					<!--  list all items ----------------------------------------------------------- -->
+
+					<tr th:each="grocery : ${groceries}">
+						<td th:text="${grocery.id}"></td>
+						<td th:text="${grocery.groceryName}"></td>
+						<td th:text="${grocery.bought}"></td>
+
+
+						<td sec:authorize="hasRole('ADMIN')"><a
+							th:href="@{/changeGrocery(id=${grocery.id})}"
+							class="btn btn-xs btn-success"> <span
+								class="glyphicon glyphicon-edit" aria-hidden="true"></span>
+								Edit
+						</a> <a th:href="@{/delete(id=${grocery.id})}"
+							class="btn btn-xs btn-danger"> <span
+								class="glyphicon glyphicon-trash" aria-hidden="true"></span>
+								Delete
+						</a></td>
+					</tr>
+					<!--  list all items ----------------------------------------------------------- -->
+				</tbody>
+			</table>
+		</div>
+		
+		
+	</div>
 	
 	<!--  End of container -->
 	<div th:replace="~{includes/bootstrap :: bootstrapJS}" />
+	<div th:replace="~{includes/footer :: footer}" />
 </body>
 </html>

@@ -6,21 +6,6 @@
 			method="post">
 			<input class="btn btn-danger" type="submit" value="Sign Out" />
 		</form>
-		
-		<span sec:authorize="hasRole('USER')">
-		<form th:action="@{/showGroceryList}" method="post" class="btn btn-default navbar-btn">
-			<input class="btn btn-default" type = "submit" value = "Grocery List"/>
-		</form> </span>
-		
-		<span sec:authorize="hasRole('USER')">
-		<form th:action="@{/listComments}" method="post" class="btn btn-default navbar-btn">
-			<input class="btn btn-default" type = "submit" value = "Comment Section"/>
-		</form> </span>
-		
-		<span sec:authorize="hasRole('ADMIN')">
-		<form th:action="@{/editUser}" method="post" class="btn btn-default navbar-btn">
-			<input class="btn btn-default" type = "submit" value = "Add new User"/>
-		 </form></span>
 
 
 
@@ -35,34 +20,11 @@
 			</div>
 		</form>
 
-
-		<form class="navbar-form navbar-left" method="post">
-			<ul class="nav navbar-nav">
-				<li class="dropdown"><a class="dropdown-toggle"
-					data-toggle="dropdown" href="#">Menu <span class="caret"></span></a>
-					<ul class="dropdown-menu">
-						<li>
-							<form class="navbar-form" th:action="@{/listGrocery}"
-								method="post">
-								<a class="btn btn-default" type="submit">Grocery</a>
-							</form>
-						</li>
-						
-						<li>
-							<form class="navbar-form" th:action="@{/todo}"
-								method="post">
-								<a class="btn btn-default" type="submit">To-Do's</a>
-							</form>
-						</li>
-						
-						
-						
-						
-					</ul></li>
-
-			</ul>
+		
+		<form class="navbar-form navbar-left">
+			<a style="color:white; font-size:200%;" th:href="@{/}"> COMMUNE-IC8</a>		
 		</form>
-
+		
 
 
 	</div>

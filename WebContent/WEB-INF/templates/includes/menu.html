@@ -1,30 +1,53 @@
-<nav th:fragment="search" class="navbar navbar-default">
+<div th:fragment="menu">
 
 
-	<!-- Left Menu------------------------------------------------------------------- -->
-	<div class="container">
-		
-			<table data-toggle="table" class="table table-striped">
-				<thead>
-					<tr>
-						<th>Menu</th>
-					</tr>
-				</thead>
+	<div class="card bg-secondary text-white">
+		<div class="card-header">
+			<h2>Menu</h2>
+		</div>
+		<div class="card-body">
 
-				<tbody>
-					<!--  list manu items ----------------------------------------------------------- -->
-					<tr>
-						<td>
-							<form th:action="@{/grocery}" method="post">
-								<input class="btn btn-default" type="submit" value="Groceries" />
-							</form>
-						</td>
+			<!-- <ul style=list-style-type:none>  -->
+			<!--------------------------------- GroceryList ----------------------------------------->
+			<form th:action="@{/showGroceryList}"
+			method="post">
+			<input class="btn btn-default" type="submit" value="Grocery" />
+			</form>
 
 
-					</tr>
-					<!--  list all items ----------------------------------------------------------- -->
-				</tbody>
 
-			</table>
+
+			<!--------------------------------- CommentsList ----------------------------------------->
+				<form th:action="@{/listComments}"
+			method="post">
+			<input class="btn btn-default" type="submit" value="Comments" />
+			</form>
+
+
+			<!--------------------------------- TodoList ----------------------------------------->
+
+				<form th:action="@{/listTodos}"
+			method="post">
+			<input class="btn btn-default" type="submit" value="Todo" />
+			</form>
+
+			<!-- -------------------------- UsersLists -->
+				<form th:action="@{/listUsers}"
+			method="post">
+			<input class="btn btn-default" type="submit" value="Users" />
+			</form>
+
+
+			<!-- -------------------------- FlatLists -->
+
+				<form th:action="@{/listFlat}"
+			method="post">
+			<input class="btn btn-default" type="submit" value="Flat" />
+			</form>
+
+
+		</div>
 	</div>
-</nav>
+</div>
+
+</html>
