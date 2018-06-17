@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import at.fh.swenga.dao.TodoDao;
@@ -67,7 +68,7 @@ public class TodoController {
 	}
 
 	
-	@RequestMapping("/addTodo")
+	@RequestMapping(value="/addTodo") 
 	public String addTodo(Model model, @Valid Todo newTodo,
 			@RequestParam(value = "todoName") String todoName,
 			@RequestParam(value = "todoCategory") String todoCategory, @RequestParam(value = "todoDate") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) Date todoDate, Authentication authentication,

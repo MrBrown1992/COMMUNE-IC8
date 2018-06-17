@@ -41,18 +41,13 @@
 								Category </label>
 							<div class="col-md-10">
 								<select>
-								<option class="form-control" type="text" name="todoCategory"
-									th:value="${todo} ? ${todo.todoCategory}">Appointment</option>
-								<option class="form-control" type="text" name="todoCategory"
-								th:value="${todo} ? ${todo.todoCategory}">Cleaning</option>
-								
-								<option class="form-control" type="text" name="todoCategory"
-								th:value="${todo} ? ${todo.todoCategory}">Housekeeping</option>
-							
-								<option class="form-control" type="text" name="todoCategory"
-								th:value="${todo} ? ${todo.todoCategory}">Party</option>
-							
-							</select>
+  									<option th:value="${todo} ? ${todo.todoCategory}" th:text="Appointment"> Appointment</option>
+  									<option th:value="${todoCategory}" th:text="Cleaning"> Cleaning</option>
+  									<option th:value="${todoCategory}" th:text="Housekeeping"> Housekeeping</option>
+  									<option th:value="${todoCategory}" th:text="Party"> Party</option>
+  									<option th:value="${todoCategory}" th:text="Other"> Other</option>
+								</select>
+						
 							</div>
 						</div>
 						
