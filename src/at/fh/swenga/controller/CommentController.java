@@ -1,5 +1,6 @@
 package at.fh.swenga.controller;
 
+import java.util.Collections;
 import java.util.Date;
 import java.util.List;
 
@@ -66,34 +67,11 @@ public class CommentController {
 	public String listComments(Model model) {
 
 		List<Comment> comments = commentDao.findAll();
-		System.out.println("Size: " + comments.size());
+		
 		model.addAttribute("comments", comments);
 		return "listComments";
 	}
 
-	// ******************** R:READ ****************************************
-
-	@Secured({ "ROLE_USER" })
-	@RequestMapping(value = { "showCurrentUser" })
-	public User getCurrentUser(Model model, Authentication authentication) {
-
-		User user = userDao.findFirstByUsername(authentication.getName());
-
-		/*
-		 if (user != null) {
-			model.addAttribute("user", user);
-
-		} else {
-
-			model.addAttribute("errorMessage", "Something went wrong!");
-		}
-
-		 */
-		System.out.println("The current user is: " + user +"\n" + authentication.getPrincipal());
-		return user;
-	}
-	
-	
 	
 	@RequestMapping(value = "/username", method = RequestMethod.GET)
     @ResponseBody
@@ -134,11 +112,7 @@ public class CommentController {
 		newComment.setDate(date);
 		newComment.setText(commentText);
 		
-		System.out.println("Username: " + username);
-
-		System.out.println("User: " + user);
-
-		System.out.println("Comment: " + newComment.toString());
+		
 		commentDao.save(newComment);
 
 		return "forward:listComments";

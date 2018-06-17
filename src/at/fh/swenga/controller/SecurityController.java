@@ -119,6 +119,11 @@ public class SecurityController {
 	public String user(Model model) {
 		return "editUser";
 	}
+	
+	@RequestMapping(value = { "/listUsers" })
+	public String listUsers(Model model) {
+		return "listUsers";
+	}
 
 	@RequestMapping(value = { "/","/listUsers" })
 	public String index(Model model) {

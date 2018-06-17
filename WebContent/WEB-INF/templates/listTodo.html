@@ -1,18 +1,18 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:th="http://www.thymeleaf.org"
-	xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
-	>
+	xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head>
 <div th:replace="~{includes/bootstrap :: bootstrapMeta}" />
 <title>COMMUNE-IC8</title>
 <div th:replace="~{includes/bootstrap :: bootstrapCSS}" />
 </head>
 <body>
-	<div class="container" role="main">
+	<div class="container-fluid" role="main">
 
 		<div class="page-header">
-		<h1>LIST TODO's</h1>
+		<h1 align="center">To-Do's</h1>
+			<nav th:replace="~{includes/searchNav :: search}"></nav>
 		</div>
 
 		<!--  Error message ----------------------------------------------------------- -->
@@ -21,49 +21,74 @@
 		<!--  Error message ----------------------------------------------------------- -->
 
 		<!--  Warning message ----------------------------------------------------------- -->
-		<div th:unless="${warningMessage} == null" th:utext="${warningMessage}"
-			class="alert alert-warning" role="warning"></div>
+		<div th:unless="${warningMessage} == null"
+			th:utext="${warningMessage}" class="alert alert-warning"
+			role="warning"></div>
 		<!--  Warning message ----------------------------------------------------------- -->
 
 		<!--   message ----------------------------------------------------------- -->
 		<div th:unless="${message} == null" th:utext="${message}"
 			class="alert alert-success" role="warning"></div>
 		<!--   message ----------------------------------------------------------- -->
-
-		<nav th:replace="~{includes/searchNav :: search}"></nav>
-
-		<!--  1 simple button ----------------------------------------------------------- -->
-		<div class="row">
-		</div>
-		<!--  1 simple button ----------------------------------------------------------- -->
-
-		<div class="row">
-			<div class="col-md-10 col-md-offset-1">
-
-				<table data-toggle="table" class="table table-striped">
-					<thead>
-						<tr>
-							<th>ToDo</th>
-							
-							
-						</tr>
-					</thead>
-					<tbody>
-						<!--  list all items ----------------------------------------------------------- -->
-						<tr th:each="user : ${users}">
-							<td th:text="${...}"></td>
-						
-							
-						</tr>
-						<!--  list all items ----------------------------------------------------------- -->
-					</tbody>
-				</table>
-								
-			</div>
-		</div>
 		
+		
+
+		<!--  Menu ----------------------------------------------------------- -->
+		<div class="col-sm-1">
+		
+			<div th:replace="~{includes/menu :: menu}"></div>
+		
+		</div>
+		<!--  Menu ----------------------------------------------------------- -->
+
+
+		<!--  Edit Grocery----------------------------------------------------------- -->
+		<div class="col-md-2 col-md-offset-1">
+
+			<form sec:authorize="hasRole('USER')" th:action="@{/editTodo}"
+				method="post">
+				<input class="btn btn-default" type="submit" value="Add Todo" />			
+				<input class="btn btn-default" type="submit" value="PDF" >
+			</form>
+		</div>
+		<!--  Edit Grocery----------------------------------------------------------- -->
+
+
+
+		<!-- Right Dynamic Content------------------------------------------------------- -->
+		<div class="col-md-10 col-md-offset-1">
+
+			<table data-toggle="table" class="table table-striped">
+				<thead>
+					<tr>
+						<th>Name</th>
+						<th>Category</th>
+						<th>Deadline</th>
+
+					</tr>
+				</thead>
+				<tbody>
+					<!--  list all items ----------------------------------------------------------- -->
+					<tr th:each="todo : ${todos}">
+						<td th:text="${todo.name}"></td>
+						<td th:text="${todo.category}"></td>
+						<td th:text="${todo.date}"></td>
+						
+					</tr>
+					<!--  list all items ----------------------------------------------------------- -->
+				</tbody>
+			</table>
+
+		</div>
+		<!-- Right Dynamic Content------------------------------------------------------- -->
+	</div>
+	
+	
+	
 	</div>
 	<!--  End of container -->
 	<div th:replace="~{includes/bootstrap :: bootstrapJS}" />
+	<div th:replace="~{includes/footer :: footer}" />
+
 </body>
 </html>

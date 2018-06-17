@@ -8,10 +8,11 @@
 <div th:replace="~{includes/bootstrap :: bootstrapCSS}" />
 </head>
 <body>
-	<div class="container" role="main">
+	<div class="container-fluid" role="main">
 
 		<div class="page-header">
-			<h1>LIST COMMENTS</h1>
+		<h1 align="center">Comments</h1>
+			<nav th:replace="~{includes/searchNav :: search}"></nav>
 		</div>
 
 		<!--  Error message ----------------------------------------------------------- -->
@@ -30,21 +31,21 @@
 			class="alert alert-success" role="warning"></div>
 		<!--   message ----------------------------------------------------------- -->
 
-		<nav th:replace="~{includes/searchNav :: search}"></nav>
 		
-	
-		
-
-		<!--  1 simple button ----------------------------------------------------------- -->
-		<div class="row">
-		<form sec:authorize="hasRole('ADMIN')" th:action="@{/addComment}"
-				method="post">
-				<input class="btn btn-default" type="submit" value="Add new Comment" />
-			</form>
-		
-		
+		<div class="col-sm-1">
+			<div th:replace="~{includes/menu :: menu}"></div>
 		</div>
-		<!--  1 simple button ----------------------------------------------------------- -->
+		
+		<!--  Edit Grocery----------------------------------------------------------- -->
+		<div class="col-md-2 col-md-offset-1">
+
+			<form sec:authorize="hasRole('USER')" th:action="@{/addComment}"
+				method="post">
+				<input class="btn btn-default" type="submit" value="Add Comment" />			
+				<input class="btn btn-default" type="submit" value="PDF" >
+			</form>
+		</div>
+		<!--  Edit Grocery----------------------------------------------------------- -->
 
 
 
