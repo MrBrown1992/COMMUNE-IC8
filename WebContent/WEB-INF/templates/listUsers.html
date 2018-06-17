@@ -60,7 +60,7 @@
 						<th>Last Name</th>
 						<th>Mobile Number</th>
 						<th>E-Mail</th>
-						<!--<th>DOB</th>-->
+
 						<th>User Picture</th>
 						<th>Action</th>
 
@@ -76,7 +76,11 @@
 						<td th:text="${user.lastname}"></td>
 						<td th:text="${user.mobilenumber}"></td>
 						<td th:text="${user.email}"></td>
+<<<<<<< HEAD
 						<!--<td th:text="${#calendars.format(user.birthdate,'dd.MM.yyyy')}"></td>
+=======
+						<!--<td th:text="${#calendars.format(user.birthdate,'dd.MM.yyyy')}"></td> -->
+>>>>>>> 0d02a6e0c762e443be2c7cbd8b0e8af871cbc81c
 						<!-- <td><a sec:authorize="hasRole('ADMIN')" th:href="@{/delete(id=${employee.id})}">Delete</a></td> -->
 						<td><span th:if="${user.picture != null}"> <a
 								th:href="@{download(documentId=${user.image.id})}"

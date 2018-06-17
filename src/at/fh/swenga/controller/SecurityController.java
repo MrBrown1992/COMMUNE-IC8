@@ -125,24 +125,16 @@ public class SecurityController {
 		return "listUsers";
 	}
 
-	@RequestMapping(value = { "/" })
+	@RequestMapping(value = { "/","/listUsers" })
 	public String index(Model model) {
 
 		List<User> users = userDao.findAll();
 
 		model.addAttribute("users", users);
-		return "index";
+		return "listUsers";
 	}
 
-	@RequestMapping(value = { "/editGrocery" })
-	public String grocery(Model model) {
-		return "editGrocery";
-	}
-
-	@RequestMapping(value = { "/listGrocery" })
-	public String listGrocery(Model model) {
-		return "listGrocery";
-	}
+	
 
 	public String getCurrentUser(Model model) {
 
