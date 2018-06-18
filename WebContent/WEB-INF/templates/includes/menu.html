@@ -1,49 +1,44 @@
 <div th:fragment="menu">
 
 
-	<div class="card bg-secondary text-white" style="background-color:grey; width:150%;">
+	<div class="card bg-dark text-white"
+		style=" width: 150%; border-radius: 25px">
 		<div class="card-header">
 			<h2>Menu</h2>
 		</div>
 		<div class="card-body">
 
-			<!-- <ul style=list-style-type:none>  -->
-			<!--------------------------------- GroceryList ----------------------------------------->
-			<form th:action="@{/showGroceryList}"
-			method="post">
-			<input class="btn btn-default" type="submit" value="Grocery" />
-			</form>
+			<ul class="list-group list-group-flush">
+				<li class="list-group-item"><form 
+						th:action="@{/showGroceryList}" method="post">
+						<input type="submit" value="Grocery" style="color: black;" />
+					</form></li>
+				<li class="list-group-item"><form th:action="@{/listComments}"
+						method="post">
+						<input type="submit" value="Comments" style="color: black;" />
+					</form></li>
+				<li class="list-group-item"><form th:action="@{/listTodos}"
+						method="post">
+						<input type="submit" value="To-Do's" style="color: black;" />
+					</form></li>
 
-
-
-
-			<!--------------------------------- CommentsList ----------------------------------------->
-				<form th:action="@{/listComments}"
-			method="post">
-			<input class="btn btn-default" type="submit" value="Comments" />
-			</form>
-
-
-			<!--------------------------------- TodoList ----------------------------------------->
-
-				<form th:action="@{/listTodos}"
-			method="post">
-			<input class="btn btn-default" type="submit" value="Todo" />
-			</form>
 
 			<!-- -------------------------- UsersLists -->
-				<form th:action="@{/listUsers}"
-			method="post">
-			<input class="btn btn-default" type="submit" value="Users" />
-			</form>
+
+				<li class="list-group-item"><form th:action="@{/listUsers}"
+						method="post">
+						<input type="submit" value="Users" style="color: black;" />
+					</form></li>
 
 
-			<!-- -------------------------- FlatLists -->
+				<!-- -------------------------- FlatLists -->
 
-				<form th:action="@{/listFlat}"
-			method="post">
-			<input class="btn btn-default" type="submit" value="Flat" />
-			</form>
+				<li class="list-group-item"><form th:action="@{/listFlat}"
+						method="post">
+						<input type="submit" value="Flat" style="color: black;" />
+					</form></li>
+			</ul>
+
 
 
 		</div>
