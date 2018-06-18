@@ -1,7 +1,6 @@
 package at.fh.swenga.model;
 
-import java.util.Calendar;
-import java.util.Date;
+
 import java.util.HashSet;
 import java.util.Set;
 
@@ -17,16 +16,18 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
 
-import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 @Entity
 @Table(name = "user")
 
 public class User implements java.io.Serializable {
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -1927572077220848230L;
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)

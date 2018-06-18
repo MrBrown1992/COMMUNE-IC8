@@ -1,7 +1,5 @@
 package at.fh.swenga.controller;
 
-import java.util.Calendar;
-import java.util.Date;
 import java.util.List;
 
 import javax.validation.Valid;
@@ -23,11 +21,9 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import at.fh.swenga.dao.UserDao;
 import at.fh.swenga.dao.UserRoleDao;
-
 import at.fh.swenga.model.Flat;
 import at.fh.swenga.model.User;
 import at.fh.swenga.model.UserRole;
-
 @Controller
 @Scope(proxyMode = ScopedProxyMode.TARGET_CLASS, value = "session")
 public class SecurityController {
@@ -39,6 +35,9 @@ public class SecurityController {
 	UserRoleDao userRoleDao;
 
 	/// UserRole userRole;
+	
+	
+	
 
 	@RequestMapping(value = "/login", method = RequestMethod.GET)
 	public String handleLogin() {
@@ -69,12 +68,16 @@ public class SecurityController {
 		UserRole userRole = userRoleDao.findFirstByRoleName("ROLE_USER");
 		if (userRole == null)
 			userRole = new UserRole("ROLE_USER");
-
+		
+		
+		
+		
 		// User admin = new User("admin", "password", true);
 		User spiess = new User("spiess", "password", true, "nikolaus", "spiess", 0, "testmail@mimimi.com", null, null);
 		spiess.encryptPassword();
 		spiess.addUserRole(userRole);
 		spiess.addUserRole(adminRole);
+		spiess.setFlat(FlatController.testFlat);
 		userDao.save(spiess);
 
 		User user = new User("user", "password", true, "user", "user", 1, null, null, null);
@@ -84,6 +87,9 @@ public class SecurityController {
 
 		return "forward:login";
 	}
+	
+	
+	 
 
 	@RequestMapping("/addNewUser")
 	@Transactional
@@ -91,13 +97,17 @@ public class SecurityController {
 			@RequestParam(value = "firstName") String firstName, @RequestParam(value = "lastName") String lastName,
 			@RequestParam(value = "password") String password, @RequestParam(value = "email") String email,
 			/* @RequestParam(value = "dob") Date dob, */@RequestParam(value = "mobilenumber") int mobilenumber,
-			@RequestParam(value = "userRole") UserRole userRole, @RequestParam(value = "flat") Flat flat,
+			@RequestParam(value ="Admin",required = false) UserRole userRole, @RequestParam(value = "flat") Flat flat,
 			Authentication authentication, Model model, BindingResult bindingResult) {
 
 		// Any errors? -> Create a String out of all errors and return to the page
 		if (errorsDetected(model, bindingResult)) {
 			return ("/index");
 		}
+		
+		
+		
+		
 
 		newUser.setFirstname(firstName);
 		newUser.setLastname(lastName);
@@ -106,9 +116,21 @@ public class SecurityController {
 		newUser.encryptPassword();
 		// newUser.setBirthdate(dob);
 		newUser.setEmail(email);
-		newUser.addUserRole(userRole);
+		
 		newUser.setMobilenumber(mobilenumber);
 		// newUser.setFlat(flat);
+		
+		if ("Admin".equals(userRole)) {
+			newUser.addUserRole(userRoleDao.findFirstByRoleName("ROLE_ADMIN"));
+			newUser.addUserRole(userRoleDao.findFirstByRoleName("ROLE_USER"));
+
+		}else {
+			newUser.addUserRole(userRoleDao.findFirstByRoleName("ROLE_USER"));
+
+		}
+		
+		newUser.setFlat(flat);
+		
 
 		userDao.save(newUser);
 

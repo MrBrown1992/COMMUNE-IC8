@@ -48,6 +48,7 @@
 			<form th:action="@{/report}" method="post">
 				<input class="btn btn-default" type="submit" value="PDF" style="float:left;">
 			</form>
+			
 		</div>
 		<!--  Add Flat----------------------------------------------------------- -->
 
@@ -61,6 +62,7 @@
 					<tr>
 						<th data-sortable="true">ID</th>
 						<th data-sortable="true">Flat</th>
+						<th data-sortable="true">User</th>
 						<th sec:authorize="hasRole('ADMIN')">Actions</th>
 
 
@@ -75,7 +77,7 @@
 					<tr th:each="flat : ${flats}">
 						<td th:text="${flat.id}"></td>
 						<td th:text="${flat.name}"></td>
-
+						<td th:text="${flat.getUsers()}"></td>
 
 						<td sec:authorize="hasRole('ADMIN')"><a
 							th:href="@{/changeFlat(id=${flat.id})}"
@@ -85,61 +87,10 @@
 							class="btn btn-xs btn-danger"> <span
 								class="glyphicon glyphicon-trash" aria-hidden="true"></span>
 								Delete
+
 						</a></td>		
-		<!--  Menu ----------------------------------------------------------- -->
-		<div class="col-sm-1">
-		
-			<div th:replace="~{includes/menu :: menu}"></div>
-		
-		</div>
-		<!--  Menu ----------------------------------------------------------- -->
-
-
-		<!--  1 simple button ----------------------------------------------------------- -->
-		<div class="col-md-2 col-md-offset-1">
-		<form sec:authorize="hasRole('ADMIN')" th:action="@{/editFlat}"
-				method="post">
-				<input class="btn btn-default" type="submit" value="Edit Flat" />
-			</form>
-		</div>
-		<!--  1 simple button ----------------------------------------------------------- -->
-
 
 		
-
-		<!-- Right Dynamic Content------------------------------------------------------- -->
-		<div class="col-md-10 col-md-offset-1">
-
-			<table data-toggle="table" class="table table-striped">
-				<thead>
-					<tr>
-						<th>Name</th>
-						
-					
-						<th>Users</th>
-						<th>Cleanplan</th>
-						
-
-					</tr>
-				</thead>
-				<tbody>
-					<!--  list all items ----------------------------------------------------------- -->
-					<tr th:each="flat : ${flats}">
-						<td th:text="${flat.name}"></td>
-						
-						
-						<td th:text="${flat.users}"></td>
-						<td th:text="${flat.cleanplan}"></td>
-
-
-					</tr>
-					<!--  list all items ----------------------------------------------------------- -->
-				</tbody>
-			</table>
-
-		</div>
-
-
 	</div>
 
 
@@ -150,6 +101,7 @@
 	
 	
 	</div>
+
 	<!--  End of container -->
 	<div th:replace="~{includes/bootstrap :: bootstrapJS}" />
 	<div th:replace="~{includes/footer :: footer}" />
