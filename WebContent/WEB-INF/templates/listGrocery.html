@@ -11,7 +11,7 @@
 	<div class="container-fluid" role="main">
 
 		<div class="page-header">
-			
+
 			<h1 align="center">Groceries</h1>
 			<nav th:replace="~{includes/searchNav :: search}"></nav>
 		</div>
@@ -35,25 +35,27 @@
 		<div class="col-sm-1">
 			<div th:replace="~{includes/menu :: menu}"></div>
 		</div>
-		
+
 		<!--  Edit Grocery----------------------------------------------------------- -->
 		<div class="col-md-2 col-md-offset-1">
 
 			<form sec:authorize="hasRole('USER')" th:action="@{/editGrocery}"
 				method="post">
-				<input class="btn btn-default" type="submit" value="Add Grocery" />			
-				<input class="btn btn-default" type="submit" value="PDF" >
+				<input class="btn btn-default" type="submit" value="Add Grocery" />
+			</form>
+			<form th:action="@{/report}" method="post">
+				<input class="btn btn-default" type="submit" value="PDF">
 			</form>
 		</div>
 		<!--  Edit Grocery----------------------------------------------------------- -->
-		
-	
-		
+
+
+
 
 		<div class="col-md-10 col-md-offset-1">
 			<table data-toggle="table" class="table table-striped">
 				<thead>
-					
+
 					<tr>
 						<th data-sortable="true">ID</th>
 						<th data-sortable="true">Grocery</th>
@@ -78,8 +80,7 @@
 						<td sec:authorize="hasRole('ADMIN')"><a
 							th:href="@{/changeGrocery(id=${grocery.id})}"
 							class="btn btn-xs btn-success"> <span
-								class="glyphicon glyphicon-edit" aria-hidden="true"></span>
-								Edit
+								class="glyphicon glyphicon-edit" aria-hidden="true"></span> Edit
 						</a> <a th:href="@{/delete(id=${grocery.id})}"
 							class="btn btn-xs btn-danger"> <span
 								class="glyphicon glyphicon-trash" aria-hidden="true"></span>
@@ -90,10 +91,10 @@
 				</tbody>
 			</table>
 		</div>
-		
-		
+
+
 	</div>
-	
+
 	<!--  End of container -->
 	<div th:replace="~{includes/bootstrap :: bootstrapJS}" />
 	<div th:replace="~{includes/footer :: footer}" />
