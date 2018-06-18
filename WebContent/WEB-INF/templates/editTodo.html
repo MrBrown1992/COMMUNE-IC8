@@ -35,25 +35,25 @@
 							</div>
 						</div>
 
-				<!-- --------------  Category ---------------- -->
+						<!-- --------------  Category ---------------- -->
 						<div class="form-group">
 							<label for="todoCategory" class="col-md-2 control-label">
 								Category </label>
 							<div class="col-md-10">
-								
-								<select>
-									<option th:text="Appointment" th:value="Appointment">Appointment</option>
-								
-								
+
+								<select class="form-control" name="todoCategory" id="todoCategory">
+									
+									<option th:each="category : ${categories}" th:value="${category}"
+										th:text="${category}"></option>
 								</select>
-								
+
 							</div>
 						</div>
-						
-						
 
 
-				<!-- --------------  Date ---------------- -->
+
+
+						<!-- --------------  Date ---------------- -->
 						<div class="form-group">
 							<label for="todoDate" class="col-md-2 control-label">
 								Date </label>

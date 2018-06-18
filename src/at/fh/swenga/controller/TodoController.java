@@ -39,6 +39,8 @@ public class TodoController {
 	@Autowired
 	TodoDao todoDao;
 
+	private List<String> categories = new ArrayList<String>();
+	
 	public TodoController() {
 
 		// TODO Auto-generated constructor stub
@@ -80,14 +82,8 @@ public class TodoController {
 			@RequestParam(value = "todoName") String todoName,
 			@ModelAttribute(value = "todoCategory") String todoCategory, @RequestParam(value = "todoDate") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) Date todoDate, Authentication authentication,
 			BindingResult bindingResult) {
-		
-		List<String> categories = new ArrayList<String>();
-		categories.add("Appointment");
-		categories.add("Cleaning");
-		categories.add("Housekeeping");
-		categories.add("Party");
-		categories.add("Other");
 
+		
 		// Any errors? -> Create a String out of all errors and return to the page
 		if (errorsDetected(model, bindingResult)) {
 			return listTodos(model);
@@ -105,6 +101,17 @@ public class TodoController {
 	
 	@RequestMapping(value = { "/editTodo" })
 	public String editTodo(Model model) {
+		
+		if(categories.isEmpty()) {
+			categories = new ArrayList<String>();
+			categories.add("Appointment");
+			categories.add("Cleaning");
+			categories.add("Housekeeping");
+			categories.add("Party");
+			categories.add("Other");
+		}
+		model.addAttribute("categories" ,categories);
+		
 		return "editTodo";
 	}
 	
