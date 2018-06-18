@@ -41,7 +41,7 @@
 		</div>
 		<!--  Menu ----------------------------------------------------------- -->
 
-<<<<<<< HEAD
+
 		<!--  1 simple button ----------------------------------------------------------- -->
 		<div class="row">
 		<form sec:authorize="hasRole('ADMIN')" th:action="@{/editUser}"
@@ -51,11 +51,6 @@
 		</div>
 		<!--  1 simple button ----------------------------------------------------------- -->
 
-=======
-		
-	
-		
->>>>>>> 21f64e902b55f239775051c8165a72dc5aa32399
 
 		
 
@@ -88,11 +83,7 @@
 						<td th:text="${user.lastname}"></td>
 						<td th:text="${user.mobilenumber}"></td>
 						<td th:text="${user.email}"></td>
-<<<<<<< HEAD
-						<!--<td th:text="${#calendars.format(user.birthdate,'dd.MM.yyyy')}"></td>
-=======
-						<!--<td th:text="${#calendars.format(user.birthdate,'dd.MM.yyyy')}"></td> -->
->>>>>>> 0d02a6e0c762e443be2c7cbd8b0e8af871cbc81c
+
 						<!-- <td><a sec:authorize="hasRole('ADMIN')" th:href="@{/delete(id=${employee.id})}">Delete</a></td> -->
 						<td><span th:if="${user.picture != null}"> <a
 								th:href="@{download(documentId=${user.image.id})}"
