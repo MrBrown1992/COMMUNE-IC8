@@ -107,6 +107,8 @@ public class CommentController {
 			return listComments(model);
 		}
 		
+		System.out.println(username);
+		System.out.println(user);
 		
 		newComment.setUser(user);
 		newComment.setDate(date);

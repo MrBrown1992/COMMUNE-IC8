@@ -1,5 +1,6 @@
 package at.fh.swenga.controller;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -12,11 +13,13 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.FieldError;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -25,6 +28,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import at.fh.swenga.dao.TodoDao;
 import at.fh.swenga.model.Grocery;
 import at.fh.swenga.model.Todo;
+import at.fh.swenga.model.User;
+import at.fh.swenga.model.UserRole;
 
 
 @Controller
@@ -55,6 +60,8 @@ public class TodoController {
 		}
 		return false;
 	}
+
+	
 	
 	
 	@RequestMapping(value = {"listTodos"})
@@ -71,8 +78,15 @@ public class TodoController {
 	@RequestMapping(value="/addTodo") 
 	public String addTodo(Model model, @Valid Todo newTodo,
 			@RequestParam(value = "todoName") String todoName,
-			@RequestParam(value = "todoCategory") String todoCategory, @RequestParam(value = "todoDate") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) Date todoDate, Authentication authentication,
+			@ModelAttribute(value = "todoCategory") String todoCategory, @RequestParam(value = "todoDate") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) Date todoDate, Authentication authentication,
 			BindingResult bindingResult) {
+		
+		List<String> categories = new ArrayList<String>();
+		categories.add("Appointment");
+		categories.add("Cleaning");
+		categories.add("Housekeeping");
+		categories.add("Party");
+		categories.add("Other");
 
 		// Any errors? -> Create a String out of all errors and return to the page
 		if (errorsDetected(model, bindingResult)) {
