@@ -71,7 +71,7 @@ public class SecurityController {
 			userRole = new UserRole("ROLE_USER");
 
 		// User admin = new User("admin", "password", true);
-		User spiess = new User("spiess", "password", true, "nikolaus", "spiess", 0, null, null, null);
+		User spiess = new User("spiess", "password", true, "nikolaus", "spiess", 0, "testmail@mimimi.com", null, null);
 		spiess.encryptPassword();
 		spiess.addUserRole(userRole);
 		spiess.addUserRole(adminRole);
