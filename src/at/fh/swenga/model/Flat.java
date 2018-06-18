@@ -31,11 +31,20 @@ public class Flat {
 	private Set<User> users;
 	
 	@OneToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "flatToClean", nullable = false)
+    @JoinColumn(name = "flatToClean")
 	private CleanPlan cleanplan;
 
 	@Version
 	long version;
+
+	
+	
+	
+	
+	public Flat() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
 
 	public Flat(String name) {
 		super();

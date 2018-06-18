@@ -11,18 +11,12 @@
 	<div class="container-fluid" role="main">
 
 		<div class="page-header">
-<<<<<<< HEAD
 
-			<h1 align="center">Flats</h1>
-			<nav th:replace="~{includes/searchNav :: search}"></nav>
-		</div>
-
-=======
 			<h1 align="center">Flat</h1>
 			<nav th:replace="~{includes/searchNav :: search}"></nav>
 		</div>
 
->>>>>>> 3b4d7502ce712b2a703abc4e3aaf7451f99b0b5c
+
 		<!--  Error message ----------------------------------------------------------- -->
 		<div th:unless="${errorMessage} == null" th:utext="${errorMessage}"
 			class="alert alert-danger" role="alert"></div>
@@ -39,23 +33,23 @@
 			class="alert alert-success" role="warning"></div>
 		<!--   message ----------------------------------------------------------- -->
 
-<<<<<<< HEAD
+
 		<div class="col-sm-1">
 			<div th:replace="~{includes/menu :: menu}"></div>
 		</div>
 
-		<!--  Edit Grocery----------------------------------------------------------- -->
+		<!--  Add Flat----------------------------------------------------------- -->
 		<div class="col-md-2 col-md-offset-1">
 
 			<form sec:authorize="hasRole('USER')" th:action="@{/editFlat}"
 				method="post">
-				<input class="btn btn-default" type="submit" value="Add Flat" />
+				<input class="btn btn-default" type="submit" value="Add Flat" style="float:left;"/>
 			</form>
 			<form th:action="@{/report}" method="post">
-				<input class="btn btn-default" type="submit" value="PDF">
+				<input class="btn btn-default" type="submit" value="PDF" style="float:left;">
 			</form>
 		</div>
-		<!--  Edit Grocery----------------------------------------------------------- -->
+		<!--  Add Flat----------------------------------------------------------- -->
 
 
 
@@ -91,10 +85,7 @@
 							class="btn btn-xs btn-danger"> <span
 								class="glyphicon glyphicon-trash" aria-hidden="true"></span>
 								Delete
-						</a></td>
-=======
-		
-		
+						</a></td>		
 		<!--  Menu ----------------------------------------------------------- -->
 		<div class="col-sm-1">
 		
@@ -140,18 +131,17 @@
 						<td th:text="${flat.users}"></td>
 						<td th:text="${flat.cleanplan}"></td>
 
->>>>>>> 3b4d7502ce712b2a703abc4e3aaf7451f99b0b5c
+
 					</tr>
 					<!--  list all items ----------------------------------------------------------- -->
 				</tbody>
 			</table>
-<<<<<<< HEAD
+
 		</div>
 
 
 	</div>
 
-=======
 
 		</div>
 		<!-- Right Dynamic Content------------------------------------------------------- -->
@@ -160,7 +150,6 @@
 	
 	
 	</div>
->>>>>>> 3b4d7502ce712b2a703abc4e3aaf7451f99b0b5c
 	<!--  End of container -->
 	<div th:replace="~{includes/bootstrap :: bootstrapJS}" />
 	<div th:replace="~{includes/footer :: footer}" />
