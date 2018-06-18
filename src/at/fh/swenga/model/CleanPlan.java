@@ -30,11 +30,11 @@ public class CleanPlan {
 	@Temporal(TemporalType.DATE)
 	@Column(name="DayofCleaning",nullable = false)
 	private Date doc;
-	
+	/*
 	
 	@OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "cleanplan")
 	private Flat flat;
-
+*/
 	public CleanPlan() {
 		super();
 		// TODO Auto-generated constructor stub
@@ -97,16 +97,17 @@ public class CleanPlan {
 	}
 	/**
 	 * @return the flat
-	 */
+	 
+	
 	public Flat getFlat() {
 		return flat;
 	}
 
 	/**
 	 * @param flat the flat to set
-	 */
+	
 	public void setFlat(Flat flat) {
 		this.flat = flat;
 	}
-
+	*/
 }

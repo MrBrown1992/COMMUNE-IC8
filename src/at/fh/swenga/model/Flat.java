@@ -18,22 +18,28 @@ import javax.persistence.Version;
 
 @Entity
 @Table(name = "flat")
-public class Flat {
+public class Flat  implements java.io.Serializable{
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -9004782543943650955L;
 
 	@Id
 	@Column(name = "id")
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
 
+	@Column(name = "name")
 	private String name;
 
 	@OneToMany(mappedBy = "flat", fetch = FetchType.EAGER)
 	private Set<User> users;
-	
+	/*
 	@OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "flatToClean", nullable = false)
 	private CleanPlan cleanplan;
-
+*/
 	@Version
 	long version;
 

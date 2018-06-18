@@ -25,6 +25,8 @@ public class FlatController {
 	}
 	
 	
+	public  static Flat testFlat = new Flat("Admin WG");
+	
 	
 	@RequestMapping(value = {"listFlat"})
 	public String listFlat(Model model) {
