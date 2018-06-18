@@ -1,12 +1,66 @@
 <!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
-<title>Insert title here</title>
-</head>
-<body>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org">
 
-<h1>EDIT FLAT</h1>
+<head>
+<div th:include="~{includes/bootstrap :: bootstrapMeta}" th:remove="tag" />
+
+<title>Edit Flat</title>
+
+<div th:include="~{includes/bootstrap :: bootstrapCSS}" th:remove="tag" />
+<link
+	href="http://www.malot.fr/bootstrap-datetimepicker/bootstrap-datetimepicker/css/bootstrap-datetimepicker.css"
+	rel="stylesheet">
+</head>
+
+<body>
+	<div class="container" role="main">
+		<div class="row">
+			<div class="col-md-8 col-md-offset-2">
+				<form class="form-horizontal" method="post"
+					th:action="${flat} ? @{/changeFlat(id=${flat.id})} : @{/createNewFlat}">
+					<!--<input type="hidden" th:name="${_csrf.parameterName}"
+						th:value="${_csrf.token}" />-->
+					<fieldset>
+						<legend th:text="${flat}? 'Change Flat' : 'New Flat'">New
+							Flat</legend>
+
+						<!-- --------------  Name ---------------- -->
+						<div class="form-group">
+							<label for="flatName" class="col-md-2 control-label">
+								Name </label>
+							<div class="col-md-10">
+								<input class="form-control" type="text" name="flatName"
+									th:value="${flat} ? ${flat.flatName}">
+							</div>
+						</div>
+
+					
+
+
+
+						<!-- --------------  buttons ---------------- -->
+						<div class="form-group">
+							<div class="col-md-10 col-md-offset-2">
+								<button type="submit" class="btn btn-primary">Submit</button>
+								<a href="listFlat" class="btn btn-default"> Cancel </a>
+							</div>
+						</div>
+
+					</fieldset>
+				</form>
+			</div>
+		</div>
+
+	</div>
+	<!--  End of container -->
+	<div th:include="~{includes/bootstrap :: bootstrapJS}" th:remove="tag" />
+
+	<!-- JS for Datetime picker -->
+	<script type="text/javascript"
+		src="http://www.malot.fr/bootstrap-datetimepicker/bootstrap-datetimepicker/js/bootstrap-datetimepicker.js"></script>
+
 
 </body>
+
 </html>
