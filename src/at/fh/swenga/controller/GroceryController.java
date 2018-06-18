@@ -34,11 +34,11 @@ public class GroceryController {
 
 		// TODO Auto-generated constructor stub
 	}
-
+/*
 	private PageRequest generatePageRequest(int pageNr) {
 		return PageRequest.of(pageNr, 6);
 	}
-
+*/
 	private boolean errorsDetected(Model model, BindingResult bindingResult) {
 		// Any errors? -> Create a String out of all errors and return to the page
 		if (bindingResult.hasErrors()) {
