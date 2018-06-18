@@ -122,16 +122,19 @@ public class SecurityController {
 	
 	@RequestMapping(value = { "/listUsers" })
 	public String listUsers(Model model) {
-		return "listUsers";
-	}
-
-	@RequestMapping(value = { "/","/listUsers" })
-	public String index(Model model) {
-
+		
 		List<User> users = userDao.findAll();
 
 		model.addAttribute("users", users);
+		
 		return "listUsers";
+	}
+
+	
+	
+	@RequestMapping(value = { "/" })
+	public String index(Model model) {
+		return "index";
 	}
 
 	
