@@ -43,6 +43,17 @@ public class Flat  implements java.io.Serializable{
 	@Version
 	long version;
 
+	
+	
+	 
+	/**
+	 * 
+	 */
+	public Flat() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
+
 	public Flat(String name) {
 		super();
 		this.name = name;

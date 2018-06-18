@@ -168,6 +168,16 @@ public class SecurityController {
 		model.addAttribute("name", name);
 		return name;
 	}
+	
+	
+	@RequestMapping(value = "/upload", method = RequestMethod.GET)
+	public String showUploadForm(Model model, @RequestParam("id") int id) {
+		model.addAttribute("id",id);
+		return "uploadFile";
+	}
+	
+	
+	
 
 	@ExceptionHandler(Exception.class)
 	public String handleAllException(Exception ex) {
