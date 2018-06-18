@@ -129,7 +129,7 @@ public class SecurityController {
 
 		}
 		
-		newUser.setFlat(flat);
+		//newUser.setFlat(flat);
 		
 
 		userDao.save(newUser);
@@ -168,6 +168,31 @@ public class SecurityController {
 		model.addAttribute("name", name);
 		return name;
 	}
+	
+	
+	@RequestMapping(value = "/upload", method = RequestMethod.GET)
+	public String showUploadForm(Model model, @RequestParam("id") int id, Authentication authentication) {
+		
+		
+		String firstname = userDao.findFirstByid(id).getFirstname();
+		String lastname = userDao.findFirstByid(id).getLastname();
+		model.addAttribute("id",id);
+		model.addAttribute("firstname",firstname);
+		model.addAttribute("lastname",lastname);
+
+
+		return "uploadFile";
+	}
+	
+	@RequestMapping(value = "/deleteUser")
+	public String deleteUser(Model model, @RequestParam int id) {
+		userDao.deleteById(id);
+
+		return listUsers(model);
+	}
+	
+	
+	
 
 	@ExceptionHandler(Exception.class)
 	public String handleAllException(Exception ex) {

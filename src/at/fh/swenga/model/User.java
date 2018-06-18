@@ -265,6 +265,7 @@ public class User implements java.io.Serializable {
 	
 	
 	
+	
 	/**
 	 * @return the flat
 	 */

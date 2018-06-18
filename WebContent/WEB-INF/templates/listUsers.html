@@ -67,7 +67,6 @@
 						<th>Last Name</th>
 						<th>Mobile Number</th>
 						<th>E-Mail</th>
-
 						<th>User Picture</th>
 						<th>Action</th>
 
@@ -85,16 +84,20 @@
 						<td th:text="${user.email}"></td>
 
 						<!-- <td><a sec:authorize="hasRole('ADMIN')" th:href="@{/delete(id=${employee.id})}">Delete</a></td> -->
-						<td><span th:if="${user.picture != null}"> <a
-								th:href="@{download(documentId=${user.image.id})}"
-								target="_blank" th:text="${user.image.filename}"></a>
-						</span> <span th:unless="${user.image != null}"> -- no file --- </span>
+						<td><span th:if="${user.userimage != null}"> <a
+								th:href="@{download(documentId=${user.userimage.id})}"
+								target="_blank" th:text="${user.userimage.filename}"></a>
+						</span> <span th:unless="${user.userimage != null}"> -- no file --- </span>
 						<td><a th:href="@{upload(id=${user.id})}">
 								<button type="button" class="btn btn-xs btn-success">
 									<span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>
 									Upload
-								</button>
-						</a></td>
+								</button></a>
+								<a sec:authorize="hasRole('ADMIN')" th:href="@{/deleteUser(id=${user.id})}"><button type="button" class="btn btn-xs btn-danger">
+									<span class="glyphicon glyphicon-trash" aria-hidden="true"></span>
+									Delete
+								</button></a>
+						</td>
 
 
 

@@ -46,8 +46,7 @@ public class Flat  implements java.io.Serializable{
 
 	
 	
-	
-	
+
 	public Flat() {
 		super();
 		// TODO Auto-generated constructor stub
