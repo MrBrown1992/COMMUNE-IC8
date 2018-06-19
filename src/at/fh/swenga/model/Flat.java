@@ -94,7 +94,7 @@ public class Flat  implements java.io.Serializable{
 	 */
 	@Override
 	public String toString() {
-		return "Flat [name=" + name + "]";
+		return  name;
 	}
 	
 	

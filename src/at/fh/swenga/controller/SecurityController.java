@@ -72,6 +72,13 @@ public class SecurityController {
 	@Transactional
 	public String fillData(Model model) {
 
+		Flat testFlat = flatDao.findFirstByFlatName("Admin WG");
+		if (testFlat == null) {
+			testFlat = new Flat("Admin WG");
+
+			flatDao.save(testFlat);
+		}
+
 		UserRole adminRole = userRoleDao.findFirstByRoleName("ROLE_ADMIN");
 		if (adminRole == null)
 			adminRole = new UserRole("ROLE_ADMIN");
@@ -80,18 +87,18 @@ public class SecurityController {
 		if (userRole == null)
 			userRole = new UserRole("ROLE_USER");
 
-		// User admin = new User("admin", "password", true);
 		User spiess = new User("spiess", "password", true, "nikolaus", "spiess", 0316666666, "testmail@mimimi.com",
 				Calendar.getInstance(), null, null);
 		spiess.encryptPassword();
 		spiess.addUserRole(userRole);
 		spiess.addUserRole(adminRole);
-		spiess.setFlat(FlatController.testFlat);
+		spiess.setFlat(testFlat);
 		userDao.save(spiess);
 
 		User user = new User("user", "password", true, "user", "user", 1, null, Calendar.getInstance(), null, null);
 		user.encryptPassword();
 		user.addUserRole(userRole);
+		spiess.setFlat(testFlat);
 		userDao.save(user);
 
 		return "forward:login";
