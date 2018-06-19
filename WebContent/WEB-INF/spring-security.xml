@@ -9,7 +9,7 @@
 
 
 	<http>
-		<csrf disabled="true" />
+		<csrf disabled="false" />
 		<intercept-url pattern="/login" access="permitAll" />
 		<intercept-url pattern="/addUser" access="permitAll" />
 		<intercept-url pattern="/images/**" access="permitAll" />

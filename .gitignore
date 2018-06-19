@@ -7,4 +7,3 @@ target/**
 
 /target/
 /src/db.properties
-/WebContent/WEB-INF/dispatcher-servlet.xml

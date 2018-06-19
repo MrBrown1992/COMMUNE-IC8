@@ -1,6 +1,7 @@
 package at.fh.swenga.model;
 
 
+import java.util.Calendar;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -16,7 +17,10 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 @Entity
@@ -51,11 +55,11 @@ public class User implements java.io.Serializable {
 
 	@Column(name = "email", nullable = true, length = 65)
 	private String email;
-	/*
+	
 	@DateTimeFormat(pattern = "dd.MM.yyyy") 
 	@Temporal(TemporalType.DATE)
-	private Date birthdate;
-*/
+	private Calendar birthdate;
+
 	
 	@ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.PERSIST)
 	private Set<UserRole> userRoles;
@@ -82,7 +86,7 @@ public class User implements java.io.Serializable {
 	}
 
 	public User(String username, String password, boolean enabled, String firstname, String lastname, int mobilenumber,
-			String email, /*Date birthdate,*/ Set<UserRole> userRoles, Image userimage ) {
+			String email, Calendar birthdate, Set<UserRole> userRoles, Image userimage ) {
 		super();
 		this.username = username;
 		this.password = password;
@@ -91,7 +95,7 @@ public class User implements java.io.Serializable {
 		this.lastname = lastname;
 		this.mobilenumber = mobilenumber;
 		this.email = email;
-		//this.birthdate = birthdate;
+		this.birthdate = birthdate;
 		this.userRoles = userRoles;
 		this.userimage = userimage;
 		}
@@ -225,20 +229,20 @@ public class User implements java.io.Serializable {
 		this.email = email;
 	}
 
+	
 	/**
 	 * @return the birthdate
-	
-	public Date getBirthdate() {
+	 */
+	public Calendar getBirthdate() {
 		return birthdate;
 	}
 
 	/**
-	 * @param birthdate
-	 *            the birthdate to set
-	
-	public void setBirthdate(Date birthdate) {
+	 * @param birthdate the birthdate to set
+	 */
+	public void setBirthdate(Calendar birthdate) {
 		this.birthdate = birthdate;
-	}*/
+	}
 
 	/**
 	 * @return the userRoles

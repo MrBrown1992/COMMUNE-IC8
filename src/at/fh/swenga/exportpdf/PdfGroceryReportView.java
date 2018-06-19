@@ -31,11 +31,12 @@ public class PdfGroceryReportView extends AbstractPdfView {
 
 		List<Grocery> groceries = (List<Grocery>) model.get("groceries");
 
-		document.add(new Paragraph("Grocery list"));
+		document.add(new Paragraph("Grocery list"+groceries.size()));
+		
 
-		PdfPTable table = new PdfPTable(3);
+		PdfPTable table = new PdfPTable(2);
 		table.setWidthPercentage(100.0f);
-		table.setWidths(new float[] { 1.0f, 3.0f, 3.0f });
+		table.setWidths(new float[] { 1.0f, 3.0f });
 		table.setSpacingBefore(10);
 
 		// define font for table header row

@@ -34,6 +34,7 @@ public class ReportController{
 	@Autowired
 	GroceryDao groceryDao;
 
+
 	@RequestMapping(value = { "/pdf" })
 	public String pdf(Model model,
 			@RequestParam(required = false) String pdf
@@ -85,6 +86,7 @@ public class ReportController{
 		model.addAttribute("groceries", groceries);
 
 		// Which submit button was pressed? -> call the right report view
+
 		if (StringUtils.isNoneEmpty(excel)) {
 			return "excelReport";
 		}
@@ -93,6 +95,9 @@ public class ReportController{
 			return "forward:listGrocery";
 		}
 	}
+
+		
+			
 
 	
 
