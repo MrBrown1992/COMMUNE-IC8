@@ -33,7 +33,7 @@
 		
 		<form th:action="@{/logout}"
 			method="post">
-			<input class="btn btn-danger" type="submit" value="Sign Out" />
+			<input class="btn btn-danger"   type="submit" value="Sign Out" />
 		</form>	
 
 
@@ -109,7 +109,7 @@
 								class="glyphicon glyphicon-edit" aria-hidden="true"></span> Edit
 						</a> <a th:href="@{/delete(id=${grocery.id})}"
 							class="btn btn-xs btn-danger"> <span
-								class="glyphicon glyphicon-trash" aria-hidden="true"></span>
+								class="cui-Trash" aria-hidden="true"></span>
 								Delete
 						</a></td>
 					</tr>
@@ -134,19 +134,19 @@
 			<li class="nav-title">Options</li>
 
 			<li sec:authorize="hasRole('USER')" class="nav-item"><a class="nav-link"
-				th:href="@{/editGrocery}" > <i
-					class="nav-icon cui-speedometer"></i> Add Grocery
+				th:href="@{/editGrocery}"> <i
+					class="nav-icon cui-basket-loaded"></i> Add Grocery
 			</a></li>
 		
 
 			<li sec:authorize="hasRole('USER')" class="nav-item"><a class="nav-link"
-				th:href="@{/groceryPdf}" th:value="pdf"> <i
-					class="nav-icon cui-speedometer"></i> Export PDF
+				th:href="@{/groceryPdf}"> <i
+					class="nav-icon cui-cloud-download"></i> Export PDF
 			</a></li>
 			
 			<li sec:authorize="hasRole('USER')" class="nav-item"><a class="nav-link"
-				th:href="@{/groceryExcel}" th:value="excel"> <i
-					class="nav-icon cui-speedometer"></i> Export Excel
+				th:href="@{/groceryExcel}"> <i
+					class="nav-icon cui-cloud-download"></i> Export Excel
 			</a></li>
 
 			
