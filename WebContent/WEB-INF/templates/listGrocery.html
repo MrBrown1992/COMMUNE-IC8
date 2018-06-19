@@ -134,18 +134,18 @@
 			<li class="nav-title">Options</li>
 
 			<li sec:authorize="hasRole('USER')" class="nav-item"><a class="nav-link"
-				th:href="@{/editGrocery}"> <i
+				th:href="@{/editGrocery}" > <i
 					class="nav-icon cui-speedometer"></i> Add Grocery
 			</a></li>
 		
 
 			<li sec:authorize="hasRole('USER')" class="nav-item"><a class="nav-link"
-				th:href="@{/groceryPdf}"> <i
+				th:href="@{/groceryPdf}" th:value="pdf"> <i
 					class="nav-icon cui-speedometer"></i> Export PDF
 			</a></li>
 			
 			<li sec:authorize="hasRole('USER')" class="nav-item"><a class="nav-link"
-				th:href="@{/groceryExcel}"> <i
+				th:href="@{/groceryExcel}" th:value="excel"> <i
 					class="nav-icon cui-speedometer"></i> Export Excel
 			</a></li>
 

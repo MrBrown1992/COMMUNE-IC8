@@ -143,12 +143,12 @@
 		
 
 			<li sec:authorize="hasRole('USER')" class="nav-item"><a class="nav-link"
-				th:href="@{/commentsPdf}"> <i
+				th:href="@{/commentsPdf}" th:value="pdf"> <i
 					class="nav-icon cui-speedometer"></i> Export PDF
 			</a></li>
 			
 			<li sec:authorize="hasRole('USER')" class="nav-item"><a class="nav-link"
-				th:href="@{/commentsExcel}"> <i
+				th:href="@{/commentsExcel}" th:value="excel"> <i
 					class="nav-icon cui-speedometer"></i> Export Excel
 			</a></li>
 

@@ -39,11 +39,8 @@ public class ReportController {
 		// Store the groceries in the model, so the reports can access them
 		model.addAttribute("groceries", groceries);
 
-		if (StringUtils.isNoneEmpty(pdf)) {
-			return "groceryPdfReport";
-		} else {
-			return "forward:/listGrocery";
-		}
+		return "groceryPdfReport";
+		
 	}
 
 	@RequestMapping(value = { "/groceryExcel" })
@@ -55,14 +52,11 @@ public class ReportController {
 		// Store the groceries in the model, so the reports can access them
 		model.addAttribute("groceries", groceries);
 
-		if (StringUtils.isNoneEmpty(excel)) {
-			return "groceryExcelReport";
+		return "groceryExcelReport";
 		}
 
-		else {
-			return "forward:listGrocery";
-		}
-	}
+		
+	
 
 	@RequestMapping(value = { "/commentsPdf" })
 	public String commentsPdf(Model model, @RequestParam(required = false) String pdf) {
@@ -72,11 +66,8 @@ public class ReportController {
 		// Store the comments in the model, so the reports can access them
 		model.addAttribute("comments", comments);
 
-		if (StringUtils.isNoneEmpty(pdf)) {
-			return "commentsPdfReport";
-		} else {
-			return "forward:/listComments";
-		}
+		return "commentsPdfReport";
+		
 	}
 
 	@RequestMapping(value = { "/commentsExcel" })
@@ -88,14 +79,10 @@ public class ReportController {
 		// Store the comments in the model, so the reports can access them
 		model.addAttribute("comments", comments);
 
-		if (StringUtils.isNoneEmpty(excel)) {
-			return "commentsExcelReport";
+		return "commentsExcelReport";
 		}
 
-		else {
-			return "forward:listComments";
-		}
-	}
+		
 
 	@RequestMapping(value = { "/todoPdf" })
 	public String todoPdf(Model model, @RequestParam(required = false) String pdf) {
@@ -105,13 +92,10 @@ public class ReportController {
 		// Store the todos in the model, so the reports can access them
 		model.addAttribute("todos", todos);
 
-		if (StringUtils.isNoneEmpty(pdf)) {
-			return "todoPdfReport";
-		} else {
-			return "forward:/listTodo";
-		}
-	}
-
+		return "todoPdfReport";
+		} 
+	
+	
 	@RequestMapping(value = { "/todoExcel" })
 	public String todoExcel(Model model, @RequestParam(required = false) String excel) {
 
@@ -121,13 +105,10 @@ public class ReportController {
 		// Store the todos in the model, so the reports can access them
 		model.addAttribute("todos", todos);
 
-		if (StringUtils.isNoneEmpty(excel)) {
-			return "todoExcelReport";
+		return "todoExcelReport";
 		}
 
-		else {
-			return "forward:listTodo";
-		}
-	}
-
+		
 }
+
+

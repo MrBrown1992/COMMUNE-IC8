@@ -143,12 +143,12 @@
 		
 
 			<li sec:authorize="hasRole('USER')" class="nav-item"><a class="nav-link"
-				th:href="@{/todoPdf}"> <i
+				th:href="@{/todoPdf}" th:value="pdf"> <i
 					class="nav-icon cui-speedometer"></i> Export PDF
 			</a></li>
 			
 			<li sec:authorize="hasRole('USER')" class="nav-item"><a class="nav-link"
-				th:href="@{/todoExcel}"> <i
+				th:href="@{/todoExcel}" th:value="excel"> <i
 					class="nav-icon cui-speedometer"></i> Export Excel
 			</a></li>
 
