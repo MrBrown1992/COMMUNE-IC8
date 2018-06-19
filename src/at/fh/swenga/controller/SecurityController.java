@@ -302,6 +302,15 @@ public class SecurityController {
 
 		return listUsers(model);
 	}
+	
+	
+	
+	@RequestMapping(value = "/test")
+	public String test() {
+		return "test";
+	}
+	
+	
 
 	@RequestMapping(value = "/about")
 	public String about(Model model) {
@@ -316,4 +325,7 @@ public class SecurityController {
 
 	}
 
+	
+	
+	
 }
