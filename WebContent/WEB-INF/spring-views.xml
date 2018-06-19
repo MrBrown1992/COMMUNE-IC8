@@ -8,12 +8,14 @@
 	
 	
 	  
-	<bean id="excelReport" class="at.fh.swenga.exportexcel.ExcelGroceryReportView" />
+	<bean id="groceryExcelReport" class="at.fh.swenga.exportexcel.ExcelGroceryReportView" />
+	<bean id="commentsExcelReport" class="at.fh.swenga.exportexcel.ExcelCommentsReportView" />
 	 
 	<!-- NEW ITEXT LIBRARY 
 	<bean id="pdfReportV5" class="at.fh.swenga.jpa.report.pdf.itext5.PdfEmployeeReportViewItext5" />
   -->
 	<!-- OLD ITEXT LIBRARY -->
-	<bean id="pdfReport" class="at.fh.swenga.exportpdf.PdfGroceryReportView" />
+	<bean id="groceryPdfReport" class="at.fh.swenga.exportpdf.PdfGroceryReportView" />
+	<bean id="commentsPdfReport" class="at.fh.swenga.exportpdf.PdfCommentsReportView" />
 
 </beans>

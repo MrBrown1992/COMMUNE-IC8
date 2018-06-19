@@ -38,17 +38,17 @@
 
 		
 		<!--  Edit Grocery----------------------------------------------------------- -->
-		<div class="col-md-2 col-md-offset-1">
+		<div class="col-md-3 col-md-offset-1">
 
 			<form sec:authorize="hasRole('USER')" th:action="@{/editGrocery}"
 				method="post" style="float: left;">
 				<input class="btn btn-default" type="submit" value="Add Grocery" />
 			</form>
 
-			<form th:action="@{/pdf}" method="post" style="float: left;">
+			<form th:action="@{/groceryPdf}" method="post" style="float: left;">
 				<input class="btn btn-default" type="submit" name ="pdf" value="PDF">
 			</form>
-			<form th:action="@{/excel}" method="post" style="float: left;">
+			<form th:action="@{/groceryExcel}" method="post" style="float: left;">
 				<input class="btn btn-default" type="submit" name ="excel" value="Excel">
 
 			</form>
