@@ -61,10 +61,15 @@ public class FlatController {
 
 	@RequestMapping(value = { "listFlat" })
 	public String listFlat(Model model) {
-
+		
+		
+		
 		List<Flat> flats = flatDao.findAll();
-
+		//List<User> users = flatDao.findAllByFlatid(flat_id);
+		
+		
 		model.addAttribute("flats", flats);
+		//model.addAttribute("users",users);
 		return "listFlat";
 	}
 
@@ -118,4 +123,5 @@ public class FlatController {
 					return listFlat(model);
 				}
 	}
+	
 }
