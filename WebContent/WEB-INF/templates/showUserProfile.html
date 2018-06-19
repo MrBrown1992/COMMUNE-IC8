@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org">
+
+<head>
+<div th:include="~{includes/bootstrap :: bootstrapMeta}" th:remove="tag" />
+<title>User Profile</title>
+<div th:include="~{includes/bootstrap :: bootstrapCSS}" th:remove="tag" />
+</head>
+
+<body class="app flex-row align-items-center bg-dark">
+	<div class="container mb-5" role="main">
+		<div class="card bg-light">
+			<div class="card-body text-dark">
+				<div class="row page-header">
+					<!-- include the Nav bar fragment-->
+					
+				</div>
+
+				<!-- include the Nav bar fragment-->
+				
+
+				<!-- include message boxes (moved to fragments) -->
+		
+			</div>
+		</div>
+		<div class="card bg-light md-5">
+			<div class="card-body">
+				<div class="card text-dark">
+					<div class="bg-success card-header">
+						<strong th:text="${user.username}"></strong>
+						<div class="card-header-actions">
+							<a
+								th:href="@{/editUserFromShowProfile(username=${user.username})}"
+								class="card-header-action btn-user"><i class="icon-user"></i></a>
+							<a
+								th:href="@{/changePasswordFromShowProfile(username=${user.username})}"
+								class="card-header-action btn-lock"><i class="icon-lock"></i></a>
+							<a th:href="@{/uploadProfilePicture(username=${user.username})}"
+								class="card-header-action btn-picture"><i
+								class="icon-picture"></i></a>
+						</div>
+					</div>
+					<div class="card-body">
+						<div class="float-left">
+							<strong>First name:</strong> <em th:text="${user.firstname}"></em><br>
+							<strong>Last name:</strong> <em th:text="${user.lastname}"></em><br>
+							<strong>Email:</strong> <em th:text="${user.email}"></em><br>
+							<strong>Telephone:</strong> <em th:text="${user.mobilenumber}"></em><br>
+						</div>
+						<div class="float-right">
+							<img th:unless="${image} == null" th:src="${image}" height="250">
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+
+
+		<!-- hoedlale16: include some fancy footer -->
+		<footer th:replace="~{includes/fragments :: footer}"></footer>
+
+		<!--  End of container -->
+		<div th:include="~{includes/bootstrap :: bootstrapJS}" th:remove="tag" />
+</body>
+
+</html>

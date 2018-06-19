@@ -12,6 +12,7 @@ import org.apache.commons.codec.binary.Base64;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.context.annotation.ScopedProxyMode;
+import org.springframework.security.access.annotation.Secured;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
@@ -220,8 +221,8 @@ public class SecurityController {
 		return listUsers(model);
 	}
 
-	// @Secured({ "ROLE_USER" })
-	@RequestMapping(value = { "showProfile" })
+	 @Secured({ "ROLE_USER" })
+	@RequestMapping(value = { "showUserProfile" })
 	public String showProfile(Model model, Authentication authentication) {
 
 		User user = userDao.findFirstByUsername(authentication.getName());
@@ -246,7 +247,7 @@ public class SecurityController {
 			model.addAttribute("errorMessage", "Something went wrong!");
 			return "login";
 		}
-		return "showProfile"; // <-- pofil anzeigen :)
+		return "showUserProfile"; // <-- pofil anzeigen :)
 	}
 
 	@RequestMapping(value = "/deleteUser")

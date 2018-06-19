@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org"
+	xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+<div th:replace="~{includes/bootstrap :: bootstrapMeta}" />
+<title>COMMUNE-IC8</title>
+<div th:replace="~{includes/bootstrap :: bootstrapCSS}" />
+</head>
+<body>
+	<div class="container-fluid" role="main">
+
+		<div class="page-header">
+
+			<h1 align="center">Party Pics</h1>
+			<nav th:replace="~{includes/searchNav :: search}"></nav>
+		</div>
+
+
+		<!--  Error message ----------------------------------------------------------- -->
+		<div th:unless="${errorMessage} == null" th:utext="${errorMessage}"
+			class="alert alert-danger" role="alert"></div>
+		<!--  Error message ----------------------------------------------------------- -->
+
+		<!--  Warning message ----------------------------------------------------------- -->
+		<div th:unless="${warningMessage} == null"
+			th:utext="${warningMessage}" class="alert alert-warning"
+			role="warning"></div>
+		<!--  Warning message ----------------------------------------------------------- -->
+
+		<!--   message ----------------------------------------------------------- -->
+		<div th:unless="${message} == null" th:utext="${message}"
+			class="alert alert-success" role="warning"></div>
+		<!--   message ----------------------------------------------------------- -->
+
+
+		<div class="col-sm-1">
+			<div th:replace="~{includes/menu :: menu}"></div>
+		</div>
+
+		<!--  Add Img----------------------------------------------------------- -->
+		<div class="col-md-2 col-md-offset-1">
+
+			<a th:href="@{/uploadPartyPic}" class = "btn btn-default" > Add Pic
+			
+				</a>
+		
+			
+
+		</div>
+		<!--  Add Img----------------------------------------------------------- -->
+
+
+
+
+		<div class="col-md-10 col-md-offset-1">
+			<table data-toggle="table" class="table table-striped">
+				<thead>
+
+					<tr>
+						<th data-sortable="true">Pic1</th>
+
+
+
+
+					</tr>
+				</thead>
+
+
+				<tbody>
+					<!--  list all items ----------------------------------------------------------- -->
+
+					<tr th:each="pic: ${partypics}">
+						<td><img th:src="${pic}" height="250"></td>
+					</tr>
+
+
+
+
+
+					<!-- Right Dynamic Content------------------------------------------------------- -->
+
+
+					<!--  End of container -->
+					<div th:replace="~{includes/bootstrap :: bootstrapJS}" />
+					<div th:replace="~{includes/footer :: footer}" />
+</body>
+</html>
