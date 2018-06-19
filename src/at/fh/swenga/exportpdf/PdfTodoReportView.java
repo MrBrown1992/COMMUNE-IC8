@@ -18,25 +18,25 @@ import com.lowagie.text.pdf.PdfPCell;
 import com.lowagie.text.pdf.PdfPTable;
 import com.lowagie.text.pdf.PdfWriter;
 
-import at.fh.swenga.model.Grocery;
+import at.fh.swenga.model.Todo;
 
-public class PdfGroceryReportView extends AbstractPdfView {
+public class PdfTodoReportView extends AbstractPdfView {
 	
 	@Override
 	protected void buildPdfDocument(Map<String, Object> model, Document document, PdfWriter writer,
 			HttpServletRequest request, HttpServletResponse response) throws Exception {
 
 		// change the file name
-		response.setHeader("Content-Disposition", "attachment; filename=\"grocery.pdf\"");
+		response.setHeader("Content-Disposition", "attachment; filename=\"todos.pdf\"");
 
-		List<Grocery> groceries = (List<Grocery>) model.get("groceries");
+		List<Todo> todos = (List<Todo>) model.get("todos");
 
-		document.add(new Paragraph("Grocery list"+groceries.size()));
+		document.add(new Paragraph("Todo list"));
 		
 
-		PdfPTable table = new PdfPTable(2);
+		PdfPTable table = new PdfPTable(3);
 		table.setWidthPercentage(100.0f);
-		table.setWidths(new float[] { 1.0f, 3.0f });
+		table.setWidths(new float[] { 1.0f, 1.0f, 1.0f });
 		table.setSpacingBefore(10);
 
 		// define font for table header row
@@ -49,18 +49,21 @@ public class PdfGroceryReportView extends AbstractPdfView {
 		cell.setPadding(5);
 
 		// write table header
-		cell.setPhrase(new Phrase("ID", font));
-		table.addCell(cell);
-
 		cell.setPhrase(new Phrase("Name", font));
 		table.addCell(cell);
 
+		cell.setPhrase(new Phrase("Category", font));
+		table.addCell(cell);
+
+		cell.setPhrase(new Phrase("Deadline", font));
+		table.addCell(cell);
+		
 
 		// write table row data
-		for (Grocery grocery : groceries) {
-			table.addCell(grocery.getId() + "");
-			table.addCell(grocery.getName());
-			
+		for (Todo todo : todos) {
+			table.addCell(todo.getName());
+			table.addCell(todo.getCategory());
+			table.addCell(todo.getDate().toString());
 		}
 
 		document.add(table);
