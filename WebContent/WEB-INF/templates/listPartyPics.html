@@ -9,60 +9,55 @@
 </head>
 
 <body class="app sidebar-show aside-menu-show">
-  <header class="app-header navbar" >
-  
-<!---------------------------HEADER CONTENT --------------------------------------->
-    <div class="container-fluid">
+	<header class="app-header navbar">
+
+		<!---------------------------HEADER CONTENT --------------------------------------->
+		<div class="container-fluid">
 
 			<form>
-				<a style="font-size:200%;" th:href="@{/}"> COMMUNE-IC8</a>		
+				<a style="font-size: 200%;" th:href="@{/}"> COMMUNE-IC8</a>
 			</form>
-	
-
-		<!-- HTML form with search textbox and submit button-->
-		<form role="search" method="post"
-			action="searchUsers">
-			<div class="input-group">
-				<input type="text" class="form-control" placeholder="Search for..."
-					name="searchString"> <span class="input-group-btn">
-					<button class="btn btn-default" type="submit">Go!</button>
-				</span>
-			</div>
-		</form>
-		
-		
-		<form th:action="@{/logout}"
-			method="post">
-			<input class="btn btn-danger" type="submit" value="Sign Out" />
-		</form>	
 
 
-	</div>
-    
-  </header>
-<!---------------------------HEADER CONTENT --------------------------------------->
-  
-  
-  
-  
-<!---------------------------SIDEBAR CONTENT --------------------------------------->
-  
-  <div class="app-body">
-    <div class="sidebar">
-      <!-- Sidebar content here -->
+			<!-- HTML form with search textbox and submit button-->
+			<form role="search" method="post" action="searchUsers">
+				<div class="input-group">
+					<input type="text" class="form-control" placeholder="Search for..."
+						name="searchString"> <span class="input-group-btn">
+						<button class="btn btn-default" type="submit">Go!</button>
+					</span>
+				</div>
+			</form>
 
-     <div th:include="~{includes/sidebar :: sidebar}"></div>
-     
-    </div>
-<!---------------------------SIDEBAR CONTENT --------------------------------------->
-    
-    
 
- <!---------------------------MAIN CONTENT --------------------------------------->
-    <main class="main">
-      <!-- Main content here -->
-      
-      <!--  Error message ----------------------------------------------------------- -->
+			<form th:action="@{/logout}" method="post">
+				<input class="btn btn-danger" type="submit" value="Sign Out" />
+			</form>
+
+
+		</div>
+
+	</header>
+	<!---------------------------HEADER CONTENT --------------------------------------->
+
+
+
+
+	<!---------------------------SIDEBAR CONTENT --------------------------------------->
+
+	<div class="app-body">
+		<div class="sidebar">
+			<!-- Sidebar content here -->
+
+			<div th:include="~{includes/sidebar :: sidebar}"></div>
+
+		</div>
+		<!---------------------------SIDEBAR CONTENT --------------------------------------->
+
+
+
+		<!---------------------------MAIN CONTENT --------------------------------------->
+		<main class="main"> <!-- Main content here --> <!--  Error message ----------------------------------------------------------- -->
 		<div th:unless="${errorMessage} == null" th:utext="${errorMessage}"
 			class="alert alert-danger" role="alert"></div>
 		<!--  Error message ----------------------------------------------------------- -->
@@ -77,83 +72,86 @@
 		<div th:unless="${message} == null" th:utext="${message}"
 			class="alert alert-success" role="warning"></div>
 		<!--   message ----------------------------------------------------------- -->
-      	
-      	<div><h1>Party Pics</h1></div>
-      	
-      	
-      	<div class="col-md-10 col-md-offset-1">
-			<table data-toggle="table" class="table table-striped">
-				<thead>
 
-					<tr>
-						<th data-sortable="true">Pic1</th>
-
-
-
-
-					</tr>
-				</thead>
-
-
-				<tbody>
-					<!--  list all items ----------------------------------------------------------- -->
-
-					<tr th:each="pic: ${partypics}">
-						<td><img th:src="${pic}" height="250"></td>
-					</tr>
-
-
-      	
-    </main>
- <!---------------------------MAIN CONTENT --------------------------------------->
-
-    
-    
- <!---------------------------RIGHT-SIDEBAR --------------------------------------->
-    
-    <aside class="aside-menu">
-      <!-- Aside menu content here -->
-      <!-- -----------------Edit / PDF / Excel Buttons -------------------------- -->
-      	<div class="sidebar">
-		<nav class="sidebar-nav">
-		<ul class="nav">
-			<li class="nav-title">Options</li>
-
-			<li sec:authorize="hasRole('USER')" class="nav-item"><a class="nav-link"
-				th:href="@{/uploadPartyPic}"> <i
-					class="nav-icon cui-speedometer"></i> Add New Picture
-			</a></li>
-		
-
-			<li sec:authorize="hasRole('USER')" class="nav-item"><a class="nav-link"
-				th:href="@{/todoPdf}" th:value="pdf"> <i
-					class="nav-icon cui-speedometer"></i> Export PDF
-			</a></li>
-			
-			<li sec:authorize="hasRole('USER')" class="nav-item"><a class="nav-link"
-				th:href="@{/todoExcel}" th:value="excel"> <i
-					class="nav-icon cui-speedometer"></i> Export Excel
-			</a></li>
-
-			
-			</ul></nav>
-     
-    </div>
-    
-    
-    
-    </aside>
-  </div>
- <!---------------------------RIGHT-SIDEBAR --------------------------------------->
+		<div>
+			<h1 align = "center">Party Pics</h1>
+		</div>
 
   
-  <!---------------------------FOOTER --------------------------------------->
+		<div th:each="pic: ${partypics}">
+			<div>
+				<div class="card" style="width: 20rem;
+  				margin: 0 auto;">
+					<img class="card-img-top" th:src="${pic}" alt="Card image cap">
+					<div class="card-body">
+						<h5 class="card-title">Card title</h5>
+						<p class="card-text">Quick sample text to create the card
+							title and make up the body of the card's content.</p>
+					</div>
+				</div>
+			</div>
+			<br>
+		</div>
  
-  <footer class="app-footer">
-    <!-- Footer content here -->
-    <div th:include="~{includes/footer :: footer}"></div>
-  </footer>
-  
-  	<div th:replace="~{includes/bootstrap :: bootstrapJS}" />
-  	
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		</main>
+		<!---------------------------MAIN CONTENT --------------------------------------->
+
+
+
+		<!---------------------------RIGHT-SIDEBAR --------------------------------------->
+		
+		<aside class="aside-menu-xl">
+			<!-- Aside menu content here -->
+			<!-- -----------------Edit / PDF / Excel Buttons -------------------------- -->
+			<div class="sidebar">
+				<nav class="sidebar-nav">
+					<ul class="nav">
+						<li class="nav-title">Options</li>
+
+						<li sec:authorize="hasRole('USER')" class="nav-item"><a
+							class="nav-link" th:href="@{/uploadPartyPic}"> <i
+								class="nav-icon cui-speedometer"></i> Add New Picture
+						</a></li>
+
+
+						<li sec:authorize="hasRole('USER')" class="nav-item"><a
+							class="nav-link" th:href="@{/todoPdf}" th:value="pdf"> <i
+								class="nav-icon cui-speedometer"></i> Export PDF
+						</a></li>
+
+						<li sec:authorize="hasRole('USER')" class="nav-item"><a
+							class="nav-link" th:href="@{/todoExcel}" th:value="excel"> <i
+								class="nav-icon cui-speedometer"></i> Export Excel
+						</a></li>
+
+
+					</ul>
+				</nav>
+
+			</div>
+		</aside>
+		
+		
+	</div>
+	<!---------------------------RIGHT-SIDEBAR --------------------------------------->
+
+
+	<!---------------------------FOOTER --------------------------------------->
+
+	<footer class="app-footer">
+		<!-- Footer content here -->
+		<div th:include="~{includes/footer :: footer}"></div>
+	</footer>
+
+	<div th:replace="~{includes/bootstrap :: bootstrapJS}" />
+
 </body>
