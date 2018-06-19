@@ -19,4 +19,3 @@ import at.fh.swenga.model.PartyImg;
 public interface PartyImgDao extends JpaRepository<PartyImg, Integer> {
 
 }
- 
