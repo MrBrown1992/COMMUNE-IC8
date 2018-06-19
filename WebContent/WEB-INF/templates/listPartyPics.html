@@ -7,17 +7,62 @@
 <title>COMMUNE-IC8</title>
 <div th:replace="~{includes/bootstrap :: bootstrapCSS}" />
 </head>
-<body>
-	<div class="container-fluid" role="main">
 
-		<div class="page-header">
+<body class="app sidebar-show aside-menu-show">
+  <header class="app-header navbar" >
+  
+<!---------------------------HEADER CONTENT --------------------------------------->
+    <div class="container-fluid">
 
-			<h1 align="center">Party Pics</h1>
-			<nav th:replace="~{includes/searchNav :: search}"></nav>
-		</div>
+			<form>
+				<a style="font-size:200%;" th:href="@{/}"> COMMUNE-IC8</a>		
+			</form>
+	
+
+		<!-- HTML form with search textbox and submit button-->
+		<form role="search" method="post"
+			action="searchUsers">
+			<div class="input-group">
+				<input type="text" class="form-control" placeholder="Search for..."
+					name="searchString"> <span class="input-group-btn">
+					<button class="btn btn-default" type="submit">Go!</button>
+				</span>
+			</div>
+		</form>
+		
+		
+		<form th:action="@{/logout}"
+			method="post">
+			<input class="btn btn-danger" type="submit" value="Sign Out" />
+		</form>	
 
 
-		<!--  Error message ----------------------------------------------------------- -->
+	</div>
+    
+  </header>
+<!---------------------------HEADER CONTENT --------------------------------------->
+  
+  
+  
+  
+<!---------------------------SIDEBAR CONTENT --------------------------------------->
+  
+  <div class="app-body">
+    <div class="sidebar">
+      <!-- Sidebar content here -->
+
+     <div th:include="~{includes/sidebar :: sidebar}"></div>
+     
+    </div>
+<!---------------------------SIDEBAR CONTENT --------------------------------------->
+    
+    
+
+ <!---------------------------MAIN CONTENT --------------------------------------->
+    <main class="main">
+      <!-- Main content here -->
+      
+      <!--  Error message ----------------------------------------------------------- -->
 		<div th:unless="${errorMessage} == null" th:utext="${errorMessage}"
 			class="alert alert-danger" role="alert"></div>
 		<!--  Error message ----------------------------------------------------------- -->
@@ -32,28 +77,11 @@
 		<div th:unless="${message} == null" th:utext="${message}"
 			class="alert alert-success" role="warning"></div>
 		<!--   message ----------------------------------------------------------- -->
-
-
-		<div class="col-sm-1">
-			<div th:replace="~{includes/menu :: menu}"></div>
-		</div>
-
-		<!--  Add Img----------------------------------------------------------- -->
-		<div class="col-md-2 col-md-offset-1">
-
-			<a th:href="@{/uploadPartyPic}" class = "btn btn-default" > Add Pic
-			
-				</a>
-		
-			
-
-		</div>
-		<!--  Add Img----------------------------------------------------------- -->
-
-
-
-
-		<div class="col-md-10 col-md-offset-1">
+      	
+      	<div><h1>Party Pics</h1></div>
+      	
+      	
+      	<div class="col-md-10 col-md-offset-1">
 			<table data-toggle="table" class="table table-striped">
 				<thead>
 
@@ -75,14 +103,57 @@
 					</tr>
 
 
+      	
+    </main>
+ <!---------------------------MAIN CONTENT --------------------------------------->
 
+    
+    
+ <!---------------------------RIGHT-SIDEBAR --------------------------------------->
+    
+    <aside class="aside-menu">
+      <!-- Aside menu content here -->
+      <!-- -----------------Edit / PDF / Excel Buttons -------------------------- -->
+      	<div class="sidebar">
+		<nav class="sidebar-nav">
+		<ul class="nav">
+			<li class="nav-title">Options</li>
 
+			<li sec:authorize="hasRole('USER')" class="nav-item"><a class="nav-link"
+				th:href="@{/uploadPartyPic}"> <i
+					class="nav-icon cui-speedometer"></i> Add New Picture
+			</a></li>
+		
 
-					<!-- Right Dynamic Content------------------------------------------------------- -->
+			<li sec:authorize="hasRole('USER')" class="nav-item"><a class="nav-link"
+				th:href="@{/todoPdf}" th:value="pdf"> <i
+					class="nav-icon cui-speedometer"></i> Export PDF
+			</a></li>
+			
+			<li sec:authorize="hasRole('USER')" class="nav-item"><a class="nav-link"
+				th:href="@{/todoExcel}" th:value="excel"> <i
+					class="nav-icon cui-speedometer"></i> Export Excel
+			</a></li>
 
+			
+			</ul></nav>
+     
+    </div>
+    
+    
+    
+    </aside>
+  </div>
+ <!---------------------------RIGHT-SIDEBAR --------------------------------------->
 
-					<!--  End of container -->
-					<div th:replace="~{includes/bootstrap :: bootstrapJS}" />
-					<div th:replace="~{includes/footer :: footer}" />
+  
+  <!---------------------------FOOTER --------------------------------------->
+ 
+  <footer class="app-footer">
+    <!-- Footer content here -->
+    <div th:include="~{includes/footer :: footer}"></div>
+  </footer>
+  
+  	<div th:replace="~{includes/bootstrap :: bootstrapJS}" />
+  	
 </body>
-</html>
