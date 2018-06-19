@@ -41,7 +41,7 @@
 		<!--  Add Flat----------------------------------------------------------- -->
 		<div class="col-md-2 col-md-offset-1">
 
-			<form sec:authorize="hasRole('USER')" th:action="@{/editFlat}"
+			<form sec:authorize="hasRole('ADMIN')" th:action="@{/changeFlat}"
 				method="post">
 				<input class="btn btn-default" type="submit" value="Add Flat" style="float:left;"/>
 			</form>

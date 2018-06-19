@@ -1,7 +1,6 @@
 package at.fh.swenga.controller;
 
 import java.util.List;
-import java.util.Set;
 
 import javax.validation.Valid;
 
@@ -13,12 +12,15 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.FieldError;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import at.fh.swenga.dao.FlatDao;
 import at.fh.swenga.dao.UserDao;
 import at.fh.swenga.model.Flat;
+import at.fh.swenga.model.User;
 
 @Controller
 @Scope(proxyMode = ScopedProxyMode.TARGET_CLASS, value = "session")
@@ -80,8 +82,8 @@ public class FlatController {
 		return "editFlat";
 	}
 
-	@RequestMapping(value = "changeFlat")
-	public String changeFlat(Model model, @RequestParam(value = "flatName") String flatName,
+	@PostMapping(value = "changeFlat")
+	public String changeFlat(Model model, @RequestParam(value = "name") String name,
 
 			@Valid Flat changedFlat, Authentication authentication, BindingResult bindingResult) {
 
@@ -91,7 +93,7 @@ public class FlatController {
 
 		Flat flat = flatDao.findFirstByid(changedFlat.getId());
 		if (flat != null) {
-			flat.setName(flatName);
+			flat.setName(name);
 
 			flatDao.save(flat);
 
@@ -101,5 +103,21 @@ public class FlatController {
 			return listFlat(model);
 		}
 	}
+	
+	@GetMapping("/changeFlat")
+	public String changeFlat( Model model, Authentication authentication, @RequestParam(value = "name")String name) {
+
+		Flat flat = flatDao.findFirstByFlatName(name);
+
+		if (flat != null) {
+
+			model.addAttribute("flat", flat);
+			return "editFlat";
+		}
+
+		model.addAttribute("warningMessage", "Flat not found!");
+		return listFlat(model);
+	}
+
 
 }
