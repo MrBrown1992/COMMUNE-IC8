@@ -35,6 +35,7 @@ public class Image implements java.io.Serializable {
 	private String filename;
 	@Version
 	long version;
+	private String contentType;
 
 	public Image() {
 		super();
@@ -79,6 +80,20 @@ public class Image implements java.io.Serializable {
  
 	public void setFilename(String filename) {
 		this.filename = filename;
+	}
+
+	/**
+	 * @return the contentType
+	 */
+	public String getContentType() {
+		return contentType;
+	}
+
+	/**
+	 * @param contentType the contentType to set
+	 */
+	public void setContentType(String contentType) {
+		this.contentType = contentType;
 	}
  
 	

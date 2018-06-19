@@ -100,7 +100,7 @@
 					<!--  list all items ----------------------------------------------------------- -->
 
 					<tr th:each="flat : ${flats}">
-						<td th:text="flat.name"></td>
+						<td th:text="${flat.name}"></td>
 						<td >
 						<ul> 
 						<li th:each=" user: ${flat.getUsers()}" th:text= "${user.firstname} + ' '+ ${user.lastname} "></li>
