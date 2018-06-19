@@ -7,15 +7,62 @@
 <title>COMMUNE-IC8</title>
 <div th:replace="~{includes/bootstrap :: bootstrapCSS}" />
 </head>
-<body >
-	<div class="container-fluid" role="main">
 
-		<div class="page-header">
-		<h1 align="center">Welcome To Your Flat !</h1>
-			<nav th:replace="~{includes/searchNav :: search}"></nav>
-		</div>
+<body class="app sidebar-show aside-menu-show">
+  <header class="app-header navbar" >
+  
+<!---------------------------HEADER CONTENT --------------------------------------->
+    <div class="container-fluid">
 
-		<!--  Error message ----------------------------------------------------------- -->
+			<form>
+				<a style="font-size:200%;" th:href="@{/}"> COMMUNE-IC8</a>		
+			</form>
+	
+
+		<!-- HTML form with search textbox and submit button-->
+		<form role="search" method="post"
+			action="searchUsers">
+			<div class="input-group">
+				<input type="text" class="form-control" placeholder="Search for..."
+					name="searchString"> <span class="input-group-btn">
+					<button class="btn btn-default" type="submit">Go!</button>
+				</span>
+			</div>
+		</form>
+		
+		
+		<form th:action="@{/logout}"
+			method="post">
+			<input class="btn btn-danger" type="submit" value="Sign Out" />
+		</form>	
+
+
+	</div>
+    
+  </header>
+<!---------------------------HEADER CONTENT --------------------------------------->
+  
+  
+  
+  
+<!---------------------------SIDEBAR CONTENT --------------------------------------->
+  
+  <div class="app-body">
+    <div class="sidebar">
+      <!-- Sidebar content here -->
+
+     <div th:include="~{includes/sidebar :: sidebar}"></div>
+     
+    </div>
+<!---------------------------SIDEBAR CONTENT --------------------------------------->
+    
+    
+
+ <!---------------------------MAIN CONTENT --------------------------------------->
+    <main class="main">
+      <!-- Main content here -->
+      
+      <!--  Error message ----------------------------------------------------------- -->
 		<div th:unless="${errorMessage} == null" th:utext="${errorMessage}"
 			class="alert alert-danger" role="alert"></div>
 		<!--  Error message ----------------------------------------------------------- -->
@@ -30,36 +77,36 @@
 		<div th:unless="${message} == null" th:utext="${message}"
 			class="alert alert-success" role="warning"></div>
 		<!--   message ----------------------------------------------------------- -->
-		
-		
-
-		<!--  Menu ----------------------------------------------------------- -->
-		<div class="col-sm-1">
-		
-			<div th:replace="~{includes/menu :: menu}"></div>
-		
-		</div>
-		<!--  Menu ----------------------------------------------------------- -->
-
-
-		<!-- Right Dynamic Content------------------------------------------------------- -->
-		<div class="col-md-10 col-md-offset-1">
-
-
-			<p> Hello and welcome to your flat, du Eierbär! This place lets you organize your shared flat and helps you to COMMUNE-IC8 with your Flatmates!
+      	
+      	<div><h1>Home</h1></div>
+      	
+      	<p> Hello and welcome to your flat, du Eierbär! This place lets you organize your shared flat and helps you to COMMUNE-IC8 with your Flatmates!
 				Have an Appointment? No problem, just add id to the Todo list and the others will see it. Not enough Mayo in the refrigerator? Never mind, just add it to the grocery list so it wont be forgotten on the next shopping tour :P</p>
 
+      	
+      	
+    </main>
+ <!---------------------------MAIN CONTENT --------------------------------------->
 
-		</div>
-		<!-- Right Dynamic Content------------------------------------------------------- -->
-	</div>
-	
-	
-	
-	</div>
-	<!--  End of container -->
-	<div th:replace="~{includes/bootstrap :: bootstrapJS}" />
-	<div th:replace="~{includes/footer :: footer}" />
+    
+    
+ <!---------------------------RIGHT-SIDEBAR --------------------------------------->
+    
+    <aside class="aside-menu">
+      <!-- Aside menu content here -->
+      <div><h1>Aside</h1></div>
+    </aside>
+  </div>
+ <!---------------------------RIGHT-SIDEBAR --------------------------------------->
 
+  
+  <!---------------------------FOOTER --------------------------------------->
+ 
+  <footer class="app-footer">
+    <!-- Footer content here -->
+    <div th:include="~{includes/footer :: footer}"></div>
+  </footer>
+  
+  	<div th:replace="~{includes/bootstrap :: bootstrapJS}" />
+  	
 </body>
-</html>

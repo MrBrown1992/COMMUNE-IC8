@@ -7,16 +7,62 @@
 <title>COMMUNE-IC8</title>
 <div th:replace="~{includes/bootstrap :: bootstrapCSS}" />
 </head>
-<body>
-	<div class="container-fluid" role="main">
 
-		<div class="page-header">
+<body class="app sidebar-show aside-menu-show">
+  <header class="app-header navbar" >
+  
+<!---------------------------HEADER CONTENT --------------------------------------->
+    <div class="container-fluid">
 
-			<h1 align="center">Groceries</h1>
-			<nav th:replace="~{includes/searchNav :: search}"></nav>
-		</div>
+			<form>
+				<a style="font-size:200%;" th:href="@{/}"> COMMUNE-IC8</a>		
+			</form>
+	
 
-		<!--  Error message ----------------------------------------------------------- -->
+		<!-- HTML form with search textbox and submit button-->
+		<form role="search" method="post"
+			action="searchUsers">
+			<div class="input-group">
+				<input type="text" class="form-control" placeholder="Search for..."
+					name="searchString"> <span class="input-group-btn">
+					<button class="btn btn-default" type="submit">Go!</button>
+				</span>
+			</div>
+		</form>
+		
+		
+		<form th:action="@{/logout}"
+			method="post">
+			<input class="btn btn-danger" type="submit" value="Sign Out" />
+		</form>	
+
+
+	</div>
+    
+  </header>
+<!---------------------------HEADER CONTENT --------------------------------------->
+  
+  
+  
+  
+<!---------------------------SIDEBAR CONTENT --------------------------------------->
+  
+  <div class="app-body">
+    <div class="sidebar">
+      <!-- Sidebar content here -->
+
+     <div th:include="~{includes/sidebar :: sidebar}"></div>
+     
+    </div>
+<!---------------------------SIDEBAR CONTENT --------------------------------------->
+    
+    
+
+ <!---------------------------MAIN CONTENT --------------------------------------->
+    <main class="main">
+      <!-- Main content here -->
+      
+      <!--  Error message ----------------------------------------------------------- -->
 		<div th:unless="${errorMessage} == null" th:utext="${errorMessage}"
 			class="alert alert-danger" role="alert"></div>
 		<!--  Error message ----------------------------------------------------------- -->
@@ -31,42 +77,17 @@
 		<div th:unless="${message} == null" th:utext="${message}"
 			class="alert alert-success" role="warning"></div>
 		<!--   message ----------------------------------------------------------- -->
-
-		<div class="col-sm-1">
-			<div th:replace="~{includes/menu :: menu}"></div>
-		</div>
-
-		
-		<!--  Edit Grocery----------------------------------------------------------- -->
-		<div class="col-md-3 col-md-offset-1">
-
-			<form sec:authorize="hasRole('USER')" th:action="@{/editGrocery}"
-				method="post" style="float: left;">
-				<input class="btn btn-default" type="submit" value="Add Grocery" />
-			</form>
-
-			<form th:action="@{/groceryPdf}" method="post" style="float: left;">
-				<input class="btn btn-default" type="submit" name ="pdf" value="PDF">
-			</form>
-			<form th:action="@{/groceryExcel}" method="post" style="float: left;">
-				<input class="btn btn-default" type="submit" name ="excel" value="Excel">
-
-			</form>
-		</div>
-		<!--  Edit Grocery----------------------------------------------------------- -->
-
-		
-		
-
-
-		<div class="col-md-10 col-md-offset-1">
-			<table data-toggle="table" class="table table-striped">
+      	
+      	<div><h1>Grocery List</h1></div>
+      	
+      	
+      	<div>
+      		<table data-toggle="table" class="table table-striped">
 				<thead>
 
 					<tr>
-						<th data-sortable="true">ID</th>
 						<th data-sortable="true">Grocery</th>
-						<th data-sortable="true">bought</th>
+						<th data-sortable="true">Bought</th>
 						<th sec:authorize="hasRole('ADMIN')">Actions</th>
 
 
@@ -74,14 +95,10 @@
 					</tr>
 				</thead>
 
-		
-
-
 				<tbody>
 					<!--  list all items ----------------------------------------------------------- -->
 
 					<tr th:each="grocery : ${groceries}">
-						<td th:text="${grocery.id}"></td>
 						<td th:text="${grocery.groceryName}"></td>
 						<td th:text="${grocery.bought}"></td>
 
@@ -99,13 +116,58 @@
 					<!--  list all items ----------------------------------------------------------- -->
 				</tbody>
 			</table>
-		</div>
+      	</div>
+      	
+    </main>
+ <!---------------------------MAIN CONTENT --------------------------------------->
 
+    
+    
+ <!---------------------------RIGHT-SIDEBAR --------------------------------------->
+    
+    <aside class="aside-menu">
+      <!-- Aside menu content here -->
+      <!-- -----------------Edit / PDF / Excel Buttons -------------------------- -->
+      	<div class="sidebar">
+		<nav class="sidebar-nav">
+		<ul class="nav">
+			<li class="nav-title">Options</li>
 
-	</div>
+			<li sec:authorize="hasRole('USER')" class="nav-item"><a class="nav-link"
+				th:href="@{/editGrocery}"> <i
+					class="nav-icon cui-speedometer"></i> Add Grocery
+			</a></li>
+		
 
-	<!--  End of container -->
-	<div th:replace="~{includes/bootstrap :: bootstrapJS}" />
-	<div th:replace="~{includes/footer :: footer}" />
+			<li sec:authorize="hasRole('USER')" class="nav-item"><a class="nav-link"
+				th:href="@{/groceryPdf}"> <i
+					class="nav-icon cui-speedometer"></i> Export PDF
+			</a></li>
+			
+			<li sec:authorize="hasRole('USER')" class="nav-item"><a class="nav-link"
+				th:href="@{/groceryExcel}"> <i
+					class="nav-icon cui-speedometer"></i> Export Excel
+			</a></li>
+
+			
+			</ul></nav>
+     
+    </div>
+    
+    
+    
+    </aside>
+  </div>
+ <!---------------------------RIGHT-SIDEBAR --------------------------------------->
+
+  
+  <!---------------------------FOOTER --------------------------------------->
+ 
+  <footer class="app-footer">
+    <!-- Footer content here -->
+    <div th:include="~{includes/footer :: footer}"></div>
+  </footer>
+  
+  	<div th:replace="~{includes/bootstrap :: bootstrapJS}" />
+  	
 </body>
-</html>

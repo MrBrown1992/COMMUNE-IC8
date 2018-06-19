@@ -256,6 +256,15 @@ public class SecurityController {
 
 		return listUsers(model);
 	}
+	
+	
+	
+	@RequestMapping(value = "/test")
+	public String test() {
+		return "test";
+	}
+	
+	
 
 	@ExceptionHandler(Exception.class)
 	public String handleAllException(Exception ex) {
@@ -265,4 +274,7 @@ public class SecurityController {
 
 	}
 
+	
+	
+	
 }
