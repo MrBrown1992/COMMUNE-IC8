@@ -37,17 +37,9 @@ public class CommentController {
 	@Autowired
 	UserDao userDao;
 
-	//@Autowired
-	//User user;
-
 	@Autowired
 	CommentDao commentDao;
-	
 
-
-	/**
-	 * 
-	 */
 	public CommentController() {
 
 		// TODO Auto-generated constructor stub
@@ -70,60 +62,54 @@ public class CommentController {
 	public String listComments(Model model) {
 
 		List<Comment> comments = commentDao.findAll();
-		
+
 		model.addAttribute("comments", comments);
 		return "listComments";
 	}
 
-	
 	@RequestMapping(value = "/username", method = RequestMethod.GET)
-    @ResponseBody
-    public String currentUserName(Authentication authentication) {
-        
-		//System.out.println("inside currentUserName" + authentication.getName());
+	@ResponseBody
+	public String currentUserName(Authentication authentication) {
+
+		// System.out.println("inside currentUserName" + authentication.getName());
 		return authentication.getName();
-	
+
 	}
-	
-	
+
 	@Secured({ "ROLE_USER" })
 	@RequestMapping(value = "/addComment")
 	public String addComment() {
-		
+
 		return "addComment";
 	}
-	
+
 	@RequestMapping("/createComment")
 	public String createComment(Model model, @Valid Comment newComment,
-			@RequestParam(value = "commentText") String commentText,
-			Authentication authentication,
+			@RequestParam(value = "commentText") String commentText, Authentication authentication,
 			BindingResult bindingResult) {
 
 		Date date = new Date();
-		
-		
+
 		String username = authentication.getName();
 		User user = userDao.findFirstByUsername(username);
-		
+
 		// Any errors? -> Create a String out of all errors and return to the page
 		if (errorsDetected(model, bindingResult)) {
 			return listComments(model);
 		}
-		
+
 		System.out.println(username);
 		System.out.println(user);
-		
+
 		newComment.setUser(user);
 		newComment.setDate(date);
 		newComment.setText(commentText);
-		
-		
+
 		commentDao.save(newComment);
 
 		return "forward:listComments";
 	}
-	
-	
+
 	@ExceptionHandler(Exception.class)
 	public String handleAllException(Exception ex) {
 		ex.printStackTrace();

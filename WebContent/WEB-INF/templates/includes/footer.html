@@ -1,5 +1,10 @@
-<div th:fragment="footer">
-	<div class="navbar" >
-          <form class="navbar-form navbar-center"><p >&copy; 2018 Die Eierbären</p></form>
+<nav th:fragment="footer">
+	<div class="container-fluid" >
+          <form class="navbar-form navbar-left"><p style="color:white;">&copy; 2018 Die Eierbären</p></form>
+          
+         <form class="navbar-form navbar-right"><a style="color:white;" th:href="@{/about}">About</a></form>
+          
+          
+
     </div>
 </nav>

@@ -22,25 +22,20 @@ import org.springframework.web.bind.annotation.RequestParam;
 import at.fh.swenga.dao.GroceryDao;
 import at.fh.swenga.model.Grocery;
 
-
 @Controller
 @Scope(proxyMode = ScopedProxyMode.TARGET_CLASS, value = "session")
 public class GroceryController {
 
 	@Autowired
-	 GroceryDao groceryDao;
+	GroceryDao groceryDao;
 
 	public GroceryController() {
 
 		// TODO Auto-generated constructor stub
 	}
-/*
-	private PageRequest generatePageRequest(int pageNr) {
-		return PageRequest.of(pageNr, 6);
-	}
-*/
+
 	private boolean errorsDetected(Model model, BindingResult bindingResult) {
-		// Any errors? -> Create a String out of all errors and return to the page
+
 		if (bindingResult.hasErrors()) {
 			String errorMessage = "";
 			for (FieldError fieldError : bindingResult.getFieldErrors()) {
@@ -51,25 +46,20 @@ public class GroceryController {
 		}
 		return false;
 	}
-	
-	
 
-	
-	@RequestMapping(value = {"showGroceryList"})
+	@RequestMapping(value = { "showGroceryList" })
 	public String showGroceryList(Model model) {
-		
 
 		List<Grocery> groceries = groceryDao.findAll();
 
-		model.addAttribute("groceries",groceries);
+		model.addAttribute("groceries", groceries);
 		return "listGrocery";
 	}
 
-	
 	@RequestMapping("/createNewGroceryItem")
 	public String createNewGroceryItem(Model model, @Valid Grocery newGrocery,
 			@RequestParam(value = "groceryName") String groceryName,
-			@RequestParam(value = "boughtstate",required = false) boolean bought, Authentication authentication,
+			@RequestParam(value = "boughtstate", required = false) boolean bought, Authentication authentication,
 			BindingResult bindingResult) {
 
 		// Any errors? -> Create a String out of all errors and return to the page
@@ -85,11 +75,10 @@ public class GroceryController {
 	}
 
 	@PostMapping("/changeGrocery")
-	public String changeGrocery(Model model,	@RequestParam(value = "groceryName") String groceryName,
-			@RequestParam(value = "boughtstate",required = false,defaultValue = "false" ) boolean bought,
-			
-			@Valid Grocery changedGrocery, Authentication authentication,
-			BindingResult bindingResult) {
+	public String changeGrocery(Model model, @RequestParam(value = "groceryName") String groceryName,
+			@RequestParam(value = "boughtstate", required = false, defaultValue = "false") boolean bought,
+
+			@Valid Grocery changedGrocery, Authentication authentication, BindingResult bindingResult) {
 
 		// Any errors? -> Create a String out of all errors and return to the page
 		if (errorsDetected(model, bindingResult)) {
@@ -99,9 +88,8 @@ public class GroceryController {
 		Grocery grocery = groceryDao.findFirstByid(changedGrocery.getId());
 		if (grocery != null) {
 			grocery.setName(groceryName);
-			
-			grocery.setBought(bought); // default value setzen .. 
-			
+
+			grocery.setBought(bought); // default value setzen ..
 
 			groceryDao.save(grocery);
 
@@ -111,31 +99,29 @@ public class GroceryController {
 			return showGroceryList(model);
 		}
 	}
-	
+
 	@GetMapping("/changeGrocery")
-	public String changeGrocery(@RequestParam(value = "id") int id ,Model model ,Authentication authentication ) {
-		
-		
+	public String changeGrocery(@RequestParam(value = "id") int id, Model model, Authentication authentication) {
+
 		Grocery grocery = groceryDao.findFirstByid(id);
-		
-		if(grocery != null ) {
-			
-			model.addAttribute("grocery",grocery);
-			return "editGrocery"; 
+
+		if (grocery != null) {
+
+			model.addAttribute("grocery", grocery);
+			return "editGrocery";
 		}
-		
+
 		model.addAttribute("warningMessage", "Grocery not found!");
 		return showGroceryList(model);
 	}
-	
-	
+
 	@RequestMapping("/delete")
 	public String deleteGrocery(Model model, @RequestParam int id) {
 		groceryDao.deleteById(id);
 
 		return showGroceryList(model);
 	}
-	
+
 	@RequestMapping(value = { "/editGrocery" })
 	public String grocery(Model model) {
 		return "editGrocery";
@@ -145,11 +131,7 @@ public class GroceryController {
 	public String listGrocery(Model model) {
 		return "listGrocery";
 	}
-	
-	
-	
-	
-	
+
 	@ExceptionHandler(Exception.class)
 	public String handleAllException(Exception ex) {
 		ex.printStackTrace();

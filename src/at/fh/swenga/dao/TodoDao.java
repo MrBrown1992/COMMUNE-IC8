@@ -8,13 +8,8 @@ import at.fh.swenga.model.Todo;
 
 @Repository
 @Transactional
-public interface TodoDao extends JpaRepository <Todo,Integer> {
+public interface TodoDao extends JpaRepository<Todo, Integer> {
 
 	Todo findFirstByid(int id);
 
-	
-
-	
-	
-	
 }

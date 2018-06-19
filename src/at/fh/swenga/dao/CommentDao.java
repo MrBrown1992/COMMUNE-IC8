@@ -8,9 +8,6 @@ import at.fh.swenga.model.Comment;
 
 @Repository
 @Transactional
-public interface CommentDao extends JpaRepository <Comment,Integer> {
+public interface CommentDao extends JpaRepository<Comment, Integer> {
 
-	
-	
-	
 }
