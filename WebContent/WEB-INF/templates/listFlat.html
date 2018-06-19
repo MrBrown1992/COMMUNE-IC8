@@ -80,7 +80,7 @@
 
 
 
-      	<div><h1>Flat</h1></div>
+      	<div><h1 align="center">Flat</h1></div>
       	
       	
       	<div>
@@ -100,7 +100,7 @@
 					<!--  list all items ----------------------------------------------------------- -->
 
 					<tr th:each="flat : ${flats}">
-						<td th:text="flat.name"></td>
+						<td th:text="${flat.name}"></td>
 						<td >
 						<ul> 
 						<li th:each=" user: ${flat.getUsers()}" th:text= "${user.firstname} + ' '+ ${user.lastname} "></li>
@@ -144,7 +144,7 @@
 
 			<li sec:authorize="hasRole('USER')" class="nav-item"><a class="nav-link"
 				th:href="@{/editUser}"> <i
-					class="nav-icon cui-speedometer"></i> Create New Flat
+					class="nav-icon cui-location-pin"></i> Create New Flat
 			</a></li>
 			
 			</ul></nav>

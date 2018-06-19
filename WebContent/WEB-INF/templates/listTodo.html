@@ -78,7 +78,7 @@
 			class="alert alert-success" role="warning"></div>
 		<!--   message ----------------------------------------------------------- -->
       	
-      	<div><h1>To-Do's</h1></div>
+      	<div><h1 align="center">To-Do's</h1></div>
       	
       	
       	<div>
@@ -138,18 +138,18 @@
 
 			<li sec:authorize="hasRole('USER')" class="nav-item"><a class="nav-link"
 				th:href="@{/editTodo}"> <i
-					class="nav-icon cui-speedometer"></i> Add To-Do
+					class="nav-icon cui-task"></i> Add To-Do
 			</a></li>
 		
 
 			<li sec:authorize="hasRole('USER')" class="nav-item"><a class="nav-link"
 				th:href="@{/todoPdf}" th:value="pdf"> <i
-					class="nav-icon cui-speedometer"></i> Export PDF
+					class="nav-icon cui-cloud-download"></i> Export PDF
 			</a></li>
 			
 			<li sec:authorize="hasRole('USER')" class="nav-item"><a class="nav-link"
 				th:href="@{/todoExcel}" th:value="excel"> <i
-					class="nav-icon cui-speedometer"></i> Export Excel
+					class="nav-icon cui-cloud-download"></i> Export Excel
 			</a></li>
 
 			

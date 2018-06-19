@@ -78,7 +78,7 @@
 			class="alert alert-success" role="warning"></div>
 		<!--   message ----------------------------------------------------------- -->
       	
-      	<div><h1>Comment Section</h1></div>
+      	<div><h1 align="center">Comment Section</h1></div>
       	
       	
       	<div>
@@ -138,18 +138,18 @@
 
 			<li sec:authorize="hasRole('USER')" class="nav-item"><a class="nav-link"
 				th:href="@{/addComment}"> <i
-					class="nav-icon cui-speedometer"></i> Add Comment
+					class="nav-icon cui-note"></i> Add Comment
 			</a></li>
 		
 
 			<li sec:authorize="hasRole('USER')" class="nav-item"><a class="nav-link"
 				th:href="@{/commentsPdf}" th:value="pdf"> <i
-					class="nav-icon cui-speedometer"></i> Export PDF
+					class="nav-icon cui-cloud-download"></i> Export PDF
 			</a></li>
 			
 			<li sec:authorize="hasRole('USER')" class="nav-item"><a class="nav-link"
 				th:href="@{/commentsExcel}" th:value="excel"> <i
-					class="nav-icon cui-speedometer"></i> Export Excel
+					class="nav-icon cui-cloud-download"></i> Export Excel
 			</a></li>
 
 			

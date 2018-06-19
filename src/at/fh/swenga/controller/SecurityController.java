@@ -1,11 +1,13 @@
 package at.fh.swenga.controller;
 
+import java.io.OutputStream;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.List;
 import java.util.Optional;
 
+import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
 
 import org.apache.commons.codec.binary.Base64;
@@ -91,7 +93,7 @@ public class SecurityController {
 		if (userRole == null)
 			userRole = new UserRole("ROLE_USER");
 
-		User spiess = new User("spiess", "password", true, "nikolaus", "spiess", 0316666666, "testmail@mimimi.com",
+		User spiess = new User("spiess", "password", true, "Nikolaus", "Spiess", 0316123456, "testmail@mimimi.com",
 				Calendar.getInstance(), null, null);
 		spiess.encryptPassword();
 		spiess.addUserRole(userRole);
@@ -99,7 +101,8 @@ public class SecurityController {
 		spiess.setFlat(testFlat);
 		userDao.save(spiess);
 
-		User user = new User("user", "password", true, "user", "user", 1, null, Calendar.getInstance(), null, null);
+		User user = new User("user", "password", true, "user", "user", 0664123321, "malware@xyz.com",
+				Calendar.getInstance(), null, null);
 		user.encryptPassword();
 		user.addUserRole(userRole);
 		spiess.setFlat(testFlat);
@@ -267,6 +270,27 @@ public class SecurityController {
 		return listUsers(model);
 	}
 
+	@RequestMapping("/download")
+	public void download(@RequestParam("documentId") int documentId, HttpServletResponse response) {
+
+		Optional<Image> iamgeOpt = imageDao.findById(documentId);
+		if (!iamgeOpt.isPresent())
+			throw new IllegalArgumentException("No Image with id " + documentId);
+
+		Image img = iamgeOpt.get();
+
+		try {
+			response.setHeader("Content-Disposition", "inline;filename=\"" + img.getFilename() + "\"");
+			OutputStream out = response.getOutputStream();
+			// application/octet-stream
+			response.setContentType(img.getContentType());
+			out.write(img.getImg());
+			out.flush();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+
 	@Secured({ "ROLE_USER" })
 	@RequestMapping(value = { "showUserProfile" })
 	public String showProfile(Model model, Authentication authentication) {
@@ -302,15 +326,11 @@ public class SecurityController {
 
 		return listUsers(model);
 	}
-	
-	
-	
+
 	@RequestMapping(value = "/test")
 	public String test() {
 		return "test";
 	}
-	
-	
 
 	@RequestMapping(value = "/about")
 	public String about(Model model) {
@@ -325,7 +345,4 @@ public class SecurityController {
 
 	}
 
-	
-	
-	
 }
