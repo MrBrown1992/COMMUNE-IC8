@@ -88,7 +88,8 @@
 
 								<select class="form-control" name="flat" id="flat">
 									
-									<option th:each="flat : ${flats}" th:value="${flat}"
+									<option th:each="flat : ${flats}" th:value="${flat.id}"
+								
 										th:text="${flat}"></option>
 								</select>
 
@@ -104,16 +105,8 @@
 
 							</div>
 						</div>
-
-
-
-
-
-
-
-
-						<!--
-						<!-- --------------  dayOfBirth ---------------- 
+	
+						<!-- --------------  dayOfBirth ---------------- -->
 						<div class="form-group">
 							<label class="col-md-2 control-label">Date</label>
 							<div class="col-md-10">
