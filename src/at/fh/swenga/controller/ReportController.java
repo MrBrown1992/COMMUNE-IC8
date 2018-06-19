@@ -24,12 +24,7 @@ public class ReportController {
 	GroceryDao groceryDao;
 
 	@RequestMapping(value = { "/report" })
-	public String report(Model model, @RequestParam(required = false) String excel,
-			@RequestParam(required = false) String pdf, @RequestParam(required = false) String mail
-	/*
-	 * @RequestParam(name = "grocier_id ", required = false) List<Integer>
-	 * employeeIds
-	 */) {
+	public String report(Model model) {
 
 		/*
 		 * User didn't select any employee ? -> go back to list if
@@ -45,21 +40,10 @@ public class ReportController {
 		model.addAttribute("groceries", groceries);
 
 		// Which submit button was pressed? -> call the right report view
-		if (StringUtils.isNoneEmpty(excel)) {
-			return "excelReport";
-		} else if (StringUtils.isNoneEmpty(pdf)) {
-			// return "pdfReport";
+		
 			return "pdfReport";
-		} else if (StringUtils.isNoneEmpty(mail)) {
-			// sendMail(groceries);
-			model.addAttribute("errorMessage", "Mail sent");
-			return "forward:/index";
 		}
-
-		else {
-			return "forward:/index";
-		}
-	}
+	
 
 	@ExceptionHandler(Exception.class)
 	public String handleAllException(Exception ex) {

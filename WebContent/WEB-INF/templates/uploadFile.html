@@ -4,7 +4,7 @@
 	xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
 <head>
 <div th:replace="~{includes/bootstrap :: bootstrapMeta}" />
-<title>Employee Manager</title>
+<title> COMMUNE-IC8</title>
 <div th:replace="~{includes/bootstrap :: bootstrapCSS}" />
 </head>
 <body>
@@ -12,7 +12,7 @@
 
 		<div class="row">
 			<div class="col-md-8 col-md-offset-2">
-				<form class="form-horizontal" enctype="multipart/form-data" method="post" action="upload">
+				<form class="form-horizontal" enctype="multipart/form-data" method="post" th:action="@{/upload(${_csrf.parameterName}=${_csrf.token})}">
 					<fieldset>
 						<legend th:text="'Upload Image for user ' + ${firstname} + ' ' + ${lastname}"></legend>
 

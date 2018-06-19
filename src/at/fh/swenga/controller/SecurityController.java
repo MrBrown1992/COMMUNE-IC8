@@ -1,9 +1,12 @@
 package at.fh.swenga.controller;
 
+import java.util.Date;
 import java.util.List;
+import java.util.Optional;
 
 import javax.validation.Valid;
 
+import org.apache.commons.codec.binary.Base64;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.context.annotation.ScopedProxyMode;
@@ -18,10 +21,13 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
 
+import at.fh.swenga.dao.ImageDao;
 import at.fh.swenga.dao.UserDao;
 import at.fh.swenga.dao.UserRoleDao;
 import at.fh.swenga.model.Flat;
+import at.fh.swenga.model.Image;
 import at.fh.swenga.model.User;
 import at.fh.swenga.model.UserRole;
 @Controller
@@ -34,7 +40,8 @@ public class SecurityController {
 	@Autowired
 	UserRoleDao userRoleDao;
 
-	/// UserRole userRole;
+	@Autowired 
+	ImageDao imageDao;
 	
 	
 	
@@ -73,7 +80,7 @@ public class SecurityController {
 		
 		
 		// User admin = new User("admin", "password", true);
-		User spiess = new User("spiess", "password", true, "nikolaus", "spiess", 0, "testmail@mimimi.com", null, null);
+		User spiess = new User("spiess", "password", true, "nikolaus", "spiess", 0316666666, "testmail@mimimi.com", null, null);
 		spiess.encryptPassword();
 		spiess.addUserRole(userRole);
 		spiess.addUserRole(adminRole);
@@ -182,7 +189,85 @@ public class SecurityController {
 
 
 		return "uploadFile";
+	
 	}
+	@RequestMapping(value = "/upload", method = RequestMethod.POST)
+	public String uploadDocument(Model model, @RequestParam("id") String id1,
+			@RequestParam("myFile") MultipartFile file) {
+
+		
+		int id = Integer.parseInt(id1);
+		try {
+
+			Optional<User> userOpt = userDao.findById(id);
+			if (!userOpt.isPresent())
+				throw new IllegalArgumentException("No employee with id " + id);
+
+			User user = userOpt.get();
+
+			// Already a document available -> delete it
+			if (user.getUserimage() != null) {
+				imageDao.delete(user.getUserimage());
+				// Don't forget to remove the relationship too
+				user.setUserimage(null);
+			}
+
+			// Create a new document and set all available infos
+
+			Image image = new Image();	
+			image.setImg(file.getBytes());
+			image.setFilename(file.getOriginalFilename());
+			image.setAttacheduser(user);
+			user.setUserimage(image);
+			userDao.save(user);
+		} catch (Exception e) {
+			model.addAttribute("errorMessage", "Error:" + e.getMessage());
+		}
+
+		return listUsers(model);
+	}
+	
+	
+	//@Secured({ "ROLE_USER" })
+	@RequestMapping(value = { "showProfile" })
+	public String showProfile(Model model, Authentication authentication) {
+
+		User user = userDao.findFirstByUsername(authentication.getName());
+
+		if (user != null && user.isEnabled()) {
+
+			model.addAttribute("user", user);
+			if (user.getUserimage() != null) {
+
+				Optional<Image> imageOpt = imageDao.findById(user.getUserimage().getId());
+				Image img = imageOpt.get();
+				byte[] profilePicture = img.getImg();
+
+				StringBuilder sb = new StringBuilder();
+				sb.append("data:image/jpeg;base64,");
+				sb.append(Base64.encodeBase64String(profilePicture));
+				String image = sb.toString();
+
+				model.addAttribute("image", image);
+			}
+		} else {
+			model.addAttribute("errorMessage", "Something went wrong!");
+			return "login";
+		}
+		return "showProfile"; // <-- pofil anzeigen :) 
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	
 	@RequestMapping(value = "/deleteUser")
 	public String deleteUser(Model model, @RequestParam int id) {
@@ -190,6 +275,10 @@ public class SecurityController {
 
 		return listUsers(model);
 	}
+	
+	
+	
+	
 	
 	
 	
