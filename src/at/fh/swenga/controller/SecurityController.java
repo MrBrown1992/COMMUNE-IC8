@@ -32,8 +32,8 @@ import at.fh.swenga.dao.FlatDao;
 import at.fh.swenga.dao.ImageDao;
 import at.fh.swenga.dao.UserDao;
 import at.fh.swenga.dao.UserRoleDao;
+
 import at.fh.swenga.model.Flat;
-import at.fh.swenga.model.Grocery;
 import at.fh.swenga.model.Image;
 import at.fh.swenga.model.User;
 import at.fh.swenga.model.UserRole;
@@ -117,7 +117,6 @@ public class SecurityController {
 			@RequestParam(value = "Admin", required = false) boolean isAdmin, @RequestParam(value = "flat") int flat_id,
 			Authentication authentication, Model model, BindingResult bindingResult) throws ParseException {
 
-		// Any errors? -> Create a String out of all errors and return to the page
 		if (errorsDetected(model, bindingResult)) {
 			return ("/index");
 		}
@@ -152,11 +151,10 @@ public class SecurityController {
 		model.addAttribute("flats", flatDao.findAll());
 		return "editUser";
 	}
-	
+
 	@PostMapping("/changeUser")
-	public String changeUser(Model model,@RequestParam(value = "id") int id,			
-			@Valid User changedUser, Authentication authentication,
-			BindingResult bindingResult) {
+	public String changeUser(Model model, @RequestParam(value = "id") int id, @Valid User changedUser,
+			Authentication authentication, BindingResult bindingResult) {
 
 		if (errorsDetected(model, bindingResult)) {
 			return listUsers(model);
@@ -173,8 +171,6 @@ public class SecurityController {
 			user.setFlat(changedUser.getFlat());
 			user.setUserRoles(changedUser.getUserRoles());
 			user.setBirthdate(changedUser.getBirthdate());
-			
-			
 
 			userDao.save(user);
 
@@ -184,24 +180,21 @@ public class SecurityController {
 			return listUsers(model);
 		}
 	}
-	
+
 	@GetMapping("/changeUser")
-	public String changeUser(@RequestParam(value = "id") int id ,Model model ,Authentication authentication ) {
-		
-		
+	public String changeUser(@RequestParam(value = "id") int id, Model model, Authentication authentication) {
+
 		User user = userDao.findFirstByid(id);
-		
-		if(user != null ) {
-			
-			model.addAttribute("user",user);
-			return "editUser"; 
+
+		if (user != null) {
+
+			model.addAttribute("user", user);
+			return "editUser";
 		}
-		
+
 		model.addAttribute("warningMessage", "User not found!");
 		return listUsers(model);
 	}
-	
-	
 
 	@RequestMapping(value = { "/listUsers" })
 	public String listUsers(Model model) {
@@ -255,7 +248,7 @@ public class SecurityController {
 			// Already a document available -> delete it
 			if (user.getUserimage() != null) {
 				imageDao.delete(user.getUserimage());
-				// Don't forget to remove the relationship too
+				// Don't forget to remove the relationship
 				user.setUserimage(null);
 			}
 
@@ -274,7 +267,7 @@ public class SecurityController {
 		return listUsers(model);
 	}
 
-	 @Secured({ "ROLE_USER" })
+	@Secured({ "ROLE_USER" })
 	@RequestMapping(value = { "showUserProfile" })
 	public String showProfile(Model model, Authentication authentication) {
 
@@ -300,7 +293,7 @@ public class SecurityController {
 			model.addAttribute("errorMessage", "Something went wrong!");
 			return "login";
 		}
-		return "showUserProfile"; // <-- pofil anzeigen :)
+		return "showUserProfile"; // <-- profil anzeigen :)
 	}
 
 	@RequestMapping(value = "/deleteUser")
@@ -309,8 +302,8 @@ public class SecurityController {
 
 		return listUsers(model);
 	}
-	
-	@RequestMapping(value="/about")
+
+	@RequestMapping(value = "/about")
 	public String about(Model model) {
 		return "about";
 	}

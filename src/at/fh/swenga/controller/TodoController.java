@@ -31,7 +31,6 @@ import at.fh.swenga.model.Todo;
 import at.fh.swenga.model.User;
 import at.fh.swenga.model.UserRole;
 
-
 @Controller
 @Scope(proxyMode = ScopedProxyMode.TARGET_CLASS, value = "session")
 public class TodoController {
@@ -40,18 +39,13 @@ public class TodoController {
 	TodoDao todoDao;
 
 	private List<String> categories = new ArrayList<String>();
-	
+
 	public TodoController() {
 
 		// TODO Auto-generated constructor stub
 	}
 
-	private PageRequest generatePageRequest(int pageNr) {
-		return PageRequest.of(pageNr, 6);
-	}
-
 	private boolean errorsDetected(Model model, BindingResult bindingResult) {
-		// Any errors? -> Create a String out of all errors and return to the page
 		if (bindingResult.hasErrors()) {
 			String errorMessage = "";
 			for (FieldError fieldError : bindingResult.getFieldErrors()) {
@@ -63,27 +57,21 @@ public class TodoController {
 		return false;
 	}
 
-	
-	
-	
-	@RequestMapping(value = {"listTodos"})
+	@RequestMapping(value = { "listTodos" })
 	public String listTodos(Model model) {
-		
 
 		List<Todo> todos = todoDao.findAll();
 
-		model.addAttribute("todos",todos);
+		model.addAttribute("todos", todos);
 		return "listTodo";
 	}
 
-	
-	@RequestMapping(value="/addTodo") 
-	public String addTodo(Model model, @Valid Todo newTodo,
-			@RequestParam(value = "todoName") String todoName,
-			@ModelAttribute(value = "todoCategory") String todoCategory, @RequestParam(value = "todoDate") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) Date todoDate, Authentication authentication,
-			BindingResult bindingResult) {
+	@RequestMapping(value = "/addTodo")
+	public String addTodo(Model model, @Valid Todo newTodo, @RequestParam(value = "todoName") String todoName,
+			@ModelAttribute(value = "todoCategory") String todoCategory,
+			@RequestParam(value = "todoDate") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) Date todoDate,
+			Authentication authentication, BindingResult bindingResult) {
 
-		
 		// Any errors? -> Create a String out of all errors and return to the page
 		if (errorsDetected(model, bindingResult)) {
 			return listTodos(model);
@@ -97,12 +85,10 @@ public class TodoController {
 		return listTodos(model);
 	}
 
-	
-	
 	@RequestMapping(value = { "/editTodo" })
 	public String editTodo(Model model) {
-		
-		if(categories.isEmpty()) {
+
+		if (categories.isEmpty()) {
 			categories = new ArrayList<String>();
 			categories.add("Appointment");
 			categories.add("Cleaning");
@@ -110,18 +96,16 @@ public class TodoController {
 			categories.add("Party");
 			categories.add("Other");
 		}
-		model.addAttribute("categories" ,categories);
-		
+		model.addAttribute("categories", categories);
+
 		return "editTodo";
 	}
-	
-	
+
 	@PostMapping("/changeTodo")
-	public String changeTodo(Model model,	@RequestParam(value = "todoName") String todoName,
+	public String changeTodo(Model model, @RequestParam(value = "todoName") String todoName,
 			@RequestParam(value = "category") String category, @RequestParam(value = "date") Date date,
-			
-			@Valid Todo changedTodo, Authentication authentication,
-			BindingResult bindingResult) {
+
+			@Valid Todo changedTodo, Authentication authentication, BindingResult bindingResult) {
 
 		// Any errors? -> Create a String out of all errors and return to the page
 		if (errorsDetected(model, bindingResult)) {
@@ -131,8 +115,8 @@ public class TodoController {
 		Todo todo = todoDao.findFirstByid(changedTodo.getId());
 		if (todo != null) {
 			todo.setName(todoName);
-			
-			todo.setCategory(category); // default value setzen .. 
+
+			todo.setCategory(category); // default value setzen ..
 			todo.setDate(date);
 
 			todoDao.save(todo);
@@ -143,32 +127,29 @@ public class TodoController {
 			return listTodos(model);
 		}
 	}
-	
+
 	@GetMapping("/changeTodo")
-	public String changeTodo(@RequestParam(value = "id") int id ,Model model ,Authentication authentication ) {
-		
-		
+	public String changeTodo(@RequestParam(value = "id") int id, Model model, Authentication authentication) {
+
 		Todo todo = todoDao.findFirstByid(id);
-		
-		if(todo != null ) {
-			
-			model.addAttribute("todo",todo);
-			return "editTodo"; 
+
+		if (todo != null) {
+
+			model.addAttribute("todo", todo);
+			return "editTodo";
 		}
-		
+
 		model.addAttribute("warningMessage", "Todo not found!");
 		return listTodos(model);
 	}
-	
-	
+
 	@RequestMapping("/deleteTodo")
 	public String deleteTodo(Model model, @RequestParam int id) {
 		todoDao.deleteById(id);
 
 		return listTodos(model);
 	}
-	
-	
+
 	@ExceptionHandler(Exception.class)
 	public String handleAllException(Exception ex) {
 		ex.printStackTrace();

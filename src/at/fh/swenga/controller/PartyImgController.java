@@ -46,34 +46,31 @@ public class PartyImgController {
 			picsAsString.add(image);
 
 		}
-		
-		model.addAttribute("partypics",picsAsString);
-		
+
+		model.addAttribute("partypics", picsAsString);
+
 		return "listPartyPics";
 	}
+
 	@GetMapping(value = { "uploadPartyPic" })
-	public String uploadPic(Model model)
-	{
+	public String uploadPic(Model model) {
 		return "uploadPartyPic";
 	}
-	
+
 	@PostMapping(value = { "uploadPartyPic" })
-	public String uploadPartyPic(Model model ,@RequestParam("myFile") MultipartFile file)
-	{
-		
-			try {
+	public String uploadPartyPic(Model model, @RequestParam("myFile") MultipartFile file) {
+
+		try {
 			PartyImg image = new PartyImg();
 			image.setImg(file.getBytes());
 			image.setFilename(file.getOriginalFilename());
 			image.setUploadDate(Calendar.getInstance());
-			partyImgDao.save(image);}
-			catch (Exception e) {
-				model.addAttribute("errorMessage", "Error:" + e.getMessage());
-			}
-			
-	
-		
+			partyImgDao.save(image);
+		} catch (Exception e) {
+			model.addAttribute("errorMessage", "Error:" + e.getMessage());
+		}
+
 		return showPartyImg(model);
 	}
-	
+
 }

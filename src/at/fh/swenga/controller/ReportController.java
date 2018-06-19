@@ -20,11 +20,11 @@ import at.fh.swenga.model.Todo;
 
 @Controller
 @Scope(proxyMode = ScopedProxyMode.TARGET_CLASS, value = "session")
-public class ReportController{
+public class ReportController {
 
 	@Autowired
 	GroceryDao groceryDao;
-	
+
 	@Autowired
 	CommentDao commentDao;
 
@@ -32,33 +32,28 @@ public class ReportController{
 	TodoDao todoDao;
 
 	@RequestMapping(value = { "/groceryPdf" })
-	public String groceryPdf(Model model,
-			@RequestParam(required = false) String pdf) {
-	
+	public String groceryPdf(Model model, @RequestParam(required = false) String pdf) {
+
 		List<Grocery> groceries = groceryDao.findAll();
 
-		// Store the employees in the model, so the reports can access them
+		// Store the groceries in the model, so the reports can access them
 		model.addAttribute("groceries", groceries);
 
-		// Which submit button was pressed? -> call the right report view
 		if (StringUtils.isNoneEmpty(pdf)) {
-			return "groceryPdfReport";}
-		else {
+			return "groceryPdfReport";
+		} else {
 			return "forward:/listGrocery";
 		}
 	}
-	
-	
+
 	@RequestMapping(value = { "/groceryExcel" })
 	public String excel(Model model, @RequestParam(required = false) String excel) {
-	
+
 		// The method findAll() can do this
 		List<Grocery> groceries = groceryDao.findAll();
 
-		// Store the employees in the model, so the reports can access them
+		// Store the groceries in the model, so the reports can access them
 		model.addAttribute("groceries", groceries);
-
-		// Which submit button was pressed? -> call the right report view
 
 		if (StringUtils.isNoneEmpty(excel)) {
 			return "groceryExcelReport";
@@ -69,35 +64,29 @@ public class ReportController{
 		}
 	}
 
-		
 	@RequestMapping(value = { "/commentsPdf" })
-	public String commentsPdf(Model model,
-			@RequestParam(required = false) String pdf) {
-	
+	public String commentsPdf(Model model, @RequestParam(required = false) String pdf) {
+
 		List<Comment> comments = commentDao.findAll();
 
-		// Store the employees in the model, so the reports can access them
+		// Store the comments in the model, so the reports can access them
 		model.addAttribute("comments", comments);
 
-		// Which submit button was pressed? -> call the right report view
 		if (StringUtils.isNoneEmpty(pdf)) {
-			return "commentsPdfReport";}
-		else {
+			return "commentsPdfReport";
+		} else {
 			return "forward:/listComments";
 		}
 	}
 
-	
 	@RequestMapping(value = { "/commentsExcel" })
 	public String commentsExcel(Model model, @RequestParam(required = false) String excel) {
-	
+
 		// The method findAll() can do this
 		List<Comment> comments = commentDao.findAll();
 
-		// Store the employees in the model, so the reports can access them
+		// Store the comments in the model, so the reports can access them
 		model.addAttribute("comments", comments);
-
-		// Which submit button was pressed? -> call the right report view
 
 		if (StringUtils.isNoneEmpty(excel)) {
 			return "commentsExcelReport";
@@ -107,38 +96,30 @@ public class ReportController{
 			return "forward:listComments";
 		}
 	}
-	
 
-	
-	
 	@RequestMapping(value = { "/todoPdf" })
-	public String todoPdf(Model model,
-			@RequestParam(required = false) String pdf) {
-	
+	public String todoPdf(Model model, @RequestParam(required = false) String pdf) {
+
 		List<Todo> todos = todoDao.findAll();
 
-		// Store the employees in the model, so the reports can access them
+		// Store the todos in the model, so the reports can access them
 		model.addAttribute("todos", todos);
 
-		// Which submit button was pressed? -> call the right report view
 		if (StringUtils.isNoneEmpty(pdf)) {
-			return "todoPdfReport";}
-		else {
+			return "todoPdfReport";
+		} else {
 			return "forward:/listTodo";
 		}
 	}
 
-	
 	@RequestMapping(value = { "/todoExcel" })
 	public String todoExcel(Model model, @RequestParam(required = false) String excel) {
-	
+
 		// The method findAll() can do this
 		List<Todo> todos = todoDao.findAll();
 
-		// Store the employees in the model, so the reports can access them
+		// Store the todos in the model, so the reports can access them
 		model.addAttribute("todos", todos);
-
-		// Which submit button was pressed? -> call the right report view
 
 		if (StringUtils.isNoneEmpty(excel)) {
 			return "todoExcelReport";
@@ -148,13 +129,5 @@ public class ReportController{
 			return "forward:listTodo";
 		}
 	}
-	
-	
-	
-	
-	
-	
-	
-	
 
 }
