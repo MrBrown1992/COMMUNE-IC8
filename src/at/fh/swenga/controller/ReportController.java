@@ -13,8 +13,10 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import at.fh.swenga.dao.CommentDao;
 import at.fh.swenga.dao.GroceryDao;
+import at.fh.swenga.dao.TodoDao;
 import at.fh.swenga.model.Comment;
 import at.fh.swenga.model.Grocery;
+import at.fh.swenga.model.Todo;
 
 @Controller
 @Scope(proxyMode = ScopedProxyMode.TARGET_CLASS, value = "session")
@@ -26,6 +28,8 @@ public class ReportController{
 	@Autowired
 	CommentDao commentDao;
 
+	@Autowired
+	TodoDao todoDao;
 
 	@RequestMapping(value = { "/groceryPdf" })
 	public String groceryPdf(Model model,
@@ -103,6 +107,54 @@ public class ReportController{
 			return "forward:listComments";
 		}
 	}
+	
+
+	
+	
+	@RequestMapping(value = { "/todoPdf" })
+	public String todoPdf(Model model,
+			@RequestParam(required = false) String pdf) {
+	
+		List<Todo> todos = todoDao.findAll();
+
+		// Store the employees in the model, so the reports can access them
+		model.addAttribute("todos", todos);
+
+		// Which submit button was pressed? -> call the right report view
+		if (StringUtils.isNoneEmpty(pdf)) {
+			return "todoPdfReport";}
+		else {
+			return "forward:/listTodo";
+		}
+	}
+
+	
+	@RequestMapping(value = { "/todoExcel" })
+	public String todoExcel(Model model, @RequestParam(required = false) String excel) {
+	
+		// The method findAll() can do this
+		List<Todo> todos = todoDao.findAll();
+
+		// Store the employees in the model, so the reports can access them
+		model.addAttribute("todos", todos);
+
+		// Which submit button was pressed? -> call the right report view
+
+		if (StringUtils.isNoneEmpty(excel)) {
+			return "todoExcelReport";
+		}
+
+		else {
+			return "forward:listTodo";
+		}
+	}
+	
+	
+	
+	
+	
+	
+	
 	
 
 }

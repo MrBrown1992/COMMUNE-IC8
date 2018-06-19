@@ -43,12 +43,18 @@
 
 
 		<!--  Edit Todo----------------------------------------------------------- -->
-		<div class="col-md-2 col-md-offset-1">
+		<div class="col-md-3 col-md-offset-1">
 
 			<form sec:authorize="hasRole('USER')" th:action="@{/editTodo}"
-				method="post">
+				method="post" style="float: left;">
 				<input class="btn btn-default" type="submit" value="Add Todo" />			
-				<input class="btn btn-default" type="submit" value="PDF" >
+			</form>
+			<form th:action="@{/todoPdf}" method="post" style="float: left;">
+				<input class="btn btn-default" type="submit" name ="pdf" value="PDF">
+			</form>
+			<form th:action="@{/todoExcel}" method="post" style="float: left;">
+				<input class="btn btn-default" type="submit" name ="excel" value="Excel">
+
 			</form>
 		</div>
 		<!--  Edit Todo----------------------------------------------------------- -->
