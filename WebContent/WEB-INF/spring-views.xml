@@ -7,9 +7,9 @@
 	
 	
 	
-	 <!-- 
-	<bean id="excelReport" class="at.fh.swenga.jpa.report.ExcelEmployeeReportView" />
-	 -->
+	  
+	<bean id="excelReport" class="at.fh.swenga.exportexcel.ExcelGroceryReportView" />
+	 
 	<!-- NEW ITEXT LIBRARY 
 	<bean id="pdfReportV5" class="at.fh.swenga.jpa.report.pdf.itext5.PdfEmployeeReportViewItext5" />
   -->
