@@ -38,13 +38,7 @@ public class FlatController {
 		// TODO Auto-generated constructor stub
 	}
 
-	
-	
-	public  static Flat testFlat = new Flat("Admin WG");
-	
-	
-	
-	
+
 	private boolean errorsDetected(Model model, BindingResult bindingResult) {
 		// Any errors? -> Create a String out of all errors and return to the page
 		if (bindingResult.hasErrors()) {

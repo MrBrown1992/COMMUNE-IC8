@@ -318,4 +318,12 @@ public class User implements java.io.Serializable {
 		password = passwordEncoder.encode(password);
 	}
 
+	/* (non-Javadoc)
+	 * @see java.lang.Object#toString()
+	 */
+	@Override
+	public String toString() {
+		return firstname  +" "+ lastname ;
+	}
+
 }

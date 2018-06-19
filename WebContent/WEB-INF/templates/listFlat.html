@@ -77,7 +77,10 @@
 					<tr th:each="flat : ${flats}">
 						<td th:text="${flat.id}"></td>
 						<td th:text="${flat.name}"></td>
-						<td th:text="${flat.getUsers()}"></td>
+						<td >
+						<ul> 
+						<li th:each=" user: ${flat.getUsers()}" th:text= "${user.firstname} + ' '+ ${user.lastname} "></li>
+						</ul></td>
 
 						<td sec:authorize="hasRole('ADMIN')"><a
 							th:href="@{/changeFlat(id=${flat.id})}"

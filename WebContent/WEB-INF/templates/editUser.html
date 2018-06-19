@@ -80,32 +80,30 @@
 
 						<!-- Flat -->
 
-					
+
 						<div class="form-group">
-							<label for="flat" class="col-md-2 control-label">
-								Flat </label>
+							<label for="flat" class="col-md-2 control-label"> Flat </label>
 							<div class="col-md-10">
 
 								<select class="form-control" name="flat" id="flat">
-									
+
 									<option th:each="flat : ${flats}" th:value="${flat.id}"
-								
 										th:text="${flat}"></option>
 								</select>
 
 							</div>
 						</div>
-		
+
 
 						<!-- UserRole  -->
-						<div>
+						<div class="form-group" >
 							<label class="col-md-2 control-label"> User is an Admin </label>
 							<div class="col-md-10">
 								<input type="checkbox" name="Admin">
 
 							</div>
 						</div>
-	
+
 						<!-- --------------  dayOfBirth ---------------- -->
 						<div class="form-group">
 							<label class="col-md-2 control-label">Date</label>
@@ -116,7 +114,7 @@
 
 							</div>
 						</div>
--->
+
 						<!-- --------------  buttons ---------------- -->
 						<div class="form-group">
 							<div class="col-md-10 col-md-offset-2">
