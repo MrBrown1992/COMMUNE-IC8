@@ -68,7 +68,7 @@ public class ExcelGroceryReportView extends AbstractXlsxView{
 		cell2.setCellValue("Bought-State");
 		cell2.setCellStyle(style);
  
-		// create multiple rows with employee data
+		// create multiple rows with grocery data
 		int rowNum = 1;
 		for (Grocery grocery : groceries) {
 			// create the row data
