@@ -27,8 +27,8 @@
 						<div class="form-group">
 							<label class="col-md-2 control-label"> User name </label>
 							<div class="col-md-10">
-								<input class="form-control" type="text" name="userName"
-									th:value="${user} ? ${user.userName}">
+								<input class="form-control" type="text" name="username"
+									th:value="${user} ? ${user.username}">
 							</div>
 						</div>
 						<!-- --------------  MobileNumber ---------------- -->
@@ -45,7 +45,7 @@
 						<div class="form-group">
 							<label class="col-md-2 control-label"> First Name </label>
 							<div class="col-md-10">
-								<input class="form-control" type="text" name="firstName"
+								<input class="form-control" type="text" name="firstname"
 									th:value="${user} ? ${user.firstname}">
 							</div>
 						</div>
@@ -54,7 +54,7 @@
 						<div class="form-group">
 							<label class="col-md-2 control-label"> Last Name </label>
 							<div class="col-md-10">
-								<input class="form-control" type="text" name="lastName"
+								<input class="form-control" type="text" name="lastname"
 									th:value="${user} ? ${user.lastname}">
 							</div>
 
@@ -109,8 +109,8 @@
 							<label class="col-md-2 control-label">Date</label>
 							<div class="col-md-10">
 								<input class="form_datetime" placeholder="day of birth"
-									type="text" readonly name="dob"
-									th:value="${user} ? ${#dates.format(user.dob, 'dd.MM.yyyy')}">
+									type="text" readonly name="birthdate"
+									th:value="${user} ? ${#dates.format(user.birthdate, 'dd.MM.yyyy')}">
 
 							</div>
 						</div>

@@ -21,6 +21,8 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.FieldError;
 import org.springframework.web.bind.annotation.ExceptionHandler;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -31,6 +33,7 @@ import at.fh.swenga.dao.ImageDao;
 import at.fh.swenga.dao.UserDao;
 import at.fh.swenga.dao.UserRoleDao;
 import at.fh.swenga.model.Flat;
+import at.fh.swenga.model.Grocery;
 import at.fh.swenga.model.Image;
 import at.fh.swenga.model.User;
 import at.fh.swenga.model.UserRole;
@@ -149,6 +152,56 @@ public class SecurityController {
 		model.addAttribute("flats", flatDao.findAll());
 		return "editUser";
 	}
+	
+	@PostMapping("/changeUser")
+	public String changeUser(Model model,@RequestParam(value = "id") int id,			
+			@Valid User changedUser, Authentication authentication,
+			BindingResult bindingResult) {
+
+		if (errorsDetected(model, bindingResult)) {
+			return listUsers(model);
+		}
+
+		User user = userDao.findFirstByid(changedUser.getId());
+		if (user != null) {
+			user.setUsername(changedUser.getUsername());
+			user.setPassword(changedUser.getPassword());
+			user.setFirstname(changedUser.getFirstname());
+			user.setLastname(changedUser.getLastname());
+			user.setMobilenumber(changedUser.getMobilenumber());
+			user.setEmail(changedUser.getEmail());
+			user.setFlat(changedUser.getFlat());
+			user.setUserRoles(changedUser.getUserRoles());
+			user.setBirthdate(changedUser.getBirthdate());
+			
+			
+
+			userDao.save(user);
+
+			return listUsers(model);
+		} else {
+			model.addAttribute("warningMessage", "User not found!");
+			return listUsers(model);
+		}
+	}
+	
+	@GetMapping("/changeUser")
+	public String changeUser(@RequestParam(value = "id") int id ,Model model ,Authentication authentication ) {
+		
+		
+		User user = userDao.findFirstByid(id);
+		
+		if(user != null ) {
+			
+			model.addAttribute("user",user);
+			return "editUser"; 
+		}
+		
+		model.addAttribute("warningMessage", "User not found!");
+		return listUsers(model);
+	}
+	
+	
 
 	@RequestMapping(value = { "/listUsers" })
 	public String listUsers(Model model) {
@@ -255,6 +308,11 @@ public class SecurityController {
 		userDao.deleteById(id);
 
 		return listUsers(model);
+	}
+	
+	@RequestMapping(value="/about")
+	public String about(Model model) {
+		return "about";
 	}
 
 	@ExceptionHandler(Exception.class)
