@@ -9,36 +9,33 @@
 </head>
 
 <body class="app sidebar-show aside-menu-show">
-  <header class="app-header" >
-  
-<!---------------------------HEADER CONTENT --------------------------------------->
-        <div th:replace="~{includes/searchNav :: search}"></div>
+	<header class="app-header">
 
-    
-  </header>
-<!---------------------------HEADER CONTENT --------------------------------------->
-  
-  
-  
-  
-<!---------------------------SIDEBAR CONTENT --------------------------------------->
-  
-  <div class="app-body">
-    <div class="sidebar">
-      <!-- Sidebar content here -->
+		<!---------------------------HEADER CONTENT --------------------------------------->
+		<div th:replace="~{includes/searchNav :: search}"></div>
 
-     <div th:include="~{includes/sidebar :: sidebar}"></div>
-     
-    </div>
-<!---------------------------SIDEBAR CONTENT --------------------------------------->
-    
-    
 
- <!---------------------------MAIN CONTENT --------------------------------------->
-    <main class="main">
-      <!-- Main content here -->
-      
-      <!--  Error message ----------------------------------------------------------- -->
+	</header>
+	<!---------------------------HEADER CONTENT --------------------------------------->
+
+
+
+
+	<!---------------------------SIDEBAR CONTENT --------------------------------------->
+
+	<div class="app-body">
+		<div class="sidebar">
+			<!-- Sidebar content here -->
+
+			<div th:include="~{includes/sidebar :: sidebar}"></div>
+
+		</div>
+		<!---------------------------SIDEBAR CONTENT --------------------------------------->
+
+
+
+		<!---------------------------MAIN CONTENT --------------------------------------->
+		<main class="main"> <!-- Main content here --> <!--  Error message ----------------------------------------------------------- -->
 		<div th:unless="${errorMessage} == null" th:utext="${errorMessage}"
 			class="alert alert-danger" role="alert"></div>
 		<!--  Error message ----------------------------------------------------------- -->
@@ -56,17 +53,19 @@
 
 
 
-      	<div><h1 align="center">Flat</h1></div>
-      	
-      	
-      	<div>
-      		<table data-toggle="table" class="table table-striped">
+		<div>
+			<h1 align="center">Flat</h1>
+		</div>
+
+
+		<div>
+			<table data-toggle="table" class="table table-striped">
 
 				<thead>
 
 					<tr>
 						<th data-sortable="true">Flatname</th>
-						<th data-sortable="true">User</th>			
+						<th data-sortable="true">User</th>
 						<th sec:authorize="hasRole('ADMIN')">Actions</th>
 
 					</tr>
@@ -77,22 +76,23 @@
 
 					<tr th:each="flat : ${flats}">
 						<td th:text="${flat.name}"></td>
-						<td >
-						<ul> 
-						<li th:each=" user: ${flat.getUsers()}" th:text= "${user.firstname} + ' '+ ${user.lastname} "></li>
-						</ul></td>
-						
+						<td>
+							<ul>
+								<li th:each=" user: ${flat.getUsers()}"
+									th:text="${user.firstname} + ' '+ ${user.lastname} "></li>
+							</ul>
+						</td>
+
 
 						<!-- <td><a sec:authorize="hasRole('ADMIN')" th:href="@{/delete(id=${employee.id})}">Delete</a></td> -->
 						<td sec:authorize="hasRole('ADMIN')"><a
-							th:href="@{/changeFlat(id=${flat.id})}"
-							class="btn btn-xs btn-success"> <span
-								class="glyphicon glyphicon-edit" aria-hidden="true"></span> Edit
-						</a> <a th:href="@{/deleteFlat(id=${flat.id})}"
-							class="btn btn-xs btn-danger"> <span
-								class="glyphicon glyphicon-trash" aria-hidden="true"></span>
-								Delete
-						</a></td>
+							th:href="@{/changeFlat(id=${flat.id})}"><button type="button"
+									class="btn btn-xs btn-warning cui-wrench">
+									<span aria-hidden="true"></span> Edit
+								</button> </a> <a th:href="@{/deleteFlat(id=${flat.id})}"><button
+									type="button" class="btn btn-xs btn-danger cui-trash">
+									<span aria-hidden="true"></span> Delete
+								</button> </a></td>
 
 
 
@@ -101,44 +101,45 @@
 					<!--  list all items ----------------------------------------------------------- -->
 				</tbody>
 			</table>
-      	</div>
-      	
-    </main>
- <!---------------------------MAIN CONTENT --------------------------------------->
+		</div>
 
-    
-    
- <!---------------------------RIGHT-SIDEBAR --------------------------------------->
-    
-    <aside class="aside-menu">
-      <!-- Aside menu content here -->
-      <!-- -----------------Edit / PDF / Excel Buttons -------------------------- -->
-      	<div class="sidebar">
-		<nav class="sidebar-nav">
-		<ul class="nav">
-			<li class="nav-title">Options</li>
+		</main>
+		<!---------------------------MAIN CONTENT --------------------------------------->
 
-			<li sec:authorize="hasRole('USER')" class="nav-item"><a class="nav-link"
-				th:href="@{/editUser}"> <i
-					class="nav-icon cui-location-pin"></i> Create New Flat
-			</a></li>
-			
-			</ul></nav>
-     
-    </div>
-    
-    
-    
-    </aside>
-  </div>
- <!---------------------------RIGHT-SIDEBAR --------------------------------------->
 
-  
-  <!---------------------------FOOTER --------------------------------------->
- 
-    <!-- Footer content here -->
-    <div th:replace="~{includes/footer :: footer}"></div>
-  
-  	<div th:replace="~{includes/bootstrap :: bootstrapJS}" />
-  	
+
+		<!---------------------------RIGHT-SIDEBAR --------------------------------------->
+
+		<aside class="aside-menu">
+			<!-- Aside menu content here -->
+			<!-- -----------------Edit / PDF / Excel Buttons -------------------------- -->
+			<div class="sidebar">
+				<nav class="sidebar-nav">
+					<ul class="nav">
+						<li class="nav-title">Options</li>
+
+						<li sec:authorize="hasRole('ADMIN')" class="nav-item"><a
+							class="nav-link" th:href="@{/editFlat}"> <i
+								class="nav-icon cui-location-pin"></i> Create New Flat
+						</a></li>
+
+					</ul>
+				</nav>
+
+			</div>
+
+
+
+		</aside>
+	</div>
+	<!---------------------------RIGHT-SIDEBAR --------------------------------------->
+
+
+	<!---------------------------FOOTER --------------------------------------->
+
+	<!-- Footer content here -->
+	<div th:replace="~{includes/footer :: footer}"></div>
+
+	<div th:replace="~{includes/bootstrap :: bootstrapJS}" />
+
 </body>

@@ -83,7 +83,7 @@ public class FlatController {
 	}
 
 	@PostMapping(value = "changeFlat")
-	public String changeFlat(Model model, @RequestParam(value = "name") String name,
+	public String changeFlat(Model model, @RequestParam(value = "flatName") String flatName,
 
 			@Valid Flat changedFlat, Authentication authentication, BindingResult bindingResult) {
 
@@ -93,7 +93,7 @@ public class FlatController {
 
 		Flat flat = flatDao.findFirstByid(changedFlat.getId());
 		if (flat != null) {
-			flat.setName(name);
+			flat.setName(flatName);
 
 			flatDao.save(flat);
 
@@ -105,9 +105,9 @@ public class FlatController {
 	}
 	
 	@GetMapping("/changeFlat")
-	public String changeFlat( Model model, Authentication authentication, @RequestParam(value = "name")String name) {
+	public String changeFlat( Model model, Authentication authentication, @RequestParam(value = "flatName")String flatName) {
 
-		Flat flat = flatDao.findFirstByFlatName(name);
+		Flat flat = flatDao.findFirstByFlatName(flatName);
 
 		if (flat != null) {
 

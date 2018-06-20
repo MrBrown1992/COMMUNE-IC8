@@ -113,10 +113,10 @@ public class SecurityController {
 
 	@RequestMapping("/addNewUser")
 	@Transactional
-	public String addNewUser(@Valid User newUser, @RequestParam(value = "userName") String userName,
-			@RequestParam(value = "firstName") String firstName, @RequestParam(value = "lastName") String lastName,
+	public String addNewUser(@Valid User newUser, @RequestParam(value = "username") String username,
+			@RequestParam(value = "firstname") String firstname, @RequestParam(value = "lastname") String lastname,
 			@RequestParam(value = "password") String password, @RequestParam(value = "email") String email,
-			@RequestParam(value = "dob") String dobString, @RequestParam(value = "mobilenumber") int mobilenumber,
+			@RequestParam(value = "birthdate") String dobString, @RequestParam(value = "mobilenumber") int mobilenumber,
 			@RequestParam(value = "Admin", required = false) boolean isAdmin, @RequestParam(value = "flat") int flat_id,
 			Authentication authentication, Model model, BindingResult bindingResult) throws ParseException {
 
@@ -124,9 +124,9 @@ public class SecurityController {
 			return ("/index");
 		}
 
-		newUser.setFirstname(firstName);
-		newUser.setLastname(lastName);
-		newUser.setUsername(userName);
+		newUser.setFirstname(firstname);
+		newUser.setLastname(lastname);
+		newUser.setUsername(username);
 		newUser.setPassword(password);
 		newUser.encryptPassword();
 		newUser.setEnabled(true);
