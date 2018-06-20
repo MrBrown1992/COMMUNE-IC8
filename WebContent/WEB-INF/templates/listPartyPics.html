@@ -9,33 +9,11 @@
 </head>
 
 <body class="app sidebar-show aside-menu-show">
-	<header class="app-header navbar">
+	<header class="app-header">
 
 		<!---------------------------HEADER CONTENT --------------------------------------->
-		<div class="container-fluid">
+		     <div th:replace="~{includes/searchNav :: search}"></div>
 
-			<form>
-				<a style="font-size: 200%;" th:href="@{/}"> COMMUNE-IC8</a>
-			</form>
-
-
-			<!-- HTML form with search textbox and submit button-->
-			<form role="search" method="post" action="searchUsers">
-				<div class="input-group">
-					<input type="text" class="form-control" placeholder="Search for..."
-						name="searchString"> <span class="input-group-btn">
-						<button class="btn btn-default" type="submit">Go!</button>
-					</span>
-				</div>
-			</form>
-
-
-			<form th:action="@{/logout}" method="post">
-				<input class="btn btn-danger" type="submit" value="Sign Out" />
-			</form>
-
-
-		</div>
 
 	</header>
 	<!---------------------------HEADER CONTENT --------------------------------------->
@@ -72,16 +50,15 @@
 		<div th:unless="${message} == null" th:utext="${message}"
 			class="alert alert-success" role="warning"></div>
 		<!--   message ----------------------------------------------------------- -->
-		
+
 		<div>
-			<h1 align = "center">Party Pics</h1>
+			<h1 align="center">Party Pics</h1>
 		</div>
 
-  
+		
 		<div th:each="pic: ${partypics}">
 			<div>
-				<div class="card" style="width: 20rem;
-  				margin: 0 auto;">
+				<div class="card" style="width: 20rem; margin: 0 auto;">
 					<img class="card-img-top" th:src="${pic}" alt="Card image cap">
 					<div class="card-body">
 						<h5 class="card-title">Card title</h5>
@@ -94,21 +71,13 @@
 		</div>
  
 		
-		
-		
-		
-		
-		
-		
-		
-		
 		</main>
 		<!---------------------------MAIN CONTENT --------------------------------------->
 
 
 
 		<!---------------------------RIGHT-SIDEBAR --------------------------------------->
-		
+
 		<aside class="aside-menu-xl">
 			<!-- Aside menu content here -->
 			<!-- -----------------Edit / PDF / Excel Buttons -------------------------- -->
@@ -139,18 +108,18 @@
 
 			</div>
 		</aside>
-		
-		
+
+
 	</div>
 	<!---------------------------RIGHT-SIDEBAR --------------------------------------->
 
 
 	<!---------------------------FOOTER --------------------------------------->
 
-	<footer class="app-footer">
+	
 		<!-- Footer content here -->
-		<div th:include="~{includes/footer :: footer}"></div>
-	</footer>
+		<div th:replace="~{includes/footer :: footer}"></div>
+	
 
 	<div th:replace="~{includes/bootstrap :: bootstrapJS}" />
 

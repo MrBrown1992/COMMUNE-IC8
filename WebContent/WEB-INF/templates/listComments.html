@@ -9,35 +9,11 @@
 </head>
 
 <body class="app sidebar-show aside-menu-show">
-  <header class="app-header navbar" >
+  <header class="app-header" >
   
 <!---------------------------HEADER CONTENT --------------------------------------->
-    <div class="container-fluid">
+         <div th:replace="~{includes/searchNav :: search}"></div>
 
-			<form>
-				<a style="font-size:200%;" th:href="@{/}"> COMMUNE-IC8</a>		
-			</form>
-	
-
-		<!-- HTML form with search textbox and submit button-->
-		<form role="search" method="post"
-			action="searchUsers">
-			<div class="input-group">
-				<input type="text" class="form-control" placeholder="Search for..."
-					name="searchString"> <span class="input-group-btn">
-					<button class="btn btn-default" type="submit">Go!</button>
-				</span>
-			</div>
-		</form>
-		
-		
-		<form th:action="@{/logout}"
-			method="post">
-			<input class="btn btn-danger" type="submit" value="Sign Out" />
-		</form>	
-
-
-	</div>
     
   </header>
 <!---------------------------HEADER CONTENT --------------------------------------->
@@ -166,10 +142,10 @@
   
   <!---------------------------FOOTER --------------------------------------->
  
-  <footer class="app-footer">
+  
     <!-- Footer content here -->
-    <div th:include="~{includes/footer :: footer}"></div>
-  </footer>
+    <div th:replace="~{includes/footer :: footer}"></div>
+  
   
   	<div th:replace="~{includes/bootstrap :: bootstrapJS}" />
   	
