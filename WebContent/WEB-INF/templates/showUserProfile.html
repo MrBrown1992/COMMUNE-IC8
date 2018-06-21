@@ -29,17 +29,7 @@
 				<div class="card text-dark">
 					<div class="bg-success card-header">
 						<strong th:text="${user.username}"></strong>
-						<div class="card-header-actions">
-							<a
-								th:href="@{/editUserFromShowProfile(username=${user.username})}"
-								class="card-header-action btn-user"><i class="icon-user"></i></a>
-							<a
-								th:href="@{/changePasswordFromShowProfile(username=${user.username})}"
-								class="card-header-action btn-lock"><i class="icon-lock"></i></a>
-							<a th:href="@{/uploadProfilePicture(username=${user.username})}"
-								class="card-header-action btn-picture"><i
-								class="icon-picture"></i></a>
-						</div>
+						
 					</div>
 					<div class="card-body">
 						<div class="float-left">
