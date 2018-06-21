@@ -115,6 +115,8 @@ public class TodoController {
 		if (errorsDetected(model, bindingResult)) {
 			return listTodos(model);
 		}
+		
+		
 
 		Todo todo = todoDao.findFirstByid(changedTodo.getId());
 		if (todo != null) {
