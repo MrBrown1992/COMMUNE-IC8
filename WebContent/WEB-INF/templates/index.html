@@ -86,7 +86,7 @@
 	
 	<div class="card bg-dark mx-auto" >
 		
-		<img class="card-img-top" th:unless="${userimage} == null" th:src="${userimage}" >
+		<img class="img-thumbnail" th:unless="${image} == null" th:src="${image}" >
 			
 			<div class="card-body">
 				<h2 class="card-title" th:text="${'@' + user.getUsername()}"></h2>

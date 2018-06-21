@@ -210,7 +210,7 @@ public class SecurityController {
 		return "listUsers";
 	}
 
-	@RequestMapping(value = { "/" })
+	@RequestMapping(value = { "/"})
 	public String index(Model model, Authentication authentication) {
 		
 		String username = authentication.getName();
@@ -218,6 +218,25 @@ public class SecurityController {
 		String fullname = user.getFirstname() + " " + user.getLastname();
 		model.addAttribute("fullname", fullname);
 		model.addAttribute("user", user);
+		
+		if (user != null && user.isEnabled()) {
+
+			model.addAttribute("user", user);
+			if (user.getUserimage() != null) {
+
+				Optional<Image> imageOpt = imageDao.findById(user.getUserimage().getId());
+				Image img = imageOpt.get();
+				byte[] profilePicture = img.getImg();
+
+				StringBuilder sb = new StringBuilder();
+				sb.append("data:image/jpeg;base64,");
+				sb.append(Base64.encodeBase64String(profilePicture));
+				String image = sb.toString();
+
+				model.addAttribute("image", image);
+			}
+		} 
+	
 		return "index";
 	}
 	
@@ -349,9 +368,6 @@ public class SecurityController {
 	public String about(Model model) {
 		return "about";
 	}
-
-
-	
 	
 	
 	
