@@ -17,6 +17,11 @@ import javax.persistence.Version;
 @Table(name = "image")
 public class Image implements java.io.Serializable {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 5579904538345082224L;
+
 	@Id
 	@Column(name = "id")
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
