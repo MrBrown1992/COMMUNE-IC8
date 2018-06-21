@@ -4,6 +4,7 @@ import java.io.OutputStream;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
@@ -34,7 +35,7 @@ import at.fh.swenga.dao.FlatDao;
 import at.fh.swenga.dao.ImageDao;
 import at.fh.swenga.dao.UserDao;
 import at.fh.swenga.dao.UserRoleDao;
-
+import at.fh.swenga.model.Comment;
 import at.fh.swenga.model.Flat;
 import at.fh.swenga.model.Image;
 import at.fh.swenga.model.User;
@@ -213,12 +214,18 @@ public class SecurityController {
 	public String index(Model model) {
 		return "index";
 	}
+	
+	@RequestMapping(value= {"/currentUser"})
+	public String getCurrentUser(Model model, Authentication authentication) {
 
-	public String getCurrentUser(Model model) {
-
-		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-		String name = auth.getName();
+		String name = authentication.getName();
+		String firstname = userDao.findFirstByUsername(name).getFirstname();
+		String lastname = userDao.findFirstByUsername(name).getLastname();
+	
 		model.addAttribute("name", name);
+		model.addAttribute("firstname", firstname);
+		model.addAttribute("lastname", lastname);
+
 		return name;
 	}
 
@@ -337,6 +344,22 @@ public class SecurityController {
 		return "about";
 	}
 
+
+	@PostMapping(value= {"/getName"})
+	public String getName(Model model, Authentication authentication) {
+
+		String username = authentication.getName();
+		String fullname = userDao.findFirstByUsername(username).getFirstname() + " " + userDao.findFirstByUsername(username).getLastname();
+		
+	
+		model.addAttribute("fullname", fullname);
+		return "index";
+	}
+
+	
+	
+	
+	
 	@ExceptionHandler(Exception.class)
 	public String handleAllException(Exception ex) {
 		ex.printStackTrace();

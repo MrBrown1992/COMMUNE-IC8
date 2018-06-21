@@ -9,37 +9,34 @@
 </head>
 
 <body class="app sidebar-show aside-menu-show">
-  <header class="app-header" >
-  
-<!---------------------------HEADER CONTENT --------------------------------------->
-    
-     <div th:replace="~{includes/searchNav :: search}"></div>
-	
-    
- </header>
-<!---------------------------HEADER CONTENT --------------------------------------->
-  
-  
-  
-  
-<!---------------------------SIDEBAR CONTENT --------------------------------------->
-  
-  <div class="app-body">
-    <div class="sidebar">
-      <!-- Sidebar content here -->
+	<header class="app-header">
 
-     <div th:include="~{includes/sidebar :: sidebar}"></div>
-     
-    </div>
-<!---------------------------SIDEBAR CONTENT --------------------------------------->
-    
-    
+		<!---------------------------HEADER CONTENT --------------------------------------->
 
- <!---------------------------MAIN CONTENT --------------------------------------->
-    <main class="main">
-      <!-- Main content here -->
-      
-      <!--  Error message ----------------------------------------------------------- -->
+		<div th:replace="~{includes/searchNav :: search}"></div>
+
+
+	</header>
+	<!---------------------------HEADER CONTENT --------------------------------------->
+
+
+
+
+	<!---------------------------SIDEBAR CONTENT --------------------------------------->
+
+	<div class="app-body">
+		<div class="sidebar">
+			<!-- Sidebar content here -->
+
+			<div th:include="~{includes/sidebar :: sidebar}"></div>
+
+		</div>
+		<!---------------------------SIDEBAR CONTENT --------------------------------------->
+
+
+
+		<!---------------------------MAIN CONTENT --------------------------------------->
+		<main class="main"> <!-- Main content here --> <!--  Error message ----------------------------------------------------------- -->
 		<div th:unless="${errorMessage} == null" th:utext="${errorMessage}"
 			class="alert alert-danger" role="alert"></div>
 		<!--  Error message ----------------------------------------------------------- -->
@@ -54,34 +51,42 @@
 		<div th:unless="${message} == null" th:utext="${message}"
 			class="alert alert-success" role="warning"></div>
 		<!--   message ----------------------------------------------------------- -->
-      	
-      	<div><h1 align="center">Home</h1></div>
-      	
-      	<p> Hello and welcome to your flat, du Eierbär! This place lets you organize your shared flat and helps you to COMMUNE-IC8 with your Flatmates!
-				Have an Appointment? No problem, just add id to the Todo list and the others will see it. Not enough Mayo in the refrigerator? Never mind, just add it to the grocery list so it wont be forgotten on the next shopping tour :P</p>
 
-      	
-      	
-    </main>
- <!---------------------------MAIN CONTENT --------------------------------------->
+		<div>
+			<h1>WELCOME</h1>
+		</div>
 
-    
-    
- <!---------------------------RIGHT-SIDEBAR --------------------------------------->
-    
-    <aside class="aside-menu">
-      <!-- Aside menu content here -->
-      <div><h1>Aside</h1></div>
-    </aside>
-  </div>
- <!---------------------------RIGHT-SIDEBAR --------------------------------------->
+		<p>Hello and welcome to your flat, du Eierbär! This place lets you
+			organize your shared flat and helps you to COMMUNE-IC8 with your
+			Flatmates! Have an Appointment? No problem, just add id to the Todo
+			list and the others will see it. Not enough Mayo in the refrigerator?
+			Never mind, just add it to the grocery list so it wont be forgotten
+			on the next shopping tour :P</p>
 
-  
-  <!---------------------------FOOTER --------------------------------------->
- 
-    <!-- Footer content here -->
-    <div th:replace="~{includes/footer :: footer}"></div>
-  
-  	<div th:replace="~{includes/bootstrap :: bootstrapJS}" />
-  	
+
+
+		</main>
+		<!---------------------------MAIN CONTENT --------------------------------------->
+
+
+
+		<!---------------------------RIGHT-SIDEBAR --------------------------------------->
+
+		<aside class="aside-menu">
+			<!-- Aside menu content here -->
+			<div>
+				<h1>Aside</h1>
+			</div>
+		</aside>
+	</div>
+	<!---------------------------RIGHT-SIDEBAR --------------------------------------->
+
+
+	<!---------------------------FOOTER --------------------------------------->
+
+	<!-- Footer content here -->
+	<div th:replace="~{includes/footer :: footer}"></div>
+
+	<div th:replace="~{includes/bootstrap :: bootstrapJS}" />
+
 </body>
