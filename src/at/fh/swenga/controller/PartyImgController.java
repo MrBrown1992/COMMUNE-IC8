@@ -35,7 +35,6 @@ public class PartyImgController {
 
 		List<PartyImg> partyimgs = partyImgDao.findAll();
 		List<String> picsAsString = new ArrayList<String>();
-
 		for (PartyImg img : partyimgs) {
 			byte[] pic = img.getImg();
 			StringBuilder sb = new StringBuilder();
@@ -47,7 +46,7 @@ public class PartyImgController {
 		}
 
 		model.addAttribute("partypics", picsAsString);
-
+		model.addAttribute("partyimgs", partyimgs);
 		return "listPartyPics";
 	}
 
@@ -68,8 +67,10 @@ public class PartyImgController {
 			image.setImgtitle(imgtitle);
 			image.setImgtext(imgtext);
 			partyImgDao.save(image);
+
 		} catch (Exception e) {
 			model.addAttribute("errorMessage", "Error:" + e.getMessage());
+			
 		}
 
 		return showPartyImg(model);

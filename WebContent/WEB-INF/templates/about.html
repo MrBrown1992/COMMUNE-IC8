@@ -1,11 +1,59 @@
 <!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
-<title>About</title>
-</head>
-<body>
-lol test
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org">
 
+<head>
+
+<style>
+em, strong {
+	font-size: 150%;
+}
+</style>
+
+<div th:include="~{includes/bootstrap :: bootstrapMeta}" th:remove="tag" />
+<title>COMMUNE-IC8</title>
+<div th:include="~{includes/bootstrap :: bootstrapCSS}" th:remove="tag" />
+</head>
+
+<body class="container bg-dark">
+
+	<div class="page-header text-center" style="border-bottom:5px;"><h1 class ="text-light" >DEV'S</h1></div>
+
+	<div class="row" align="center">
+
+		<div class="col-xl">
+			<div class="card text-white bg-dark mb-3" style="width: 18rem;">
+				<img class="card-img-top" src="https://avatars3.githubusercontent.com/u/22908228?s=400&v=4" alt="Card image cap">
+				<div class="card-body">
+					<h5 class="card-title">MrBrown1992</h5>
+					<p class="card-text">Das ist ein EIERBÄR.</p>
+					<a href="#" class="btn btn-primary">Go somewhere</a>
+				</div>
+			</div>
+		</div>
+
+
+		<div class="col-md">
+			<div class="card text-white bg-dark mb-3" style="width: 18rem;">
+				<img class="card-img-top" src="https://avatars1.githubusercontent.com/u/22908403?s=400&v=4" alt="Card image cap">
+				<div class="card-body">
+					<h5 class="card-title">MrPink1992</h5>
+					<p class="card-text">Das ist kein EIERBÄR.</p>
+					<a href="#" class="btn btn-primary">Go somewhere</a>
+				</div>
+			</div>
+		</div>
+
+
+	</div>
+
+	<div class="page-footer text-center" style="border-bottom:5px;"><a th:href="@{/}" class="btn btn-dark">Back</a></div>
+
+
+	<!-- hoedlale16: include some fancy footer -->
+
+	<!--  End of container -->
+	<div th:include="~{includes/bootstrap :: bootstrapJS}" th:remove="tag" />
 </body>
+
 </html>

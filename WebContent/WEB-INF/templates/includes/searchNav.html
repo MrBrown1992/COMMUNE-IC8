@@ -7,10 +7,21 @@
 			<a style="color:white; font-size:200%;" th:href="@{/}"> COMMUNE-IC8</a>		
 		</form>
 		
-		<form class="navbar-form navbar-right" th:action="@{/logout}"
-			method="post">
-			<input class="btn btn-danger" type="submit" value="Sign Out" />
-		</form>
-
+		
+		<div class="row">
+			
+			<div class="col-sm">
+				<form class="navbar-form navbar-right" th:action="@{/showUserProfile}"
+				method="post">
+				<input class="btn btn-default nav-icon " type="submit" value="Profile" />
+				</form>
+			</div>
+			
+			<div class="col-sm">
+				<form class="navbar-form navbar-right" th:action="@{/logout}"
+				method="post">
+				<input class="btn btn-danger" type="submit" value="Sign Out" />
+				</form>
+			</div>
 	</div>
 </nav>

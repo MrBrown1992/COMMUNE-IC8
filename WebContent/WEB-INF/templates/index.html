@@ -8,7 +8,7 @@
 <div th:replace="~{includes/bootstrap :: bootstrapCSS}" />
 </head>
 
-<body class="app sidebar-show aside-menu-show">
+<body class="app sidebar-show aside-menu-show bg-primary">
 	<header class="app-header">
 
 		<!---------------------------HEADER CONTENT --------------------------------------->
@@ -64,7 +64,7 @@
 				
 				<p> Have an appointment, something to clean or an upcoming party? Add them to the <a th:href="listTodos">To-Do List</a> so everybody knows about it !</p>
 				
-				<p> Want to <a href="https://www.youtube.com/watch?v=-2U0Ivkn2Ds">say something?</a> Just leave a comment in the <a th:href="listComments">Comment Section</a></p>
+				<p> Want to <a href="https://www.youtube.com/watch?v=-2U0Ivkn2Ds">say something?</a> Just leave a comment in the <a th:href="listComments">Comment Section.</a></p>
 
 				<p> Or just visit <a th:href="showUserProfile" class="card-link">Your Profile!</a></p>
 			</div>
@@ -86,10 +86,10 @@
 	
 	<div class="card bg-dark mx-auto" >
 		
-		<img class="img-thumbnail" th:unless="${image} == null" th:src="${image}" >
+		<img class="img-fluid" th:unless="${image} == null" th:src="${image}" height="250">
 			
 			<div class="card-body">
-				<h2 class="card-title" th:text="${'@' + user.getUsername()}"></h2>
+				<a class="card-title" th:text="${'@' + user.getUsername()}" th:href="@{/showUserProfile}" style="font-size:200%;"></a>
 				<p class="card-text" style="font-size:120%;">
 					<ul style="list-style-type:none; padding-left:0;">
 						<li th:text="${'Firstname: ' + user.getFirstname()}"></li>

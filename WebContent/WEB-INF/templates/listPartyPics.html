@@ -56,18 +56,19 @@
 		</div>
 
 		
-		<div th:each="pic: ${partypics}">
+		<div th:each="pic : ${partypics}">
 			<div>
 				<div class="card" style="width: 20rem; margin: 0 auto;">
 					<img class="card-img-top" th:src="${pic}" alt="Card image cap">
 					<div class="card-body">
-						<h5 class="card-title">Card title</h5>
-						<p class="card-text" >Quick sample text to create the card
+						<h5 class="card-title" th:text="${#request.getAttribute('imgtitle')}">Card title</h5>
+						<p class="card-text" th:text="${#request.getAttribute('imgtext')}">Quick sample text to create the card
 							title and make up the body of the card's content.</p>
 					</div>
 				</div>
 			</div>
 			<br>
+		</div>
 		</div>
  
 		
@@ -78,7 +79,7 @@
 
 		<!---------------------------RIGHT-SIDEBAR --------------------------------------->
 
-		<aside class="aside-menu-xl">
+		<aside class="aside-menu bg-dark">
 			<!-- Aside menu content here -->
 			<!-- -----------------Edit / PDF / Excel Buttons -------------------------- -->
 			<div class="sidebar">
@@ -99,7 +100,7 @@
 		</aside>
 
  
-	</div>
+	
 	<!---------------------------RIGHT-SIDEBAR --------------------------------------->
 
 

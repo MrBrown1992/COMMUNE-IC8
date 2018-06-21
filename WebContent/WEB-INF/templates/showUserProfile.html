@@ -3,6 +3,13 @@
 	xmlns:th="http://www.thymeleaf.org">
 
 <head>
+
+<style>
+em, strong {
+	font-size: 150%;
+}
+</style>
+
 <div th:include="~{includes/bootstrap :: bootstrapMeta}" th:remove="tag" />
 <title>User Profile</title>
 <div th:include="~{includes/bootstrap :: bootstrapCSS}" th:remove="tag" />
@@ -10,41 +17,62 @@
 
 <body class="app flex-row align-items-center bg-dark">
 	<div class="container mb-5" role="main">
-		<div class="card bg-light">
-			<div class="card-body text-dark">
+		<div class="card bg-light" style="border-style: none;">
+			<div class="card-body text-dark" style="display: none;">
 				<div class="row page-header">
 					<!-- include the Nav bar fragment-->
-					
+
 				</div>
 
 				<!-- include the Nav bar fragment-->
-				
+
 
 				<!-- include message boxes (moved to fragments) -->
-		
+
 			</div>
 		</div>
-		<div class="card bg-light md-5">
+
+
+
+
+
+
+		<div class="card text-dark">
+			<div class="bg-dark card-header">
+				<strong th:text="${user.username}"></strong>
+
+			</div>
 			<div class="card-body">
-				<div class="card text-dark">
-					<div class="bg-success card-header">
-						<strong th:text="${user.username}"></strong>
+				<div class="float-left container">
+					<div class="row">
+						<div class="col-sm">
+						<strong>First name:</strong><br>
+						<strong>Last name:</strong><br>
+						<strong>Email:</strong><br>
+						<strong>Phone:</strong><br>
 						
-					</div>
-					<div class="card-body">
-						<div class="float-left">
-							<strong>First name:</strong> <em th:text="${user.firstname}"></em><br>
-							<strong>Last name:</strong> <em th:text="${user.lastname}"></em><br>
-							<strong>Email:</strong> <em th:text="${user.email}"></em><br>
-							<strong>Telephone:</strong> <em th:text="${user.mobilenumber}"></em><br>
 						</div>
-						<div class="float-right">
+						<div class="col-sm">
+							<em th:text="${user.firstname}"></em><br>
+							<em th:text="${user.lastname}"></em><br>
+							<em th:text="${user.email}"></em><br>
+							<em th:text="${user.mobilenumber}"></em><br>
+						</div>
+						
+						
+						<div class="col-sm text-right">
 							<img th:unless="${image} == null" th:src="${image}" height="250">
 						</div>
 					</div>
 				</div>
 			</div>
+			<div class="card-footer text-center">
+				<a class="btn btn-dark" th:href="@{/}">Home </a>
+			</div>
 		</div>
+
+
+
 
 
 		<!-- hoedlale16: include some fancy footer -->
