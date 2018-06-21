@@ -80,18 +80,18 @@
 						<td th:text="${comment.text}"></td>
 						
 						
-<!-- 
-						<td sec:authorize="hasRole('ADMIN')"><a
-							th:href="@{/changeComment(id=${comment.id})}"
-							class="btn btn-xs btn-success"> <span
-								class="glyphicon glyphicon-edit" aria-hidden="true"></span> Edit
-						</a> <a th:href="@{/deleteComment(id=${comment.id})}"
-							class="btn btn-xs btn-danger"> <span
-								class="glyphicon glyphicon-trash" aria-hidden="true"></span>
-								Delete
+
+						<td> <a sec:authorize="hasRole('ADMIN')"
+							th:href="@{/changeComment(id=${comment.id})}"><button type="button" class="btn btn-xs btn-warning cui-wrench">
+						<span aria-hidden="true"></span> Edit </button>
+						</a>
+						 <a sec:authorize="hasRole('ADMIN')" th:href="@{/deleteComment(id=${comment.id})}"><button type="button" class="btn btn-xs btn-danger cui-trash">
+							<span
+								 aria-hidden="true"></span>
+								Delete</button>
 						</a></td>
 					</tr>
-					 -->
+					 
 					<!--  list all items ----------------------------------------------------------- -->
 				</tbody>
 			</table>

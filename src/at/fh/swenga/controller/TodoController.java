@@ -1,6 +1,9 @@
 package at.fh.swenga.controller;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
@@ -69,8 +72,8 @@ public class TodoController {
 	@RequestMapping(value = "/addTodo")
 	public String addTodo(Model model, @Valid Todo newTodo, @RequestParam(value = "todoName") String todoName,
 			@ModelAttribute(value = "todoCategory") String todoCategory,
-			@RequestParam(value = "todoDate") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) Date todoDate,
-			Authentication authentication, BindingResult bindingResult) {
+			@RequestParam(value = "todoDate") String todoDate,
+			Authentication authentication, BindingResult bindingResult) throws ParseException {
 
 		// Any errors? -> Create a String out of all errors and return to the page
 		if (errorsDetected(model, bindingResult)) {
@@ -79,7 +82,10 @@ public class TodoController {
 
 		newTodo.setName(todoName);
 		newTodo.setCategory(todoCategory);
-		newTodo.setDate(todoDate);
+		SimpleDateFormat format = new SimpleDateFormat("dd.MM.yyyy");
+		Calendar date = Calendar.getInstance();
+		date.setTime(format.parse(todoDate));
+		newTodo.setDate(date);
 		todoDao.save(newTodo);
 
 		return listTodos(model);
@@ -102,8 +108,8 @@ public class TodoController {
 	}
 
 	@PostMapping("/changeTodo")
-	public String changeTodo(Model model, @RequestParam(value = "todoName") String todoName,
-			@RequestParam(value = "category") String category, @RequestParam(value = "date") Date date,
+	public String changeTodo(Model model,
+			
 
 			@Valid Todo changedTodo, Authentication authentication, BindingResult bindingResult) {
 
@@ -114,10 +120,10 @@ public class TodoController {
 
 		Todo todo = todoDao.findFirstByid(changedTodo.getId());
 		if (todo != null) {
-			todo.setName(todoName);
+			todo.setName(changedTodo.getName());
 
-			todo.setCategory(category); // default value setzen ..
-			todo.setDate(date);
+			todo.setCategory(changedTodo.getCategory()); // default value setzen ..
+			todo.setDate(changedTodo.getDate());
 
 			todoDao.save(todo);
 

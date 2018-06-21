@@ -36,11 +36,7 @@ public class Flat  implements java.io.Serializable{
 	@OneToMany(mappedBy = "flat", fetch = FetchType.EAGER)
 	private Set<User> users;
 	
-	/*
-	@OneToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "flatToClean")
-	private CleanPlan cleanplan;
-*/
+
 	@Version
 	long version;
 

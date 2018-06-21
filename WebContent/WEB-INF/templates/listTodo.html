@@ -79,17 +79,17 @@
 					<tr th:each="todo : ${todos}">
 						<td th:text="${todo.name}"></td>
 						<td th:text="${todo.category}"></td>
-						<td th:text="${todo.date}"></td>
+						<td th:text="${#dates.format(todo.date,'dd.MM.yyyy')}"></td>
 
 
 						<td sec:authorize="hasRole('ADMIN')"><a
 							th:href="@{/changeTodo(id=${todo.id})}"
-							class="btn btn-xs btn-success"> <span
-								class="glyphicon glyphicon-edit" aria-hidden="true"></span> Edit
-						</a> <a th:href="@{/deleteTodo(id=${todo.id})}"
-							class="btn btn-xs btn-danger"> <span
-								class="glyphicon glyphicon-trash" aria-hidden="true"></span>
-								Delete
+							><button type="button" class="btn btn-xs btn-warning cui-wrench"> <span
+								aria-hidden="true"></span> Edit</button>
+						</a> <a th:href="@{/deleteTodo(id=${todo.id})}"><button type="button" class="btn btn-xs btn-danger cui-trash">
+							 <span
+								aria-hidden="true"></span>
+								Delete</button>
 						</a></td>
 					</tr>
 					<!--  list all items ----------------------------------------------------------- -->
@@ -148,6 +148,6 @@
     
  
   
-  	<div th:replace="~{includes/bootstrap :: bootstrapJS}"  class="bg-dark"/>
+  	<div th:replace="~{includes/bootstrap :: bootstrapJS}" class="bg-dark" />
   	
 </body>

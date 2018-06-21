@@ -1,5 +1,6 @@
 package at.fh.swenga.model;
 
+import java.util.Calendar;
 import java.util.Date;
 
 import javax.persistence.Column;
@@ -10,6 +11,8 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+
+import org.springframework.format.annotation.DateTimeFormat;
 
 @Entity
 @Table(name = "todo")
@@ -32,10 +35,11 @@ public class Todo implements java.io.Serializable{
 	@Column(name = "category", length = 512)
 	private String category;
 	
+	@DateTimeFormat(pattern = "dd.MM.yyyy") 
 	@Temporal(TemporalType.DATE)
-	private Date date;
+	private Calendar date;
 
-	public Todo(String name, String category, Date date) {
+	public Todo(String name, String category, Calendar date) {
 		super();
 		this.name = name;
 		this.category = category;
@@ -71,11 +75,11 @@ public class Todo implements java.io.Serializable{
 		this.category = category;
 	}
 
-	public Date getDate() {
+	public Calendar getDate() {
 		return date;
 	}
 
-	public void setDate(Date date) {
+	public void setDate(Calendar date) {
 		this.date = date;
 	}
 
