@@ -84,7 +84,6 @@
 						</td>
 
 
-						<!-- <td><a sec:authorize="hasRole('ADMIN')" th:href="@{/delete(id=${employee.id})}">Delete</a></td> -->
 						<td sec:authorize="hasRole('ADMIN')"><a
 							th:href="@{/changeFlat(id=${flat.id})}"><button type="button"
 									class="btn btn-xs btn-warning cui-wrench">

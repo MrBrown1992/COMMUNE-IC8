@@ -20,7 +20,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import at.fh.swenga.dao.FlatDao;
 import at.fh.swenga.dao.UserDao;
 import at.fh.swenga.model.Flat;
-import at.fh.swenga.model.User;
+
 
 @Controller
 @Scope(proxyMode = ScopedProxyMode.TARGET_CLASS, value = "session")
@@ -83,8 +83,7 @@ public class FlatController {
 	}
 
 	@PostMapping(value = "changeFlat")
-	public String changeFlat(Model model, @RequestParam(value = "flatName") String flatName,
-
+	public String changeFlat(Model model, @RequestParam(value = "name") String name,
 			@Valid Flat changedFlat, Authentication authentication, BindingResult bindingResult) {
 
 		if (errorsDetected(model, bindingResult)) {
@@ -93,21 +92,21 @@ public class FlatController {
 
 		Flat flat = flatDao.findFirstByid(changedFlat.getId());
 		if (flat != null) {
-			flat.setName(flatName);
+			flat.setName(name);
 
 			flatDao.save(flat);
 
 			return listFlat(model);
 		} else {
-			model.addAttribute("warningMessage", "Grocery not found!");
+			model.addAttribute("warningMessage", "Flat not found!");
 			return listFlat(model);
 		}
 	}
 	
 	@GetMapping("/changeFlat")
-	public String changeFlat( Model model, Authentication authentication, @RequestParam(value = "flatName")String flatName) {
+	public String changeFlat( Model model, Authentication authentication, @RequestParam(value= "id")int id ) {
 
-		Flat flat = flatDao.findFirstByFlatName(flatName);
+		Flat flat = flatDao.findFirstByid(id);
 
 		if (flat != null) {
 
@@ -116,6 +115,13 @@ public class FlatController {
 		}
 
 		model.addAttribute("warningMessage", "Flat not found!");
+		return listFlat(model);
+	}
+	
+	@RequestMapping("/deleteFlat")
+	public String deleteFlat(Model model, @RequestParam int id) {
+		flatDao.deleteById(id);
+
 		return listFlat(model);
 	}
 

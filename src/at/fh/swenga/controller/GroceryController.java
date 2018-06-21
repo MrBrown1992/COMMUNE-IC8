@@ -77,7 +77,6 @@ public class GroceryController {
 	@PostMapping("/changeGrocery")
 	public String changeGrocery(Model model, @RequestParam(value = "groceryName") String groceryName,
 			@RequestParam(value = "boughtstate", required = false, defaultValue = "false") boolean bought,
-
 			@Valid Grocery changedGrocery, Authentication authentication, BindingResult bindingResult) {
 
 		// Any errors? -> Create a String out of all errors and return to the page
