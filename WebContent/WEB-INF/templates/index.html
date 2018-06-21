@@ -52,16 +52,26 @@
 			class="alert alert-success" role="warning"></div>
 		<!--   message ----------------------------------------------------------- -->
 
-		<div>
-			<h1>WELCOME</h1>
+	<h1 align="center">Home</h1>
+
+		<div class="card bg-dark mx-auto" style="width: 50%;">
+			<div class="card-body">
+				<h1 class="card-title" th:text="'Hello !'"></h1>
+				<p class="card-text" style="font-size:120%;">Hello and welcome to your flat <span style="font-size:150%;"th:text="${fullname}"/> !</p>
+				<br><p>COMMUNE-IC8 is the right place to manage your flat and to keep everything in order. It makes life for you and your flatmates easier.</p>
+				
+				<p> Need some groceries? Simply add them to the <a th:href="showGroceryList">Grocery List</a> so you and your roommates have an overview on what is missing !</p>
+				
+				<p> Have an appointment, something to clean or an upcoming party? Add them to the <a th:href="listTodos">To-Do List</a> so everybody knows about it !</p>
+				
+				<p> Want to <a href="https://www.youtube.com/watch?v=-2U0Ivkn2Ds">say something?</a> Just leave a comment in the <a th:href="listComments">Comment Section</a></p>
+
+				<p> Or just visit <a th:href="showUserProfile" class="card-link">Your Profile</a></p>
+			</div>
 		</div>
 
-		<p>Hello and welcome to your flat, du Eierbär! This place lets you
-			organize your shared flat and helps you to COMMUNE-IC8 with your
-			Flatmates! Have an Appointment? No problem, just add id to the Todo
-			list and the others will see it. Not enough Mayo in the refrigerator?
-			Never mind, just add it to the grocery list so it wont be forgotten
-			on the next shopping tour :P</p>
+
+		
 
 
 
@@ -72,12 +82,7 @@
 
 		<!---------------------------RIGHT-SIDEBAR --------------------------------------->
 
-		<aside class="aside-menu">
-			<!-- Aside menu content here -->
-			<div>
-				<h1>Aside</h1>
-			</div>
-		</aside>
+		
 	</div>
 	<!---------------------------RIGHT-SIDEBAR --------------------------------------->
 

@@ -211,7 +211,12 @@ public class SecurityController {
 	}
 
 	@RequestMapping(value = { "/" })
-	public String index(Model model) {
+	public String index(Model model, Authentication authentication) {
+		
+		String username = authentication.getName();
+		User user = userDao.findFirstByUsername(username);
+		String fullname = user.getFirstname() + " " + user.getLastname();
+		model.addAttribute("fullname", fullname);
 		return "index";
 	}
 	
@@ -345,17 +350,7 @@ public class SecurityController {
 	}
 
 
-	@PostMapping(value= {"/getName"})
-	public String getName(Model model, Authentication authentication) {
-
-		String username = authentication.getName();
-		String fullname = userDao.findFirstByUsername(username).getFirstname() + " " + userDao.findFirstByUsername(username).getLastname();
-		
 	
-		model.addAttribute("fullname", fullname);
-		return "index";
-	}
-
 	
 	
 	
