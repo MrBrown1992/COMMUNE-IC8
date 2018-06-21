@@ -7,6 +7,7 @@ import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.context.annotation.ScopedProxyMode;
+import org.springframework.security.access.annotation.Secured;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -59,13 +60,13 @@ public class FlatController {
 		
 		return "listFlat";
 	}
-
+	@Secured("ROLE_ADMIN")
 	@RequestMapping(value = "addFlat")
 	public String addFlat() {
 
 		return "editFlat";
 	}
-
+	@Secured("ROLE_ADMIN")
 	@RequestMapping(value = { "createNewFlat" })
 	public String createNewFlat(Model model, @Valid Flat newFlat, @RequestParam(value = "name") String flatName,
 			Authentication authentication) {
@@ -76,12 +77,12 @@ public class FlatController {
 
 		return "forward:listFlat";
 	}
-
+	@Secured("ROLE_ADMIN")
 	@RequestMapping(value = "editFlat")
 	public String editFlat() {
 		return "editFlat";
 	}
-
+	@Secured("ROLE_ADMIN")
 	@PostMapping(value = "changeFlat")
 	public String changeFlat(Model model, @RequestParam(value = "name") String name,
 			@Valid Flat changedFlat, Authentication authentication, BindingResult bindingResult) {
@@ -102,7 +103,7 @@ public class FlatController {
 			return listFlat(model);
 		}
 	}
-	
+	@Secured("ROLE_ADMIN")
 	@GetMapping("/changeFlat")
 	public String changeFlat( Model model, Authentication authentication, @RequestParam(value= "id")int id ) {
 
@@ -117,7 +118,7 @@ public class FlatController {
 		model.addAttribute("warningMessage", "Flat not found!");
 		return listFlat(model);
 	}
-	
+	@Secured("ROLE_ADMIN")
 	@RequestMapping("/deleteFlat")
 	public String deleteFlat(Model model, @RequestParam int id) {
 		flatDao.deleteById(id);

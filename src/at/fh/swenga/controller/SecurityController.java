@@ -74,7 +74,8 @@ public class SecurityController {
 		}
 		return false;
 	}
-
+	
+	
 	@RequestMapping("/addUser")
 	@Transactional
 	public String fillData(Model model) {
@@ -111,7 +112,7 @@ public class SecurityController {
 
 		return "forward:login";
 	}
-
+	@Secured("ROLE_ADMIN")
 	@RequestMapping("/addNewUser")
 	@Transactional
 	public String addNewUser(@Valid User newUser, @RequestParam(value = "username") String username,
@@ -149,7 +150,7 @@ public class SecurityController {
 
 		return listUsers(model);
 	}
-
+	
 	@RequestMapping(value = { "/editUser" })
 	public String user(Model model) {
 		model.addAttribute("flats", flatDao.findAll());
@@ -199,7 +200,7 @@ public class SecurityController {
 		model.addAttribute("warningMessage", "User not found!");
 		return listUsers(model);
 	}
-
+	@Secured("ROLE_ADMIN")
 	@RequestMapping(value = { "/listUsers" })
 	public String listUsers(Model model) {
 

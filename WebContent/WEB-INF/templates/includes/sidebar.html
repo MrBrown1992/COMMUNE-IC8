@@ -24,7 +24,7 @@
 					class="nav-icon cui-star"></i> Party Pics
 			</a></li>
 			
-			<li class="nav-item"><a class="nav-link"
+			<li sec:authorize="hasRole('ADMIN')" class="nav-item"><a class="nav-link"
 				th:href="@{/listUsers}"> <i
 					class="nav-icon cui-user"></i> Users
 			</a></li>
