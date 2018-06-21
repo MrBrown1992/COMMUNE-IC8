@@ -36,6 +36,8 @@ public class Image implements java.io.Serializable {
 	@Version
 	long version;
 	private String contentType;
+	
+
 
 	public Image() {
 		super();
