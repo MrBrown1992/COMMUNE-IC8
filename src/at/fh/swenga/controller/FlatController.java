@@ -67,7 +67,7 @@ public class FlatController {
 	}
 
 	@RequestMapping(value = { "createNewFlat" })
-	public String createNewFlat(Model model, @Valid Flat newFlat, @RequestParam(value = "flatName") String flatName,
+	public String createNewFlat(Model model, @Valid Flat newFlat, @RequestParam(value = "name") String flatName,
 			Authentication authentication) {
 
 		newFlat.setName(flatName);

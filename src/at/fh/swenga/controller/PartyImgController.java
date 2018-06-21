@@ -8,7 +8,6 @@ import org.apache.commons.codec.binary.Base64;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.context.annotation.ScopedProxyMode;
-import org.springframework.security.access.annotation.Secured;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -58,13 +57,16 @@ public class PartyImgController {
 	}
 
 	@PostMapping(value = { "uploadPartyPic" })
-	public String uploadPartyPic(Model model, @RequestParam("myFile") MultipartFile file) {
+	public String uploadPartyPic(Model model, @RequestParam("myFile") MultipartFile file,
+			@RequestParam(value = "imgtitle",required = false) String imgtitle, @RequestParam(value = "imgtext",required = false) String imgtext) {
 
 		try {
 			PartyImg image = new PartyImg();
 			image.setImg(file.getBytes());
 			image.setFilename(file.getOriginalFilename());
 			image.setUploadDate(Calendar.getInstance());
+			image.setImgtitle(imgtitle);
+			image.setImgtext(imgtext);
 			partyImgDao.save(image);
 		} catch (Exception e) {
 			model.addAttribute("errorMessage", "Error:" + e.getMessage());

@@ -47,6 +47,14 @@ public class PartyImg implements java.io.Serializable {
 	private Calendar uploadDate;
 	@Version
 	long version;
+	
+	@Column(name="imgtitle",nullable = true)
+
+	private String imgtitle;
+	
+	@Column(name="imgtext",nullable = true)
+
+	private String imgtext;
 
 	
 	
@@ -55,7 +63,7 @@ public class PartyImg implements java.io.Serializable {
 	 * @param filename
 	 * @param uploadDate
 	 */
-	public PartyImg( byte[] img, String filename, Calendar uploadDate) {
+	public PartyImg( byte[] img, String filename, Calendar uploadDate,String imgtitle,String imgtext) {
 		super();
 	
 		this.img = img;
@@ -142,6 +150,42 @@ public class PartyImg implements java.io.Serializable {
 	 */
 	public void setUploadDate(Calendar uploadDate) {
 		this.uploadDate = uploadDate;
+	}
+
+
+
+	/**
+	 * @return the imgtitle
+	 */
+	public String getImgtitle() {
+		return imgtitle;
+	}
+
+
+
+	/**
+	 * @param imgtitle the imgtitle to set
+	 */
+	public void setImgtitle(String imgtitle) {
+		this.imgtitle = imgtitle;
+	}
+
+
+
+	/**
+	 * @return the imgtext
+	 */
+	public String getImgtext() {
+		return imgtext;
+	}
+
+
+
+	/**
+	 * @param imgtext the imgtext to set
+	 */
+	public void setImgtext(String imgtext) {
+		this.imgtext = imgtext;
 	}
 	
 	

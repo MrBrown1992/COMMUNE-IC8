@@ -70,10 +70,10 @@ public class TodoController {
 	}
 
 	@RequestMapping(value = "/addTodo")
-	public String addTodo(Model model, @Valid Todo newTodo, @RequestParam(value = "todoName") String todoName,
+	public String addTodo(Model model, @Valid Todo newTodo, @RequestParam(value = "name") String todoName,
 			@ModelAttribute(value = "todoCategory") String todoCategory,
-			@RequestParam(value = "todoDate") String todoDate,
-			Authentication authentication, BindingResult bindingResult) throws ParseException {
+			@RequestParam(value = "todoDate") String todoDate, Authentication authentication,
+			BindingResult bindingResult) throws ParseException {
 
 		// Any errors? -> Create a String out of all errors and return to the page
 		if (errorsDetected(model, bindingResult)) {
@@ -108,10 +108,8 @@ public class TodoController {
 	}
 
 	@PostMapping("/changeTodo")
-	public String changeTodo(Model model,
-			
-
-			@Valid Todo changedTodo, Authentication authentication, BindingResult bindingResult) {
+	public String changeTodo(Model model, @Valid Todo changedTodo, Authentication authentication,
+			BindingResult bindingResult) {
 
 		// Any errors? -> Create a String out of all errors and return to the page
 		if (errorsDetected(model, bindingResult)) {
