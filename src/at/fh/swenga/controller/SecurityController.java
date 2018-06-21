@@ -218,6 +218,7 @@ public class SecurityController {
 		User user = userDao.findFirstByUsername(username);
 		String fullname = user.getFirstname() + " " + user.getLastname();
 		model.addAttribute("fullname", fullname);
+		model.addAttribute("user", user);
 		return "index";
 	}
 	
