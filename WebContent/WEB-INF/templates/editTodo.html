@@ -58,8 +58,8 @@
 							<label for="todoDate" class="col-md-2 control-label">
 								Date </label>
 							<div class="col-md-10">
-								<input class="form-control" type="date" name="todoDate"
-									th:value="${todo} ? ${todo.todoDate}">
+								<input class="form_datetime" placeholder="date" type="text" readonly name="todoDate"
+									th:value="${todo} ? ${#dates.format()todo.todoDate, 'dd.MM.yyyy')}">
 							</div>
 						</div>
 
@@ -84,6 +84,19 @@
 	<!-- JS for Datetime picker -->
 	<script type="text/javascript"
 		src="http://www.malot.fr/bootstrap-datetimepicker/bootstrap-datetimepicker/js/bootstrap-datetimepicker.js"></script>
+	<script>
+		$(function() {
+
+			$(".form_datetime").datetimepicker({
+				format : "dd.mm.yyyy",
+				autoclose : true,
+				todayBtn : true,
+				pickerPosition : "bottom-left",
+				minView : 2
+			});
+
+		});
+	</script>
 
 
 </body>
