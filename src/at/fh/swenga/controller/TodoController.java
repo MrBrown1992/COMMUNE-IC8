@@ -108,8 +108,8 @@ public class TodoController {
 	}
 
 	@PostMapping("/changeTodo")
-	public String changeTodo(Model model, @RequestParam(value = "todoName") String todoName,
-			@RequestParam(value = "category") String category, @RequestParam(value = "date") Calendar date,
+	public String changeTodo(Model model,
+			
 
 			@Valid Todo changedTodo, Authentication authentication, BindingResult bindingResult) {
 
@@ -120,10 +120,10 @@ public class TodoController {
 
 		Todo todo = todoDao.findFirstByid(changedTodo.getId());
 		if (todo != null) {
-			todo.setName(todoName);
+			todo.setName(changedTodo.getName());
 
-			todo.setCategory(category); // default value setzen ..
-			todo.setDate(date);
+			todo.setCategory(changedTodo.getCategory()); // default value setzen ..
+			todo.setDate(changedTodo.getDate());
 
 			todoDao.save(todo);
 
