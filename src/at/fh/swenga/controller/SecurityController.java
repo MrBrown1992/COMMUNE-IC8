@@ -84,6 +84,11 @@ public class SecurityController {
 			flatDao.save(testFlat);
 		}
 
+		UserRole rootRole = userRoleDao.findFirstByRoleName("ROLE_ROOT");
+		if(rootRole == null)
+			rootRole = new UserRole("ROLE_ROOT");
+		
+		
 		UserRole adminRole = userRoleDao.findFirstByRoleName("ROLE_ADMIN");
 		if (adminRole == null)
 			adminRole = new UserRole("ROLE_ADMIN");
@@ -91,6 +96,18 @@ public class SecurityController {
 		UserRole userRole = userRoleDao.findFirstByRoleName("ROLE_USER");
 		if (userRole == null)
 			userRole = new UserRole("ROLE_USER");
+		
+		User root = new User("root", "password", true, "Master", "of the Universe", 3141592, "master@universe.xyz",
+				Calendar.getInstance(), null, null);
+		root.encryptPassword();
+		root.addUserRole(userRole);
+		root.addUserRole(adminRole);
+		root.addUserRole(rootRole);
+		root.setFlat(testFlat);
+		userDao.save(root);
+				
+				
+				
 
 		User spiess = new User("spiess", "password", true, "Nikolaus", "Spiess", 0316123456, "testmail@mimimi.com",
 				Calendar.getInstance(), null, null);
