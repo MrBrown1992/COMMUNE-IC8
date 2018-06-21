@@ -8,6 +8,7 @@ import org.springframework.context.annotation.Scope;
 import org.springframework.context.annotation.ScopedProxyMode;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
@@ -108,7 +109,13 @@ public class ReportController {
 		return "todoExcelReport";
 		}
 
-		
+	@ExceptionHandler(Exception.class)
+	public String handleAllException(Exception ex) {
+		ex.printStackTrace();
+
+		return "error";
+
+	}
 }
 
 

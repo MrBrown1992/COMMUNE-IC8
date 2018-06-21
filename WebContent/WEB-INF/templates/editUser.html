@@ -87,7 +87,7 @@
 
 								<select class="form-control" name="flat" id="flat">
 
-									<option th:each="flat : ${flats}" th:value="${flat.id}"
+									<option th:each="flat : ${flats}" th:value="${flat} ?${flat.id} "
 										th:text="${flat}"></option>
 								</select>
 

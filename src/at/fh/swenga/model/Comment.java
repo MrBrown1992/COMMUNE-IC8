@@ -17,6 +17,12 @@ import javax.persistence.TemporalType;
 @Table(name = "comment")
 public class Comment implements java.io.Serializable{
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -3534057603171743878L;
+
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;

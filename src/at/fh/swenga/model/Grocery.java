@@ -1,6 +1,6 @@
 package at.fh.swenga.model;
 
-import java.io.Serializable;
+
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -12,6 +12,11 @@ import javax.persistence.Table;
 @Entity
 @Table(name = "grocery")
 public class Grocery implements java.io.Serializable{
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -4105617388524643455L;
 
 	@Id
 	@Column(name = "id")

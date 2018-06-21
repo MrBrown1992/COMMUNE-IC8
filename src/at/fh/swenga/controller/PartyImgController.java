@@ -10,6 +10,7 @@ import org.springframework.context.annotation.Scope;
 import org.springframework.context.annotation.ScopedProxyMode;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -40,8 +41,11 @@ public class PartyImgController {
 			StringBuilder sb = new StringBuilder();
 			sb.append("data:image/jpeg;base64,");
 			sb.append(Base64.encodeBase64String(pic));
+			
 			String image = sb.toString();
+			
 			picsAsString.add(image);
+
 
 		}
 
@@ -74,6 +78,14 @@ public class PartyImgController {
 		}
 
 		return showPartyImg(model);
+	}
+	
+	@ExceptionHandler(Exception.class)
+	public String handleAllException(Exception ex) {
+		ex.printStackTrace();
+
+		return "error";
+
 	}
 
 }
