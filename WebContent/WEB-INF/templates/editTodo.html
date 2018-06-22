@@ -37,11 +37,11 @@
 
 						<!-- --------------  Category ---------------- -->
 						<div class="form-group">
-							<label for="todoCategory" class="col-md-2 control-label">
+							<label for="cat" class="col-md-2 control-label">
 								Category </label>
 							<div class="col-md-10">
 
-								<select class="form-control" name="todoCategory" id="todoCategory">
+								<select class="form-control" name="todoCategory" id="todoCategory" th:field="*{cat}">
 									
 									<option th:each="category : ${categories}" th:value="${category} ?${category.id}"
 										th:text="${category}"></option>
