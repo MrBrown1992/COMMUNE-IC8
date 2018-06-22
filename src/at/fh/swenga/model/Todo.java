@@ -40,6 +40,10 @@ public class Todo implements java.io.Serializable {
 	@Column(nullable = false)
 	@Temporal(TemporalType.DATE)
 	private Calendar date;
+	
+	
+	@ManyToOne(fetch = FetchType.LAZY)
+	private Flat flat; 
 
 	public Todo(String name, Category category, Calendar date) {
 		super();
@@ -85,10 +89,30 @@ public class Todo implements java.io.Serializable {
 	public void setDate(Calendar date) {
 		this.date = date;
 	}
+	
+	
 
+	/**
+	 * @return the flat
+	 */
+	public Flat getFlat() {
+		return flat;
+	}
+
+	/**
+	 * @param flat the flat to set
+	 */
+	public void setFlat(Flat flat) {
+		this.flat = flat;
+	}
+
+	/* (non-Javadoc)
+	 * @see java.lang.Object#toString()
+	 */
 	@Override
 	public String toString() {
 		return "Todo [date=" + date + "]";
 	}
+
 	
 }

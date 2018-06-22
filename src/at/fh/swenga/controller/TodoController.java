@@ -13,6 +13,7 @@ import org.springframework.context.annotation.Scope;
 import org.springframework.context.annotation.ScopedProxyMode;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.FieldError;
@@ -23,8 +24,10 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+
 import at.fh.swenga.dao.CategoryDao;
 import at.fh.swenga.dao.TodoDao;
+import at.fh.swenga.dao.UserDao;
 import at.fh.swenga.model.Todo;
 
 @Controller
@@ -37,7 +40,11 @@ public class TodoController {
 	@Autowired
 	CategoryDao categoryDao;
 
+	@Autowired
+	UserDao userDao;
+
 	//private List<String> categories = new ArrayList<String>();
+
 
 	public TodoController() {
 
@@ -57,15 +64,16 @@ public class TodoController {
 	}
 
 	@RequestMapping(value = { "listTodos" })
-	public String listTodos(Model model) {
+	public String listTodos(Model model,Authentication authentication) {
 
-		List<Todo> todos = todoDao.findAll();
+		List<Todo> todos = todoDao.findAllByFlat_id(userDao.findFirstByUsername(authentication.getName()).getFlat().getId());
 
 		model.addAttribute("todos", todos);
 		return "listTodo";
 	}
 
 	@RequestMapping(value = "/addTodo")
+	@Transactional
 	public String addTodo(Model model, @Valid Todo newTodo, @RequestParam(value = "name") String todoName,
 			@RequestParam(value = "todoCategory") int todoCategory,
 			@RequestParam(value = "todoDate") String todoDate, Authentication authentication,
@@ -73,7 +81,7 @@ public class TodoController {
 
 		// Any errors? -> Create a String out of all errors and return to the page
 		if (errorsDetected(model, bindingResult)) {
-			return listTodos(model);
+			return listTodos(model ,authentication);
 		}
 		model.addAttribute("categories", categoryDao.findAll());
 
@@ -85,7 +93,7 @@ public class TodoController {
 		newTodo.setDate(date);
 		todoDao.save(newTodo);
 
-		return listTodos(model);
+		return listTodos(model,authentication);
 	}
 
 	@RequestMapping(value = { "/editTodo" })
@@ -110,7 +118,7 @@ public class TodoController {
 
 		// Any errors? -> Create a String out of all errors and return to the page
 		if (errorsDetected(model, bindingResult)) {
-			return listTodos(model);
+			return listTodos(model,authentication);
 		}
 		/*
 		if (categories.isEmpty()) {
@@ -134,10 +142,10 @@ public class TodoController {
 
 			todoDao.save(todo);
 
-			return listTodos(model);
+			return listTodos(model,authentication);
 		} else {
 			model.addAttribute("warningMessage", "Todo not found!");
-			return listTodos(model);
+			return listTodos(model,authentication);
 		}
 	}
 
@@ -152,14 +160,14 @@ public class TodoController {
 		}
 
 		model.addAttribute("warningMessage", "Todo not found!");
-		return listTodos(model);
+		return listTodos(model,authentication);
 	}
 
 	@RequestMapping("/deleteTodo")
-	public String deleteTodo(Model model, @RequestParam int id) {
+	public String deleteTodo(Model model, @RequestParam int id,Authentication authentication) {
 		todoDao.deleteById(id);
 
-		return listTodos(model);
+		return listTodos(model,authentication);
 	}
 
 	@ExceptionHandler(Exception.class)
