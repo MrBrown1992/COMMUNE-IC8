@@ -65,7 +65,7 @@ public class ReportController {
 	@RequestMapping(value = { "/commentsPdf" })
 	public String commentsPdf(Model model, @RequestParam(required = false) String pdf,Authentication authentication) {
 
-		List<Comment> comments = commentDao.findAllByFlat_id(userDao.findFirstByUsername(authentication.getName()).getFlat().getId());
+		List<Comment> comments = commentDao.findAllByUser_id(userDao.findFirstByUsername(authentication.getName()).getFlat().getId());
 
 		// Store the comments in the model, so the reports can access them
 		model.addAttribute("comments", comments);
@@ -78,7 +78,7 @@ public class ReportController {
 	public String commentsExcel(Model model, @RequestParam(required = false) String excel,Authentication authentication) {
 
 		// The method findAll() can do this
-		List<Comment> comments = commentDao.findAllByFlat_id(userDao.findFirstByUsername(authentication.getName()).getFlat().getId());
+		List<Comment> comments = commentDao.findAllByUser_id(userDao.findFirstByUsername(authentication.getName()).getFlat().getId());
 
 		// Store the comments in the model, so the reports can access them
 		model.addAttribute("comments", comments);

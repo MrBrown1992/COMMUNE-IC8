@@ -116,8 +116,15 @@ public class SecurityController {
 				Calendar.getInstance(), null, null);
 		user.encryptPassword();
 		user.addUserRole(userRole);
-		spiess.setFlat(testFlat);
+		user.setFlat(testFlat);
 		userDao.save(user);
+		
+		User steiner = new User("steiner", "password", true, "steiner", "steiner", 0664123321, "steiner@xyz.com",
+				Calendar.getInstance(), null, null);
+		steiner.encryptPassword();
+		steiner.addUserRole(userRole);
+		steiner.setFlat(testFlat);
+		userDao.save(steiner);
 
 		return "forward:login";
 	}

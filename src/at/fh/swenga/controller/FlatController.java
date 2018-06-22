@@ -1,5 +1,6 @@
 package at.fh.swenga.controller;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.validation.Valid;
@@ -22,6 +23,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import at.fh.swenga.dao.FlatDao;
 import at.fh.swenga.dao.UserDao;
 import at.fh.swenga.model.Flat;
+import at.fh.swenga.model.User;
 
 @Controller
 @Scope(proxyMode = ScopedProxyMode.TARGET_CLASS, value = "session")
@@ -51,11 +53,22 @@ public class FlatController {
 		return false;
 	}
 	
+	@Secured("ROLE_USER")
 	@RequestMapping(value = { "listFlat" })
 	public String listFlat(Model model,Authentication authentication) {
+			
+		List<Flat> flats = new ArrayList<Flat>();
+		String username = authentication.getName();
+		System.out.println("Username: " + username);
 
-		 Flat flats = flatDao.findFirstByid(userDao.findFirstByUsername(authentication.getName()).getFlat().getId());
+		User user = userDao.findFirstByUsername(username);
+		System.out.println("User: " + user);
 
+		Flat flat = user.getFlat();
+		System.out.println("Flat:" + flat);
+
+		//Flat flat = flatDao.findFirstByid(userDao.findFirstByUsername(authentication.getName()).getFlat().getId());
+		flats.add(flat);
 		model.addAttribute("flats", flats);
 
 		return "listFlat";

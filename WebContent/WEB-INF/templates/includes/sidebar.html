@@ -29,9 +29,14 @@
 					class="nav-icon cui-user"></i> Users
 			</a></li>
 
-			<li class="nav-item"><a class="nav-link"
+			<li  sec:authorize="hasRole('USER')" class="nav-item"><a class="nav-link"
 				th:href="@{/listFlat}"> <i
 					class="nav-icon cui-home"></i> Flat
+			</a></li>
+			
+			<li  sec:authorize="hasRole('ROOT')" class="nav-item"><a class="nav-link"
+				th:href="@{/listAllFlat}"> <i
+					class="nav-icon cui-home"></i> All Flats
 			</a></li>
 			
 

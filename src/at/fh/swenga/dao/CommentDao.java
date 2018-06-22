@@ -13,6 +13,8 @@ import at.fh.swenga.model.Comment;
 @Transactional
 public interface CommentDao extends JpaRepository<Comment, Integer> {
 	
-	public List<Comment> findAllByFlat_id(@Param("flat_id") int flat_id);
-
+	public List<Comment> findAllByUser_id(@Param("flat_id") int flat_id);
+	
+	
+					
 }
