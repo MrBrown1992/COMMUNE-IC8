@@ -1,8 +1,8 @@
 package at.fh.swenga.model;
 
-
 import java.util.Calendar;
 import java.util.HashSet;
+
 import java.util.Set;
 
 import javax.persistence.CascadeType;
@@ -55,12 +55,11 @@ public class User implements java.io.Serializable {
 
 	@Column(name = "email", nullable = true, length = 65)
 	private String email;
-	
-	@DateTimeFormat(pattern = "dd.MM.yyyy") 
+
+	@DateTimeFormat(pattern = "dd.MM.yyyy")
 	@Temporal(TemporalType.DATE)
 	private Calendar birthdate;
 
-	
 	@ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.PERSIST)
 	private Set<UserRole> userRoles;
 
@@ -69,10 +68,10 @@ public class User implements java.io.Serializable {
 
 	@ManyToOne(cascade = CascadeType.PERSIST)
 	Flat flat;
-	
-	@OneToMany(fetch = FetchType.LAZY,cascade = CascadeType.PERSIST)
+
+	@OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.PERSIST)
 	private Set<Comment> comments;
-	
+
 	public User() {
 		/**
 		 * @param username
@@ -86,7 +85,7 @@ public class User implements java.io.Serializable {
 	}
 
 	public User(String username, String password, boolean enabled, String firstname, String lastname, int mobilenumber,
-			String email, Calendar birthdate, Set<UserRole> userRoles, Image userimage ) {
+			String email, Calendar birthdate, Set<UserRole> userRoles, Image userimage) {
 		super();
 		this.username = username;
 		this.password = password;
@@ -98,10 +97,7 @@ public class User implements java.io.Serializable {
 		this.birthdate = birthdate;
 		this.userRoles = userRoles;
 		this.userimage = userimage;
-		}
-	
-	
-	
+	}
 
 	public User(String username, String password, boolean enabled) {
 		this.username = username;
@@ -229,7 +225,6 @@ public class User implements java.io.Serializable {
 		this.email = email;
 	}
 
-	
 	/**
 	 * @return the birthdate
 	 */
@@ -238,7 +233,8 @@ public class User implements java.io.Serializable {
 	}
 
 	/**
-	 * @param birthdate the birthdate to set
+	 * @param birthdate
+	 *            the birthdate to set
 	 */
 	public void setBirthdate(Calendar birthdate) {
 		this.birthdate = birthdate;
@@ -252,7 +248,7 @@ public class User implements java.io.Serializable {
 	}
 
 	/**
-	 * @param userRoles
+	 * @param userRoles2
 	 *            the userRoles to set
 	 */
 	public void setUserRoles(Set<UserRole> userRoles) {
@@ -265,11 +261,6 @@ public class User implements java.io.Serializable {
 		userRoles.add(userRole);
 	}
 
-	
-	
-	
-	
-	
 	/**
 	 * @return the flat
 	 */
@@ -278,7 +269,8 @@ public class User implements java.io.Serializable {
 	}
 
 	/**
-	 * @param flat the flat to set
+	 * @param flat
+	 *            the flat to set
 	 */
 	public void setFlat(Flat flat) {
 		this.flat = flat;
@@ -292,7 +284,8 @@ public class User implements java.io.Serializable {
 	}
 
 	/**
-	 * @param comments the comments to set
+	 * @param comments
+	 *            the comments to set
 	 */
 	public void setComments(Set<Comment> comments) {
 		this.comments = comments;
@@ -318,12 +311,14 @@ public class User implements java.io.Serializable {
 		password = passwordEncoder.encode(password);
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see java.lang.Object#toString()
 	 */
 	@Override
 	public String toString() {
-		return firstname  +" "+ lastname ;
+		return firstname + " " + lastname;
 	}
 
 }

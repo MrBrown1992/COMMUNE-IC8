@@ -44,6 +44,9 @@
 
 	<!-- JSR-303/JSR-349 support will be detected on classpath and enabled automatically -->
 	<mvc:annotation-driven />
+	
+	<security:global-method-security secured-annotations="enabled"/>
+	
 
 	<mvc:default-servlet-handler />
 
