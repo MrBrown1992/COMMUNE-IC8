@@ -116,7 +116,7 @@ public class TodoController {
 	@PostMapping("/changeTodo")
 	public String changeTodo(Model model, @Valid Todo changedTodo,Authentication authentication,
 			BindingResult bindingResult) {
-
+		model.addAttribute("categories", categoryDao.findAll());
 		// Any errors? -> Create a String out of all errors and return to the page
 		if (errorsDetected(model, bindingResult)) {
 			return listTodos(model,authentication);
@@ -152,7 +152,7 @@ public class TodoController {
 
 	@GetMapping("/changeTodo")
 	public String changeTodo(@RequestParam(value = "id") int todo_id,  Model model, Authentication authentication) {
-
+		model.addAttribute("categories", categoryDao.findAll());
 		Todo todo = todoDao.findFirstByid(todo_id);
 		String cat = todo.getCategory().getName();
 		if (todo != null) {

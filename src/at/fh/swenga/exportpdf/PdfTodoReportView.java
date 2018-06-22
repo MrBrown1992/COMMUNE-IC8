@@ -2,7 +2,7 @@ package at.fh.swenga.exportpdf;
 
 import java.awt.Color;
 import java.text.SimpleDateFormat;
-import java.util.Calendar;
+
 import java.util.List;
 import java.util.Map;
 
@@ -65,7 +65,7 @@ public class PdfTodoReportView extends AbstractPdfView {
 		// write table row data
 		for (Todo todo : todos) {	
 			table.addCell(todo.getName());
-			table.addCell(todo.getCategory());
+			table.addCell(todo.getCategory().getName());
 			table.addCell(sdf.format(todo.getDate().getTime()));
 			//table.addCell(todo.getDate().toString());
 		}
