@@ -96,37 +96,20 @@
 
 
 						<!-- UserRole  -->
-						<div class="form-group" >
+						
+						<div sec:authorize="hasRole('ROLE_ADMIN')" class="form-group" >
 							<label class="col-md-2 control-label"> User is an Admin </label>
 							<div class="col-md-10">
 								<input type="checkbox" name="Admin">
 							
 							</div>
 							
-							<label class="col-md-2 control-label"> User is  Root </label>
-							<div class="col-md-10">
-								<input type="checkbox" name="Root">
+							<label sec:authorize="hasRole('ROLE_ROOT')"> User is  Root </label>
+							<div sec:authorize="hasRole('ROLE_ROOT')" class="col-md-10">
+								<input type="checkbox" name="Root" >
 							
 							</div>
 						</div>
-						
-						
-						<!-- userole anders 
-						<div class="form-group">
-							<label for="flat" class="col-md-2 control-label"> User Role </label>
-							<div class="col-md-10">
-
-								<select class="custom-select form-control" name="role">
-										<option th:each="role : ${roles}" th:value="${role} ? ${role.id}" th:text = "${role}">
-										</option>
-											</select>
-
-							</div>
-						</div>
-						-->
-						
-						
-						
 						
 
 						<!-- --------------  dayOfBirth ---------------- -->
