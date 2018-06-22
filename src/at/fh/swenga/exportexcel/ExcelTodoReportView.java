@@ -76,7 +76,7 @@ public class ExcelTodoReportView extends AbstractXlsxView{
 			// create the row data
 			Row row = sheet.createRow(rowNum++);
 			row.createCell(0).setCellValue(todo.getName());
-			row.createCell(1).setCellValue(todo.getCategory());
+			row.createCell(1).setCellValue(todo.getCategory().getName());
 			row.createCell(2).setCellValue(sdf.format(todo.getDate().getTime()));
 		}
  
