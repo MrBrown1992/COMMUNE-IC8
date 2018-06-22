@@ -8,7 +8,7 @@
 <div th:replace="~{includes/bootstrap :: bootstrapCSS}" />
 </head>
 
-<body class="app sidebar-show aside-menu-show">
+<body class="app sidebar-show aside-menu-show bg-dark">
   <header class="app-header" >
   
 <!---------------------------HEADER CONTENT --------------------------------------->
@@ -54,17 +54,17 @@
 			class="alert alert-success" role="warning"></div>
 		<!--   message ----------------------------------------------------------- -->
       	
-      	<div><h1 align="center">Grocery List</h1></div>
+      	<div><h1 align="center">Grocery List</h1><br></div>
       	
       	
       	<div>
-      		<table data-toggle="table" class="table table-striped">
-				<thead>
+      		<table data-toggle="table" class="table table-light text-dark table-borderless rounded mx-auto">
+				<thead class="thead-dark">
 
 					<tr>
 						<th data-sortable="true">Grocery</th>
 						<th data-sortable="true">Bought</th>
-						<th sec:authorize="hasRole('ADMIN')">Actions</th>
+						<th sec:authorize="hasRole('ADMIN')" >Actions</th>
 
 
 

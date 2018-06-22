@@ -8,7 +8,7 @@
 <div th:replace="~{includes/bootstrap :: bootstrapCSS}" />
 </head>
 
-<body class="app sidebar-show aside-menu-show">
+<body class="app sidebar-show aside-menu-show bg-dark">
 	<header class="app-header">
 
 		<!---------------------------HEADER CONTENT --------------------------------------->
@@ -52,14 +52,14 @@
 		<!--   message ----------------------------------------------------------- -->
 
 		<div>
-			<h1 align="center">Party Pics</h1>
+			<h1 align="center">Party Pics</h1><br>
 		</div>
 
-		
+		 <div class="row">
 		<div th:each="pic : ${partypics}">
-			<div>
-				<div class="card" style="width: 20rem; margin: 0 auto;">
-					<img class="card-img-top" th:src="${pic}" alt="Card image cap">
+			<div class="col-sm">
+				<div class="card mx-auto" style="width: 18rem;">
+					<img class="card-img-top" th:src="${pic}" alt="Card image cap"></img>
 					<div class="card-body">
 						<h5 class="card-title" th:text="${#request.getAttribute('imgtitle')}">Card title</h5>
 						<p class="card-text" th:text="${#request.getAttribute('imgtext')}">Quick sample text to create the card
@@ -70,7 +70,7 @@
 			<br>
 		</div>
 		</div>
- 
+  
 		
 		</main>
 		<!---------------------------MAIN CONTENT --------------------------------------->
@@ -82,8 +82,8 @@
 		<aside class="aside-menu bg-dark">
 			<!-- Aside menu content here -->
 			<!-- -----------------Edit / PDF / Excel Buttons -------------------------- -->
-			<div class="sidebar">
-				<nav class="sidebar-nav">
+			<div class="sidebar bg-dark">
+				<nav class="sidebar-nav bg-dark">
 					<ul class="nav">
 						<li class="nav-title">Options</li>
 
@@ -98,8 +98,7 @@
 
 			</div>
 		</aside>
-
- 
+ </div>
 	
 	<!---------------------------RIGHT-SIDEBAR --------------------------------------->
 
@@ -108,9 +107,10 @@
 
 	
 		<!-- Footer content here -->
+		
 		<div th:replace="~{includes/footer :: footer}"></div>
 	
 
-	<div th:replace="~{includes/bootstrap :: bootstrapJS}" />
+		<div th:replace="~{includes/bootstrap :: bootstrapJS}" />
 
 </body>

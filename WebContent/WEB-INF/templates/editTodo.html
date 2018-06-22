@@ -5,7 +5,7 @@
 <head>
 <div th:include="~{includes/bootstrap :: bootstrapMeta}" th:remove="tag" />
 
-<title>Edit Grocery</title>
+<title>COMMUNE-IC8</title>
 
 <div th:include="~{includes/bootstrap :: bootstrapCSS}" th:remove="tag" />
 <link
@@ -41,10 +41,10 @@
 								Category </label>
 							<div class="col-md-10">
 
-								<select class="form-control" name="todoCategory" id="todoCategory">
+								<select th:field="*{selectedCategory}">
 									
 									<option th:each="category : ${categories}" th:value="${category}"
-										th:text="${category}"></option>
+										th:text="${category}">Wireframe</option>
 								</select>
 
 							</div>

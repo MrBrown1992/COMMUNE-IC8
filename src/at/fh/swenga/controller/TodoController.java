@@ -138,9 +138,11 @@ public class TodoController {
 	public String changeTodo(@RequestParam(value = "id") int id, Model model, Authentication authentication) {
 
 		Todo todo = todoDao.findFirstByid(id);
+		
 
+		
+		
 		if (todo != null) {
-
 			model.addAttribute("todo", todo);
 			return "editTodo";
 		}

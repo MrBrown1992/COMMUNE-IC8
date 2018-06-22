@@ -8,7 +8,7 @@
 <div th:replace="~{includes/bootstrap :: bootstrapCSS}" />
 </head>
 
-<body class="app sidebar-show aside-menu-show bg-primary">
+<body class="app sidebar-show aside-menu-show bg-dark">
 	<header class="app-header">
 
 		<!---------------------------HEADER CONTENT --------------------------------------->
@@ -28,9 +28,9 @@
 		<div class="sidebar">
 			<!-- Sidebar content here -->
 
-			<div th:include="~{includes/sidebar :: sidebar}"></div>
+		<div th:include="~{includes/sidebar :: sidebar}"></div>
 
-		</div>
+	</div>
 		<!---------------------------SIDEBAR CONTENT --------------------------------------->
 
 
@@ -52,9 +52,10 @@
 			class="alert alert-success" role="warning"></div>
 		<!--   message ----------------------------------------------------------- -->
 
-	<h1 align="center">Home</h1>
+		<div class="container bg-dark" style="height:100vh;">
+		<div><h1 align="center">Home</h1><br></div>
 
-		<div class="card bg-dark mx-auto" style="width: 50%;">
+		<div class="card bg-light text-dark mx-auto rounded" style="width: 50%;">
 			<div class="card-body">
 				<h1 class="card-title" th:text="'Hello !'"></h1>
 				<p class="card-text" style="font-size:120%;">Hello and welcome to your flat <span style="font-size:150%;"th:text="${fullname}"/> !</p>
@@ -69,7 +70,7 @@
 				<p> Or just visit <a th:href="showUserProfile" class="card-link">Your Profile!</a></p>
 			</div>
 		</div>
-
+		</div>
 
 		
 
@@ -84,7 +85,7 @@
 
 	 <aside class="aside-menu bg-dark">
 	
-	<div class="card bg-dark mx-auto" >
+	<div class="card bg-dark mx-auto rounded " >
 		
 		<img class="img-fluid" th:unless="${image} == null" th:src="${image}" height="250">
 			
