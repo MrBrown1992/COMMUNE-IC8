@@ -2,7 +2,6 @@ package at.fh.swenga.controller;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 
@@ -19,13 +18,12 @@ import org.springframework.validation.BindingResult;
 import org.springframework.validation.FieldError;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
-
 import at.fh.swenga.dao.CategoryDao;
+import at.fh.swenga.dao.FlatDao;
 import at.fh.swenga.dao.TodoDao;
 import at.fh.swenga.dao.UserDao;
 import at.fh.swenga.model.Todo;
@@ -42,6 +40,9 @@ public class TodoController {
 
 	@Autowired
 	UserDao userDao;
+	
+	@Autowired
+	FlatDao flatDao;
 
 	//private List<String> categories = new ArrayList<String>();
 
@@ -67,7 +68,7 @@ public class TodoController {
 	public String listTodos(Model model,Authentication authentication) {
 
 		List<Todo> todos = todoDao.findAllByFlat_id(userDao.findFirstByUsername(authentication.getName()).getFlat().getId());
-
+		
 		model.addAttribute("todos", todos);
 		return "listTodo";
 	}
@@ -84,7 +85,7 @@ public class TodoController {
 			return listTodos(model ,authentication);
 		}
 		model.addAttribute("categories", categoryDao.findAll());
-
+		newTodo.setFlat(flatDao.findFirstByid(userDao.findFirstByUsername(authentication.getName()).getFlat().getId()));
 		newTodo.setName(todoName);
 		newTodo.setCategory(categoryDao.findFirstByid(todoCategory));
 		SimpleDateFormat format = new SimpleDateFormat("dd.MM.yyyy");
