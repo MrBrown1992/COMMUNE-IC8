@@ -1,6 +1,6 @@
 package at.fh.swenga.model;
 
-import java.util.Set;
+import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -24,8 +24,8 @@ public class UserRole implements java.io.Serializable {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
  
-	@ManyToMany(mappedBy = "userRoles", fetch = FetchType.LAZY)
-	private Set<User> users;
+	@ManyToMany(mappedBy = "userRoles", fetch = FetchType.EAGER)
+	private List<User> users;
  
 	@Column(name = "role", nullable = false, length = 45)
 	private String role;
@@ -47,14 +47,22 @@ public class UserRole implements java.io.Serializable {
 		this.id = id;
 	}
  
-	public Set<User> getUsers() {
+	
+ 
+	/**
+	 * @return the users
+	 */
+	public List<User> getUsers() {
 		return users;
 	}
- 
-	public void setUsers(Set<User> users) {
+
+	/**
+	 * @param users the users to set
+	 */
+	public void setUsers(List<User> users) {
 		this.users = users;
 	}
- 
+
 	public String getRole() {
 		return role;
 	}

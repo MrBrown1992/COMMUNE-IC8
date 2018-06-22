@@ -3,6 +3,7 @@ package at.fh.swenga.controller;
 import java.io.OutputStream;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 import java.util.Optional;
@@ -97,6 +98,8 @@ public class SecurityController {
 		if (userRole == null)
 			userRole = new UserRole("ROLE_USER");
 		
+		
+		
 		User root = new User("root", "password", true, "Master", "of the Universe", 3141592, "master@universe.xyz",
 				Calendar.getInstance(), null, null);
 		root.encryptPassword();
@@ -126,6 +129,11 @@ public class SecurityController {
 
 		return "forward:login";
 	}
+	
+	
+	
+	
+	
 	@Secured("ROLE_ADMIN")
 	@RequestMapping("/addNewUser")
 	@Transactional
@@ -133,13 +141,14 @@ public class SecurityController {
 			@RequestParam(value = "firstname") String firstname, @RequestParam(value = "lastname") String lastname,
 			@RequestParam(value = "password") String password, @RequestParam(value = "email") String email,
 			@RequestParam(value = "birthdate") String dobString, @RequestParam(value = "mobilenumber") int mobilenumber,
-			@RequestParam(value = "Admin", required = false) boolean isAdmin, @RequestParam(value = "flat") int flat_id,
+			@RequestParam(value = "Admin", required = false) boolean isAdmin,@RequestParam(value = "Root", required = false) boolean isRoot, @RequestParam(value = "flat") int flat_id,
 			Authentication authentication, Model model, BindingResult bindingResult) throws ParseException {
 
 		if (errorsDetected(model, bindingResult)) {
 			return ("/index");
 		}
 
+		
 		newUser.setFirstname(firstname);
 		newUser.setLastname(lastname);
 		newUser.setUsername(username);
@@ -159,7 +168,11 @@ public class SecurityController {
 		if (isAdmin) {
 			newUser.addUserRole(userRoleDao.findFirstByRoleName("ROLE_ADMIN"));
 		}
-
+		
+		if (isRoot) {
+			newUser.addUserRole(userRoleDao.findFirstByRoleName("ROLE_ROOT"));
+		}
+		
 		userDao.save(newUser);
 
 		return listUsers(model);
@@ -188,7 +201,7 @@ public class SecurityController {
 			user.setMobilenumber(changedUser.getMobilenumber());
 			user.setEmail(changedUser.getEmail());
 			user.setFlat(changedUser.getFlat());
-			user.setUserRoles(changedUser.getUserRoles());
+			user.setUserRoles(changedUser.getUserRoles()); //<--
 			user.setBirthdate(changedUser.getBirthdate());
 
 			userDao.save(user);
