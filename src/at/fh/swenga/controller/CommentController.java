@@ -57,9 +57,9 @@ public class CommentController {
 	}
 
 	@RequestMapping(value = { "/listComments" })
-	public String listComments(Model model) {
+	public String listComments(Model model,Authentication authentication) {
 
-		List<Comment> comments = commentDao.findAll();
+		List<Comment> comments = commentDao.findAllByFlat_id(userDao.findFirstByUsername(authentication.getName()).getFlat().getId());
 
 		model.addAttribute("comments", comments);
 		return "listComments";
@@ -93,7 +93,7 @@ public class CommentController {
 
 		// Any errors? -> Create a String out of all errors and return to the page
 		if (errorsDetected(model, bindingResult)) {
-			return listComments(model);
+			return listComments(model,authentication);
 		}
 
 		System.out.println(username);
@@ -110,10 +110,10 @@ public class CommentController {
 	
 	@Secured("ROLE_ADMIN")
 	@RequestMapping("/deleteComment")
-	public String deleteComment(Model model, @RequestParam int id) {
+	public String deleteComment(Model model, @RequestParam int id,Authentication authentication) {
 		commentDao.deleteById(id);
 
-		return listComments(model);
+		return listComments(model,authentication);
 	}
 
 	@ExceptionHandler(Exception.class)

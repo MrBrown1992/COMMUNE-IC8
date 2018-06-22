@@ -50,9 +50,20 @@ public class FlatController {
 		}
 		return false;
 	}
-
+	
 	@RequestMapping(value = { "listFlat" })
-	public String listFlat(Model model) {
+	public String listFlat(Model model,Authentication authentication) {
+
+		 Flat flats = flatDao.findFirstByid(userDao.findFirstByUsername(authentication.getName()).getFlat().getId());
+
+		model.addAttribute("flats", flats);
+
+		return "listFlat";
+	}
+	
+	@Secured("ROLE_ROOT")
+	@RequestMapping(value = { "listAllFlat" })
+	public String listAllFlat(Model model) {
 
 		List<Flat> flats = flatDao.findAll();
 
@@ -60,6 +71,9 @@ public class FlatController {
 
 		return "listFlat";
 	}
+	
+	
+	
 
 	@Secured("ROLE_ROOT")
 	@RequestMapping(value = "addFlat")
@@ -92,7 +106,7 @@ public class FlatController {
 			Authentication authentication, BindingResult bindingResult) {
 
 		if (errorsDetected(model, bindingResult)) {
-			return listFlat(model);
+			return listFlat(model,authentication);
 		}
 
 		Flat flat = flatDao.findFirstByid(changedFlat.getId());
@@ -101,10 +115,10 @@ public class FlatController {
 
 			flatDao.save(flat);
 
-			return listFlat(model);
+			return listFlat(model,authentication);
 		} else {
 			model.addAttribute("warningMessage", "Flat not found!");
-			return listFlat(model);
+			return listFlat(model,authentication);
 		}
 	}
 
@@ -121,15 +135,15 @@ public class FlatController {
 		}
 
 		model.addAttribute("warningMessage", "Flat not found!");
-		return listFlat(model);
+		return listFlat(model,authentication);
 	}
 
 	@Secured("ROLE_ROOT")
 	@RequestMapping("/deleteFlat")
-	public String deleteFlat(Model model, @RequestParam int id) {
+	public String deleteFlat(Model model, @RequestParam int id,Authentication authentication) {
 		flatDao.deleteById(id);
 
-		return listFlat(model);
+		return listFlat(model,authentication);
 	}
 
 	@ExceptionHandler(Exception.class)

@@ -21,9 +21,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import at.fh.swenga.dao.FlatDao;
 import at.fh.swenga.dao.GroceryDao;
 import at.fh.swenga.dao.UserDao;
-import at.fh.swenga.model.Flat;
 import at.fh.swenga.model.Grocery;
-import at.fh.swenga.model.User;
 
 @Controller
 @Scope(proxyMode = ScopedProxyMode.TARGET_CLASS, value = "session")
