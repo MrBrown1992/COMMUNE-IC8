@@ -111,4 +111,9 @@ public class Todo implements java.io.Serializable {
 		return "Todo [date=" + date + "]";
 	}
 
+	@Override
+	public String toString() {
+		return "Todo [date=" + date + "]";
+	}
+	
 }

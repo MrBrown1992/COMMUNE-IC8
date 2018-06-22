@@ -1,5 +1,6 @@
 package at.fh.swenga.exportexcel;
 
+import java.text.SimpleDateFormat;
 import java.util.List;
 import java.util.Map;
 
@@ -67,14 +68,16 @@ public class ExcelTodoReportView extends AbstractXlsxView{
 		cell2.setCellValue("Deadline");
 		cell2.setCellStyle(style);
  
-		// create multiple rows with grocery data
+		// create multiple rows with todo data
+		SimpleDateFormat sdf = new SimpleDateFormat("dd.MM.yyyy");
+		
 		int rowNum = 1;
 		for (Todo todo : todos) {
 			// create the row data
 			Row row = sheet.createRow(rowNum++);
 			row.createCell(0).setCellValue(todo.getName());
 			row.createCell(1).setCellValue(todo.getCategory());
-			row.createCell(2).setCellValue(todo.getDate().toString());
+			row.createCell(2).setCellValue(sdf.format(todo.getDate().getTime()));
 		}
  
 		// adjust column width to fit the content
