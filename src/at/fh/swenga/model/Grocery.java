@@ -2,11 +2,15 @@ package at.fh.swenga.model;
 
 
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 @Entity
@@ -32,6 +36,11 @@ public class Grocery implements java.io.Serializable{
 	@Column(name = "bought")
 	private boolean bought;
 	
+	
+	@ManyToOne(fetch = FetchType.LAZY)
+	//@JoinColumn(name ="flat_id")
+	private Flat flat; 
+		
 	public Grocery() {
 		super();
 		// TODO Auto-generated constructor stub
@@ -83,6 +92,27 @@ public class Grocery implements java.io.Serializable{
 	 */
 	public void setBought(boolean bought) {
 		this.bought = bought;
+	}
+	
+	
+	
+	
+
+
+
+
+	/**
+	 * @return the flat
+	 */
+	public Flat getFlat() {
+		return flat;
+	}
+
+	/**
+	 * @param flat the flat to set
+	 */
+	public void setFlat(Flat flat) {
+		this.flat = flat;
 	}
 
 	/* (non-Javadoc)

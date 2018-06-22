@@ -4,7 +4,6 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.Date;
 import java.util.List;
 
 import javax.validation.Valid;
@@ -12,8 +11,6 @@ import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.context.annotation.ScopedProxyMode;
-import org.springframework.data.domain.PageRequest;
-import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
@@ -25,14 +22,12 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import at.fh.swenga.dao.FlatDao;
 import at.fh.swenga.dao.TodoDao;
-import at.fh.swenga.model.Grocery;
+import at.fh.swenga.dao.UserDao;
 import at.fh.swenga.model.Todo;
-import at.fh.swenga.model.User;
-import at.fh.swenga.model.UserRole;
 
 @Controller
 @Scope(proxyMode = ScopedProxyMode.TARGET_CLASS, value = "session")
@@ -40,6 +35,14 @@ public class TodoController {
 
 	@Autowired
 	TodoDao todoDao;
+
+	@Autowired
+	UserDao userDao;
+
+	@Autowired
+	FlatDao flatDao;
+	
+	
 
 	private List<String> categories = new ArrayList<String>();
 
@@ -61,15 +64,16 @@ public class TodoController {
 	}
 
 	@RequestMapping(value = { "listTodos" })
-	public String listTodos(Model model) {
+	public String listTodos(Model model,Authentication authentication) {
 
-		List<Todo> todos = todoDao.findAll();
+		List<Todo> todos = todoDao.findAllByFlat_id(userDao.findFirstByUsername(authentication.getName()).getFlat().getId());
 
 		model.addAttribute("todos", todos);
 		return "listTodo";
 	}
 
 	@RequestMapping(value = "/addTodo")
+	@Transactional
 	public String addTodo(Model model, @Valid Todo newTodo, @RequestParam(value = "name") String todoName,
 			@ModelAttribute(value = "todoCategory") String todoCategory,
 			@RequestParam(value = "todoDate") String todoDate, Authentication authentication,
@@ -77,7 +81,7 @@ public class TodoController {
 
 		// Any errors? -> Create a String out of all errors and return to the page
 		if (errorsDetected(model, bindingResult)) {
-			return listTodos(model);
+			return listTodos(model ,authentication);
 		}
 
 		newTodo.setName(todoName);
@@ -88,7 +92,7 @@ public class TodoController {
 		newTodo.setDate(date);
 		todoDao.save(newTodo);
 
-		return listTodos(model);
+		return listTodos(model,authentication);
 	}
 
 	@RequestMapping(value = { "/editTodo" })
@@ -113,7 +117,7 @@ public class TodoController {
 
 		// Any errors? -> Create a String out of all errors and return to the page
 		if (errorsDetected(model, bindingResult)) {
-			return listTodos(model);
+			return listTodos(model,authentication);
 		}
 		
 		
@@ -127,10 +131,10 @@ public class TodoController {
 
 			todoDao.save(todo);
 
-			return listTodos(model);
+			return listTodos(model,authentication);
 		} else {
 			model.addAttribute("warningMessage", "Todo not found!");
-			return listTodos(model);
+			return listTodos(model,authentication);
 		}
 	}
 
@@ -148,14 +152,14 @@ public class TodoController {
 		}
 
 		model.addAttribute("warningMessage", "Todo not found!");
-		return listTodos(model);
+		return listTodos(model,authentication);
 	}
 
 	@RequestMapping("/deleteTodo")
-	public String deleteTodo(Model model, @RequestParam int id) {
+	public String deleteTodo(Model model, @RequestParam int id,Authentication authentication) {
 		todoDao.deleteById(id);
 
-		return listTodos(model);
+		return listTodos(model,authentication);
 	}
 
 	@ExceptionHandler(Exception.class)

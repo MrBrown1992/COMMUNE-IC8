@@ -23,7 +23,6 @@ import at.fh.swenga.dao.FlatDao;
 import at.fh.swenga.dao.UserDao;
 import at.fh.swenga.model.Flat;
 
-
 @Controller
 @Scope(proxyMode = ScopedProxyMode.TARGET_CLASS, value = "session")
 public class FlatController {
@@ -55,19 +54,21 @@ public class FlatController {
 	@RequestMapping(value = { "listFlat" })
 	public String listFlat(Model model) {
 
-		List<Flat> flats = flatDao.findAll();		
+		List<Flat> flats = flatDao.findAll();
 
 		model.addAttribute("flats", flats);
-		
+
 		return "listFlat";
 	}
-	@Secured("ROLE_ADMIN")
+
+	@Secured("ROLE_ROOT")
 	@RequestMapping(value = "addFlat")
 	public String addFlat() {
 
 		return "editFlat";
 	}
-	@Secured("ROLE_ADMIN")
+
+	@Secured("ROLE_ROOT")
 	@RequestMapping(value = { "createNewFlat" })
 	public String createNewFlat(Model model, @Valid Flat newFlat, @RequestParam(value = "name") String flatName,
 			Authentication authentication) {
@@ -78,15 +79,17 @@ public class FlatController {
 
 		return "forward:listFlat";
 	}
+
 	@Secured("ROLE_ADMIN")
 	@RequestMapping(value = "editFlat")
 	public String editFlat() {
 		return "editFlat";
 	}
+
 	@Secured("ROLE_ADMIN")
 	@PostMapping(value = "changeFlat")
-	public String changeFlat(Model model, @RequestParam(value = "name") String name,
-			@Valid Flat changedFlat, Authentication authentication, BindingResult bindingResult) {
+	public String changeFlat(Model model, @RequestParam(value = "name") String name, @Valid Flat changedFlat,
+			Authentication authentication, BindingResult bindingResult) {
 
 		if (errorsDetected(model, bindingResult)) {
 			return listFlat(model);
@@ -104,9 +107,10 @@ public class FlatController {
 			return listFlat(model);
 		}
 	}
+
 	@Secured("ROLE_ADMIN")
 	@GetMapping("/changeFlat")
-	public String changeFlat( Model model, Authentication authentication, @RequestParam(value= "id")int id ) {
+	public String changeFlat(Model model, Authentication authentication, @RequestParam(value = "id") int id) {
 
 		Flat flat = flatDao.findFirstByid(id);
 
@@ -119,7 +123,8 @@ public class FlatController {
 		model.addAttribute("warningMessage", "Flat not found!");
 		return listFlat(model);
 	}
-	@Secured("ROLE_ADMIN")
+
+	@Secured("ROLE_ROOT")
 	@RequestMapping("/deleteFlat")
 	public String deleteFlat(Model model, @RequestParam int id) {
 		flatDao.deleteById(id);

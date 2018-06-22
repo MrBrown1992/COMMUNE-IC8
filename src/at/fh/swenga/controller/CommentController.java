@@ -107,6 +107,14 @@ public class CommentController {
 
 		return "forward:listComments";
 	}
+	
+	@Secured("ROLE_ADMIN")
+	@RequestMapping("/deleteComment")
+	public String deleteComment(Model model, @RequestParam int id) {
+		commentDao.deleteById(id);
+
+		return listComments(model);
+	}
 
 	@ExceptionHandler(Exception.class)
 	public String handleAllException(Exception ex) {
@@ -114,4 +122,6 @@ public class CommentController {
 		return "error";
 
 	}
+	
+	
 }

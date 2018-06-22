@@ -72,8 +72,7 @@ public class SecurityController {
 		}
 		return false;
 	}
-	
-	
+
 	@RequestMapping("/addUser")
 	@Transactional
 	public String fillData(Model model) {
@@ -86,10 +85,9 @@ public class SecurityController {
 		}
 
 		UserRole rootRole = userRoleDao.findFirstByRoleName("ROLE_ROOT");
-		if(rootRole == null)
+		if (rootRole == null)
 			rootRole = new UserRole("ROLE_ROOT");
-		
-		
+
 		UserRole adminRole = userRoleDao.findFirstByRoleName("ROLE_ADMIN");
 		if (adminRole == null)
 			adminRole = new UserRole("ROLE_ADMIN");
@@ -97,9 +95,7 @@ public class SecurityController {
 		UserRole userRole = userRoleDao.findFirstByRoleName("ROLE_USER");
 		if (userRole == null)
 			userRole = new UserRole("ROLE_USER");
-		
-		
-		
+
 		User root = new User("root", "password", true, "Master", "of the Universe", 3141592, "master@universe.xyz",
 				Calendar.getInstance(), null, null);
 		root.encryptPassword();
@@ -108,9 +104,6 @@ public class SecurityController {
 		root.addUserRole(rootRole);
 		root.setFlat(testFlat);
 		userDao.save(root);
-				
-				
-				
 
 		User spiess = new User("spiess", "password", true, "Nikolaus", "Spiess", 0316123456, "testmail@mimimi.com",
 				Calendar.getInstance(), null, null);
@@ -129,11 +122,7 @@ public class SecurityController {
 
 		return "forward:login";
 	}
-	
-	
-	
-	
-	
+
 	@Secured("ROLE_ADMIN")
 	@RequestMapping("/addNewUser")
 	@Transactional
@@ -141,14 +130,14 @@ public class SecurityController {
 			@RequestParam(value = "firstname") String firstname, @RequestParam(value = "lastname") String lastname,
 			@RequestParam(value = "password") String password, @RequestParam(value = "email") String email,
 			@RequestParam(value = "birthdate") String dobString, @RequestParam(value = "mobilenumber") int mobilenumber,
-			@RequestParam(value = "Admin", required = false) boolean isAdmin,@RequestParam(value = "Root", required = false) boolean isRoot, @RequestParam(value = "flat") int flat_id,
+			@RequestParam(value = "Admin", required = false) boolean isAdmin,
+			@RequestParam(value = "Root", required = false) boolean isRoot, @RequestParam(value = "flat") int flat_id,
 			Authentication authentication, Model model, BindingResult bindingResult) throws ParseException {
 
 		if (errorsDetected(model, bindingResult)) {
 			return ("/index");
 		}
 
-		
 		newUser.setFirstname(firstname);
 		newUser.setLastname(lastname);
 		newUser.setUsername(username);
@@ -168,16 +157,17 @@ public class SecurityController {
 		if (isAdmin) {
 			newUser.addUserRole(userRoleDao.findFirstByRoleName("ROLE_ADMIN"));
 		}
-		
+
 		if (isRoot) {
 			newUser.addUserRole(userRoleDao.findFirstByRoleName("ROLE_ROOT"));
 		}
-		
+
 		userDao.save(newUser);
 
 		return listUsers(model);
 	}
-	
+
+	@Secured("ROLE_USER")
 	@RequestMapping(value = { "/editUser" })
 	public String user(Model model) {
 		model.addAttribute("flats", flatDao.findAll());
@@ -201,7 +191,7 @@ public class SecurityController {
 			user.setMobilenumber(changedUser.getMobilenumber());
 			user.setEmail(changedUser.getEmail());
 			user.setFlat(changedUser.getFlat());
-			user.setUserRoles(changedUser.getUserRoles()); // <-- wie geht  das :( ???d
+			user.setUserRoles(changedUser.getUserRoles()); // <-- wie geht das :( ???d
 			user.setBirthdate(changedUser.getBirthdate());
 
 			userDao.save(user);
@@ -227,6 +217,7 @@ public class SecurityController {
 		model.addAttribute("warningMessage", "User not found!");
 		return listUsers(model);
 	}
+
 	@Secured("ROLE_ADMIN")
 	@RequestMapping(value = { "/listUsers" })
 	public String listUsers(Model model) {
@@ -238,15 +229,15 @@ public class SecurityController {
 		return "listUsers";
 	}
 
-	@RequestMapping(value = { "/"})
+	@RequestMapping(value = { "/" })
 	public String index(Model model, Authentication authentication) {
-		
+
 		String username = authentication.getName();
 		User user = userDao.findFirstByUsername(username);
 		String fullname = user.getFirstname() + " " + user.getLastname();
 		model.addAttribute("fullname", fullname);
 		model.addAttribute("user", user);
-		
+
 		if (user != null && user.isEnabled()) {
 
 			model.addAttribute("user", user);
@@ -263,18 +254,18 @@ public class SecurityController {
 
 				model.addAttribute("image", image);
 			}
-		} 
-	
+		}
+
 		return "index";
 	}
-	
-	@RequestMapping(value= {"/currentUser"})
+
+	@RequestMapping(value = { "/currentUser" })
 	public String getCurrentUser(Model model, Authentication authentication) {
 
 		String name = authentication.getName();
 		String firstname = userDao.findFirstByUsername(name).getFirstname();
 		String lastname = userDao.findFirstByUsername(name).getLastname();
-	
+
 		model.addAttribute("name", name);
 		model.addAttribute("firstname", firstname);
 		model.addAttribute("lastname", lastname);
@@ -351,7 +342,7 @@ public class SecurityController {
 		}
 	}
 
-	@Secured({ "ROLE_USER" })
+	@Secured("ROLE_USER")
 	@RequestMapping(value = { "showUserProfile" })
 	public String showProfile(Model model, Authentication authentication) {
 
@@ -380,6 +371,7 @@ public class SecurityController {
 		return "showUserProfile"; // <-- profil anzeigen :)
 	}
 
+	@Secured("ROLE_ROOT")
 	@RequestMapping(value = "/deleteUser")
 	public String deleteUser(Model model, @RequestParam int id) {
 		userDao.deleteById(id);
@@ -387,19 +379,11 @@ public class SecurityController {
 		return listUsers(model);
 	}
 
-	@RequestMapping(value = "/test")
-	public String test() {
-		return "test";
-	}
-
 	@RequestMapping(value = "/about")
 	public String about(Model model) {
 		return "about";
 	}
-	
-	
-	
-	
+
 	@ExceptionHandler(Exception.class)
 	public String handleAllException(Exception ex) {
 		ex.printStackTrace();

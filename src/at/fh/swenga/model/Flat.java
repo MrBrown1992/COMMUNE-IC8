@@ -3,6 +3,7 @@ package at.fh.swenga.model;
 import java.util.HashSet;
 import java.util.Set;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -33,6 +34,20 @@ public class Flat  implements java.io.Serializable{
 
 	@OneToMany(mappedBy = "flat", fetch = FetchType.EAGER)
 	private Set<User> users;
+	
+	
+
+	@OneToMany(mappedBy = "flat" ,fetch = FetchType.LAZY)
+	private Set<Grocery> grocery;
+	
+
+	@OneToMany(mappedBy = "flat",fetch = FetchType.LAZY )
+	private Set<Todo> todo;
+
+	@OneToMany(mappedBy = "flat",fetch = FetchType.LAZY)
+	private Set<PartyImg> partyimg;
+	
+	
 	
 
 	@Version
@@ -81,6 +96,53 @@ public class Flat  implements java.io.Serializable{
 
 	public void setId(int id) {
 		this.id = id;
+	}
+	
+	
+	
+	
+
+
+	/**
+	 * @return the grocery
+	 */
+	public Set<Grocery> getGrocery() {
+		return grocery;
+	}
+
+	/**
+	 * @param grocery the grocery to set
+	 */
+	public void setGrocery(Set<Grocery> grocery) {
+		this.grocery = grocery;
+	}
+
+	/**
+	 * @return the todo
+	 */
+	public Set<Todo> getTodo() {
+		return todo;
+	}
+
+	/**
+	 * @param todo the todo to set
+	 */
+	public void setTodo(Set<Todo> todo) {
+		this.todo = todo;
+	}
+
+	/**
+	 * @return the partyimg
+	 */
+	public Set<PartyImg> getPartyimg() {
+		return partyimg;
+	}
+
+	/**
+	 * @param partyimg the partyimg to set
+	 */
+	public void setPartyimg(Set<PartyImg> partyimg) {
+		this.partyimg = partyimg;
 	}
 
 	/* (non-Javadoc)

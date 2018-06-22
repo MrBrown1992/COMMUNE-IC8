@@ -45,7 +45,7 @@ public class PdfTodoReportView extends AbstractPdfView {
 
 		// define table header cell
 		PdfPCell cell = new PdfPCell();
-		cell.setBackgroundColor(Color.BLUE);
+		cell.setBackgroundColor(Color.GRAY);
 		cell.setPadding(5);
 
 		// write table header
