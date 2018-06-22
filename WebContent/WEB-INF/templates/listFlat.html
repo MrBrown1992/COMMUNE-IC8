@@ -23,7 +23,7 @@
 
 	<!---------------------------SIDEBAR CONTENT --------------------------------------->
 
-	<div class="app-body">
+	<div class="app-body" style="border-right: 1px solid;">
 		<div class="sidebar">
 			<!-- Sidebar content here -->
 
@@ -58,7 +58,8 @@
 		</div>
 
 
-		<div>
+		     <div class ="col-sm-10 mx-auto" align="center">
+
 			<table data-toggle="table" class="table table-light text-dark table-borderless rounded mx-auto">
 
 				<thead class="thead-dark">
@@ -75,8 +76,8 @@
 					<!--  list all items ----------------------------------------------------------- -->
 
 					<tr th:each="flat : ${flats}">
-						<td th:text="${flat.name}"></td>
-						<td>
+						<td th:text="${flat.name}" align="left"></td>
+						<td align="center">
 							<ul>
 								<li th:each=" user: ${flat.getUsers()}"
 									th:text="${user.firstname} + ' '+ ${user.lastname} "></li>
@@ -84,7 +85,7 @@
 						</td>
 
 
-						<td sec:authorize="hasRole('ADMIN')"><a
+						<td sec:authorize="hasRole('ADMIN')" align="right"><a
 							th:href="@{/changeFlat(id=${flat.id})}"><button type="button"
 									class="btn btn-xs btn-warning cui-wrench">
 									<span aria-hidden="true"></span> Edit

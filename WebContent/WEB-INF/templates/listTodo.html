@@ -23,7 +23,7 @@
   
 <!---------------------------SIDEBAR CONTENT --------------------------------------->
   
-  <div class="app-body">
+  <div class="app-body" style="border-right: 1px solid;">
     <div class="sidebar">
       <!-- Sidebar content here -->
 
@@ -57,7 +57,8 @@
       	<div><h1 align="center">To-Do's</h1><br></div>
       	
       	
-      	<div>
+      	      	<div class ="col-sm-10 mx-auto" align="center">
+
       		<table data-toggle="table" class="table table-light text-dark table-borderless rounded mx-auto">
 				<thead class="thead-dark">
 
@@ -77,12 +78,12 @@
 					<!--  list all items ----------------------------------------------------------- -->
 
 					<tr th:each="todo : ${todos}">
-						<td th:text="${todo.name}"></td>
-						<td th:text="${todo.category}"></td>
-						<td th:text="${#dates.format(todo.date,'dd.MM.yyyy')}"></td>
+						<td th:text="${todo.name}" align="left"></td>
+						<td th:text="${todo.category}" align="center"></td>
+						<td th:text="${#dates.format(todo.date,'dd.MM.yyyy')}" align="center"></td>
 
 
-						<td sec:authorize="hasRole('ADMIN')"><a
+						<td sec:authorize="hasRole('ADMIN')" align="right"><a
 							th:href="@{/changeTodo(id=${todo.id})}"
 							><button type="button" class="btn btn-xs btn-warning cui-wrench"> <span
 								aria-hidden="true"></span> Edit</button>

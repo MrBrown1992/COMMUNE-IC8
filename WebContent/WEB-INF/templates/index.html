@@ -25,10 +25,10 @@
 	<!---------------------------SIDEBAR CONTENT --------------------------------------->
 
 	<div class="app-body">
-		<div class="sidebar">
+		<div class="sidebar" style="border-right: 1px solid;">
 			<!-- Sidebar content here -->
 
-		<div th:include="~{includes/sidebar :: sidebar}"></div>
+		<div th:include="~{includes/sidebar :: sidebar}" ></div>
 
 	</div>
 		<!---------------------------SIDEBAR CONTENT --------------------------------------->
@@ -85,7 +85,7 @@
 
 	 <aside class="aside-menu bg-dark">
 	
-	<div class="card bg-dark mx-auto rounded " >
+	<div class="card bg-dark mx-auto rounded border-0" >
 		
 		<img class="img-fluid" th:unless="${image} == null" th:src="${image}" height="250">
 			

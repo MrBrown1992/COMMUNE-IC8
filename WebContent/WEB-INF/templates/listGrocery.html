@@ -23,7 +23,7 @@
   
 <!---------------------------SIDEBAR CONTENT --------------------------------------->
   
-  <div class="app-body">
+  <div class="app-body" style="border-right: 1px solid;">
     <div class="sidebar">
       <!-- Sidebar content here -->
 
@@ -57,8 +57,9 @@
       	<div><h1 align="center">Grocery List</h1><br></div>
       	
       	
-      	<div>
-      		<table data-toggle="table" class="table table-light text-dark table-borderless rounded mx-auto">
+      <div class ="col-sm-10 mx-auto" align="center">
+
+      		<table data-toggle="table" class="table table-light text-dark table-borderless rounded ">
 				<thead class="thead-dark">
 
 					<tr>
@@ -75,11 +76,11 @@
 					<!--  list all items ----------------------------------------------------------- -->
 
 					<tr th:each="grocery : ${groceries}">
-						<td th:text="${grocery.groceryName}"></td>
-						<td th:text="${grocery.bought}"></td>
+						<td th:text="${grocery.groceryName}" align="left"></td>
+						<td th:text="${grocery.bought}" align="center"></td>
 
 
-						<td sec:authorize="hasRole('ADMIN')"><a
+						<td sec:authorize="hasRole('ADMIN')" align="right"><a
 							th:href="@{/changeGrocery(id=${grocery.id})}"><button type="button" class="btn btn-xs btn-warning cui-wrench">
 							<span aria-hidden="true"></span> Edit</button>
 						</a> 
