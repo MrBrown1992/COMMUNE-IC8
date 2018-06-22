@@ -1,6 +1,8 @@
 package at.fh.swenga.exportpdf;
 
 import java.awt.Color;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.List;
 import java.util.Map;
 
@@ -30,7 +32,7 @@ public class PdfTodoReportView extends AbstractPdfView {
 		response.setHeader("Content-Disposition", "attachment; filename=\"todos.pdf\"");
 
 		List<Todo> todos = (List<Todo>) model.get("todos");
-
+		
 		document.add(new Paragraph("Todo list"));
 		
 
@@ -58,12 +60,14 @@ public class PdfTodoReportView extends AbstractPdfView {
 		cell.setPhrase(new Phrase("Deadline", font));
 		table.addCell(cell);
 		
+		SimpleDateFormat sdf = new SimpleDateFormat("dd.MM.yyyy");
 
 		// write table row data
-		for (Todo todo : todos) {
+		for (Todo todo : todos) {	
 			table.addCell(todo.getName());
 			table.addCell(todo.getCategory());
-			table.addCell(todo.getDate().toString());
+			table.addCell(sdf.format(todo.getDate().getTime()));
+			//table.addCell(todo.getDate().toString());
 		}
 
 		document.add(table);
