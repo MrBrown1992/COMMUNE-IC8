@@ -183,7 +183,7 @@ public class SecurityController {
 	@PostMapping("/changeUser")
 	public String changeUser(Model model, @RequestParam(value = "id") int id, @Valid User changedUser,
 			Authentication authentication, BindingResult bindingResult) {
-
+		model.addAttribute("flats", flatDao.findAll());
 		if (errorsDetected(model, bindingResult)) {
 			return listUsers(model);
 		}
@@ -211,7 +211,7 @@ public class SecurityController {
 
 	@GetMapping("/changeUser")
 	public String changeUser(@RequestParam(value = "id") int id, Model model, Authentication authentication) {
-
+		model.addAttribute("flats", flatDao.findAll());
 		User user = userDao.findFirstByid(id);
 
 		if (user != null) {
