@@ -161,13 +161,7 @@ public class SecurityController {
 		newUser.setPassword(password);
 		newUser.encryptPassword();
 		newUser.setEnabled(true);
-		
-		SimpleDateFormat format = new SimpleDateFormat("dd.MM.yyyy");
-		Calendar dob = Calendar.getInstance();
-		dob.setTime(format.parse(dobString));
-		newUser.setBirthdate(dob);
 		newUser.setEmail(email);
-
 		newUser.setMobilenumber(mobilenumber);
 		newUser.setFlat(flatDao.findFirstByid(flat_id));
 
@@ -180,6 +174,12 @@ public class SecurityController {
 		if (isRoot) {
 			newUser.addUserRole(userRoleDao.findFirstByRoleName("ROLE_ROOT"));
 		}
+		
+		
+		SimpleDateFormat format = new SimpleDateFormat("dd.MM.yyyy");
+		Calendar dob = Calendar.getInstance();
+		dob.setTime(format.parse(dobString));
+		newUser.setBirthdate(dob);
 
 		userDao.save(newUser);
 
