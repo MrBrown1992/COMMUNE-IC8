@@ -77,7 +77,7 @@ public class TodoController {
 	@Transactional
 	public String addTodo(Model model, @Valid Todo newTodo, @RequestParam(value = "name") String todoName,
 			@RequestParam(value = "todoCategory") int todoCategory,
-			@RequestParam(value = "todoDate") String todoDate, Authentication authentication,
+			@RequestParam(value = "date") String todoDate, Authentication authentication,
 			BindingResult bindingResult) throws ParseException {
 
 		// Any errors? -> Create a String out of all errors and return to the page
@@ -99,15 +99,7 @@ public class TodoController {
 
 	@RequestMapping(value = { "/editTodo" })
 	public String editTodo(Model model) {
-		/*
-		if (categories.isEmpty()) {
-			categories = new ArrayList<String>();
-			categories.add("Appointment");
-			categories.add("Cleaning");
-			categories.add("Housekeeping");
-			categories.add("Party");
-			categories.add("Other");
-		}*/
+
 		model.addAttribute("categories", categoryDao.findAll());
 
 		return "editTodo";
@@ -115,30 +107,24 @@ public class TodoController {
 
 	@PostMapping("/changeTodo")
 	public String changeTodo(Model model, @Valid Todo changedTodo,Authentication authentication,
-			BindingResult bindingResult) {
+			BindingResult bindingResult,@RequestParam(value = "todoCategory") int todoCategory,@RequestParam(value = "date") String dateAsString) throws ParseException {
+		
 		model.addAttribute("categories", categoryDao.findAll());
 		// Any errors? -> Create a String out of all errors and return to the page
 		if (errorsDetected(model, bindingResult)) {
 			return listTodos(model,authentication);
 		}
-		/*
-		if (categories.isEmpty()) {
-			categories = new ArrayList<String>();
-			categories.add("Appointment");
-			categories.add("Cleaning");
-			categories.add("Housekeeping");
-			categories.add("Party");
-			categories.add("Other");
-		}
-		*/
-		//model.addAttribute("categories", categories);
 
+		
 		Todo todo = todoDao.findFirstByid(changedTodo.getId());
 		
 		if (todo != null) {
+			
+			
+			
 			todo.setName(changedTodo.getName());
 
-			todo.setCategory(changedTodo.getCategory()); // default value setzen ..
+			todo.setCategory(categoryDao.findFirstByid(todoCategory)); // default value setzen ..
 			todo.setDate(changedTodo.getDate());
 
 			todoDao.save(todo);
@@ -152,6 +138,7 @@ public class TodoController {
 
 	@GetMapping("/changeTodo")
 	public String changeTodo(@RequestParam(value = "id") int todo_id,  Model model, Authentication authentication) {
+		
 		model.addAttribute("categories", categoryDao.findAll());
 		Todo todo = todoDao.findFirstByid(todo_id);
 		

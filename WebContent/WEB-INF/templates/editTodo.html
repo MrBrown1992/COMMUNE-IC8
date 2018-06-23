@@ -52,11 +52,11 @@
 
 						<!-- --------------  Date ---------------- -->
 						<div class="form-group">
-							<label class="col-md-2 control-label">
+							<label  class="col-md-2 control-label">
 								Date </label>
 							<div class="col-md-10">
-								<input class="form_datetime" placeholder="date" type="text" readonly name="todoDate"
-									th:value="${todo} ? ${#dates.format(todo.todoDate, 'dd.MM.yyyy')}">
+								<input class="form_datetime" placeholder="date" type="text" readonly name="date"
+									th:value="${todo} ? ${#dates.format(todo.date, 'dd.MM.yyyy')}">
 							</div>
 						</div>
 
