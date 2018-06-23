@@ -2,6 +2,7 @@ package at.fh.swenga.controller;
 
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.HashMap;
 import java.util.List;
 
 import org.apache.commons.codec.binary.Base64;
@@ -17,6 +18,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
+
+import com.sun.javafx.collections.MappingChange.Map;
 
 import at.fh.swenga.dao.FlatDao;
 import at.fh.swenga.dao.PartyImgDao;
@@ -44,7 +47,10 @@ public class PartyImgController {
 
 		List<PartyImg> partyimgs = partyImgDao.findAllByFlat_id(userDao.findFirstByUsername(authentication.getName()).getFlat().getId());
 		List<String> picsAsString = new ArrayList<String>();
-		for (PartyImg img : partyimgs) {
+		
+		HashMap<PartyImg, String> picMap = new HashMap<PartyImg, String>();
+		
+		/*for (PartyImg img : partyimgs) {
 			byte[] pic = img.getImg();
 			StringBuilder sb = new StringBuilder();
 			sb.append("data:image/jpeg;base64,");
@@ -52,13 +58,32 @@ public class PartyImgController {
 			
 			String image = sb.toString();
 			
-			picsAsString.add(image);
+			picsAsString.add(image);}
+*/
 
+		
+		for (PartyImg img : partyimgs) {
+			
+			byte[] pic = img.getImg();
+			StringBuilder sb = new StringBuilder();
+			sb.append("data:image/jpeg;base64,");
+			sb.append(Base64.encodeBase64String(pic));
+			
+			String image = sb.toString();
+			
+			picMap.put(img, image);
 
 		}
-
+		picMap.entrySet();
+		
+		
+		model.addAttribute("picMap", picMap);
+		
+		
 		model.addAttribute("partypics", picsAsString);
 		model.addAttribute("partyimgs", partyimgs);
+		
+
 		return "listPartyPics";
 	}
 

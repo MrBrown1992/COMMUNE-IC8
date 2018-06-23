@@ -29,10 +29,12 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
+import at.fh.swenga.dao.CategoryDao;
 import at.fh.swenga.dao.FlatDao;
 import at.fh.swenga.dao.ImageDao;
 import at.fh.swenga.dao.UserDao;
 import at.fh.swenga.dao.UserRoleDao;
+import at.fh.swenga.model.Category;
 import at.fh.swenga.model.Flat;
 import at.fh.swenga.model.Image;
 import at.fh.swenga.model.User;
@@ -53,6 +55,9 @@ public class SecurityController {
 
 	@Autowired
 	FlatDao flatDao;
+	
+	@Autowired
+	CategoryDao categoryDao;
 
 	@RequestMapping(value = "/login", method = RequestMethod.GET)
 	public String handleLogin() {
@@ -76,6 +81,7 @@ public class SecurityController {
 	@Transactional
 	public String fillData(Model model) {
 
+		
 		Flat testFlat = flatDao.findFirstByFlatName("Admin WG");
 		if (testFlat == null) {
 			testFlat = new Flat("Admin WG");
@@ -86,14 +92,19 @@ public class SecurityController {
 		UserRole rootRole = userRoleDao.findFirstByRoleName("ROLE_ROOT");
 		if (rootRole == null)
 			rootRole = new UserRole("ROLE_ROOT");
+			userRoleDao.save(rootRole);
 
 		UserRole adminRole = userRoleDao.findFirstByRoleName("ROLE_ADMIN");
 		if (adminRole == null)
 			adminRole = new UserRole("ROLE_ADMIN");
+			userRoleDao.save(adminRole);
+
 
 		UserRole userRole = userRoleDao.findFirstByRoleName("ROLE_USER");
 		if (userRole == null)
 			userRole = new UserRole("ROLE_USER");
+			userRoleDao.save(userRole);
+
 
 		User root = new User("root", "password", true, "Master", "of the Universe", 3141592, "master@universe.xyz",
 				Calendar.getInstance(), null, null);
