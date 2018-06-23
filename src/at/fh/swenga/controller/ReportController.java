@@ -36,81 +36,82 @@ public class ReportController {
 	UserDao userDao;
 
 	@RequestMapping(value = { "/groceryPdf" })
-	public String groceryPdf(Model model, @RequestParam(required = false) String pdf,Authentication authentication) {
+	public String groceryPdf(Model model, @RequestParam(required = false) String pdf, Authentication authentication) {
 
-		List<Grocery> groceries = groceryDao.findAllByFlat_id(userDao.findFirstByUsername(authentication.getName()).getFlat().getId());
+		List<Grocery> groceries = groceryDao
+				.findAllByFlat_id(userDao.findFirstByUsername(authentication.getName()).getFlat().getId());
 
 		// Store the groceries in the model, so the reports can access them
 		model.addAttribute("groceries", groceries);
 
 		return "groceryPdfReport";
-		
+
 	}
 
 	@RequestMapping(value = { "/groceryExcel" })
-	public String excel(Model model, @RequestParam(required = false) String excel,Authentication authentication) {
+	public String excel(Model model, @RequestParam(required = false) String excel, Authentication authentication) {
 
 		// The method findAll() can do this
-		List<Grocery> groceries = groceryDao.findAllByFlat_id(userDao.findFirstByUsername(authentication.getName()).getFlat().getId());
+		List<Grocery> groceries = groceryDao
+				.findAllByFlat_id(userDao.findFirstByUsername(authentication.getName()).getFlat().getId());
 
 		// Store the groceries in the model, so the reports can access them
 		model.addAttribute("groceries", groceries);
 
 		return "groceryExcelReport";
-		}
-
-		
-	
+	}
 
 	@RequestMapping(value = { "/commentsPdf" })
-	public String commentsPdf(Model model, @RequestParam(required = false) String pdf,Authentication authentication) {
+	public String commentsPdf(Model model, @RequestParam(required = false) String pdf, Authentication authentication) {
 
-		List<Comment> comments = commentDao.findAllByUser_id(userDao.findFirstByUsername(authentication.getName()).getFlat().getId());
+		List<Comment> comments = commentDao
+				.findAllByUser_id(userDao.findFirstByUsername(authentication.getName()).getFlat().getId());
 
 		// Store the comments in the model, so the reports can access them
 		model.addAttribute("comments", comments);
 
 		return "commentsPdfReport";
-		
+
 	}
 
 	@RequestMapping(value = { "/commentsExcel" })
-	public String commentsExcel(Model model, @RequestParam(required = false) String excel,Authentication authentication) {
+	public String commentsExcel(Model model, @RequestParam(required = false) String excel,
+			Authentication authentication) {
 
 		// The method findAll() can do this
-		List<Comment> comments = commentDao.findAllByUser_id(userDao.findFirstByUsername(authentication.getName()).getFlat().getId());
+		List<Comment> comments = commentDao
+				.findAllByUser_id(userDao.findFirstByUsername(authentication.getName()).getFlat().getId());
 
 		// Store the comments in the model, so the reports can access them
 		model.addAttribute("comments", comments);
 
 		return "commentsExcelReport";
-		}
-
-		
+	}
 
 	@RequestMapping(value = { "/todoPdf" })
-	public String todoPdf(Model model, @RequestParam(required = false) String pdf,Authentication authentication) {
+	public String todoPdf(Model model, @RequestParam(required = false) String pdf, Authentication authentication) {
 
-		List<Todo> todos = todoDao.findAllByFlat_id(userDao.findFirstByUsername(authentication.getName()).getFlat().getId());
+		List<Todo> todos = todoDao
+				.findAllByFlat_id(userDao.findFirstByUsername(authentication.getName()).getFlat().getId());
 
 		// Store the todos in the model, so the reports can access them
 		model.addAttribute("todos", todos);
 
 		return "todoPdfReport";
-		} 
-	
-	
+	}
+
 	@RequestMapping(value = { "/todoExcel" })
-	public String todoExcel(Model model, @RequestParam(required = false) String excel,Authentication authentication) {
+	public String todoExcel(Model model, @RequestParam(required = false) String excel, Authentication authentication) {
 
 		// The method findAll() can do this
-		List<Todo> todos = todoDao.findAllByFlat_id(userDao.findFirstByUsername(authentication.getName()).getFlat().getId());
+		List<Todo> todos = todoDao
+				.findAllByFlat_id(userDao.findFirstByUsername(authentication.getName()).getFlat().getId());
 
 		// Store the todos in the model, so the reports can access them
 		model.addAttribute("todos", todos);
 
 		return "todoExcelReport";
-		}
+	}
 
 	@ExceptionHandler(Exception.class)
 	public String handleAllException(Exception ex) {
@@ -120,5 +121,3 @@ public class ReportController {
 
 	}
 }
-
-

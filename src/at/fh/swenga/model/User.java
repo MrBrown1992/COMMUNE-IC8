@@ -60,7 +60,7 @@ public class User implements java.io.Serializable {
 	@Temporal(TemporalType.DATE)
 	private Calendar birthdate;
 
-	@ManyToMany(fetch = FetchType.EAGER /*,cascade = CascadeType.PERSIST*/)
+	@ManyToMany(fetch = FetchType.EAGER /* ,cascade = CascadeType.PERSIST */)
 	private Set<UserRole> userRoles;
 
 	@OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "attacheduser")

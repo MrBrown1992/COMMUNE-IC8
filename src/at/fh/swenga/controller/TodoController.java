@@ -44,7 +44,6 @@ public class TodoController {
 	@Autowired
 	FlatDao flatDao;
 
-	//private List<String> categories = new ArrayList<String>();
 
 
 	public TodoController() {
@@ -133,7 +132,7 @@ public class TodoController {
 			todo.setName(changedTodo.getName());
 
 
-			todo.setCategory(categoryDao.findFirstByid(todoCategory)); // default value setzen ..
+			todo.setCategory(categoryDao.findFirstByid(todoCategory));
 
 			todo.setDate(changedTodo.getDate());
 

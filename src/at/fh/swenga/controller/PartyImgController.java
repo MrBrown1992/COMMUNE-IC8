@@ -23,8 +23,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
-import com.sun.javafx.collections.MappingChange.Map;
-
 import at.fh.swenga.dao.FlatDao;
 import at.fh.swenga.dao.PartyImgDao;
 import at.fh.swenga.dao.UserDao;
@@ -37,7 +35,7 @@ public class PartyImgController {
 
 	@Autowired
 	PartyImgDao partyImgDao;
-	
+
 	@Autowired
 	FlatDao flatDao;
 	@Autowired
@@ -48,46 +46,32 @@ public class PartyImgController {
 	}
 
 	@RequestMapping(value = { "showPartyImg" })
-	public String showPartyImg(Model model,Authentication authentication) {
+	public String showPartyImg(Model model, Authentication authentication) {
 
-		List<PartyImg> partyimgs = partyImgDao.findAllByFlat_id(userDao.findFirstByUsername(authentication.getName()).getFlat().getId());
+		List<PartyImg> partyimgs = partyImgDao
+				.findAllByFlat_id(userDao.findFirstByUsername(authentication.getName()).getFlat().getId());
 		List<String> picsAsString = new ArrayList<String>();
-		
-		HashMap<PartyImg, String> picMap = new HashMap<PartyImg, String>();
-		
-		/*for (PartyImg img : partyimgs) {
-			byte[] pic = img.getImg();
-			StringBuilder sb = new StringBuilder();
-			sb.append("data:image/jpeg;base64,");
-			sb.append(Base64.encodeBase64String(pic));
-			
-			String image = sb.toString();
-			
-			picsAsString.add(image);}
-*/
 
-		
+		HashMap<PartyImg, String> picMap = new HashMap<PartyImg, String>();
+
 		for (PartyImg img : partyimgs) {
-			
+
 			byte[] pic = img.getImg();
 			StringBuilder sb = new StringBuilder();
 			sb.append("data:image/jpeg;base64,");
 			sb.append(Base64.encodeBase64String(pic));
-			
+
 			String image = sb.toString();
-			
+
 			picMap.put(img, image);
 
 		}
 		picMap.entrySet();
-		
-		
+
 		model.addAttribute("picMap", picMap);
-		
-		
+
 		model.addAttribute("partypics", picsAsString);
 		model.addAttribute("partyimgs", partyimgs);
-		
 
 		return "listPartyPics";
 	}
@@ -98,8 +82,9 @@ public class PartyImgController {
 	}
 
 	@PostMapping(value = { "uploadPartyPic" })
-	public String uploadPartyPic(Model model, @RequestParam("myFile") MultipartFile file,Authentication authentication,
-			@RequestParam(value = "imgtitle",required = false) String imgtitle, @RequestParam(value = "imgtext",required = false) String imgtext) {
+	public String uploadPartyPic(Model model, @RequestParam("myFile") MultipartFile file, Authentication authentication,
+			@RequestParam(value = "imgtitle", required = false) String imgtitle,
+			@RequestParam(value = "imgtext", required = false) String imgtext) {
 
 		try {
 			PartyImg image = new PartyImg();
@@ -108,12 +93,13 @@ public class PartyImgController {
 			image.setUploadDate(Calendar.getInstance());
 			image.setImgtitle(imgtitle);
 			image.setImgtext(imgtext);
-			image.setFlat(flatDao.findFirstByid(userDao.findFirstByUsername(authentication.getName()).getFlat().getId()));
+			image.setFlat(
+					flatDao.findFirstByid(userDao.findFirstByUsername(authentication.getName()).getFlat().getId()));
 			partyImgDao.save(image);
 
 		} catch (Exception e) {
 			model.addAttribute("errorMessage", "Error:" + e.getMessage());
-			
+
 		}
 
 		return showPartyImg(model, authentication);
@@ -129,6 +115,7 @@ public class PartyImgController {
 		return showPartyImg(model,authentication);
 	}
 	
+
 	@ExceptionHandler(Exception.class)
 	public String handleAllException(Exception ex) {
 		ex.printStackTrace();

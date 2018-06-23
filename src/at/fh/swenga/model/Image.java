@@ -26,23 +26,21 @@ public class Image implements java.io.Serializable {
 	@Column(name = "id")
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
-	
+
 	@OneToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "username", nullable = false)
+	@JoinColumn(name = "username", nullable = false)
 	private User attacheduser;
-	
+
 	@Lob
 	@Basic(fetch = FetchType.LAZY)
 	@Column(name = "img")
 	private byte[] img;
-	
-	@Column(name="filename")
+
+	@Column(name = "filename")
 	private String filename;
 	@Version
 	long version;
 	private String contentType;
-	
-
 
 	public Image() {
 		super();
@@ -80,11 +78,11 @@ public class Image implements java.io.Serializable {
 	public void setImg(byte[] img) {
 		this.img = img;
 	}
-	
+
 	public String getFilename() {
 		return filename;
 	}
- 
+
 	public void setFilename(String filename) {
 		this.filename = filename;
 	}
@@ -97,15 +95,11 @@ public class Image implements java.io.Serializable {
 	}
 
 	/**
-	 * @param contentType the contentType to set
+	 * @param contentType
+	 *            the contentType to set
 	 */
 	public void setContentType(String contentType) {
 		this.contentType = contentType;
 	}
- 
-	
-	
 
-	
-	
 }

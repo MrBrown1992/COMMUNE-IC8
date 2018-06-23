@@ -16,7 +16,7 @@ Team Members:
 2. Open Eclipse and create a new Dynamic Web Project.
 3. Convert the project to maven (RMB on project root -> Configure -> Convert to Maven)
 4. Import project sources downloaded in step #1
-5. Adapt the db.properties to your own database connection.
+5. Adapt the database.properties to your own database connection and rename it to db.properties.
 6. Configure the Server to host the Application (e.g. Tomcat).
 7. Start the server.
 8. In your web browser, navigate to http://localhost:8080/COMMUNE-IC8

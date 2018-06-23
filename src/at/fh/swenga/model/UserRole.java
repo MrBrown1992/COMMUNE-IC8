@@ -11,43 +11,38 @@ import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 
-
-
- 
 @Entity
 @Table(name = "user_roles")
 public class UserRole implements java.io.Serializable {
 	private static final long serialVersionUID = 8098173157518993615L;
- 
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
- 
+
 	@ManyToMany(mappedBy = "userRoles", fetch = FetchType.EAGER)
 	private List<User> users;
- 
+
 	@Column(name = "role", nullable = false, length = 45)
 	private String role;
- 
+
 	public UserRole() {
 		// TODO Auto-generated constructor stub
 	}
- 
+
 	public UserRole(String role) {
 		super();
 		this.role = role;
 	}
- 
+
 	public int getId() {
 		return id;
 	}
- 
+
 	public void setId(int id) {
 		this.id = id;
 	}
- 
-	
- 
+
 	/**
 	 * @return the users
 	 */
@@ -56,7 +51,8 @@ public class UserRole implements java.io.Serializable {
 	}
 
 	/**
-	 * @param users the users to set
+	 * @param users
+	 *            the users to set
 	 */
 	public void setUsers(List<User> users) {
 		this.users = users;
@@ -65,9 +61,9 @@ public class UserRole implements java.io.Serializable {
 	public String getRole() {
 		return role;
 	}
- 
+
 	public void setRole(String role) {
 		this.role = role;
 	}
- 
+
 }

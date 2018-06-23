@@ -21,7 +21,7 @@ import com.lowagie.text.pdf.PdfWriter;
 import at.fh.swenga.model.Grocery;
 
 public class PdfGroceryReportView extends AbstractPdfView {
-	
+
 	@Override
 	protected void buildPdfDocument(Map<String, Object> model, Document document, PdfWriter writer,
 			HttpServletRequest request, HttpServletResponse response) throws Exception {
@@ -31,8 +31,7 @@ public class PdfGroceryReportView extends AbstractPdfView {
 
 		List<Grocery> groceries = (List<Grocery>) model.get("groceries");
 
-		document.add(new Paragraph("Grocery list"+groceries.size()));
-		
+		document.add(new Paragraph("Grocery list" + groceries.size()));
 
 		PdfPTable table = new PdfPTable(2);
 		table.setWidthPercentage(100.0f);
@@ -55,16 +54,14 @@ public class PdfGroceryReportView extends AbstractPdfView {
 		cell.setPhrase(new Phrase("Name", font));
 		table.addCell(cell);
 
-
 		// write table row data
 		for (Grocery grocery : groceries) {
 			table.addCell(grocery.getId() + "");
 			table.addCell(grocery.getName());
-			
+
 		}
 
 		document.add(table);
 	}
-
 
 }

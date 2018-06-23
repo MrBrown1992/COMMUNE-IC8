@@ -34,7 +34,6 @@ import at.fh.swenga.dao.FlatDao;
 import at.fh.swenga.dao.ImageDao;
 import at.fh.swenga.dao.UserDao;
 import at.fh.swenga.dao.UserRoleDao;
-import at.fh.swenga.model.Category;
 import at.fh.swenga.model.Flat;
 import at.fh.swenga.model.Image;
 import at.fh.swenga.model.User;
@@ -115,13 +114,13 @@ public class SecurityController {
 		root.setFlat(testFlat);
 		userDao.save(root);
 
-		User spiess = new User("spiess", "password", true, "Nikolaus", "Spiess", 0316123456, "testmail@mimimi.com",
+		User admin = new User("admin", "password", true, "Admin", "Admin", 0316123456, "testmail@mimimi.com",
 				Calendar.getInstance(), null, null);
-		spiess.encryptPassword();
-		spiess.addUserRole(userRole);
-		spiess.addUserRole(adminRole);
-		spiess.setFlat(testFlat);
-		userDao.save(spiess);
+		admin.encryptPassword();
+		admin.addUserRole(userRole);
+		admin.addUserRole(adminRole);
+		admin.setFlat(testFlat);
+		userDao.save(admin);
 
 		User user = new User("user", "password", true, "user", "user", 0664123321, "malware@xyz.com",
 				Calendar.getInstance(), null, null);
@@ -166,7 +165,6 @@ public class SecurityController {
 		newUser.setFlat(flatDao.findFirstByid(flat_id));
 
 		newUser.addUserRole(userRoleDao.findFirstByRoleName("ROLE_USER"));
-		
 		if (isAdmin) {
 			newUser.addUserRole(userRoleDao.findFirstByRoleName("ROLE_ADMIN"));
 		}

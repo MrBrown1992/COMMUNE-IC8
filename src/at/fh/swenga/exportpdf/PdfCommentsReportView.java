@@ -21,7 +21,7 @@ import com.lowagie.text.pdf.PdfWriter;
 import at.fh.swenga.model.Comment;
 
 public class PdfCommentsReportView extends AbstractPdfView {
-	
+
 	@Override
 	protected void buildPdfDocument(Map<String, Object> model, Document document, PdfWriter writer,
 			HttpServletRequest request, HttpServletResponse response) throws Exception {
@@ -31,8 +31,7 @@ public class PdfCommentsReportView extends AbstractPdfView {
 
 		List<Comment> comments = (List<Comment>) model.get("comments");
 
-		//document.add(new Paragraph("Comment list" + comments.size()));
-		
+		// document.add(new Paragraph("Comment list" + comments.size()));
 
 		PdfPTable table = new PdfPTable(3);
 		table.setWidthPercentage(100.0f);
@@ -54,21 +53,19 @@ public class PdfCommentsReportView extends AbstractPdfView {
 
 		cell.setPhrase(new Phrase("Date", font));
 		table.addCell(cell);
-		
+
 		cell.setPhrase(new Phrase("Text", font));
 		table.addCell(cell);
-
 
 		// write table row data
 		for (Comment comment : comments) {
 			table.addCell(comment.getUser().getFirstname() + " " + comment.getUser().getLastname());
 			table.addCell(comment.getDate().toString());
 			table.addCell(comment.getText());
-			
+
 		}
 
 		document.add(table);
 	}
-
 
 }

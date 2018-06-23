@@ -32,10 +32,10 @@ public class GroceryController {
 
 	@Autowired
 	UserDao userDao;
-	
+
 	@Autowired
 	FlatDao flatDao;
-	
+
 	public GroceryController() {
 
 		// TODO Auto-generated constructor stub
@@ -55,9 +55,10 @@ public class GroceryController {
 	}
 
 	@RequestMapping(value = { "showGroceryList" })
-	public String showGroceryList(Model model,Authentication authentication) {
-				
-		List<Grocery> groceries = groceryDao.findAllByFlat_id(userDao.findFirstByUsername(authentication.getName()).getFlat().getId());
+	public String showGroceryList(Model model, Authentication authentication) {
+
+		List<Grocery> groceries = groceryDao
+				.findAllByFlat_id(userDao.findFirstByUsername(authentication.getName()).getFlat().getId());
 
 		model.addAttribute("groceries", groceries);
 		return "listGrocery";
@@ -69,46 +70,43 @@ public class GroceryController {
 			@RequestParam(value = "boughtstate", required = false) boolean bought, Authentication authentication,
 			BindingResult bindingResult) {
 
-		// Any errors? -> Create a String out of all errors and return to the page
 		if (errorsDetected(model, bindingResult)) {
-			return showGroceryList(model,authentication);
+			return showGroceryList(model, authentication);
 		}
 
-	
-		
 		newGrocery.setName(groceryName);
 		newGrocery.setBought(bought);
-		newGrocery.setFlat(flatDao.findFirstByid(userDao.findFirstByUsername(authentication.getName()).getFlat().getId())); // Peter Salhofer wäre stolz ;) 
+		newGrocery.setFlat(
+				flatDao.findFirstByid(userDao.findFirstByUsername(authentication.getName()).getFlat().getId())); // Peter
+																													// Salhofer
+																													// wäre
+																													// stolz
+																													// ;)
 		groceryDao.save(newGrocery);
 
-		return showGroceryList(model,authentication);
+		return showGroceryList(model, authentication);
 	}
 
-	
-	
-	
 	@PostMapping("/changeGrocery")
 	public String changeGrocery(Model model, @RequestParam(value = "groceryName") String groceryName,
 			@RequestParam(value = "boughtstate", required = false, defaultValue = "false") boolean bought,
 			@Valid Grocery changedGrocery, Authentication authentication, BindingResult bindingResult) {
 
-		// Any errors? -> Create a String out of all errors and return to the page
 		if (errorsDetected(model, bindingResult)) {
-			return showGroceryList(model,authentication);
+			return showGroceryList(model, authentication);
 		}
 
 		Grocery grocery = groceryDao.findFirstByid(changedGrocery.getId());
 		if (grocery != null) {
 			grocery.setName(groceryName);
 
-			grocery.setBought(bought); // default value setzen ..
-
+			grocery.setBought(bought);
 			groceryDao.save(grocery);
 
-			return showGroceryList(model,authentication);
+			return showGroceryList(model, authentication);
 		} else {
 			model.addAttribute("warningMessage", "Grocery not found!");
-			return showGroceryList(model,authentication);
+			return showGroceryList(model, authentication);
 		}
 	}
 
@@ -124,14 +122,14 @@ public class GroceryController {
 		}
 
 		model.addAttribute("warningMessage", "Grocery not found!");
-		return showGroceryList(model,authentication);
+		return showGroceryList(model, authentication);
 	}
 
 	@RequestMapping("/delete")
 	public String deleteGrocery(Model model, @RequestParam int id, Authentication authentication) {
 		groceryDao.deleteById(id);
 
-		return showGroceryList(model,authentication);
+		return showGroceryList(model, authentication);
 	}
 
 	@RequestMapping(value = { "/editGrocery" })
