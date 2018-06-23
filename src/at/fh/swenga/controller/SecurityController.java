@@ -165,7 +165,6 @@ public class SecurityController {
 		newUser.setFlat(flatDao.findFirstByid(flat_id));
 
 		newUser.addUserRole(userRoleDao.findFirstByRoleName("ROLE_USER"));
-		
 		if (isAdmin) {
 			newUser.addUserRole(userRoleDao.findFirstByRoleName("ROLE_ADMIN"));
 		}

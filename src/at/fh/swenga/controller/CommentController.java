@@ -59,9 +59,9 @@ public class CommentController {
 	@RequestMapping(value = { "/listComments" })
 	public String listComments(Model model, Authentication authentication) {
 
-		List<Comment> comments = commentDao
-				.findAllByUser_id(userDao.findFirstByUsername(authentication.getName()).getFlat().getId());
+		List<Comment> comments = commentDao.findAllByUser_id(userDao.findFirstByUsername(authentication.getName()).getFlat().getId());
 
+		
 		model.addAttribute("comments", comments);
 		return "listComments";
 	}
