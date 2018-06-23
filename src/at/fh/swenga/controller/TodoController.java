@@ -141,9 +141,11 @@ public class TodoController {
 		
 		model.addAttribute("categories", categoryDao.findAll());
 		Todo todo = todoDao.findFirstByid(todo_id);
-		
+		String cat = todo.getCategory().getName();
 		if (todo != null) {
 			model.addAttribute("todo", todo);
+			model.addAttribute("cat", cat);
+
 			return "editTodo";
 		}
 
