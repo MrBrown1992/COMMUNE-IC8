@@ -97,15 +97,15 @@
 
 						<!-- UserRole  -->
 						
-						<div sec:authorize="hasRole('ROLE_ADMIN')" class="form-group" >
+						<div sec:authorize="hasRole('ROLE_ADMIN')"  class="form-group" >
 							<label class="col-md-2 control-label"> User is an Admin </label>
 							<div class="col-md-10">
 								<input type="checkbox" name="Admin">
 							
 							</div>
 							
-							<label sec:authorize="hasRole('ROLE_ROOT')"> User is  Root </label>
-							<div sec:authorize="hasRole('ROLE_ROOT')" class="col-md-10">
+							<label sec:authorize="hasRole('ROLE_ADMIN')" > User is  Root </label>
+							<div sec:authorize="hasRole('ROLE_ADMIN')"  class="col-md-10">
 								<input type="checkbox" name="Root" >
 							
 							</div>

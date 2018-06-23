@@ -79,7 +79,9 @@
 
 					<tr th:each="todo : ${todos}">
 						<td th:text="${todo.name}" align="left"></td>
-						<td th:text="${todo.category}" align="center"></td>
+
+						<td  th:text="${todo.category}" align="center"></td>
+
 						<td th:text="${#dates.format(todo.date,'dd.MM.yyyy')}" align="center"></td>
 
 

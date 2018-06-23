@@ -150,6 +150,7 @@ public class SecurityController {
 		newUser.setPassword(password);
 		newUser.encryptPassword();
 		newUser.setEnabled(true);
+		
 		SimpleDateFormat format = new SimpleDateFormat("dd.MM.yyyy");
 		Calendar dob = Calendar.getInstance();
 		dob.setTime(format.parse(dobString));
@@ -160,6 +161,7 @@ public class SecurityController {
 		newUser.setFlat(flatDao.findFirstByid(flat_id));
 
 		newUser.addUserRole(userRoleDao.findFirstByRoleName("ROLE_USER"));
+		
 		if (isAdmin) {
 			newUser.addUserRole(userRoleDao.findFirstByRoleName("ROLE_ADMIN"));
 		}
@@ -181,12 +183,19 @@ public class SecurityController {
 	}
 
 	@PostMapping("/changeUser")
-	public String changeUser(Model model, @RequestParam(value = "id") int id, @Valid User changedUser,
-			Authentication authentication, BindingResult bindingResult) {
+	public String changeUser(Model model, @RequestParam(value = "id") int id,@RequestParam(value = "birthdate") String dobString, @Valid User changedUser,
+			Authentication authentication, BindingResult bindingResult) throws ParseException {
+		
+		
 		model.addAttribute("flats", flatDao.findAll());
+		
 		if (errorsDetected(model, bindingResult)) {
 			return listUsers(model);
 		}
+		
+		SimpleDateFormat format = new SimpleDateFormat("dd.MM.yyyy");
+		Calendar dob = Calendar.getInstance();
+		dob.setTime(format.parse(dobString));
 
 		User user = userDao.findFirstByid(changedUser.getId());
 		if (user != null) {
@@ -199,7 +208,7 @@ public class SecurityController {
 			user.setFlat(changedUser.getFlat());
 			user.setUserRoles(changedUser.getUserRoles()); // <-- wie geht das :( ???d
 			user.setBirthdate(changedUser.getBirthdate());
-
+		
 			userDao.save(user);
 
 			return listUsers(model);
