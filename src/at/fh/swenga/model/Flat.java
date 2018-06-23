@@ -3,7 +3,6 @@ package at.fh.swenga.model;
 import java.util.HashSet;
 import java.util.Set;
 
-
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -14,10 +13,9 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Version;
 
-
 @Entity
 @Table(name = "flat")
-public class Flat  implements java.io.Serializable{
+public class Flat implements java.io.Serializable {
 
 	/**
 	 * 
@@ -34,27 +32,18 @@ public class Flat  implements java.io.Serializable{
 
 	@OneToMany(mappedBy = "flat", fetch = FetchType.EAGER)
 	private Set<User> users;
-	
-	
 
-	@OneToMany(mappedBy = "flat" ,fetch = FetchType.LAZY)
+	@OneToMany(mappedBy = "flat", fetch = FetchType.LAZY)
 	private Set<Grocery> grocery;
-	
 
-	@OneToMany(mappedBy = "flat",fetch = FetchType.LAZY )
+	@OneToMany(mappedBy = "flat", fetch = FetchType.LAZY)
 	private Set<Todo> todo;
 
-	@OneToMany(mappedBy = "flat",fetch = FetchType.LAZY)
+	@OneToMany(mappedBy = "flat", fetch = FetchType.LAZY)
 	private Set<PartyImg> partyimg;
-	
-	
-	
 
 	@Version
 	long version;
-
-	
-	
 
 	public Flat() {
 		super();
@@ -97,11 +86,6 @@ public class Flat  implements java.io.Serializable{
 	public void setId(int id) {
 		this.id = id;
 	}
-	
-	
-	
-	
-
 
 	/**
 	 * @return the grocery
@@ -111,7 +95,8 @@ public class Flat  implements java.io.Serializable{
 	}
 
 	/**
-	 * @param grocery the grocery to set
+	 * @param grocery
+	 *            the grocery to set
 	 */
 	public void setGrocery(Set<Grocery> grocery) {
 		this.grocery = grocery;
@@ -125,7 +110,8 @@ public class Flat  implements java.io.Serializable{
 	}
 
 	/**
-	 * @param todo the todo to set
+	 * @param todo
+	 *            the todo to set
 	 */
 	public void setTodo(Set<Todo> todo) {
 		this.todo = todo;
@@ -139,20 +125,21 @@ public class Flat  implements java.io.Serializable{
 	}
 
 	/**
-	 * @param partyimg the partyimg to set
+	 * @param partyimg
+	 *            the partyimg to set
 	 */
 	public void setPartyimg(Set<PartyImg> partyimg) {
 		this.partyimg = partyimg;
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see java.lang.Object#toString()
 	 */
 	@Override
 	public String toString() {
-		return  name;
+		return name;
 	}
-	
-	
 
 }

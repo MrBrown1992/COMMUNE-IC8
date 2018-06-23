@@ -51,7 +51,6 @@ public class ExcelCommentsReportView extends AbstractXlsxView {
 		// create a new row in the worksheet
 		Row headerRow = sheet.createRow(0);
 
-
 		// create a new cell in the row
 		Cell cell0 = headerRow.createCell(0);
 		cell0.setCellValue("User");

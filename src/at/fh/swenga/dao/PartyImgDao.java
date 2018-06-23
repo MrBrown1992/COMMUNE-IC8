@@ -10,7 +10,6 @@ import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
-
 import at.fh.swenga.model.PartyImg;
 
 /**
@@ -21,8 +20,7 @@ import at.fh.swenga.model.PartyImg;
 @Repository
 @Transactional
 public interface PartyImgDao extends JpaRepository<PartyImg, Integer> {
-	
-	public List<PartyImg> findAllByFlat_id(@Param("flat_id") int flat_id);
 
+	public List<PartyImg> findAllByFlat_id(@Param("flat_id") int flat_id);
 
 }

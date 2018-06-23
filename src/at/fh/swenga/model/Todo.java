@@ -32,17 +32,16 @@ public class Todo implements java.io.Serializable {
 	@Column(name = "name", length = 512)
 	private String name;
 
-	@ManyToOne( fetch= FetchType.EAGER)
+	@ManyToOne(fetch = FetchType.EAGER)
 	private Category category;
 
 	@DateTimeFormat(pattern = "dd.MM.yyyy")
 	@Column(nullable = false)
 	@Temporal(TemporalType.DATE)
 	private Calendar date;
-	
-	
+
 	@ManyToOne(fetch = FetchType.LAZY)
-	private Flat flat; 
+	private Flat flat;
 
 	public Todo(String name, Category category, Calendar date) {
 		super();
@@ -72,7 +71,6 @@ public class Todo implements java.io.Serializable {
 		this.name = name;
 	}
 
-	
 	public Category getCategory() {
 		return category;
 	}
@@ -88,8 +86,6 @@ public class Todo implements java.io.Serializable {
 	public void setDate(Calendar date) {
 		this.date = date;
 	}
-	
-	
 
 	/**
 	 * @return the flat
@@ -99,13 +95,16 @@ public class Todo implements java.io.Serializable {
 	}
 
 	/**
-	 * @param flat the flat to set
+	 * @param flat
+	 *            the flat to set
 	 */
 	public void setFlat(Flat flat) {
 		this.flat = flat;
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see java.lang.Object#toString()
 	 */
 	@Override
@@ -113,5 +112,4 @@ public class Todo implements java.io.Serializable {
 		return "Todo [date=" + date + "]";
 	}
 
-	
 }

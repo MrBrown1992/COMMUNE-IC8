@@ -34,7 +34,6 @@ import at.fh.swenga.dao.FlatDao;
 import at.fh.swenga.dao.ImageDao;
 import at.fh.swenga.dao.UserDao;
 import at.fh.swenga.dao.UserRoleDao;
-import at.fh.swenga.model.Category;
 import at.fh.swenga.model.Flat;
 import at.fh.swenga.model.Image;
 import at.fh.swenga.model.User;

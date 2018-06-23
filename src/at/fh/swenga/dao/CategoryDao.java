@@ -6,12 +6,10 @@ import org.springframework.transaction.annotation.Transactional;
 
 import at.fh.swenga.model.Category;
 
-
 @Repository
 @Transactional
-public interface CategoryDao extends JpaRepository<Category, Object>{
+public interface CategoryDao extends JpaRepository<Category, Object> {
 
 	public Category findFirstByid(int id);
-	
-	
+
 }

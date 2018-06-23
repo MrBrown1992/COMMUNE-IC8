@@ -33,56 +33,48 @@ public class PartyImg implements java.io.Serializable {
 	 */
 	private static final long serialVersionUID = -8402985171379909511L;
 
-
-
 	@Id
 	@Column(name = "id")
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
-	
 
-	
 	@Lob
 	@Basic(fetch = FetchType.LAZY)
 	@Column(name = "img")
 	private byte[] img;
-	
-	@Column(name="filename")
+
+	@Column(name = "filename")
 	private String filename;
-	
-	@Column(name="Date")
+
+	@Column(name = "Date")
 	@Temporal(TemporalType.DATE)
 	private Calendar uploadDate;
 	@Version
 	long version;
-	
-	@Column(name="imgtitle",nullable = true)
+
+	@Column(name = "imgtitle", nullable = true)
 
 	private String imgtitle;
-	
-	@Column(name="imgtext",nullable = true)
+
+	@Column(name = "imgtext", nullable = true)
 
 	private String imgtext;
-	
-	@ManyToOne(fetch = FetchType.LAZY)
-	private Flat flat; 
 
-	
-	
+	@ManyToOne(fetch = FetchType.LAZY)
+	private Flat flat;
+
 	/**
 	 * @param img
 	 * @param filename
 	 * @param uploadDate
 	 */
-	public PartyImg( byte[] img, String filename, Calendar uploadDate,String imgtitle,String imgtext) {
+	public PartyImg(byte[] img, String filename, Calendar uploadDate, String imgtitle, String imgtext) {
 		super();
-	
+
 		this.img = img;
 		this.filename = filename;
 		this.uploadDate = uploadDate;
 	}
-
-
 
 	/**
 	 * 
@@ -91,8 +83,6 @@ public class PartyImg implements java.io.Serializable {
 		// TODO Auto-generated constructor stub
 	}
 
-
-
 	/**
 	 * @return the id
 	 */
@@ -100,16 +90,13 @@ public class PartyImg implements java.io.Serializable {
 		return id;
 	}
 
-
-
 	/**
-	 * @param id the id to set
+	 * @param id
+	 *            the id to set
 	 */
 	public void setId(int id) {
 		this.id = id;
 	}
-
-
 
 	/**
 	 * @return the img
@@ -118,16 +105,13 @@ public class PartyImg implements java.io.Serializable {
 		return img;
 	}
 
-
-
 	/**
-	 * @param img the img to set
+	 * @param img
+	 *            the img to set
 	 */
 	public void setImg(byte[] img) {
 		this.img = img;
 	}
-
-
 
 	/**
 	 * @return the filename
@@ -136,16 +120,13 @@ public class PartyImg implements java.io.Serializable {
 		return filename;
 	}
 
-
-
 	/**
-	 * @param filename the filename to set
+	 * @param filename
+	 *            the filename to set
 	 */
 	public void setFilename(String filename) {
 		this.filename = filename;
 	}
-
-
 
 	/**
 	 * @return the uploadDate
@@ -154,16 +135,13 @@ public class PartyImg implements java.io.Serializable {
 		return uploadDate;
 	}
 
-
-
 	/**
-	 * @param uploadDate the uploadDate to set
+	 * @param uploadDate
+	 *            the uploadDate to set
 	 */
 	public void setUploadDate(Calendar uploadDate) {
 		this.uploadDate = uploadDate;
 	}
-
-
 
 	/**
 	 * @return the imgtitle
@@ -172,16 +150,13 @@ public class PartyImg implements java.io.Serializable {
 		return imgtitle;
 	}
 
-
-
 	/**
-	 * @param imgtitle the imgtitle to set
+	 * @param imgtitle
+	 *            the imgtitle to set
 	 */
 	public void setImgtitle(String imgtitle) {
 		this.imgtitle = imgtitle;
 	}
-
-
 
 	/**
 	 * @return the imgtext
@@ -190,16 +165,13 @@ public class PartyImg implements java.io.Serializable {
 		return imgtext;
 	}
 
-
-
 	/**
-	 * @param imgtext the imgtext to set
+	 * @param imgtext
+	 *            the imgtext to set
 	 */
 	public void setImgtext(String imgtext) {
 		this.imgtext = imgtext;
 	}
-
-
 
 	/**
 	 * @return the flat
@@ -208,15 +180,12 @@ public class PartyImg implements java.io.Serializable {
 		return flat;
 	}
 
-
-
 	/**
-	 * @param flat the flat to set
+	 * @param flat
+	 *            the flat to set
 	 */
 	public void setFlat(Flat flat) {
 		this.flat = flat;
 	}
-	
-	
 
 }

@@ -52,28 +52,24 @@ public class FlatController {
 		}
 		return false;
 	}
-	
+
 	@Secured("ROLE_USER")
 	@RequestMapping(value = { "listFlat" })
-	public String listFlat(Model model,Authentication authentication) {
-			
+	public String listFlat(Model model, Authentication authentication) {
+
 		List<Flat> flats = new ArrayList<Flat>();
 		String username = authentication.getName();
-		System.out.println("Username: " + username);
 
 		User user = userDao.findFirstByUsername(username);
-		System.out.println("User: " + user);
 
 		Flat flat = user.getFlat();
-		System.out.println("Flat:" + flat);
 
-		//Flat flat = flatDao.findFirstByid(userDao.findFirstByUsername(authentication.getName()).getFlat().getId());
 		flats.add(flat);
 		model.addAttribute("flats", flats);
 
 		return "listFlat";
 	}
-	
+
 	@Secured("ROLE_ROOT")
 	@RequestMapping(value = { "listAllFlat" })
 	public String listAllFlat(Model model) {
@@ -84,9 +80,6 @@ public class FlatController {
 
 		return "listFlat";
 	}
-	
-	
-	
 
 	@Secured("ROLE_ROOT")
 	@RequestMapping(value = "addFlat")
@@ -119,7 +112,7 @@ public class FlatController {
 			Authentication authentication, BindingResult bindingResult) {
 
 		if (errorsDetected(model, bindingResult)) {
-			return listFlat(model,authentication);
+			return listFlat(model, authentication);
 		}
 
 		Flat flat = flatDao.findFirstByid(changedFlat.getId());
@@ -128,10 +121,10 @@ public class FlatController {
 
 			flatDao.save(flat);
 
-			return listFlat(model,authentication);
+			return listFlat(model, authentication);
 		} else {
 			model.addAttribute("warningMessage", "Flat not found!");
-			return listFlat(model,authentication);
+			return listFlat(model, authentication);
 		}
 	}
 
@@ -148,15 +141,15 @@ public class FlatController {
 		}
 
 		model.addAttribute("warningMessage", "Flat not found!");
-		return listFlat(model,authentication);
+		return listFlat(model, authentication);
 	}
 
 	@Secured("ROLE_ROOT")
 	@RequestMapping("/deleteFlat")
-	public String deleteFlat(Model model, @RequestParam int id,Authentication authentication) {
+	public String deleteFlat(Model model, @RequestParam int id, Authentication authentication) {
 		flatDao.deleteById(id);
 
-		return listFlat(model,authentication);
+		return listFlat(model, authentication);
 	}
 
 	@ExceptionHandler(Exception.class)

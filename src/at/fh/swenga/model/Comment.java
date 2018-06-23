@@ -15,22 +15,20 @@ import javax.persistence.TemporalType;
 
 @Entity
 @Table(name = "comment")
-public class Comment implements java.io.Serializable{
-	
+public class Comment implements java.io.Serializable {
+
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = -3534057603171743878L;
 
-
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
-	
 
 	@Column(name = "text", length = 512)
 	private String text;
-	
+
 	@Temporal(TemporalType.DATE)
 	private Date date;
 
@@ -49,17 +47,11 @@ public class Comment implements java.io.Serializable{
 		this.date = date;
 		this.user = user;
 	}
-	
-	
-	
 
 	public Comment() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
-
-
-
 
 	/**
 	 * @return the id
@@ -69,7 +61,8 @@ public class Comment implements java.io.Serializable{
 	}
 
 	/**
-	 * @param id the id to set
+	 * @param id
+	 *            the id to set
 	 */
 	public void setId(int id) {
 		this.id = id;
@@ -83,7 +76,8 @@ public class Comment implements java.io.Serializable{
 	}
 
 	/**
-	 * @param text the text to set
+	 * @param text
+	 *            the text to set
 	 */
 	public void setText(String text) {
 		this.text = text;
@@ -97,7 +91,8 @@ public class Comment implements java.io.Serializable{
 	}
 
 	/**
-	 * @param date the date to set
+	 * @param date
+	 *            the date to set
 	 */
 	public void setDate(Date date) {
 		this.date = date;
@@ -111,11 +106,11 @@ public class Comment implements java.io.Serializable{
 	}
 
 	/**
-	 * @param user the user to set
+	 * @param user
+	 *            the user to set
 	 */
 	public void setUser(User user) {
 		this.user = user;
 	}
-
 
 }
