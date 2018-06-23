@@ -1,9 +1,13 @@
 package at.fh.swenga.controller;
 
+import java.io.OutputStream;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Optional;
+
+import javax.servlet.http.HttpServletResponse;
 
 import org.apache.commons.codec.binary.Base64;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,6 +28,7 @@ import com.sun.javafx.collections.MappingChange.Map;
 import at.fh.swenga.dao.FlatDao;
 import at.fh.swenga.dao.PartyImgDao;
 import at.fh.swenga.dao.UserDao;
+import at.fh.swenga.model.Image;
 import at.fh.swenga.model.PartyImg;
 
 @Controller
@@ -112,6 +117,16 @@ public class PartyImgController {
 		}
 
 		return showPartyImg(model, authentication);
+	}
+	
+	
+	
+	
+	@RequestMapping("/deletePartyPic")
+	public String deletePartyPic(Model model, @RequestParam int id, Authentication authentication) {
+		partyImgDao.deleteById(id);
+
+		return showPartyImg(model,authentication);
 	}
 	
 	@ExceptionHandler(Exception.class)

@@ -7,18 +7,31 @@
 <title> COMMUNE-IC8</title>
 <div th:replace="~{includes/bootstrap :: bootstrapCSS}" />
 </head>
-<body>
-	<div class="container" role="main">
+<body class="bg-dark">
+	<div class="container bg-dark" role="main">
 
-		<div class="row">
-			<div class="col-md-8 col-md-offset-2">
+			<div class="col-md-8 col-md-offset-2 mx-auto">
 				<form class="form-horizontal" enctype="multipart/form-data" method="post" 
 				th:action="@{/uploadPartyPic(${_csrf.parameterName}=${_csrf.token})}">
-					<fieldset>
-						<legend >Upload Party Pic </legend>
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					<div class="card text-dark">
+						<div class="bg-dark card-header">
+							<strong th:text="'Upload Party Pic'">Upload Party Pic</strong>
 
+						</div>
+						<div class="card-body">
+							<div class="float-left container">
 
-						<div class="form-group">
+								<div class="form-group">
 							<label for="inputFile" class="col-md-2 control-label">File:</label>
 							<div class="col-md-10">
 								<input class="form-control" id="inputFile" type="file" name="myFile">
@@ -53,7 +66,13 @@
 							</div>
 						</div>
 
-					</fieldset>
+
+
+							</div>
+						</div>
+					</div>
+					
+					
 				</form>
 			</div>
 		</div>
