@@ -118,7 +118,7 @@ public class SecurityController {
 		user.addUserRole(userRole);
 		user.setFlat(testFlat);
 		userDao.save(user);
-		
+
 		User steiner = new User("steiner", "password", true, "steiner", "steiner", 0664123321, "steiner@xyz.com",
 				Calendar.getInstance(), null, null);
 		steiner.encryptPassword();

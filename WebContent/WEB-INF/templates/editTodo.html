@@ -41,10 +41,10 @@
 								Category </label>
 							<div class="col-md-10">
 
-								<select class="form-control" name="todoCategory" id="todoCategory" th:field="*{cat}">
+								<select class="form-control" name="todoCategory" id="todoCategory" >
 									
 									<option th:each="category : ${categories}" th:value="${category} ?${category.id}"
-										th:text="${category}"></option>
+										th:text="${category.name}"></option>
 								</select>
 
 							</div>
@@ -55,8 +55,8 @@
 							<label class="col-md-2 control-label">
 								Date </label>
 							<div class="col-md-10">
-								<input class="form_datetime" placeholder="date" type="text" readonly name="todoDate"
-									th:value="${todo} ? ${#dates.format(todo.todoDate, 'dd.MM.yyyy')}">
+								<input class="form_datetime" placeholder="date" type="text" readonly name="date"
+									th:value="${todo} ? ${#dates.format(todo.date, 'dd.MM.yyyy')}">
 							</div>
 						</div>
 
