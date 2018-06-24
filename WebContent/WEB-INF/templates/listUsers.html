@@ -23,8 +23,8 @@
   
 <!---------------------------SIDEBAR CONTENT --------------------------------------->
   
-  <div class="app-body" style="border-right: 1px solid;">
-    <div class="sidebar">
+  <div class="app-body">
+    <div class="sidebar" style="border-right: 1px solid;">
       <!-- Sidebar content here -->
 
      <div th:include="~{includes/sidebar :: sidebar}"></div>
@@ -70,7 +70,7 @@
 						<th data-sortable="true">E-Mail</th>
 						<th data-sortable="true">Day of Birth</th>
 						<th data-sortable="true">Profile Picture	</th>
-						
+						<th>Profile Pic</th>
 						<th sec:authorize="hasRole('ADMIN')">Actions</th>
 
 					</tr>
@@ -95,11 +95,12 @@
 								th:href="@{download(documentId=${user.userimage.id})}"
 								target="_blank" th:text="${user.userimage.filename}"></a>
 						</span> <span th:unless="${user.userimage != null}"> -- no file --- </span>
-						<td align="right"><a th:href="@{upload(id=${user.id})}">
+						<td ><a th:href="@{upload(id=${user.id})}">
 								<button type="button" class="btn btn-xs btn-success cui-cloud-upload">
 									<span  aria-hidden="true"></span>
 									Upload
-								</button></a>
+								</button></a></td>
+						<td align="right">
 								<a sec:authorize="hasRole('ADMIN')" th:href="@{/changeUser(id=${user.id})}"><button type="button" class="btn btn-xs btn-warning cui-wrench">
 									<span aria-hidden="true"></span>
 									Edit

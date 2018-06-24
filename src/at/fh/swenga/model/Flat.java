@@ -35,6 +35,9 @@ public class Flat implements java.io.Serializable {
 
 	@OneToMany(mappedBy = "flat", fetch = FetchType.LAZY)
 	private Set<Grocery> grocery;
+	
+	@OneToMany(mappedBy = "flat", fetch = FetchType.LAZY)
+	private Set<Comment> comment;
 
 	@OneToMany(mappedBy = "flat", fetch = FetchType.LAZY)
 	private Set<Todo> todo;

@@ -17,4 +17,8 @@ public interface UserRoleDao extends JpaRepository<UserRole, Integer> {
 
 	public UserRole findFirstById(int id);
 
+	public UserRole findFirstByid(int i);
+
+	
+
 }

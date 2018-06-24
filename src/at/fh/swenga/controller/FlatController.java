@@ -22,8 +22,10 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import at.fh.swenga.dao.FlatDao;
 import at.fh.swenga.dao.UserDao;
+import at.fh.swenga.dao.UserRoleDao;
 import at.fh.swenga.model.Flat;
 import at.fh.swenga.model.User;
+import at.fh.swenga.model.UserRole;
 
 @Controller
 @Scope(proxyMode = ScopedProxyMode.TARGET_CLASS, value = "session")
@@ -35,6 +37,9 @@ public class FlatController {
 	@Autowired
 	UserDao userDao;
 
+	@Autowired
+	UserRoleDao userRoleDao;
+	
 	public FlatController() {
 
 		// TODO Auto-generated constructor stub
@@ -60,8 +65,8 @@ public class FlatController {
 		List<Flat> flats = new ArrayList<Flat>();
 		String username = authentication.getName();
 
-		User user = userDao.findFirstByUsername(username);
-
+		User user = userDao.findFirstByUsername(username);		
+		
 		Flat flat = user.getFlat();
 
 		flats.add(flat);

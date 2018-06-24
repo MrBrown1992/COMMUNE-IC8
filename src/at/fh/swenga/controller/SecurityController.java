@@ -129,13 +129,6 @@ public class SecurityController {
 		user.setFlat(testFlat);
 		userDao.save(user);
 
-		User steiner = new User("steiner", "password", true, "steiner", "steiner", 0664123321, "steiner@xyz.com",
-				Calendar.getInstance(), null, null);
-		steiner.encryptPassword();
-		steiner.addUserRole(userRole);
-		steiner.setFlat(testFlat);
-		userDao.save(steiner);
-
 		return "forward:login";
 	}
 
@@ -181,7 +174,7 @@ public class SecurityController {
 
 		userDao.save(newUser);
 
-		return listUsers(model);
+		return listUsers(model, authentication);
 	}
 
 	@Secured("ROLE_USER")
@@ -199,7 +192,7 @@ public class SecurityController {
 		model.addAttribute("flats", flatDao.findAll());
 		
 		if (errorsDetected(model, bindingResult)) {
-			return listUsers(model);
+			return listUsers(model, authentication);
 		}
 		
 		SimpleDateFormat format = new SimpleDateFormat("dd.MM.yyyy");
@@ -220,10 +213,10 @@ public class SecurityController {
 		
 			userDao.save(user);
 
-			return listUsers(model);
+			return listUsers(model, authentication);
 		} else {
 			model.addAttribute("warningMessage", "User not found!");
-			return listUsers(model);
+			return listUsers(model, authentication);
 		}
 	}
 
@@ -239,14 +232,32 @@ public class SecurityController {
 		}
 
 		model.addAttribute("warningMessage", "User not found!");
-		return listUsers(model);
+		return listUsers(model, authentication);
 	}
 
 	@Secured("ROLE_ADMIN")
 	@RequestMapping(value = { "/listUsers" })
-	public String listUsers(Model model) {
-
-		List<User> users = userDao.findAll();
+	public String listUsers(Model model, Authentication authentication) {
+		
+		
+		
+		User user = userDao.findFirstByUsername(authentication.getName());
+		//UserRole root = new UserRole("ROLE_ROOT");
+		System.out.println(user.getUserRoles().contains(userRoleDao.findFirstByid(1)));
+		
+		for (UserRole role : user.getUserRoles()) {System.out.println(role.toString());}
+		System.out.println(user.getUserRoles());
+		
+		
+		for (UserRole usr : user.getUserRoles()) {
+			
+			if (usr.equals(userRoleDao.findFirstByRoleName("ROLE_ROOT"))) {
+				List<User> users = userDao.findAll();
+				model.addAttribute("users", users);
+				return "listUsers";
+			}}
+		
+		List<User> users = userDao.findAllByFlat(user.getFlat());
 
 		model.addAttribute("users", users);
 
@@ -259,8 +270,10 @@ public class SecurityController {
 		String username = authentication.getName();
 		User user = userDao.findFirstByUsername(username);
 		String fullname = user.getFirstname() + " " + user.getLastname();
+		String flatname = flatDao.findFirstByid(user.getFlat().getId()).getName();
 		model.addAttribute("fullname", fullname);
 		model.addAttribute("user", user);
+		model.addAttribute("flatname", flatname);
 
 		if (user != null && user.isEnabled()) {
 
@@ -312,7 +325,7 @@ public class SecurityController {
 
 	@RequestMapping(value = "/upload", method = RequestMethod.POST)
 	public String uploadDocument(Model model, @RequestParam("id") String id1,
-			@RequestParam("myFile") MultipartFile file) {
+			@RequestParam("myFile") MultipartFile file, Authentication authentication) {
 
 		int id = Integer.parseInt(id1);
 		try {
@@ -342,7 +355,7 @@ public class SecurityController {
 			model.addAttribute("errorMessage", "Error:" + e.getMessage());
 		}
 
-		return listUsers(model);
+		return listUsers(model, authentication);
 	}
 
 	@RequestMapping("/download")
@@ -397,10 +410,10 @@ public class SecurityController {
 
 	@Secured("ROLE_ROOT")
 	@RequestMapping(value = "/deleteUser")
-	public String deleteUser(Model model, @RequestParam int id) {
+	public String deleteUser(Model model, @RequestParam int id, Authentication authentication) {
 		userDao.deleteById(id);
 
-		return listUsers(model);
+		return listUsers(model, authentication);
 	}
 
 	@RequestMapping(value = "/about")
