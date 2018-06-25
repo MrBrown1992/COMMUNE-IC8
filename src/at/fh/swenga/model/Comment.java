@@ -5,6 +5,7 @@ import java.util.Date;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -32,9 +33,12 @@ public class Comment implements java.io.Serializable {
 	@Temporal(TemporalType.DATE)
 	private Date date;
 
-	@ManyToOne(cascade = CascadeType.DETACH)
+	@ManyToOne(fetch = FetchType.LAZY)
 	User user;
 
+	@ManyToOne(fetch = FetchType.LAZY)
+	private Flat flat;
+	
 	/**
 	 * @param id
 	 * @param text
@@ -113,4 +117,14 @@ public class Comment implements java.io.Serializable {
 		this.user = user;
 	}
 
+	public Flat getFlat() {
+		return flat;
+	}
+
+	public void setFlat(Flat flat) {
+		this.flat = flat;
+	}
+
+	
+	
 }

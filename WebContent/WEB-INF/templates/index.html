@@ -24,8 +24,8 @@
 
 	<!---------------------------SIDEBAR CONTENT --------------------------------------->
 
-	<div class="app-body">
-		<div class="sidebar" style="border-right: 1px solid;">
+	<div class="app-body" >
+		<div class="sidebar" style="border-right: 1px solid;" >
 			<!-- Sidebar content here -->
 
 		<div th:include="~{includes/sidebar :: sidebar}" ></div>
@@ -53,12 +53,17 @@
 		<!--   message ----------------------------------------------------------- -->
 
 		<div class="container bg-dark" style="height:100vh;">
-		<div><h1 align="center">Home</h1><br></div>
+		
+		<div><h2 align="center">Welcome to </h2><br>
+		<h1 align="center" class="text-primary" th:text="${flatname }"></h1><br>
+		</div>
+
+
 
 		<div class="card bg-light text-dark mx-auto rounded" style="width: 50%;">
 			<div class="card-body">
-				<h1 class="card-title" th:text="'Hello !'"></h1>
-				<p class="card-text" style="font-size:120%;">Hello and welcome to your flat <span style="font-size:150%;"th:text="${fullname}"/> !</p>
+				<h1 class="card-title" ></h1>
+				<p class="card-text" style="font-size:120%;">Hello<br> <span style="font-size:150%;"th:text="${fullname}"/> !</p>
 				<br><p>COMMUNE-IC8 is the right place to manage your flat and to keep everything in order. It makes life for you and your flatmates easier.</p>
 				
 				<p> Need some groceries? Simply add them to the <a th:href="showGroceryList">Grocery List</a> so you and your roommates have an overview on what is missing !</p>

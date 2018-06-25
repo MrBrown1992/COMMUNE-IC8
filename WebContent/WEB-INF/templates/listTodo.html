@@ -23,8 +23,8 @@
   
 <!---------------------------SIDEBAR CONTENT --------------------------------------->
   
-  <div class="app-body" style="border-right: 1px solid;">
-    <div class="sidebar">
+  <div class="app-body">
+    <div class="sidebar" style="border-right: 1px solid;">
       <!-- Sidebar content here -->
 
      <div th:include="~{includes/sidebar :: sidebar}"></div>
@@ -63,11 +63,11 @@
 				<thead class="thead-dark">
 
 					<tr>
-						<th data-sortable="true">Name</th>
-						<th data-sortable="true">Category</th>
-						<th data-sortable="true">Deadline</th>
+						<th data-sortable="true" align="justify">Name</th>
+						<th data-sortable="true" align="justify">Category</th>
+						<th data-sortable="true" align="justify">Deadline</th>
 						
-						<th sec:authorize="hasRole('ADMIN')">Actions</th>
+						<th sec:authorize="hasRole('ADMIN')" align="justify">Actions</th>
 
 
 
@@ -78,14 +78,14 @@
 					<!--  list all items ----------------------------------------------------------- -->
 
 					<tr th:each="todo : ${todos}">
-						<td th:text="${todo.name}" align="left"></td>
+						<td th:text="${todo.name}" align="justify"></td>
 
-						<td  th:text="${todo.category}" align="center"></td>
+						<td  th:text="${todo.category}" align="justify"></td>
 
-						<td th:text="${#dates.format(todo.date,'dd.MM.yyyy')}" align="center"></td>
+						<td th:text="${#dates.format(todo.date,'dd.MM.yyyy')}" align="justify"></td>
 
 
-						<td sec:authorize="hasRole('ADMIN')" align="right"><a
+						<td sec:authorize="hasRole('ADMIN')" align="justify"><a
 							th:href="@{/changeTodo(id=${todo.id})}">
 							<button type="button" class="btn btn-xs btn-warning cui-wrench"> <span
 								aria-hidden="true"></span> Edit</button>

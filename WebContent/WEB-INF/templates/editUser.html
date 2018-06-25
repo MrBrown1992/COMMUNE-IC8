@@ -14,7 +14,7 @@
 <body class="bg-dark">
 	<div class="container bg-dark" role="main">
 		
-			<div class="col-md-8 col-md-offset-2">
+			<div class="col-md-8 col-md-offset-2 mx-auto">
 				<form class="form-horizontal" method="post"
 					th:action="${user} ? @{/changeUser(id=${user.id})} : @{/addNewUser}">
 					<!--<input type="hidden" th:name="${_csrf.parameterName}"
@@ -92,7 +92,7 @@
 								<select class="form-control" name="flat" id="flat">
 
 									<option th:each="flat : ${flats}" th:value="${flat} ?${flat.id} "
-										th:text="${flat}"></option>
+										th:text="${flat.name}"></option>
 								</select>
 
 							</div>
@@ -108,8 +108,8 @@
 							
 							</div>
 							
-							<label sec:authorize="hasRole('ROLE_ADMIN')" > User is  Root </label>
-							<div sec:authorize="hasRole('ROLE_ADMIN')"  class="col-md-10">
+							<label sec:authorize="hasRole('ROLE_ROOT')" > User is  Root </label>
+							<div sec:authorize="hasRole('ROLE_ROOT')"  class="col-md-10">
 								<input type="checkbox" name="Root" >
 							
 							</div>

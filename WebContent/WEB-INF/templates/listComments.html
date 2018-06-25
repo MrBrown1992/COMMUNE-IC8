@@ -23,8 +23,8 @@
   
 <!---------------------------SIDEBAR CONTENT --------------------------------------->
   
-  <div class="app-body" style="border-right: 1px solid;">
-    <div class="sidebar">
+  <div class="app-body" >
+    <div class="sidebar" style="border-right: 1px solid;">
       <!-- Sidebar content here -->
 
      <div th:include="~{includes/sidebar :: sidebar}"></div>
@@ -62,26 +62,26 @@
 				<thead class="thead-dark">
 
 					<tr>
-						<th data-sortable="true" >User</th>
-						<th data-sortable="true">Date</th>
-						<th data-sortable="true">Text</th>	
-						<th sec:authorize="hasRole('ADMIN')">Actions</th>
+						<th data-sortable="true"  align="justify">User</th>
+						<th data-sortable="true" align="justify">Date</th>
+						<th data-sortable="true" align="justify">Text</th>	
+						<th sec:authorize="hasRole('ADMIN')" align="justify" >Actions</th>
 
 					</tr>
 				</thead>
 
-				<tbody>
+				<tbody >
 					<!--  list all items ----------------------------------------------------------- -->
-
+					
 					<tr th:each="comment : ${comments}">
 						
-						<td th:text="${comment.getUser().getFirstname() + ' ' + comment.getUser().getLastname()}" align="left"></td>
-						<td th:text="${comment.date}" align="center"></td>
-						<td th:text="${comment.text}" align="center"></td>
+						<td th:text="${comment.user.username}" align="justify">Name not found</td>
+						<td th:text="${comment.date}" align="justify"></td>
+						<td th:text="${comment.text}" align="justify"></td>
 						
 						
 
-						<td align="right"> <a sec:authorize="hasRole('ADMIN')"
+						<td align="justify" sec:authorize="hasRole('ADMIN')"> <a
 							th:href="@{/changeComment(id=${comment.id})}"><button type="button" class="btn btn-xs btn-warning cui-wrench">
 						<span aria-hidden="true"></span> Edit </button>
 						</a>

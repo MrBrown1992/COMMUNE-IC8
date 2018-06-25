@@ -23,8 +23,8 @@
 
 	<!---------------------------SIDEBAR CONTENT --------------------------------------->
 
-	<div class="app-body" style="border-right: 1px solid;">
-		<div class="sidebar">
+	<div class="app-body" >
+		<div class="sidebar" style="border-right: 1px solid;">
 			<!-- Sidebar content here -->
 
 			<div th:include="~{includes/sidebar :: sidebar}"></div>
@@ -65,9 +65,9 @@
 				<thead class="thead-dark">
 
 					<tr>
-						<th data-sortable="true">Flatname</th>
-						<th data-sortable="true">User</th>
-						<th sec:authorize="hasRole('ADMIN')">Actions</th>
+						<th data-sortable="true" align="justify">Flatname</th>
+						<th data-sortable="true" align="justify">User</th>
+						<th sec:authorize="hasRole('ADMIN')" align="justify">Actions</th>
 
 					</tr>
 				</thead>
@@ -76,8 +76,8 @@
 					<!--  list all items ----------------------------------------------------------- -->
 
 					<tr th:each="flat : ${flats}">
-						<td th:text="${flat.name}" align="left"></td>
-						<td align="center">
+						<td th:text="${flat.name}" align="justify"></td>
+						<td align="justify">
 							<ul>
 								<li th:each=" user: ${flat.getUsers()}"
 									th:text="${user.firstname} + ' '+ ${user.lastname} "></li>
@@ -85,7 +85,7 @@
 						</td>
 
 
-						<td sec:authorize="hasRole('ADMIN')" align="right"><a
+						<td sec:authorize="hasRole('ADMIN')" align="justify"><a
 							th:href="@{/changeFlat(id=${flat.id})}"><button type="button"
 									class="btn btn-xs btn-warning cui-wrench">
 									<span aria-hidden="true"></span> Edit

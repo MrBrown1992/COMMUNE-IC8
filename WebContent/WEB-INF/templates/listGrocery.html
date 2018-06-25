@@ -23,8 +23,8 @@
   
 <!---------------------------SIDEBAR CONTENT --------------------------------------->
   
-  <div class="app-body" style="border-right: 1px solid;">
-    <div class="sidebar">
+  <div class="app-body">
+    <div class="sidebar" style="border-right: 1px solid;">
       <!-- Sidebar content here -->
 
      <div th:include="~{includes/sidebar :: sidebar}"></div>
@@ -63,9 +63,9 @@
 				<thead class="thead-dark">
 
 					<tr>
-						<th data-sortable="true">Grocery</th>
-						<th data-sortable="true">Bought</th>
-						<th sec:authorize="hasRole('ADMIN')" >Actions</th>
+						<th data-sortable="true" align="justify">Grocery</th>
+						<th data-sortable="true" align="justify">Bought</th>
+						<th sec:authorize="hasRole('USER')"  align="justify">Actions</th>
 
 
 
@@ -76,18 +76,18 @@
 					<!--  list all items ----------------------------------------------------------- -->
 
 					<tr th:each="grocery : ${groceries}">
-						<td th:text="${grocery.groceryName}" align="left"></td>
-						<td th:text="${grocery.bought}" align="center"></td>
+						<td th:text="${grocery.groceryName}" align="justify"></td>
+						<td th:text="${grocery.bought}" align="justify"></td>
 
 
-						<td sec:authorize="hasRole('ADMIN')" align="right"><a
+						<td sec:authorize="hasRole('USER')" align="justify"><a
 							th:href="@{/changeGrocery(id=${grocery.id})}"><button type="button" class="btn btn-xs btn-warning cui-wrench">
 							<span aria-hidden="true"></span> Edit</button>
 						</a> 
-						<a th:href="@{/delete(id=${grocery.id})}"><button type="button" class="btn btn-xs btn-danger cui-trash">
+						<a sec:authorize="hasRole('ADMIN')" th:href="@{/delete(id=${grocery.id})}"><button type="button" class="btn btn-xs btn-danger cui-trash">
 							 <span aria-hidden="true"></span>
 								Delete</button>
-						</a></td>
+						</td>
 					</tr>
 					<!--  list all items ----------------------------------------------------------- -->
 				</tbody>
